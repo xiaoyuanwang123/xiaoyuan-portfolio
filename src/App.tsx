@@ -875,7 +875,7 @@ export default function App() {
               initial={{ opacity: 0, scale: 1.02 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }}
               className="relative min-h-[320px] md:min-h-full"
             >
-              <img src="HEAD.JPG" alt="Xiaoyuan at Imperial" className="absolute inset-0 w-full h-full object-cover object-top" referrerPolicy="no-referrer" />
+              <img src="HEAD.jpg" alt="Xiaoyuan at Imperial" className="absolute inset-0 w-full h-full object-cover object-top" referrerPolicy="no-referrer" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <p className="text-terracotta font-black text-xs uppercase tracking-[0.2em] mb-1">
