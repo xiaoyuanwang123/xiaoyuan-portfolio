@@ -905,7 +905,7 @@ export default function App() {
                     <div className="relative h-40 overflow-hidden rounded-lg mb-4">
                       <img src={school.image} alt={school.name[lang]} className="w-full h-full object-cover grayscale contrast-125" referrerPolicy="no-referrer" />
                       <div className="absolute inset-0 bg-ink/5" />
-                      {i === schools.length - 1 && (
+                      {i === 0 && (
                         <div className="absolute top-2 left-2 w-8 h-8 bg-terracotta text-paper rounded-full flex items-center justify-center border border-ink shadow-sm rotate-12 font-serif font-black text-sm z-10">W</div>
                       )}
                     </div>
