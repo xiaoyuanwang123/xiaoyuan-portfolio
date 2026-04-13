@@ -56,7 +56,7 @@ const projects = [
 const schools = [
   { id: "icl", name: { zh: "伦敦帝国理工学院", en: "Imperial College London" }, degree: { zh: "设计与行为科学 理学硕士 (在读)", en: "MSc Design with Behavioural Science (Ongoing)" }, period: "2025.09 - 2026.09", image: "IC.jpg", rotation: "-2deg", zIndex: 10 },
   { id: "nju", name: { zh: "南京大学", en: "Nanjing University" }, degree: { zh: "建筑学硕士 | 一等奖学金(x1)、二等奖学金(x2)", en: "Master of Architecture | 1st Class Scholarship (x1), 2nd Class (x2)" }, period: "2022.09 - 2025.06", image: "NJU.jpeg", rotation: "0deg", zIndex: 11 },
-  { id: "wit", name: { zh: "武汉理工大学", en: "Wuhan University of Technology" }, degree: { zh: "建筑学学士 | GPA: 3.91/4.00; 优秀毕业生", en: "Bachelor of Architecture | GPA: 3.91/4.00; Outstanding Graduate" }, period: "2017.09 - 2022.06", image: "WHUT.jpg", rotation: "2deg", zIndex: 12 }
+  { id: "wit", name: { zh: "武汉理工大学", en: "Wuhan Institute of Technology" }, degree: { zh: "建筑学学士 | GPA: 3.91/4.00; 优秀毕业生", en: "Bachelor of Architecture | GPA: 3.91/4.00; Outstanding Graduate" }, period: "2017.09 - 2022.06", image: "WHUT.jpg", rotation: "2deg", zIndex: 12 }
 ];
 
 const p1Content = {
