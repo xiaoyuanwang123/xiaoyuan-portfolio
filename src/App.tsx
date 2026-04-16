@@ -298,9 +298,7 @@ function Modal1({ lang }: { lang: Language }) {
 
       <section className="mb-24">
         <SH i={1} label={lang === "zh" ? "PROMPT 设计演示" : "PROMPT DESIGN DEMO"} />
-        <div className="border-2 border-dashed border-ink/20 rounded-2xl p-16 text-center text-ink/30 font-bold text-sm">
-          {lang === "zh" ? "[ 交互式 Demo 组件 — 即将上线 ]" : "[ Interactive Demo component — coming soon ]"}
-        </div>
+        <NTNDemo lang={lang} />
       </section>
 
       <section className="mb-24">
