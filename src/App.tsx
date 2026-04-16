@@ -377,7 +377,7 @@ function Modal1({ lang }: { lang: Language }) {
                 <span>{lang === "zh" ? "▼ 展开定性图表" : "▼ View visuals"}</span>
               </summary>
               <div className="mt-3 grid grid-cols-3 gap-2">
-                {[{src:"1-bigram.png",label:lang==="zh"?"Bigram 词云":"Bigram Word Cloud",full:false},{src:"1-Bunka Semantic Map.png",label:lang==="zh"?"Bunka 语义地图":"Bunka Semantic Map",full:false},{src:"1-Interaction.png",label:lang==="zh"?"概念交互模型":"Conceptual Model",full:true}].map((img,i)=>(
+                {[{src:"1-bigram.png",label:lang==="zh"?"Bigram 词云":"Bigram Word Cloud",full:false},{src:"1-Bunka Semantic Map.png",label:lang==="zh"?"Bunka 语义地图":"Bunka Semantic Map",full:false},{src:"1-Interaction.png",label:lang==="zh"?"概念交互模型":"Conceptual Model",full:false}].map((img,i)=>(
                   <div key={i} className={`border border-ink/10 rounded-lg overflow-hidden bg-white${img.full?" col-span-2 max-w-[60%] mx-auto w-full":""}`}>
                     <img src={img.src} alt={img.label} className="w-full aspect-[4/3] object-contain bg-white" referrerPolicy="no-referrer" />
                     <p className="text-[8px] font-bold text-ink/40 uppercase text-center py-1 tracking-wide">{img.label}</p>
