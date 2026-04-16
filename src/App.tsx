@@ -297,63 +297,96 @@ function Modal1({ lang }: { lang: Language }) {
       </header>
 
       <section className="mb-24">
-        <SH i={1} label={lang === "zh" ? "研究可视化" : "Research Visuals"} />
-        <div className="space-y-4">
-          <div className="relative aspect-video bg-paper border-2 border-ink rounded-[2rem] overflow-hidden shadow-[6px_6px_0px_0px_rgba(45,45,45,1)]">
-            <img src={researchImgs[activeImg].src} alt={researchImgs[activeImg].label} className="w-full h-full object-contain bg-white" referrerPolicy="no-referrer" />
-            <div className="absolute bottom-4 left-4 px-3 py-1 bg-ink/80 text-paper text-xs font-bold rounded-full backdrop-blur-sm">
-              {researchImgs[activeImg].label}
-            </div>
-          </div>
-          <div className="flex gap-3">
-            {researchImgs.map((img, i) => (
-              <button key={i} onClick={() => setActiveImg(i)} className={`flex-1 aspect-video rounded-xl overflow-hidden border-2 transition-all ${i === activeImg ? "border-ink shadow-md" : "border-ink/20 opacity-50 hover:opacity-80"}`}>
-                <img src={img.src} alt={img.label} className="w-full h-full object-contain bg-white" referrerPolicy="no-referrer" />
-              </button>
-            ))}
-          </div>
+        <SH i={1} label={lang === "zh" ? "PROMPT 设计演示" : "PROMPT DESIGN DEMO"} />
+        <div className="border-2 border-dashed border-ink/20 rounded-2xl p-16 text-center text-ink/30 font-bold text-sm">
+          {lang === "zh" ? "[ 交互式 Demo 组件 — 即将上线 ]" : "[ Interactive Demo component — coming soon ]"}
         </div>
       </section>
 
       <section className="mb-24">
-        <SH i={2} label="Why this matters" />
+        <SH i={2} label="WHY THIS MATTERS" />
         <div className="grid md:grid-cols-3 gap-6">
-          {p.whyMatters.map((item, i) => (
-            <div key={i} className="p-6 bg-white border border-ink/10 rounded-2xl relative">
-              <span className="text-3xl font-serif font-black text-ink/10 absolute top-3 right-5">{i + 1}</span>
-              <h6 className="text-base font-black mb-3">{item.title}</h6>
-              <p className="text-ink/60 text-sm leading-relaxed">{item.desc}</p>
+          {(lang === "zh" ? [
+            { title: "现有产品的结构性问题", desc: "AI 情感产品以次日留存为核心指标，通过持续可用、无评判回应、即时安慰来提升黏性——这些设计特征与诱导依赖的机制高度重合。" },
+            { title: "用户真实处境", desc: "用户体验到情感舒适，但同时意识到自己在回避真实社交、质疑自主性。AI 带来的不是单纯的好或坏，而是一种持续的「舒适–自主」张力。" },
+            { title: "设计介入的缺失", desc: "学术研究关注依赖的存在，但没有研究从产品设计视角提出具体的干预策略。这个问题需要设计师来回答，而不只是研究者。" }
+          ] : [
+            { title: "Structural problem in existing products", desc: "AI emotional products optimise for day-1 retention through always-on availability, non-judgemental responses, and instant reassurance — design features structurally identical to dependency-inducing mechanisms." },
+            { title: "The user's real experience", desc: "Users feel emotional comfort, yet simultaneously recognise they're avoiding real relationships and questioning their own autonomy. AI creates not a simple positive or negative, but a sustained comfort–autonomy tension." },
+            { title: "The missing design intervention", desc: "Academic research identifies dependency as a phenomenon, but no study approaches it as a design problem with concrete intervention strategies. This is a question for designers, not just researchers." }
+          ]).map((item, i) => (
+            <div key={i} className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
+              <h6 className="text-lg font-black mb-3">{item.title}</h6>
+              <p className="text-ink/60 text-sm leading-relaxed font-medium">{item.desc}</p>
             </div>
           ))}
         </div>
         <div className="mt-8 p-5 bg-terracotta/5 border-l-4 border-terracotta rounded-r-xl">
           <p className="text-base font-bold text-terracotta italic">
-            {lang === "zh" ? "AI 情感支持虽然有效，但重复的肯定可能强化依赖。" : "AI emotional support can feel helpful, but repeated reassurance may reinforce reliance."}
+            {lang === "zh" ? "「AI 情感支持可以有效缓解即时压力，但重复的安慰循环可能悄悄侵蚀用户的情感自主性。」" : '"AI emotional support can effectively relieve immediate distress — but repeated comfort loops may quietly erode users\' emotional autonomy."'}
           </p>
         </div>
       </section>
 
       <section className="mb-24">
-        <SH i={3} label="My approach" />
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            { data: p.approach.quant, bg: "bg-blue-100", icon: <Target className="w-5 h-5 text-blue-600" />, dot: "bg-blue-400" },
-            { data: p.approach.qual, bg: "bg-purple-100", icon: <Lightbulb className="w-5 h-5 text-purple-600" />, dot: "bg-purple-400" }
-          ].map(({ data, bg, icon, dot }, i) => (
-            <div key={i} className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className={`w-10 h-10 ${bg} rounded-xl flex items-center justify-center border border-ink/10`}>{icon}</div>
-                <h6 className="text-xl font-serif font-black">{data.title}</h6>
-              </div>
-              <ul className="space-y-2">
-                {data.items.map(item => (
-                  <li key={item} className="flex items-center gap-2 text-xs font-bold text-ink/60">
-                    <div className={`w-1.5 h-1.5 ${dot} rounded-full`} />{item}
-                  </li>
-                ))}
-              </ul>
+        <SH i={3} label={lang === "zh" ? "用户调研" : "USER RESEARCH"} />
+        <div className="grid md:grid-cols-2 gap-6 mb-8">
+          {(lang === "zh" ? [
+            { label: "市场背景", desc: "AI 伴侣应用数量激增 700%，次日留存率仅 20–30%。现有产品以「留存」为核心指标，系统性强化用户依赖，而非真实情感健康。" },
+            { label: "研究空白", desc: "现有研究缺乏针对英国高校学生群体的定性研究，且无研究从产品设计视角提出具体干预策略。" }
+          ] : [
+            { label: "Market Context", desc: "AI companion apps surged 700%, yet day-1 retention sits at just 20–30%. Products optimise for retention metrics, systematically deepening reliance rather than supporting emotional health." },
+            { label: "Research Gap", desc: "No existing qualitative studies focus on UK university students, and none approach this from a product design intervention angle." }
+          ]).map((item, i) => (
+            <div key={i} className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
+              <p className="text-[9px] font-black uppercase tracking-widest opacity-50 mb-3">{item.label}</p>
+              <p className="text-sm font-medium leading-relaxed text-ink/70">{item.desc}</p>
             </div>
           ))}
+        </div>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="p-5 bg-blue-50 border border-blue-200 rounded-2xl">
+            <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-3">{lang === "zh" ? "定量分析 · N=60" : "Quantitative · N=60"}</p>
+            <ul className="space-y-1.5 mb-4">
+              {(lang === "zh" ? ["描述性统计分析使用模式", "Pearson 相关检验（r=0.533）", "OLS 回归验证（R²=0.30）"] : ["Descriptive stats on usage patterns", "Pearson correlation (r=0.533)", "OLS regression (R²=0.30)"]).map((item, i) => (
+                <li key={i} className="flex gap-2 text-[11px] text-ink/70 font-medium"><span className="text-blue-400">·</span>{item}</li>
+              ))}
+            </ul>
+            <details>
+              <summary className="text-[9px] font-black uppercase tracking-widest text-blue-400 cursor-pointer list-none flex items-center gap-2 select-none">
+                <span>{lang === "zh" ? "▼ 展开定量图表" : "▼ View charts"}</span>
+              </summary>
+              <div className="mt-3 grid grid-cols-3 gap-2">
+                {[{src:"1-freq.png",label:lang==="zh"?"使用频率分布":"AI Use Frequency"},{src:"1-strain.png",label:lang==="zh"?"情绪负担分布":"Emotional Strain"},{src:"1-correlation.png",label:lang==="zh"?"依赖与负担相关":"Reliance & Strain"}].map((img,i)=>(
+                  <div key={i} className="border border-ink/10 rounded-lg overflow-hidden bg-white">
+                    <img src={img.src} alt={img.label} className="w-full aspect-[4/3] object-contain bg-white" referrerPolicy="no-referrer" />
+                    <p className="text-[8px] font-bold text-ink/40 uppercase text-center py-1 tracking-wide">{img.label}</p>
+                  </div>
+                ))}
+              </div>
+            </details>
+          </div>
+          <div className="p-5 bg-purple-50 border border-purple-200 rounded-2xl">
+            <p className="text-[10px] font-black text-purple-600 uppercase tracking-widest mb-3">{lang === "zh" ? "定性分析 · N=11" : "Qualitative · N=11"}</p>
+            <ul className="space-y-1.5 mb-4">
+              {(lang === "zh" ? ["Bigram 词云提取", "Bunka 语义地图", "情绪极性分析", "核心主题归纳（4类）"] : ["Bigram word cloud extraction", "Bunka semantic mapping", "Sentiment polarity analysis", "4 core themes identified"]).map((item, i) => (
+                <li key={i} className="flex gap-2 text-[11px] text-ink/70 font-medium"><span className="text-purple-400">·</span>{item}</li>
+              ))}
+            </ul>
+            <details>
+              <summary className="text-[9px] font-black uppercase tracking-widest text-purple-400 cursor-pointer list-none flex items-center gap-2 select-none">
+                <span>{lang === "zh" ? "▼ 展开定性图表" : "▼ View visuals"}</span>
+              </summary>
+              <div className="mt-3 grid grid-cols-2 gap-2">
+                {[{src:"1-bigram.png",label:lang==="zh"?"Bigram 词云":"Bigram Word Cloud",full:false},{src:"1-Bunka Semantic Map.png",label:lang==="zh"?"Bunka 语义地图":"Bunka Semantic Map",full:false},{src:"1-Interaction.png",label:lang==="zh"?"概念交互模型":"Conceptual Model",full:true}].map((img,i)=>(
+                  <div key={i} className={`border border-ink/10 rounded-lg overflow-hidden bg-white${img.full?" col-span-2 max-w-[60%] mx-auto w-full":""}`}>
+                    <img src={img.src} alt={img.label} className="w-full aspect-[4/3] object-contain bg-white" referrerPolicy="no-referrer" />
+                    <p className="text-[8px] font-bold text-ink/40 uppercase text-center py-1 tracking-wide">{img.label}</p>
+                  </div>
+                ))}
+              </div>
+            </details>
+          </div>
         </div>
       </section>
 
