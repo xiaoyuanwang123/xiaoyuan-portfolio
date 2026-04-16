@@ -34,7 +34,7 @@ const translations = {
     projectsTitle: "Project Portfolio",
     aboutTitle: "Education",
     viewMore: "View Details",
-    aboutText: "Good design doesn't hand people answers — it builds the conditions for them to find their own. Architecture, behavioural science, AI research — these are the lenses I look through. Working at their intersection is where I belong.",
+    aboutText: "Good design doesn't hand people answers — it builds the conditions for them to find their own. Architecture, behavioural science, AI research — these are the lenses I look through. This intersection is where I belong.",
     contactText: "Always happy to connect and exchange ideas!",
     tags: ["AI", "Research", "Product", "Design", "Psychology", "Data"],
     projectDetails: {
