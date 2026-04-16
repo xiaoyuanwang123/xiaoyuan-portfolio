@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Sparkles, Heart, Brain, Car, User, X, Languages, ArrowRight,
-  BookOpen, Target, Lightbulb, Plus, Flower2
+  BookOpen, Target, Lightbulb, Plus
 } from "lucide-react";
 
 type Language = "zh" | "en";
@@ -50,7 +50,6 @@ const projects = [
   { id: 1, title: { zh: "Navigating the Noise", en: "Navigating the Noise" }, category: { zh: "AI 情感依赖研究", en: "AI Emotional Reliance Research" }, description: { zh: "识别现有产品设计问题，深入研究AI情感依赖与用户行为模式。", en: "Identifying design issues and researching AI emotional reliance patterns." }, icon: <Brain className="w-8 h-8" />, color: "bg-[#FEF3C7]", accent: "text-amber-600" },
   { id: 2, title: { zh: "CarEcoCompare", en: "CarEcoCompare" }, category: { zh: "车辆决策数据产品", en: "Vehicle Decision Data Product" }, description: { zh: "将复杂技术参数转化为通勤场景下的三维决策框架，辅助车辆选购。", en: "Transforming complex parameters into a 3D decision framework for car buyers." }, icon: <Car className="w-8 h-8" />, color: "bg-[#DBEAFE]", accent: "text-blue-600" },
   { id: 3, title: { zh: "TumorTutor", en: "TumorTutor" }, category: { zh: "脑肿瘤识别工具", en: "Brain Tumor Recognition Tool" }, description: { zh: "基于深度学习的脑肿瘤识别工具，支持分类与位置定位交互训练。", en: "Deep learning tool for brain tumor classification and localization training." }, icon: <Plus className="w-8 h-8" />, color: "bg-[#F3E8FF]", accent: "text-purple-600" },
-  { id: 4, title: { zh: "The Kit", en: "The Kit" }, category: { zh: "系统设计 / 设计心理学", en: "System Design / Design Psychology" }, description: { zh: "为自闭症女孩设计的初潮支持工具包，建立可预期的行动框架。", en: "A support toolkit helping autistic girls build predictable frameworks for menarche." }, icon: <Flower2 className="w-8 h-8" />, color: "bg-[#FFF0F3]", accent: "text-rose-500" }
 ];
 
 const schools = [
@@ -336,7 +335,7 @@ function Modal1({ lang }: { lang: Language }) {
 
       <section className="mb-24">
         <SH i={3} label="My approach" />
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-3 gap-6">
           {[
             { data: p.approach.quant, bg: "bg-blue-100", icon: <Target className="w-5 h-5 text-blue-600" />, dot: "bg-blue-400" },
             { data: p.approach.qual, bg: "bg-purple-100", icon: <Lightbulb className="w-5 h-5 text-purple-600" />, dot: "bg-purple-400" }
@@ -491,7 +490,7 @@ function Modal2({ lang }: { lang: Language }) {
 
       <section className="mb-6">
         <SH i={2} label="How it works" />
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-3 gap-6">
           <div className="p-6 bg-ink text-paper rounded-[2rem]">
             <h5 className="text-xl font-serif font-black mb-4">Data Pipeline</h5>
             <div className="space-y-4">
@@ -793,7 +792,7 @@ function Modal4({ lang }: { lang: Language }) {
 
       <section className="mb-8">
         <SH i={6} label="Impact" />
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-3 gap-6">
           {p.impact.map((item, i) => (
             <div key={i} className="p-10 bg-ink text-paper rounded-[3rem] text-center group hover:bg-rose-500 transition-colors duration-500 shadow-lg">
               <h6 className="text-3xl font-serif font-black mb-2">{item.title}</h6>
@@ -928,7 +927,7 @@ export default function App() {
             <h2 className="text-3xl md:text-5xl font-serif font-black uppercase tracking-tighter font-elegant">{t.projectsTitle}</h2>
             <div className="h-px flex-1 bg-ink/20" />
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-3 gap-6">
             {projects.map((project, i) => (
               <motion.div
                 key={project.id}
@@ -1009,7 +1008,6 @@ export default function App() {
               {selectedProject === 1 && <Modal1 lang={lang} />}
               {selectedProject === 2 && <Modal2 lang={lang} />}
               {selectedProject === 3 && <Modal3 lang={lang} />}
-              {selectedProject === 4 && <Modal4 lang={lang} />}
             </motion.div>
           </motion.div>
         )}
