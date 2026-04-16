@@ -16,7 +16,7 @@ const translations = {
     projectsTitle: "项目经历",
     aboutTitle: "教育背景",
     viewMore: "查看详情",
-    aboutText: "从 AI 情感依赖到脑肿瘤识别工具，这些项目让我看到：好的设计不是给出答案，而是帮人找到自己的路。建筑、行为科学、AI 研究——这些构成了我的思考方式。研究与设计的交叉是我探索的方向。",
+    aboutText: "好的设计不是给出答案，而是帮人找到自己的路。建筑、行为科学、AI 研究——这些构成了我的思考方式。研究与设计的交叉是我探索的方向。",
     contactText: "欢迎一起交流学习！",
     tags: ["AI", "研究", "产品", "设计", "心理学", "数据"],
     projectDetails: {
@@ -34,7 +34,7 @@ const translations = {
     projectsTitle: "Project Portfolio",
     aboutTitle: "Education",
     viewMore: "View Details",
-    aboutText: "From AI emotional reliance to brain tumour recognition, these projects taught me that good design doesn't hand people answers — it builds the conditions for them to find their own. Architecture, behavioural science, AI research — these are the lenses I look through. Working at their intersection is where I belong.",
+    aboutText: "Good design doesn't hand people answers — it builds the conditions for them to find their own. Architecture, behavioural science, AI research — these are the lenses I look through. Working at their intersection is where I belong.",
     contactText: "Always happy to connect and exchange ideas!",
     tags: ["AI", "Research", "Product", "Design", "Psychology", "Data"],
     projectDetails: {
