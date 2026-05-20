@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Sparkles, Heart, Brain, Car, User, X, Languages, ArrowRight,
-  BookOpen, Target, Lightbulb, Plus, Flower2, Zap, Flower2, Zap
+  BookOpen, Target, Lightbulb, Plus, Flower2, Zap
 } from "lucide-react";
 
 type Language = "zh" | "en";
@@ -20,15 +20,17 @@ const translations = {
     aboutText: "好的设计不是给出答案，而是帮人找到自己的路。建筑、行为科学、AI 研究——这些构成了我的思考方式。研究与设计的交叉是我探索的方向。",
     contactText: "欢迎一起交流学习！",
     vibeCodingTitle: "Vibe Coding",
-    vibeCodingCat: "AI 工具实验 · 自然语言驱动开发",
-    vibeCodingDesc: "用自然语言指令驱动 AI，快速将想法变成可交互的产品原型。",
     vibeCodingView: "查看详情",
     proj1Label: "项目一",
-    proj1Title: "私人导游行程规划小工具 🗺️",
-    proj1Status: "✦ 已上线",
+    proj1Title: "私人导游行程规划小工具",
+    proj1Status: "❆ 已上线",
+    proj1Cat: "行程规划 · 交互工具",
+    proj1Desc: "用选择题代替填空题，解决双向信息不对称，为朋友定制伦敓55日行程。",
     proj2Label: "项目二",
-    proj2Title: "大富翁桌游投资决策小工具 💰",
+    proj2Title: "大富翁桌游投资决策小工具",
     proj2Status: "⏳ 制作中",
+    proj2Cat: "数据建模 · 决策工具",
+    proj2Desc: "将棋盘规则数字化，构建地产投资决策系统。",
     tags: ["AI", "研究", "产品", "设计", "心理学", "数据"],
     projectDetails: {
       1: { problem: "识别现有产品以留存为导向、结构性诱导用户依赖的设计问题。", solution: "提出反思性提示、边界提示、真实社交引导三项设计策略。", impact: "深入研究AI情感依赖与用户行为模式，作为毕业论文前期基础。", tools: "Python, Google Colab, OLS 回归, 情感分析" },
@@ -48,15 +50,17 @@ const translations = {
     aboutText: "Good design doesn't hand people answers — it builds the conditions for them to find their own. Architecture, behavioural science, AI research — these are the lenses I look through. This intersection is where I belong.",
     contactText: "Always happy to connect and exchange ideas!",
     vibeCodingTitle: "Vibe Coding",
-    vibeCodingCat: "AI Tools · Natural Language Development",
-    vibeCodingDesc: "Using natural language to drive AI, turning ideas into interactive product prototypes.",
     vibeCodingView: "View Details",
     proj1Label: "Project 1",
-    proj1Title: "Personal Tour Itinerary Planner 🗺️",
-    proj1Status: "✦ Live",
+    proj1Title: "Personal Tour Itinerary Planner",
+    proj1Status: "Live",
+    proj1Cat: "Trip Planner · Interactive Tool",
+    proj1Desc: "Replacing open questions with structured choices to solve two-way information asymmetry.",
     proj2Label: "Project 2",
-    proj2Title: "Monopoly Investment Decision Tool 💰",
-    proj2Status: "⏳ In Progress",
+    proj2Title: "Monopoly Investment Decision Tool",
+    proj2Status: "In Progress",
+    proj2Cat: "Data Modelling · Decision Tool",
+    proj2Desc: "Digitising board game rules to build a property investment decision system.",
     tags: ["AI", "Research", "Product", "Design", "Psychology", "Data"],
     projectDetails: {
       1: { problem: "Identified design issues in existing products that induce structural user dependency.", solution: "Proposed three design strategies: reflective prompts, boundary cues, and social signposting.", impact: "Deep research into AI emotional reliance and user behavior patterns for thesis foundation.", tools: "Python, Google Colab, OLS Regression, Sentiment Analysis" },
@@ -268,17 +272,26 @@ function SH({ i, label }: { i: number; label: string }) {
       </h5>
       <div className="h-px flex-1 bg-ink/10" />
       <AnimatePresence>
-        {showVibeCoding && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibeCoding(false)}>
+        {showVibe1 && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibe1(false)}>
             <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
-              <button onClick={() => setShowVibeCoding(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all">
-                <X className="w-6 h-6" />
-              </button>
-              <ModalVibe lang={lang} />
+              <button onClick={() => setShowVibe1(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all"><X className="w-6 h-6" /></button>
+              <ModalVibe1 lang={lang} />
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
+      <AnimatePresence>
+        {showVibe2 && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibe2(false)}>
+            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
+              <button onClick={() => setShowVibe2(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all"><X className="w-6 h-6" /></button>
+              <ModalVibe2 lang={lang} />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </div>
   );
 }
@@ -480,18 +493,6 @@ function Modal1({ lang }: { lang: Language }) {
           ))}
         </div>
       </section>
-      <AnimatePresence>
-        {showVibeCoding && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibeCoding(false)}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
-              <button onClick={() => setShowVibeCoding(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all">
-                <X className="w-6 h-6" />
-              </button>
-              <ModalVibe lang={lang} />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
@@ -643,18 +644,6 @@ function Modal2({ lang }: { lang: Language }) {
           ))}
         </div>
       </section>
-      <AnimatePresence>
-        {showVibeCoding && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibeCoding(false)}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
-              <button onClick={() => setShowVibeCoding(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all">
-                <X className="w-6 h-6" />
-              </button>
-              <ModalVibe lang={lang} />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
@@ -770,18 +759,6 @@ function Modal3({ lang }: { lang: Language }) {
           ))}
         </div>
       </section>
-      <AnimatePresence>
-        {showVibeCoding && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibeCoding(false)}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
-              <button onClick={() => setShowVibeCoding(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all">
-                <X className="w-6 h-6" />
-              </button>
-              <ModalVibe lang={lang} />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
@@ -917,221 +894,146 @@ function Modal4({ lang }: { lang: Language }) {
           ))}
         </div>
       </section>
-      <AnimatePresence>
-        {showVibeCoding && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibeCoding(false)}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
-              <button onClick={() => setShowVibeCoding(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all">
-                <X className="w-6 h-6" />
-              </button>
-              <ModalVibe lang={lang} />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
 
 
-function ModalVibe({ lang }: { lang: Language }) {
+function ModalVibe1({ lang }: { lang: Language }) {
   const t = translations[lang];
-  const [activeTab, setActiveTab] = useState<"a" | "b">("a");
   return (
     <div className="font-sans">
       <div className="p-6 md:p-10 pb-4 border-b border-ink/10">
         <div className="flex flex-wrap gap-2 mb-4">
           <span className="px-3 py-1 bg-ink text-paper rounded-full text-[9px] font-bold uppercase tracking-widest">Vibe Coding</span>
-          <span className="px-3 py-1 bg-[#EDE9FE] text-[#5B21B6] rounded-full text-[9px] font-bold uppercase tracking-widest">AI PM Perspective</span>
+          <span className="px-3 py-1 bg-[#FFF0F7] text-[#C2185B] rounded-full text-[9px] font-bold uppercase tracking-widest">AI PM Perspective</span>
         </div>
-        <h2 className="text-3xl md:text-4xl font-serif font-black text-ink mb-1">Vibe Coding</h2>
-        <p className="text-sm text-[#6D28D9] italic">{lang === "zh" ? "用自然语言指令驱动 AI，把想法变成可交互的产品" : "Turning ideas into interactive products with natural language"}</p>
+        <p className="text-[9px] font-black uppercase tracking-widest text-[#E91E8C] mb-2">{t.proj1Label}</p>
+        <h2 className="text-3xl md:text-4xl font-serif font-black text-ink mb-1">{t.proj1Title}</h2>
+        <p className="text-sm text-[#E91E8C] italic">{lang === "zh" ? "用自然语言指令驱动 AI，把想法变成可交互的产品" : "Turning ideas into interactive products with natural language"}</p>
       </div>
-      <div className="flex border-b border-ink/10">
-        <button onClick={() => setActiveTab("a")} className={`flex-1 p-4 text-left transition-all border-b-[3px] ${activeTab === "a" ? "border-[#E91E8C] bg-[#FFF0F7]" : "border-transparent hover:bg-ink/5"}`}>
-          <span className="block text-[9px] font-black uppercase tracking-widest text-[#E91E8C] mb-1">{t.proj1Label}</span>
-          <span className="block text-sm font-bold text-ink mb-1">{t.proj1Title}</span>
-          <span className="block text-[10px] text-[#E91E8C]">{t.proj1Status}</span>
-        </button>
-        <button onClick={() => setActiveTab("b")} className={`flex-1 p-4 text-left transition-all border-b-[3px] ${activeTab === "b" ? "border-[#CA8A04] bg-[#FFFBEB]" : "border-transparent hover:bg-ink/5"}`}>
-          <span className="block text-[9px] font-black uppercase tracking-widest text-[#CA8A04] mb-1">{t.proj2Label}</span>
-          <span className="block text-sm font-bold text-ink mb-1">{t.proj2Title}</span>
-          <span className="block text-[10px] text-[#185FA5]">{t.proj2Status}</span>
-        </button>
+      <div className="p-6 md:p-10">
+        <div className="border-2 border-ink rounded-2xl overflow-hidden shadow-[3px_3px_0_rgba(45,45,45,1)] mb-4">
+          <div className="flex items-center gap-2 px-3 py-2 bg-[#FCE4EC]">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" /><span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" /><span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
+            <span className="flex-1 text-center text-[10px] text-ink/40 font-mono">yangyang-london.vercel.app</span>
+            <a href="https://yangyang-london.vercel.app" target="_blank" rel="noreferrer" className="text-[11px] font-bold text-[#C2185B]">{lang === "zh" ? "↗ 打开" : "↗ Open"}</a>
+          </div>
+          <svg viewBox="0 0 640 130" xmlns="http://www.w3.org/2000/svg" className="w-full block" style={{background:"#EEF6FB"}}>
+            <path d="M0,80 Q160,70 320,77 Q480,84 640,74" stroke="#93C5FD" strokeWidth="9" fill="none" strokeLinecap="round" opacity="0.7"/>
+            <circle cx="218" cy="65" r="7.5" fill="#F9A8D4" stroke="#C2185B" strokeWidth="1.8"/>
+            <text x="218" y="56" textAnchor="middle" fontSize="8" fill="#C2185B" fontFamily="sans-serif">Big Ben</text>
+            <circle cx="320" cy="35" r="7.5" fill="#F9A8D4" stroke="#C2185B" strokeWidth="1.8"/>
+            <text x="320" y="26" textAnchor="middle" fontSize="8" fill="#C2185B" fontFamily="sans-serif">大英博物馆</text>
+            <circle cx="446" cy="70" r="7.5" fill="#F9A8D4" stroke="#C2185B" strokeWidth="1.8"/>
+            <text x="446" y="61" textAnchor="middle" fontSize="8" fill="#C2185B" fontFamily="sans-serif">Tower Bridge</text>
+            <text x="12" y="15" fontSize="9" fill="#9CA3AF" fontFamily="sans-serif">London Tour Planner</text>
+          </svg>
+        </div>
+        <div className="flex gap-3 mb-4">
+          <a href="https://yangyang-london.vercel.app" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#E91E8C] text-white text-xs font-bold border-2 border-[#C2185B]">{lang === "zh" ? "↗ 打开工具" : "↗ Open Tool"}</a>
+          <span className="inline-flex items-center px-4 py-2 rounded-full text-ink/30 text-xs font-bold border-2 border-ink/15 cursor-not-allowed">{lang === "zh" ? "源码（私有）" : "Source (Private)"}</span>
+        </div>
+        <div className="flex items-center gap-3 my-4">
+          <span className="text-[10px] font-black uppercase tracking-widest text-ink/30 whitespace-nowrap">AI PM 工作流分析</span>
+          <div className="h-px flex-1 bg-ink/10" />
+        </div>
+        <div className="border border-ink/10 rounded-xl overflow-hidden">
+          {([
+            { n:"01", title: lang==="zh" ? "定义需求与痛点" : "Define the Problem", desc: lang==="zh" ? "朋友对伦敦景点没有概念，无从表达偏好；我熟悉景点，却不了解她的需求——双向信息不对称。用「选择题」代替「填空题」，将开放式需求转化为结构化问卷。" : "My friend had no knowledge of London attractions; I knew the sights but not her needs. Replacing open questions with structured choices made recommendation logic executable.", tags: ["双向信息不对称", "选择题 vs 填空题"] },
+            { n:"02", title: lang==="zh" ? "自然语言指令" : "Natural Language Prompting", desc: lang==="zh" ? "用中文描述 UI 结构、问卷流程与行程卡片逻辑，Claude 生成完整 HTML+JS。" : "Described UI structure and flow in plain language. Claude generated the full HTML+JS.", tags: ["Claude.ai Artifact", "HTML / JS"] },
+            { n:"03", title: lang==="zh" ? "实时预览 → 反馈迭代" : "Preview and Iterate", desc: lang==="zh" ? "对话框内直接看效果，用语言描述问题而非修改代码。多轮迭代覆盖行程数据、粉色视觉风格、问卷交互逻辑。" : "Previewed results in chat and described issues in words. Multiple rounds covered itinerary data, visual style and questionnaire logic.", tags: ["多轮迭代"] },
+            { n:"04", title: lang==="zh" ? "部署 & 分享" : "Deploy and Share", desc: lang==="zh" ? "导出代码 → GitHub → Vercel → 可分享链接。从想法到上线仅 2 小时。" : "Exported code to GitHub to Vercel to a shareable link. From idea to launch in roughly 2 hours.", tags: ["Vercel"] },
+          ] as {n:string;title:string;desc:string;tags:string[]}[]).map((row, i) => (
+            <div key={i} className="flex gap-3 p-3.5 border-b border-ink/[0.07] bg-white last:border-b-0">
+              <div className="w-5 h-5 rounded-full border-[1.5px] border-[#E91E8C] bg-[#FFF0F7] flex items-center justify-center text-[10px] font-bold text-[#C2185B] flex-shrink-0 mt-0.5">{row.n}</div>
+              <div>
+                <p className="text-[13px] font-bold text-ink mb-1">{row.title}</p>
+                <p className="text-[11px] text-ink/55 leading-relaxed">{row.desc}</p>
+                <div className="flex gap-1.5 mt-1.5 flex-wrap">{row.tags.map(tag => <span key={tag} className="text-[9px] px-1.5 py-0.5 rounded bg-ink/5 text-ink/50">{tag}</span>)}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-4 p-4 border-l-[3px] border-[#E91E8C] bg-[#FFF0F7] rounded-r-xl">
+          <span className="text-[9px] font-black uppercase tracking-widest text-ink/30 block mb-2">PM 反思</span>
+          <p className="text-xs text-ink/65 leading-relaxed italic">{lang === "zh" ? "我在这个过程中的角色是：需求定义者与产品测试者——识别真实痛点，将其转化为可执行的设计决策，并在迭代中持续验证产品是否解决了最初的问题。" : "My role was: problem definer and product tester — identifying real pain points, translating them into actionable design decisions, and validating whether the product solved the original problem."}</p>
+        </div>
       </div>
-      {activeTab === "a" && (
-        <div className="p-6 md:p-10">
-          <div className="border-2 border-ink rounded-2xl overflow-hidden shadow-[3px_3px_0_rgba(45,45,45,1)] mb-4">
-            <div className="flex items-center gap-2 px-3 py-2 bg-[#FCE4EC]">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57] flex-shrink-0" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] flex-shrink-0" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#28C840] flex-shrink-0" />
-              <span className="flex-1 text-center text-[10px] text-ink/40 font-mono">yangyang-london.vercel.app</span>
-              <a href="https://yangyang-london.vercel.app" target="_blank" rel="noreferrer" className="text-[11px] font-bold text-[#C2185B]">↗ 打开</a>
-            </div>
-            <svg viewBox="0 0 640 130" xmlns="http://www.w3.org/2000/svg" className="w-full block" style={{background:"#EEF6FB"}}>
-              <line x1="80" y1="0" x2="80" y2="130" stroke="#D1D5DB" strokeWidth="0.8" opacity="0.5"/>
-              <line x1="200" y1="0" x2="200" y2="130" stroke="#D1D5DB" strokeWidth="0.8" opacity="0.5"/>
-              <line x1="340" y1="0" x2="340" y2="130" stroke="#D1D5DB" strokeWidth="0.8" opacity="0.5"/>
-              <line x1="480" y1="0" x2="480" y2="130" stroke="#D1D5DB" strokeWidth="0.8" opacity="0.5"/>
-              <line x1="0" y1="45" x2="640" y2="45" stroke="#D1D5DB" strokeWidth="0.8" opacity="0.5"/>
-              <line x1="0" y1="90" x2="640" y2="90" stroke="#D1D5DB" strokeWidth="0.8" opacity="0.5"/>
-              <path d="M0,80 Q160,70 320,77 Q480,84 640,74" stroke="#93C5FD" strokeWidth="9" fill="none" strokeLinecap="round" opacity="0.7"/>
-              <rect x="108" y="22" width="30" height="18" rx="4" fill="#BBF7D0" stroke="#16A34A" strokeWidth="1" opacity="0.85"/>
-              <text x="123" y="34" textAnchor="middle" fontSize="7.5" fill="#15803D" fontFamily="sans-serif" fontWeight="600">Hyde</text>
-              <circle cx="172" cy="55" r="6.5" fill="#FDE68A" stroke="#D97706" strokeWidth="1.5"/>
-              <text x="172" y="46" textAnchor="middle" fontSize="7.5" fill="#B45309" fontFamily="sans-serif">Buckingham</text>
-              <circle cx="218" cy="65" r="7.5" fill="#F9A8D4" stroke="#C2185B" strokeWidth="1.8"/>
-              <text x="218" y="56" textAnchor="middle" fontSize="8" fill="#C2185B" fontFamily="sans-serif" fontWeight="600">Big Ben</text>
-              <circle cx="278" cy="46" r="6.5" fill="#FCA5A5" stroke="#DC2626" strokeWidth="1.5"/>
-              <text x="278" y="37" textAnchor="middle" fontSize="7.5" fill="#DC2626" fontFamily="sans-serif">Covent Gdn</text>
-              <circle cx="320" cy="35" r="7.5" fill="#F9A8D4" stroke="#C2185B" strokeWidth="1.8"/>
-              <text x="320" y="26" textAnchor="middle" fontSize="8" fill="#C2185B" fontFamily="sans-serif" fontWeight="600">大英博物馆</text>
-              <circle cx="376" cy="72" r="6.5" fill="#C4B5FD" stroke="#7C3AED" strokeWidth="1.5"/>
-              <text x="376" y="63" textAnchor="middle" fontSize="7.5" fill="#7C3AED" fontFamily="sans-serif">Tate Modern</text>
-              <circle cx="446" cy="70" r="7.5" fill="#F9A8D4" stroke="#C2185B" strokeWidth="1.8"/>
-              <text x="446" y="61" textAnchor="middle" fontSize="8" fill="#C2185B" fontFamily="sans-serif" fontWeight="600">Tower Bridge</text>
-              <circle cx="540" cy="50" r="6" fill="#BAE6FD" stroke="#0284C7" strokeWidth="1.5"/>
-              <text x="540" y="41" textAnchor="middle" fontSize="7.5" fill="#0284C7" fontFamily="sans-serif">Greenwich</text>
-              <text x="12" y="15" fontSize="9" fill="#9CA3AF" fontFamily="sans-serif" fontWeight="500">London · Interactive Tour Planner</text>
-            </svg>
-          </div>
-          <div className="flex gap-3 mb-6 flex-wrap">
-            <a href="https://yangyang-london.vercel.app" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#E91E8C] text-white text-xs font-bold border-2 border-[#C2185B] shadow-[2px_2px_0_#880E4F]">↗ {lang === "zh" ? "打开工具" : "Open Tool"}</a>
-            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-ink/30 text-xs font-bold border-2 border-ink/15 cursor-not-allowed">📁 {lang === "zh" ? "源码（私有）" : "Source (Private)"}</span>
-          </div>
-          <div className="flex items-center gap-3 my-4">
-            <span className="text-[10px] font-black uppercase tracking-widest text-ink/30 whitespace-nowrap">AI PM 工作流分析</span>
-            <div className="h-px flex-1 bg-ink/10" />
-          </div>
-          <div className="border border-ink/10 rounded-xl overflow-hidden">
-            {[
-              { n:"01", title: lang==="zh"?"定义需求与痛点":"Define the Problem", desc: lang==="zh"?"朋友对伦敦景点没有概念，无从表达偏好；我熟悉景点，却不了解她的需求——双向信息不对称。用「选择题」代替「填空题」，将开放式需求收集转化为结构化问卷，降低输入门槛的同时让推荐逻辑可被执行。":"My friend had no knowledge of London attractions and could not express preferences; I knew the sights but not her needs — a two-way information gap. Replacing open questions with structured multiple choice lowered the barrier and made recommendation logic executable.", tags:["双向信息不对称","选择题 vs 填空题","沟通障碍"] },
-              { n:"02", title: lang==="zh"?"自然语言指令":"Natural Language Prompting", desc: lang==="zh"?"用中文描述 UI 结构、问卷流程与行程卡片逻辑，Claude 生成完整 HTML+JS。关注点始终在产品体验，而非技术实现。":"Described UI structure, questionnaire flow and itinerary card logic in plain language. Claude generated the full HTML+JS. Focus stayed on product experience, not implementation.", tags:["Claude.ai Artifact","HTML / JS"] },
-              { n:"03", title: lang==="zh"?"实时预览 → 反馈迭代":"Preview → Iterate", desc: lang==="zh"?"对话框内直接看效果，用语言描述问题而非修改代码。多轮迭代覆盖行程数据、粉色视觉风格、问卷交互逻辑与行程卡展示结构。":"Previewed results directly in the chat and described issues in words rather than editing code. Multiple rounds covered itinerary data, visual style, questionnaire logic and card layout.", tags:["多轮迭代","视觉风格","交互设计"] },
-              { n:"04", title: lang==="zh"?"部署 & 分享":"Deploy & Share", desc: lang==="zh"?"导出代码 → GitHub → Vercel → 可分享链接，直接发给朋友使用。从想法到上线约 2 小时，零本地开发环境。":"Exported code → GitHub → Vercel → shareable link sent directly to friend. From idea to launch in ~2 hours, zero local dev environment.", tags:["Vercel","2小时交付"] },
-            ].map((row, i) => (
-              <div key={i} className="flex gap-3 p-3.5 border-b border-ink/[0.07] bg-white last:border-b-0">
-                <div className="w-5 h-5 rounded-full border-[1.5px] border-[#E91E8C] bg-[#FFF0F7] flex items-center justify-center text-[10px] font-bold text-[#C2185B] flex-shrink-0 mt-0.5">{row.n}</div>
-                <div>
-                  <p className="text-[13px] font-bold text-ink mb-1">{row.title}</p>
-                  <p className="text-[11px] text-ink/55 leading-relaxed">{row.desc}</p>
-                  <div className="flex gap-1.5 mt-1.5 flex-wrap">{row.tags.map(tag => <span key={tag} className="text-[9px] px-1.5 py-0.5 rounded bg-ink/5 text-ink/50">{tag}</span>)}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-4 p-4 border-l-[3px] border-[#E91E8C] bg-[#FFF0F7] rounded-r-xl">
-            <span className="text-[9px] font-black uppercase tracking-widest text-ink/30 block mb-2">PM 反思 & 延伸</span>
-            <p className="text-xs text-ink/65 leading-relaxed italic">{lang === "zh" ? "我在这个过程中的角色是：需求定义者与产品测试者——识别真实痛点，将其转化为可执行的设计决策，并在迭代中持续验证产品是否解决了最初的问题。" : "My role in this process was: problem definer and product tester — identifying real pain points, translating them into actionable design decisions, and continuously validating whether the product solved the original problem."}</p>
-            <p className="text-xs text-ink/65 leading-relaxed italic mt-2">{lang === "zh" ? "这个工具从一个朋友的小案例出发，但背后的逻辑可以直接扩展：地方导游面临同样的信息不对称——他们熟悉景点，却不掌握游客偏好。将结构化问卷与地图导览结合，可以成为面向导游的定制化行程生成工具，让每一次导览都从「了解这个人」开始。" : "This tool started from a small personal case, but the logic scales directly: local guides face the same information asymmetry — they know the sights, but not the visitor preferences. Combining structured questionnaires with map-based guidance could become a customised itinerary tool for guides, where every tour starts with getting to know this person."}</p>
-          </div>
+    </div>
+  );
+}
+
+function ModalVibe2({ lang }: { lang: Language }) {
+  const t = translations[lang];
+  return (
+    <div className="font-sans">
+      <div className="p-6 md:p-10 pb-4 border-b border-ink/10">
+        <div className="flex flex-wrap gap-2 mb-4">
+          <span className="px-3 py-1 bg-ink text-paper rounded-full text-[9px] font-bold uppercase tracking-widest">Vibe Coding</span>
+          <span className="px-3 py-1 bg-[#FFFBEB] text-[#92400E] rounded-full text-[9px] font-bold uppercase tracking-widest">AI PM Perspective</span>
         </div>
-      )}
-      {activeTab === "b" && (
-        <div className="p-6 md:p-10">
-          <div className="flex items-center gap-2 p-3 bg-blue-50 rounded-xl mb-4 text-xs text-blue-700">
-            ⏳ {lang === "zh" ? "制作中 — 正在另一个对话中迭代优化，完成后将更新链接" : "In progress — being refined in another session, link will be updated on completion"}
-          </div>
-          <div className="border-2 border-ink rounded-2xl overflow-hidden shadow-[3px_3px_0_rgba(45,45,45,1)] mb-4">
-            <div className="flex items-center gap-2 px-3 py-2 bg-[#FEF3C7]">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57] flex-shrink-0" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] flex-shrink-0" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#28C840] flex-shrink-0" />
-              <span className="flex-1 text-center text-[10px] text-ink/40 font-mono">{lang === "zh" ? "大富翁桌游投资决策小工具" : "Monopoly Investment Decision Tool"}</span>
-              <span className="text-[11px] font-bold text-[#B45309]">Coming soon</span>
-            </div>
-            <svg viewBox="0 0 640 130" xmlns="http://www.w3.org/2000/svg" className="w-full block" style={{background:"#FFFBEB"}}>
-              <rect x="20" y="10" width="600" height="110" rx="6" fill="none" stroke="#D97706" strokeWidth="1" strokeDasharray="4,3" opacity="0.35"/>
-              <rect x="20" y="10" width="42" height="42" rx="4" fill="#FEF9C3" stroke="#CA8A04" strokeWidth="1.8"/>
-              <text x="41" y="30" textAnchor="middle" fontSize="9" fill="#92400E" fontFamily="sans-serif" fontWeight="700">GO</text>
-              <text x="41" y="43" textAnchor="middle" fontSize="7" fill="#B45309" fontFamily="sans-serif">出发</text>
-              <rect x="578" y="10" width="42" height="42" rx="4" fill="#FEE2E2" stroke="#DC2626" strokeWidth="1.8"/>
-              <text x="599" y="30" textAnchor="middle" fontSize="9" fill="#991B1B" fontFamily="sans-serif" fontWeight="700">监狱</text>
-              <rect x="20" y="83" width="42" height="37" rx="4" fill="#DCFCE7" stroke="#16A34A" strokeWidth="1.8"/>
-              <text x="41" y="105" textAnchor="middle" fontSize="7.5" fill="#15803D" fontFamily="sans-serif" fontWeight="700">免费停车</text>
-              <rect x="578" y="83" width="42" height="37" rx="4" fill="#EDE9FE" stroke="#7C3AED" strokeWidth="1.8"/>
-              <text x="599" y="105" textAnchor="middle" fontSize="7.5" fill="#5B21B6" fontFamily="sans-serif" fontWeight="700">去监狱</text>
-              <rect x="67" y="10" width="38" height="42" rx="3" fill="#FFF7ED" stroke="#EA580C" strokeWidth="1"/>
-              <rect x="67" y="10" width="38" height="9" rx="2" fill="#EA580C"/>
-              <text x="86" y="28" textAnchor="middle" fontSize="7.5" fill="#7C2D12" fontFamily="sans-serif" fontWeight="600">重庆</text>
-              <text x="86" y="39" textAnchor="middle" fontSize="7" fill="#9A3412" fontFamily="sans-serif">M220</text>
-              <rect x="109" y="10" width="38" height="42" rx="3" fill="#FFF7ED" stroke="#EA580C" strokeWidth="1"/>
-              <rect x="109" y="10" width="38" height="9" rx="2" fill="#EA580C"/>
-              <text x="128" y="28" textAnchor="middle" fontSize="7.5" fill="#7C2D12" fontFamily="sans-serif" fontWeight="600">宁波</text>
-              <text x="128" y="39" textAnchor="middle" fontSize="7" fill="#9A3412" fontFamily="sans-serif">M220</text>
-              <rect x="151" y="10" width="38" height="42" rx="3" fill="#EFF6FF" stroke="#2563EB" strokeWidth="1"/>
-              <rect x="151" y="10" width="38" height="9" rx="2" fill="#2563EB"/>
-              <text x="170" y="28" textAnchor="middle" fontSize="7.5" fill="#1E3A8A" fontFamily="sans-serif" fontWeight="600">杭州</text>
-              <text x="170" y="39" textAnchor="middle" fontSize="7" fill="#1D4ED8" fontFamily="sans-serif">M240</text>
-              <rect x="235" y="10" width="38" height="42" rx="3" fill="#F5F3FF" stroke="#7C3AED" strokeWidth="1"/>
-              <rect x="235" y="10" width="38" height="9" rx="2" fill="#7C3AED"/>
-              <text x="254" y="28" textAnchor="middle" fontSize="7.5" fill="#4C1D95" fontFamily="sans-serif" fontWeight="600">南京</text>
-              <text x="254" y="39" textAnchor="middle" fontSize="7" fill="#5B21B6" fontFamily="sans-serif">M300</text>
-              <rect x="277" y="10" width="38" height="42" rx="3" fill="#FFFBEB" stroke="#CA8A04" strokeWidth="2"/>
-              <rect x="277" y="10" width="38" height="9" rx="2" fill="#CA8A04"/>
-              <text x="296" y="28" textAnchor="middle" fontSize="7.5" fill="#78350F" fontFamily="sans-serif" fontWeight="700">上海</text>
-              <text x="296" y="39" textAnchor="middle" fontSize="7" fill="#92400E" fontFamily="sans-serif">M400</text>
-              <rect x="283" y="12" width="24" height="8" rx="2" fill="#DC2626"/>
-              <text x="295" y="19" textAnchor="middle" fontSize="6.5" fill="white" fontFamily="sans-serif" fontWeight="700">酒店</text>
-              <circle cx="350" cy="65" r="13" fill="#FCD34D" stroke="#D97706" strokeWidth="2.5"/>
-              <circle cx="350" cy="65" r="9" fill="#FBBF24" stroke="#B45309" strokeWidth="1"/>
-              <text x="350" y="69" textAnchor="middle" fontSize="9" fill="#78350F" fontFamily="sans-serif" fontWeight="700">你</text>
-              <rect x="400" y="15" width="130" height="82" rx="7" fill="#FFFEF0" stroke="#CA8A04" strokeWidth="2"/>
-              <rect x="400" y="15" width="130" height="20" rx="7" fill="#FEF3C7"/>
-              <rect x="400" y="25" width="130" height="10" fill="#FEF3C7"/>
-              <text x="465" y="29" textAnchor="middle" fontSize="8.5" fill="#92400E" fontFamily="sans-serif" fontWeight="700">💡 投资建议</text>
-              <text x="412" y="50" fontSize="7.5" fill="#4B5563" fontFamily="sans-serif" fontWeight="600">上海</text>
-              <text x="460" y="50" fontSize="7.5" fill="#92400E" fontFamily="sans-serif">地价 M400</text>
-              <text x="412" y="62" fontSize="7" fill="#4B5563" fontFamily="sans-serif">酒店收益</text>
-              <text x="460" y="62" fontSize="7" fill="#16A34A" fontFamily="sans-serif" fontWeight="600">M1100/次</text>
-              <text x="412" y="74" fontSize="7" fill="#4B5563" fontFamily="sans-serif">ROI</text>
-              <text x="460" y="74" fontSize="7" fill="#D97706" fontFamily="sans-serif" fontWeight="700">175% ★ 推荐</text>
-              <text x="32" y="126" fontSize="8.5" fill="#9CA3AF" fontFamily="sans-serif" fontWeight="500">Monopoly · Investment Decision System</text>
-            </svg>
-          </div>
-          <div className="flex gap-3 mb-6">
-            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-ink/30 text-xs font-bold border-2 border-ink/15 cursor-not-allowed">↗ {lang === "zh" ? "链接待更新" : "Link coming soon"}</span>
-          </div>
-          <div className="flex items-center gap-3 my-4">
-            <span className="text-[10px] font-black uppercase tracking-widest text-ink/30 whitespace-nowrap">AI PM 工作流分析</span>
-            <div className="h-px flex-1 bg-ink/10" />
-          </div>
-          <div className="border border-ink/10 rounded-xl overflow-hidden">
-            {[
-              { n:"01", title: lang==="zh"?"定义需求与痛点":"Define the Problem", desc: lang==="zh"?"大富翁棋盘数据复杂（地价、租金、色组、酒店多维度），玩家难以快速评估地产投资价值。核心需求：将棋盘规则数字化，辅助实时投资决策。":"Monopoly board data is complex across multiple dimensions. Players struggle to quickly evaluate property investment value. Core need: digitise board rules to support real-time decision-making.", tags:["规则数字化","决策辅助"] },
-              { n:"02", title: lang==="zh"?"数据驱动的指令设计":"Data-Driven Prompting", desc: lang==="zh"?"用自然语言描述数据结构，让 AI 生成数据模型与交互界面。遇到数据匹配问题时，截图反馈精确纠正。":"Described data structures in plain language, letting AI generate the data model and interface. Screenshots were used to give precise correction feedback when mismatches occurred.", tags:["Claude.ai Artifact","数据建模"] },
-              { n:"03", title: lang==="zh"?"多轮数据校验":"Multi-round Validation", desc: lang==="zh"?"用棋盘原始数据逐条核验 AI 生成的数据表，发现偏差后精确描述修正范围。数据准确性是系统可用的前提，这是 PM 的把关职责。":"Verified AI-generated data tables line by line against the original board. Data accuracy is the prerequisite for a usable system — this is the PM's responsibility.", tags:["数据验证","精准反馈"] },
-              { n:"04", title: lang==="zh"?"待完成：部署上线":"Coming: Deploy", desc: lang==="zh"?"优化中，完成后部署至 Vercel 并在此更新链接。":"Currently being refined. Will be deployed to Vercel and the link updated here.", tags:["进行中"] },
-            ].map((row, i) => (
-              <div key={i} className="flex gap-3 p-3.5 border-b border-ink/[0.07] bg-white last:border-b-0">
-                <div className="w-5 h-5 rounded-full border-[1.5px] border-[#CA8A04] bg-[#FFFBEB] flex items-center justify-center text-[10px] font-bold text-[#92400E] flex-shrink-0 mt-0.5">{row.n}</div>
-                <div>
-                  <p className="text-[13px] font-bold text-ink mb-1">{row.title}</p>
-                  <p className="text-[11px] text-ink/55 leading-relaxed">{row.desc}</p>
-                  <div className="flex gap-1.5 mt-1.5 flex-wrap">{row.tags.map(tag => <span key={tag} className="text-[9px] px-1.5 py-0.5 rounded bg-ink/5 text-ink/50">{tag}</span>)}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-4 p-4 border-l-[3px] border-[#CA8A04] bg-[#FFFBEB] rounded-r-xl">
-            <span className="text-[9px] font-black uppercase tracking-widest text-ink/30 block mb-2">PM 反思</span>
-            <p className="text-xs text-ink/65 leading-relaxed italic">{lang === "zh" ? "我在这个过程中的角色是：数据架构定义者与逻辑把关者——AI 能快速搭建界面结构，但棋盘数据的准确性与逻辑自洽需要 PM 逐一验证。这让我清楚看到 vibe coding 的边界：结构可以交给 AI，判断需要留给人。" : "My role in this process was: data architecture definer and logic gatekeeper — AI can quickly build interface structure, but the accuracy and logical consistency of the data requires the PM to verify each entry. Structure can go to AI, judgement stays with the human."}</p>
-          </div>
+        <p className="text-[9px] font-black uppercase tracking-widest text-[#CA8A04] mb-2">{t.proj2Label}</p>
+        <h2 className="text-3xl md:text-4xl font-serif font-black text-ink mb-1">{t.proj2Title}</h2>
+        <p className="text-sm text-[#CA8A04] italic">{lang === "zh" ? "将棋盘规则数字化，构建地产投资决策系统" : "Digitising board game rules into a property investment decision system"}</p>
+      </div>
+      <div className="p-6 md:p-10">
+        <div className="flex items-center gap-2 p-3 bg-blue-50 rounded-xl mb-4 text-xs text-blue-700">
+          {lang === "zh" ? "⏳ 制作中 — 正在迭代优化，完成后将更新链接" : "In progress — being refined, link will be updated on completion"}
         </div>
-      )}
-      <AnimatePresence>
-        {showVibeCoding && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibeCoding(false)}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
-              <button onClick={() => setShowVibeCoding(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all">
-                <X className="w-6 h-6" />
-              </button>
-              <ModalVibe lang={lang} />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <div className="border-2 border-ink rounded-2xl overflow-hidden shadow-[3px_3px_0_rgba(45,45,45,1)] mb-4">
+          <div className="flex items-center gap-2 px-3 py-2 bg-[#FEF3C7]">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" /><span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" /><span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
+            <span className="flex-1 text-center text-[10px] text-ink/40 font-mono">{lang === "zh" ? "大富翁投资决策工具" : "Monopoly Investment Tool"}</span>
+            <span className="text-[11px] font-bold text-[#B45309]">Coming soon</span>
+          </div>
+          <svg viewBox="0 0 640 130" xmlns="http://www.w3.org/2000/svg" className="w-full block" style={{background:"#FFFBEB"}}>
+            <rect x="20" y="10" width="42" height="42" rx="4" fill="#FEF9C3" stroke="#CA8A04" strokeWidth="1.8"/>
+            <text x="41" y="35" textAnchor="middle" fontSize="11" fill="#92400E" fontFamily="sans-serif" fontWeight="700">GO</text>
+            <rect x="578" y="10" width="42" height="42" rx="4" fill="#FEE2E2" stroke="#DC2626" strokeWidth="1.8"/>
+            <text x="599" y="35" textAnchor="middle" fontSize="9" fill="#991B1B" fontFamily="sans-serif" fontWeight="700">监狱</text>
+            <rect x="277" y="10" width="38" height="42" rx="3" fill="#FFFBEB" stroke="#CA8A04" strokeWidth="2"/>
+            <rect x="277" y="10" width="38" height="9" rx="2" fill="#CA8A04"/>
+            <text x="296" y="27" textAnchor="middle" fontSize="7.5" fill="#78350F" fontFamily="sans-serif" fontWeight="700">上海</text>
+            <text x="296" y="39" textAnchor="middle" fontSize="7" fill="#92400E" fontFamily="sans-serif">M400</text>
+            <circle cx="350" cy="75" r="13" fill="#FCD34D" stroke="#D97706" strokeWidth="2.5"/>
+            <text x="350" y="79" textAnchor="middle" fontSize="9" fill="#78350F" fontFamily="sans-serif" fontWeight="700">你</text>
+            <rect x="410" y="20" width="120" height="60" rx="6" fill="#FFFEF0" stroke="#CA8A04" strokeWidth="1.5"/>
+            <text x="470" y="38" textAnchor="middle" fontSize="8" fill="#92400E" fontFamily="sans-serif" fontWeight="700">投资建议</text>
+            <text x="422" y="52" fontSize="7" fill="#16A34A" fontFamily="sans-serif">上海 ROI 175%</text>
+            <text x="422" y="64" fontSize="7" fill="#D97706" fontFamily="sans-serif" fontWeight="700">★ 推荐购买</text>
+            <text x="32" y="120" fontSize="8" fill="#9CA3AF" fontFamily="sans-serif">Monopoly Investment System</text>
+          </svg>
+        </div>
+        <div className="flex gap-3 mb-4">
+          <span className="inline-flex items-center px-4 py-2 rounded-full text-ink/30 text-xs font-bold border-2 border-ink/15 cursor-not-allowed">{lang === "zh" ? "链接待更新" : "Link coming soon"}</span>
+        </div>
+        <div className="flex items-center gap-3 my-4">
+          <span className="text-[10px] font-black uppercase tracking-widest text-ink/30 whitespace-nowrap">AI PM 工作流分析</span>
+          <div className="h-px flex-1 bg-ink/10" />
+        </div>
+        <div className="border border-ink/10 rounded-xl overflow-hidden">
+          {([
+            { n:"01", title: lang==="zh" ? "定义需求与痛点" : "Define the Problem", desc: lang==="zh" ? "大富翁棋盘数据复杂，玩家难以快速评估地产投资价值。核心需求：将棋盘规则数字化，辅助实时投资决策。" : "Monopoly board data is complex. Players struggle to evaluate property value quickly. Core need: digitise board rules to support real-time decision-making.", tags: ["规则数字化", "决策辅助"] },
+            { n:"02", title: lang==="zh" ? "数据驱动的指令设计" : "Data-Driven Prompting", desc: lang==="zh" ? "用自然语言描述数据结构，让 AI 生成数据模型与交互界面。遇到数据匹配问题时，截图反馈精确纠正。" : "Described data structures in plain language, letting AI generate the data model and interface. Screenshots gave precise correction feedback.", tags: ["Claude.ai Artifact", "数据建模"] },
+            { n:"03", title: lang==="zh" ? "多轮数据校验" : "Multi-round Validation", desc: lang==="zh" ? "用棋盘原始数据逐条核验 AI 生成的数据表。数据准确性是系统可用的前提，这是 PM 的把关职责。" : "Verified AI-generated data tables line by line against the original board. Data accuracy is the prerequisite for a usable system.", tags: ["数据验证"] },
+            { n:"04", title: lang==="zh" ? "待完成：部署上线" : "Coming: Deploy", desc: lang==="zh" ? "优化中，完成后部署至 Vercel 并更新链接。" : "Currently being refined. Will be deployed to Vercel and the link updated here.", tags: ["进行中"] },
+          ] as {n:string;title:string;desc:string;tags:string[]}[]).map((row, i) => (
+            <div key={i} className="flex gap-3 p-3.5 border-b border-ink/[0.07] bg-white last:border-b-0">
+              <div className="w-5 h-5 rounded-full border-[1.5px] border-[#CA8A04] bg-[#FFFBEB] flex items-center justify-center text-[10px] font-bold text-[#92400E] flex-shrink-0 mt-0.5">{row.n}</div>
+              <div>
+                <p className="text-[13px] font-bold text-ink mb-1">{row.title}</p>
+                <p className="text-[11px] text-ink/55 leading-relaxed">{row.desc}</p>
+                <div className="flex gap-1.5 mt-1.5 flex-wrap">{row.tags.map(tag => <span key={tag} className="text-[9px] px-1.5 py-0.5 rounded bg-ink/5 text-ink/50">{tag}</span>)}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-4 p-4 border-l-[3px] border-[#CA8A04] bg-[#FFFBEB] rounded-r-xl">
+          <span className="text-[9px] font-black uppercase tracking-widest text-ink/30 block mb-2">PM 反思</span>
+          <p className="text-xs text-ink/65 leading-relaxed italic">{lang === "zh" ? "我在这个过程中的角色是：数据架构定义者与逻辑把关者——AI 能快速搞建界面结构，但数据的准确性与逻辑自洽需要 PM 逐一验证。结构可以交给 AI，判断需要留给人。" : "My role was: data architecture definer and logic gatekeeper — AI can quickly build structure, but data accuracy requires the PM to verify each entry. Structure to AI, judgement to humans."}</p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -1139,7 +1041,8 @@ function ModalVibe({ lang }: { lang: Language }) {
 export default function App() {
   const [lang, setLang] = useState<Language>("zh");
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
-  const [showVibeCoding, setShowVibeCoding] = useState(false);
+  const [showVibe1, setShowVibe1] = useState(false);
+  const [showVibe2, setShowVibe2] = useState(false);
   const t = translations[lang];
 
   return (
@@ -1273,27 +1176,39 @@ export default function App() {
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-4 mb-12">
-            <h2 className="text-3xl md:text-5xl font-serif font-black uppercase tracking-tighter">Vibe Coding</h2>
+            <h2 className="text-3xl md:text-5xl font-serif font-black uppercase tracking-tighter">{t.vibeCodingTitle}</h2>
             <div className="h-px flex-1 bg-ink/20" />
           </div>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            onClick={() => setShowVibeCoding(true)}
-            className="group cursor-pointer p-8 rounded-2xl border-2 border-ink bg-[#FFEDD5] retro-card-hover relative overflow-hidden max-w-sm"
-          >
-            <div className="flex justify-between items-start mb-8">
-              <div className="p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform text-[#C2410C]">
-                <Zap className="w-8 h-8" />
+          <div className="grid md:grid-cols-2 gap-8">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0 }} onClick={() => setShowVibe1(true)} className="group cursor-pointer p-8 rounded-2xl border-2 border-ink bg-[#FFF0F7] retro-card-hover">
+              <div className="flex justify-between items-start mb-8">
+                <div className="p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform text-[#E91E8C]"><Zap className="w-8 h-8" /></div>
+                <ArrowRight className="w-6 h-6 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
               </div>
-              <ArrowRight className="w-6 h-6 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
-            </div>
-            <h3 className="text-2xl md:text-3xl font-serif font-black mb-2">{t.vibeCodingTitle}</h3>
-            <p className="text-xs font-bold uppercase tracking-wider mb-4 text-[#C2410C]">{t.vibeCodingCat}</p>
-            <p className="text-sm text-ink/70 font-medium leading-relaxed">{t.vibeCodingDesc}</p>
-            <div className="mt-8 pt-6 border-t border-ink/10 flex items-center gap-2 font-bold text-xs">
-              <BookOpen className="w-4 h-4" />{t.vibeCodingView}
-            </div>
-          </motion.div>
+              <p className="text-[9px] font-black uppercase tracking-widest text-[#E91E8C] mb-1">{t.proj1Label}</p>
+              <h3 className="text-2xl md:text-3xl font-serif font-black mb-2">{t.proj1Title}</h3>
+              <p className="text-xs font-bold uppercase tracking-wider mb-4 text-[#E91E8C]">{t.proj1Cat}</p>
+              <p className="text-sm text-ink/70 font-medium leading-relaxed">{t.proj1Desc}</p>
+              <div className="mt-8 pt-6 border-t border-ink/10 flex items-center justify-between">
+                <div className="flex items-center gap-2 font-bold text-xs"><BookOpen className="w-4 h-4" />{t.vibeCodingView}</div>
+                <span className="text-[10px] font-bold text-[#E91E8C]">{t.proj1Status}</span>
+              </div>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} onClick={() => setShowVibe2(true)} className="group cursor-pointer p-8 rounded-2xl border-2 border-ink bg-[#FFFBEB] retro-card-hover">
+              <div className="flex justify-between items-start mb-8">
+                <div className="p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform text-[#CA8A04]"><Zap className="w-8 h-8" /></div>
+                <ArrowRight className="w-6 h-6 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
+              </div>
+              <p className="text-[9px] font-black uppercase tracking-widest text-[#CA8A04] mb-1">{t.proj2Label}</p>
+              <h3 className="text-2xl md:text-3xl font-serif font-black mb-2">{t.proj2Title}</h3>
+              <p className="text-xs font-bold uppercase tracking-wider mb-4 text-[#CA8A04]">{t.proj2Cat}</p>
+              <p className="text-sm text-ink/70 font-medium leading-relaxed">{t.proj2Desc}</p>
+              <div className="mt-8 pt-6 border-t border-ink/10 flex items-center justify-between">
+                <div className="flex items-center gap-2 font-bold text-xs"><BookOpen className="w-4 h-4" />{t.vibeCodingView}</div>
+                <span className="text-[10px] font-bold text-[#185FA5]">{t.proj2Status}</span>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -1357,13 +1272,21 @@ export default function App() {
         )}
       </AnimatePresence>
       <AnimatePresence>
-        {showVibeCoding && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibeCoding(false)}>
+        {showVibe1 && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibe1(false)}>
             <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
-              <button onClick={() => setShowVibeCoding(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all">
-                <X className="w-6 h-6" />
-              </button>
-              <ModalVibe lang={lang} />
+              <button onClick={() => setShowVibe1(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all"><X className="w-6 h-6" /></button>
+              <ModalVibe1 lang={lang} />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {showVibe2 && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibe2(false)}>
+            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
+              <button onClick={() => setShowVibe2(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all"><X className="w-6 h-6" /></button>
+              <ModalVibe2 lang={lang} />
             </motion.div>
           </motion.div>
         )}
