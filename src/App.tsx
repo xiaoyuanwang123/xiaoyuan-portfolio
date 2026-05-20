@@ -28,7 +28,7 @@ const translations = {
     proj1Desc: "用选择题代替填空题，解决双向信息不对称，为朋友定制伦敓55日行程。",
     proj2Label: "项目二",
     proj2Title: "大富翁桌游投资决策小工具",
-    proj2Status: "⏳ 制作中",
+    proj2Status: "❆ 已上线",
     proj2Cat: "数据建模 · 决策工具",
     proj2Desc: "将棋盘规则数字化，构建地产投资决策系统。",
     tags: ["AI", "研究", "产品", "设计", "心理学", "数据"],
@@ -58,7 +58,7 @@ const translations = {
     proj1Desc: "Replacing open questions with structured choices to solve two-way information asymmetry.",
     proj2Label: "Project 2",
     proj2Title: "Monopoly Investment Decision Tool",
-    proj2Status: "In Progress",
+    proj2Status: "Live",
     proj2Cat: "Data Modelling · Decision Tool",
     proj2Desc: "Digitising board game rules to build a property investment decision system.",
     tags: ["AI", "Research", "Product", "Design", "Psychology", "Data"],
@@ -979,13 +979,13 @@ function ModalVibe2({ lang }: { lang: Language }) {
       </div>
       <div className="p-6 md:p-10">
         <div className="flex items-center gap-2 p-3 bg-blue-50 rounded-xl mb-4 text-xs text-blue-700">
-          {lang === "zh" ? "⏳ 制作中 — 正在迭代优化，完成后将更新链接" : "In progress — being refined, link will be updated on completion"}
+          {lang === "zh" ? "❆ 已上线 — 正在迭代优化，完成后将更新链接" : "In progress — being refined, link will be updated on completion"}
         </div>
         <div className="border-2 border-ink rounded-2xl overflow-hidden shadow-[3px_3px_0_rgba(45,45,45,1)] mb-4">
           <div className="flex items-center gap-2 px-3 py-2 bg-[#FEF3C7]">
             <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" /><span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" /><span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
             <span className="flex-1 text-center text-[10px] text-ink/40 font-mono">{lang === "zh" ? "大富翁投资决策工具" : "Monopoly Investment Tool"}</span>
-            <span className="text-[11px] font-bold text-[#B45309]">Coming soon</span>
+            <span className="text-[11px] font-bold text-[#B45309]">❆ Live</span>
           </div>
           <svg viewBox="0 0 640 130" xmlns="http://www.w3.org/2000/svg" className="w-full block" style={{background:"#FFFBEB"}}>
             <rect x="20" y="10" width="42" height="42" rx="4" fill="#FEF9C3" stroke="#CA8A04" strokeWidth="1.8"/>
@@ -1017,7 +1017,7 @@ function ModalVibe2({ lang }: { lang: Language }) {
             { n:"01", title: lang==="zh" ? "定义需求与痛点" : "Define the Problem", desc: lang==="zh" ? "大富翁棋盘数据复杂，玩家难以快速评估地产投资价值。核心需求：将棋盘规则数字化，辅助实时投资决策。" : "Monopoly board data is complex. Players struggle to evaluate property value quickly. Core need: digitise board rules to support real-time decision-making.", tags: ["规则数字化", "决策辅助"] },
             { n:"02", title: lang==="zh" ? "数据驱动的指令设计" : "Data-Driven Prompting", desc: lang==="zh" ? "用自然语言描述数据结构，让 AI 生成数据模型与交互界面。遇到数据匹配问题时，截图反馈精确纠正。" : "Described data structures in plain language, letting AI generate the data model and interface. Screenshots gave precise correction feedback.", tags: ["Claude.ai Artifact", "数据建模"] },
             { n:"03", title: lang==="zh" ? "多轮数据校验" : "Multi-round Validation", desc: lang==="zh" ? "用棋盘原始数据逐条核验 AI 生成的数据表。数据准确性是系统可用的前提，这是 PM 的把关职责。" : "Verified AI-generated data tables line by line against the original board. Data accuracy is the prerequisite for a usable system.", tags: ["数据验证"] },
-            { n:"04", title: lang==="zh" ? "待完成：部署上线" : "Coming: Deploy", desc: lang==="zh" ? "优化中，完成后部署至 Vercel 并更新链接。" : "Currently being refined. Will be deployed to Vercel and the link updated here.", tags: ["进行中"] },
+            { n:"04", title: lang==="zh" ? "部署上线" : "Deployed", desc: lang==="zh" ? "已部署至 Vercel，可直接在线体验。" : "Deployed to Vercel. Try it live now.", tags: ["Live"] },
           ] as {n:string;title:string;desc:string;tags:string[]}[]).map((row, i) => (
             <div key={i} className="flex gap-3 p-3.5 border-b border-ink/[0.07] bg-white last:border-b-0">
               <div className="w-5 h-5 rounded-full border-[1.5px] border-[#CA8A04] bg-[#FFFBEB] flex items-center justify-center text-[10px] font-bold text-[#92400E] flex-shrink-0 mt-0.5">{row.n}</div>
