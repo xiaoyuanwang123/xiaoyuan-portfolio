@@ -988,309 +988,52 @@ function ModalVibe2({ lang }: { lang: Language }) {
             <span className="text-[11px] font-bold text-[#B45309]">❆ Live</span>
           </div>
           <svg viewBox="0 0 640 130" xmlns="http://www.w3.org/2000/svg" className="w-full block" style={{background:"#FFFBEB"}}>
-            <rect x="20" y="10" width="42" height="42" rx="4" fill="#FEF9C3" stroke="#CA8A04" strokeWidth="1.8"/>
-            <text x="41" y="35" textAnchor="middle" fontSize="11" fill="#92400E" fontFamily="sans-serif" fontWeight="700">GO</text>
-            <rect x="578" y="10" width="42" height="42" rx="4" fill="#FEE2E2" stroke="#DC2626" strokeWidth="1.8"/>
-            <text x="599" y="35" textAnchor="middle" fontSize="9" fill="#991B1B" fontFamily="sans-serif" fontWeight="700">监狱</text>
-            <rect x="277" y="10" width="38" height="42" rx="3" fill="#FFFBEB" stroke="#CA8A04" strokeWidth="2"/>
-            <rect x="277" y="10" width="38" height="9" rx="2" fill="#CA8A04"/>
-            <text x="296" y="27" textAnchor="middle" fontSize="7.5" fill="#78350F" fontFamily="sans-serif" fontWeight="700">上海</text>
-            <text x="296" y="39" textAnchor="middle" fontSize="7" fill="#92400E" fontFamily="sans-serif">M400</text>
-            <circle cx="350" cy="75" r="13" fill="#FCD34D" stroke="#D97706" strokeWidth="2.5"/>
-            <text x="350" y="79" textAnchor="middle" fontSize="9" fill="#78350F" fontFamily="sans-serif" fontWeight="700">你</text>
-            <rect x="410" y="20" width="120" height="60" rx="6" fill="#FFFEF0" stroke="#CA8A04" strokeWidth="1.5"/>
-            <text x="470" y="38" textAnchor="middle" fontSize="8" fill="#92400E" fontFamily="sans-serif" fontWeight="700">投资建议</text>
-            <text x="422" y="52" fontSize="7" fill="#16A34A" fontFamily="sans-serif">上海 ROI 175%</text>
-            <text x="422" y="64" fontSize="7" fill="#D97706" fontFamily="sans-serif" fontWeight="700">★ 推荐购买</text>
-            <text x="32" y="120" fontSize="8" fill="#9CA3AF" fontFamily="sans-serif">Monopoly Investment System</text>
+            <rect x="8" y="8" width="624" height="114" rx="6" fill="none" stroke="#D97706" strokeWidth="1" strokeDasharray="4,3" opacity="0.4"/>
+            <rect x="8" y="8" width="52" height="52" rx="5" fill="#FEF9C3" stroke="#CA8A04" strokeWidth="1.5"/>
+            <text x="34" y="32" textAnchor="middle" fontSize="11" fill="#92400E" fontFamily="sans-serif" fontWeight="700">GO</text>
+            <text x="34" y="48" textAnchor="middle" fontSize="9" fill="#B45309" fontFamily="sans-serif">出发</text>
+            <rect x="68" y="8" width="46" height="52" rx="4" fill="#FFF7ED" stroke="#EA580C" strokeWidth="1"/>
+            <rect x="68" y="8" width="46" height="11" rx="3" fill="#EA580C"/>
+            <text x="91" y="19" textAnchor="middle" fontSize="8" fill="white" fontFamily="sans-serif" fontWeight="600">重庆</text>
+            <text x="91" y="38" textAnchor="middle" fontSize="9" fill="#7C2D12" fontFamily="sans-serif">M220</text>
+            <rect x="122" y="8" width="46" height="52" rx="4" fill="#FFF7ED" stroke="#EA580C" strokeWidth="1"/>
+            <rect x="122" y="8" width="46" height="11" rx="3" fill="#EA580C"/>
+            <text x="145" y="19" textAnchor="middle" fontSize="8" fill="white" fontFamily="sans-serif" fontWeight="600">宁波</text>
+            <text x="145" y="38" textAnchor="middle" fontSize="9" fill="#7C2D12" fontFamily="sans-serif">M220</text>
+            <rect x="176" y="8" width="46" height="52" rx="4" fill="#EFF6FF" stroke="#2563EB" strokeWidth="1"/>
+            <rect x="176" y="8" width="46" height="11" rx="3" fill="#2563EB"/>
+            <text x="199" y="19" textAnchor="middle" fontSize="8" fill="white" fontFamily="sans-serif" fontWeight="600">杭州</text>
+            <text x="199" y="38" textAnchor="middle" fontSize="9" fill="#1E3A8A" fontFamily="sans-serif">M240</text>
+            <rect x="230" y="8" width="46" height="52" rx="4" fill="#EFF6FF" stroke="#2563EB" strokeWidth="1"/>
+            <rect x="230" y="8" width="46" height="11" rx="3" fill="#2563EB"/>
+            <text x="253" y="19" textAnchor="middle" fontSize="8" fill="white" fontFamily="sans-serif" fontWeight="600">苏州</text>
+            <text x="253" y="38" textAnchor="middle" fontSize="9" fill="#1E3A8A" fontFamily="sans-serif">M260</text>
+            <rect x="284" y="8" width="46" height="52" rx="4" fill="#F5F3FF" stroke="#7C3AED" strokeWidth="1"/>
+            <rect x="284" y="8" width="46" height="11" rx="3" fill="#7C3AED"/>
+            <text x="307" y="19" textAnchor="middle" fontSize="8" fill="white" fontFamily="sans-serif" fontWeight="600">南京</text>
+            <text x="307" y="38" textAnchor="middle" fontSize="9" fill="#4C1D95" fontFamily="sans-serif">M300</text>
+            <rect x="338" y="8" width="52" height="52" rx="5" fill="#FFFBEB" stroke="#CA8A04" strokeWidth="2"/>
+            <rect x="338" y="8" width="52" height="13" rx="4" fill="#CA8A04"/>
+            <rect x="346" y="10" width="28" height="9" rx="3" fill="#DC2626"/>
+            <text x="360" y="18" textAnchor="middle" fontSize="7" fill="white" fontFamily="sans-serif" fontWeight="700">酒店</text>
+            <text x="364" y="34" textAnchor="middle" fontSize="9" fill="#78350F" fontFamily="sans-serif" fontWeight="700">上海</text>
+            <text x="364" y="48" textAnchor="middle" fontSize="9" fill="#92400E" fontFamily="sans-serif">M400</text>
+            <circle cx="430" cy="65" r="16" fill="#FCD34D" stroke="#D97706" strokeWidth="2.5"/>
+            <circle cx="430" cy="65" r="11" fill="#FBBF24" stroke="#B45309" strokeWidth="1.5"/>
+            <text x="430" y="69" textAnchor="middle" fontSize="10" fill="#78350F" fontFamily="sans-serif" fontWeight="700">你</text>
+            <rect x="490" y="20" width="110" height="68" rx="7" fill="#FFFEF0" stroke="#CA8A04" strokeWidth="1.5"/>
+            <rect x="490" y="20" width="110" height="18" rx="7" fill="#FEF3C7"/>
+            <rect x="490" y="30" width="110" height="8" fill="#FEF3C7"/>
+            <text x="545" y="33" textAnchor="middle" fontSize="8.5" fill="#92400E" fontFamily="sans-serif" fontWeight="700">投资建议</text>
+            <text x="502" y="50" fontSize="7.5" fill="#4B5563" fontFamily="sans-serif">上海中心 M400</text>
+            <text x="502" y="62" fontSize="7" fill="#16A34A" fontFamily="sans-serif" fontWeight="600">酒店收益 M2000/次</text>
+            <text x="502" y="74" fontSize="7" fill="#D97706" fontFamily="sans-serif" fontWeight="700">ROI 175% ★ 推荐</text>
+            <rect x="580" y="8" width="52" height="52" rx="5" fill="#FEE2E2" stroke="#DC2626" strokeWidth="1.5"/>
+            <text x="606" y="32" textAnchor="middle" fontSize="10" fill="#991B1B" fontFamily="sans-serif" fontWeight="700">监狱</text>
+            <text x="606" y="48" textAnchor="middle" fontSize="8" fill="#B91C1C" fontFamily="sans-serif">探视</text>
+            <rect x="8" y="70" width="52" height="52" rx="5" fill="#DCFCE7" stroke="#16A34A" strokeWidth="1.5"/>
+            <text x="34" y="96" textAnchor="middle" fontSize="8" fill="#15803D" fontFamily="sans-serif" fontWeight="600">免费停车</text>
+            <rect x="580" y="70" width="52" height="52" rx="5" fill="#EDE9FE" stroke="#7C3AED" strokeWidth="1.5"/>
+            <text x="606" y="96" textAnchor="middle" fontSize="8" fill="#5B21B6" fontFamily="sans-serif" fontWeight="600">去监狱</text>
+            <text x="20" y="125" fontSize="8.5" fill="#9CA3AF" fontFamily="sans-serif">Monopoly · Investment Decision System</text>
           </svg>
-        </div>
-        <div className="flex gap-3 mb-4">
-          <a href="https://monopoly-tool.vercel.app" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#CA8A04] text-white text-xs font-bold border-2 border-[#B45309] shadow-[2px_2px_0_#92400E]">{lang === "zh" ? "↗ 打开工具" : "↗ Open Tool"}</a>
-        </div>
-        <div className="flex items-center gap-3 my-4">
-          <span className="text-[10px] font-black uppercase tracking-widest text-ink/30 whitespace-nowrap">AI PM 工作流分析</span>
-          <div className="h-px flex-1 bg-ink/10" />
-        </div>
-        <div className="border border-ink/10 rounded-xl overflow-hidden">
-          {([
-            { n:"01", title: lang==="zh" ? "定义需求与痛点" : "Define the Problem", desc: lang==="zh" ? "大富翁棋盘数据复杂，玩家难以快速评估地产投资价值。核心需求：将棋盘规则数字化，辅助实时投资决策。" : "Monopoly board data is complex. Players struggle to evaluate property value quickly. Core need: digitise board rules to support real-time decision-making.", tags: ["规则数字化", "决策辅助"] },
-            { n:"02", title: lang==="zh" ? "数据驱动的指令设计" : "Data-Driven Prompting", desc: lang==="zh" ? "用自然语言描述数据结构，让 AI 生成数据模型与交互界面。遇到数据匹配问题时，截图反馈精确纠正。" : "Described data structures in plain language, letting AI generate the data model and interface. Screenshots gave precise correction feedback.", tags: ["Claude.ai Artifact", "数据建模"] },
-            { n:"03", title: lang==="zh" ? "多轮数据校验" : "Multi-round Validation", desc: lang==="zh" ? "用棋盘原始数据逐条核验 AI 生成的数据表。数据准确性是系统可用的前提，" : "Verified AI-generated data tables line by line against the original board. Data accuracy is the prerequisite for a usable system.", tags: ["数据验证"] },
-            { n:"04", title: lang==="zh" ? "部署上线" : "Deployed", desc: lang==="zh" ? "已部署至 Vercel，可直接在线体验。" : "Deployed to Vercel. Try it live now.", tags: ["Live"] },
-          ] as {n:string;title:string;desc:string;tags:string[]}[]).map((row, i) => (
-            <div key={i} className="flex gap-3 p-3.5 border-b border-ink/[0.07] bg-white last:border-b-0">
-              <div className="w-5 h-5 rounded-full border-[1.5px] border-[#CA8A04] bg-[#FFFBEB] flex items-center justify-center text-[10px] font-bold text-[#92400E] flex-shrink-0 mt-0.5">{row.n}</div>
-              <div>
-                <p className="text-[13px] font-bold text-ink mb-1">{row.title}</p>
-                <p className="text-[11px] text-ink/55 leading-relaxed">{row.desc}</p>
-                <div className="flex gap-1.5 mt-1.5 flex-wrap">{row.tags.map(tag => <span key={tag} className="text-[9px] px-1.5 py-0.5 rounded bg-ink/5 text-ink/50">{tag}</span>)}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="mt-4 p-4 border-l-[3px] border-[#CA8A04] bg-[#FFFBEB] rounded-r-xl">
-          <span className="text-[9px] font-black uppercase tracking-widest text-ink/30 block mb-2">PM 反思</span>
-          <p className="text-xs text-ink/65 leading-relaxed italic">{lang === "zh" ? "我在这个过程中的角色是：数据架构定义者与逻辑把关者。这款工具的价値在于：它让普通玩家也能完成原本需要较强经济学直觉才能快速完成的计算——ROI 分析、豁价边界、流动性风险评估。AI 负责执行运算，玩家负责做决定。" : "My role in this process was: data architecture definer and logic gatekeeper. This tool lets ordinary players complete calculations that would otherwise require strong economic intuition — ROI analysis, auction price boundaries, liquidity risk assessment. AI handles the computation, the player makes the call."}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default function App() {
-  const [lang, setLang] = useState<Language>("zh");
-  const [selectedProject, setSelectedProject] = useState<number | null>(null);
-  const [showVibe1, setShowVibe1] = useState(false);
-  const [showVibe2, setShowVibe2] = useState(false);
-  const t = translations[lang];
-
-  return (
-    <div className={`min-h-screen relative selection:bg-terracotta/20 ${lang === "zh" ? "lang-zh" : ""}`}>
-      <div className="texture-overlay" />
-
-      <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-between bg-paper/80 backdrop-blur-sm border-b border-ink/10 pb-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-ink text-paper flex items-center justify-center font-serif font-bold text-xl rotate-3">W</div>
-            <span className="font-serif font-bold text-xl md:text-2xl tracking-tight font-zh-display">{t.name}</span>
-          </div>
-          <button onClick={() => setLang(l => l === "zh" ? "en" : "zh")} className="flex items-center gap-2 px-4 py-2 rounded-full border border-ink hover:bg-ink hover:text-paper transition-all font-medium text-xs md:text-sm">
-            <Languages className="w-4 h-4" />
-            {lang === "zh" ? "English" : "中文"}
-          </button>
-        </div>
-      </nav>
-
-      <section className="pt-32 pb-16 px-6">
-        <div className="max-w-6xl mx-auto space-y-20">
-          <div className="grid md:grid-cols-2 gap-0 min-h-[420px] rounded-3xl overflow-hidden border-2 border-ink shadow-[6px_6px_0px_0px_rgba(45,45,45,1)]">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}
-              className="bg-paper p-10 md:p-12 flex flex-col justify-center space-y-5"
-            >
-              <div className="inline-block px-4 py-1.5 rounded-full border border-ink/20 text-[10px] font-black uppercase tracking-widest bg-paper rotate-[-1deg] shadow-sm w-fit">
-                {t.role}
-              </div>
-              <h1 className="font-serif font-black leading-tight">
-                {lang === "zh" ? (
-                  <>
-                    <span className="text-2xl md:text-3xl text-ink/60 block mb-1">你好，我是</span>
-                    <span className="text-terracotta text-5xl md:text-7xl block font-zh-display">王小元</span>
-                  </>
-                ) : (
-                  <>
-                    <span className="text-xl md:text-2xl text-ink/60 block mb-1">Hello, I'm</span>
-                    <span className="text-terracotta italic text-4xl md:text-5xl block">Xiaoyuan Wang</span>
-                  </>
-                )}
-              </h1>
-              <p className="text-sm md:text-base text-ink/70 leading-relaxed max-w-xs font-medium">{t.intro1}</p>
-              <p className="text-sm md:text-base text-ink/50 leading-relaxed max-w-xs font-medium italic">{t.intro2}</p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 1.02 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }}
-              className="relative min-h-[320px] md:min-h-full"
-            >
-              <img src="HEAD.jpg" alt="Xiaoyuan at Imperial" className="absolute inset-0 w-full h-full object-cover object-top" referrerPolicy="no-referrer" />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <p className="text-terracotta font-black text-xs uppercase tracking-[0.2em] mb-1">
-                  {lang === "zh" ? "伦敦 · 帝国理工" : "London · Imperial College"}
-                </p>
-                <p className="text-paper font-serif text-sm leading-snug opacity-90">
-                  {lang === "zh" ? "Dyson 设计工程学院" : "Dyson School of Design Engineering"}
-                </p>
-              </div>
-            </motion.div>
-          </div>
-
-          <div className="pt-16 border-t border-ink/5">
-            <div className="flex flex-col md:flex-row items-center gap-12">
-              <div className="flex-shrink-0">
-                <h2 className="text-xl font-serif font-black text-ink/20 uppercase tracking-[0.3em] md:[writing-mode:vertical-rl]">{t.aboutTitle}</h2>
-              </div>
-              <div className="flex-1 flex flex-col md:flex-row items-center justify-center gap-8 md:-space-x-16">
-                {schools.map((school, i) => (
-                  <motion.div
-                    key={school.id}
-                    initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.2 }}
-                    whileHover={{ y: -10, zIndex: 50, rotate: 0 }}
-                    className="w-full md:w-72 bg-white border-2 border-ink rounded-2xl overflow-hidden shadow-xl p-4 flex flex-col transition-all duration-300 relative"
-                    style={{ rotate: school.rotation, zIndex: school.zIndex }}
-                  >
-                    <div className="relative h-40 overflow-hidden rounded-lg mb-4">
-                      <img src={school.image} alt={school.name[lang]} className="w-full h-full object-cover grayscale contrast-125" referrerPolicy="no-referrer" />
-                      <div className="absolute inset-0 bg-ink/5" />
-                      {i === 0 && (
-                        <div className="absolute top-2 left-2 w-8 h-8 bg-terracotta text-paper rounded-full flex items-center justify-center border border-ink shadow-sm rotate-12 font-serif font-black text-sm z-10">W</div>
-                      )}
-                    </div>
-                    <div className="space-y-1.5">
-                      <h3 className="font-serif font-black text-sm leading-tight">{school.name[lang]}</h3>
-                      <p className="text-[10px] font-bold text-terracotta uppercase tracking-wider">{school.degree[lang]}</p>
-                      <p className="text-[10px] font-medium opacity-40">{school.period}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="projects" className="py-20 px-6 bg-ink/5">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-4 mb-12">
-            <h2 className="text-3xl md:text-5xl font-serif font-black uppercase tracking-tighter font-elegant">{t.projectsTitle}</h2>
-            <div className="h-px flex-1 bg-ink/20" />
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {projects.map((project, i) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                onClick={() => setSelectedProject(project.id)}
-                className={`group cursor-pointer p-8 rounded-2xl border-2 border-ink ${project.color} retro-card-hover relative overflow-hidden`}
-              >
-                <div className="flex justify-between items-start mb-8">
-                  <div className={`p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0px_0px_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform ${project.accent}`}>
-                    {project.icon}
-                  </div>
-                  <ArrowRight className="w-6 h-6 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
-                </div>
-                <h3 className="text-2xl md:text-3xl font-serif font-black mb-2">{project.title[lang]}</h3>
-                <p className={`text-xs font-bold uppercase tracking-wider mb-4 ${project.accent}`}>{project.category[lang]}</p>
-                <p className="text-sm md:text-base text-ink/70 font-medium leading-relaxed">{project.description[lang]}</p>
-                <div className="mt-8 pt-6 border-t border-ink/10 flex items-center gap-2 font-bold text-xs">
-                  <BookOpen className="w-4 h-4" />{t.viewMore}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* VIBE CODING */}
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-4 mb-12">
-            <h2 className="text-3xl md:text-5xl font-serif font-black uppercase tracking-tighter">{t.vibeCodingTitle}</h2>
-            <div className="h-px flex-1 bg-ink/20" />
-          </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0 }} onClick={() => setShowVibe1(true)} className="group cursor-pointer p-8 rounded-2xl border-2 border-ink bg-[#FFF0F7] retro-card-hover">
-              <div className="flex justify-between items-start mb-8">
-                <div className="p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform text-[#E91E8C]"><Zap className="w-8 h-8" /></div>
-                <ArrowRight className="w-6 h-6 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
-              </div>
-              <p className="text-[9px] font-black uppercase tracking-widest text-[#E91E8C] mb-1">{t.proj1Label}</p>
-              <h3 className="text-2xl md:text-3xl font-serif font-black mb-2">{t.proj1Title}</h3>
-              <p className="text-xs font-bold uppercase tracking-wider mb-4 text-[#E91E8C]">{t.proj1Cat}</p>
-              <p className="text-sm text-ink/70 font-medium leading-relaxed">{t.proj1Desc}</p>
-              <div className="mt-8 pt-6 border-t border-ink/10 flex items-center justify-between">
-                <div className="flex items-center gap-2 font-bold text-xs"><BookOpen className="w-4 h-4" />{t.vibeCodingView}</div>
-                <span className="text-[10px] font-bold text-[#E91E8C]">{t.proj1Status}</span>
-              </div>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} onClick={() => setShowVibe2(true)} className="group cursor-pointer p-8 rounded-2xl border-2 border-ink bg-[#FFFBEB] retro-card-hover">
-              <div className="flex justify-between items-start mb-8">
-                <div className="p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform text-[#CA8A04]"><Zap className="w-8 h-8" /></div>
-                <ArrowRight className="w-6 h-6 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
-              </div>
-              <p className="text-[9px] font-black uppercase tracking-widest text-[#CA8A04] mb-1">{t.proj2Label}</p>
-              <h3 className="text-2xl md:text-3xl font-serif font-black mb-2">{t.proj2Title}</h3>
-              <p className="text-xs font-bold uppercase tracking-wider mb-4 text-[#CA8A04]">{t.proj2Cat}</p>
-              <p className="text-sm text-ink/70 font-medium leading-relaxed">{t.proj2Desc}</p>
-              <div className="mt-8 pt-6 border-t border-ink/10 flex items-center justify-between">
-                <div className="flex items-center gap-2 font-bold text-xs"><BookOpen className="w-4 h-4" />{t.vibeCodingView}</div>
-                <span className="text-[10px] font-bold text-[#185FA5]">{t.proj2Status}</span>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24 px-6 bg-paper/30">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-xl md:text-3xl font-serif font-black leading-tight text-ink mb-10">
-            {lang === "zh" ? `"${t.aboutText}"` : <span className="italic">"{t.aboutText}"</span>}
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {t.tags.map(tag => (
-              <span key={tag} className="px-6 py-2 bg-white border-2 border-ink rounded-full font-black text-xs hover:bg-terracotta hover:text-paper transition-all cursor-default shadow-[3px_3px_0px_0px_rgba(45,45,45,1)]">#{tag}</span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <footer id="contact" className="bg-ink text-paper py-12 px-6 rounded-t-[2.5rem]">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-[1fr_auto] gap-10 items-center">
-          <div>
-            <h2 className="text-3xl md:text-5xl font-serif font-black mb-4 leading-tight font-elegant">Let's <span className="text-terracotta">Connect</span></h2>
-            <p className="text-paper/60 text-sm max-w-sm">{t.contactText}</p>
-          </div>
-          <div className="bg-paper/5 p-6 rounded-2xl border border-paper/10 min-w-[300px]">
-            <div className="space-y-4">
-              <div className="flex justify-between items-center gap-8">
-                <p className="text-[9px] font-black uppercase tracking-[0.2em] text-paper/40">Location</p>
-                <p className="text-sm font-serif">London / Shanghai</p>
-              </div>
-              <div className="flex justify-between items-center gap-8">
-                <p className="text-[9px] font-black uppercase tracking-[0.2em] text-paper/40">Email</p>
-                <p className="text-sm font-serif">xiaoyuan.wang.sylvia@outlook.com</p>
-              </div>
-              <div className="pt-2 border-t border-paper/10">
-                <p className="text-[9px] font-black uppercase tracking-[0.2em] text-paper/40 mb-2">Phone</p>
-                <div className="flex flex-col gap-0.5 text-right">
-                  <p className="text-sm font-serif">+86 15251823911</p>
-                  <p className="text-sm font-serif">+44 7940847898</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-6xl mx-auto mt-6 pt-4 border-t border-paper/10 flex flex-col md:flex-row justify-between items-center gap-4 text-paper/40 text-[9px] font-bold">
-          <p>© 2026 {t.name}.</p>
-          <p>WITH FIGMA, GOOGLE AI STUDIO & CLAUDE</p>
-        </div>
-      </footer>
-
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setSelectedProject(null)}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
-              <button onClick={() => setSelectedProject(null)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all">
-                <X className="w-6 h-6" />
-              </button>
-              {selectedProject === 1 && <Modal1 lang={lang} />}
-              {selectedProject === 2 && <Modal2 lang={lang} />}
-              {selectedProject === 3 && <Modal3 lang={lang} />}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {showVibe1 && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibe1(false)}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
-              <button onClick={() => setShowVibe1(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all"><X className="w-6 h-6" /></button>
-              <ModalVibe1 lang={lang} />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {showVibe2 && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibe2(false)}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
-              <button onClick={() => setShowVibe2(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all"><X className="w-6 h-6" /></button>
-              <ModalVibe2 lang={lang} />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
