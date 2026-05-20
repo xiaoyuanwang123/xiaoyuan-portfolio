@@ -25,7 +25,7 @@ const translations = {
     proj1Title: "私人导游行程规划小工具",
     proj1Status: "❆ 已上线",
     proj1Cat: "行程规划 · 交互工具",
-    proj1Desc: "用选择题代替填空题，解决双向信息不对称，为朋友定制伦敦〆5日行程。",
+    proj1Desc: "用选择题代替填空题，解决双向信息不对称，为朋友定制伦敦5日行程。",
     proj2Label: "项目二",
     proj2Title: "大富翁桌游投资决策小工具",
     proj2Status: "❆ 已上线",
