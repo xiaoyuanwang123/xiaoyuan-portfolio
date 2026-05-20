@@ -978,7 +978,6 @@ function ModalVibe2({ lang }: { lang: Language }) {
         <p className="text-sm text-[#CA8A04] italic">{lang === "zh" ? "将棋盘规则数字化，构建地产投资决策系统" : "Digitising board game rules into a property investment decision system"}</p>
       </div>
       <div className="p-6 md:p-10">
-        </div>
         <div className="border-2 border-ink rounded-2xl overflow-hidden shadow-[3px_3px_0_rgba(45,45,45,1)] mb-4">
           <div className="flex items-center gap-2 px-3 py-2 bg-[#FEF3C7]">
             <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" /><span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" /><span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
