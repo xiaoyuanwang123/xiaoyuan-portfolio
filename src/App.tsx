@@ -1006,7 +1006,7 @@ function ModalVibe2({ lang }: { lang: Language }) {
           </svg>
         </div>
         <div className="flex gap-3 mb-4">
-          <span className="inline-flex items-center px-4 py-2 rounded-full text-ink/30 text-xs font-bold border-2 border-ink/15 cursor-not-allowed">{lang === "zh" ? "链接待更新" : "Link coming soon"}</span>
+          <span className="inline-flex items-center px-4 py-2 rounded-full text-ink/30 text-xs font-bold border-2 border-ink/15 cursor-not-allowed">{lang === "zh" ? "↗ 打开工具" : "↗ Open Tool"}</span>
         </div>
         <div className="flex items-center gap-3 my-4">
           <span className="text-[10px] font-black uppercase tracking-widest text-ink/30 whitespace-nowrap">AI PM 工作流分析</span>
@@ -1031,7 +1031,7 @@ function ModalVibe2({ lang }: { lang: Language }) {
         </div>
         <div className="mt-4 p-4 border-l-[3px] border-[#CA8A04] bg-[#FFFBEB] rounded-r-xl">
           <span className="text-[9px] font-black uppercase tracking-widest text-ink/30 block mb-2">PM 反思</span>
-          <p className="text-xs text-ink/65 leading-relaxed italic">{lang === "zh" ? "我在这个过程中的角色是：数据架构定义者与逻辑把关者——AI 能快速搞建界面结构，但数据的准确性与逻辑自洽需要 PM 逐一验证。结构可以交给 AI，判断需要留给人。" : "My role was: data architecture definer and logic gatekeeper — AI can quickly build structure, but data accuracy requires the PM to verify each entry. Structure to AI, judgement to humans."}</p>
+          <p className="text-xs text-ink/65 leading-relaxed italic">{lang === "zh" ? "我在这个过程中的角色是：数据架构定义者与逻辑把关者——AI 能快速搞建界面结构，但这款工具的价値在于：它让普通玩家也能完成原本需要较强经济学直觉才能快速完成的计算——ROI分析、豁价边界、流动性风险评估。AI 负责执行运算，玩家负责做决定。" : "My role was: data architecture definer and logic gatekeeper — AI can quickly build structure, but This tool lets ordinary players complete economic calculations that would otherwise require strong financial intuition — ROI analysis, auction price boundaries, liquidity risk assessment. AI handles the computation, the player makes the call."}</p>
         </div>
       </div>
     </div>
