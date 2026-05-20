@@ -98,10 +98,10 @@ const p1Content = {
       { id: "C", text: "核心问题在于'情感舒适循环'，而非简单的利弊故事" }
     ],
     stories: [
-      { title: "情感舒适循环", icon: <Heart className="w-4 h-4" />, desc: "无评判的表达空间，但也可能成为'情绪辅助轮'。", quote: "「它就像我的情绪辅助轮，在压力大时提供支撑。」" },
-      { title: "人际连接张力", icon: <User className="w-4 h-4" />, desc: "AI 交流的便捷性可能削弱现实社交的动力。", quote: "「如果我因为跟 AI 倾诉而逃避跟伴侣沟通，这就是红灯。」" },
-      { title: "自主性侵蚀", icon: <Brain className="w-4 h-4" />, desc: "用户开始质疑频繁使用 AI 是否影响了独立性。", quote: "「我变得更独立还是更依赖了？老实说，两者都有。」" },
-      { title: "设计敏感度", icon: <Sparkles className="w-4 h-4" />, desc: "用户意识到 AI 设计如何塑造了他们的情感期待。", quote: "「我最想改变的是那种'友谊的幻觉'。」" }
+      { title: "情感舒适循环", icon: <Heart className="w-4 h-4" />, desc: "无评判的表达空间，但也可能成为'情绪辅助轮'。", quote: "“它就像我的情绪辅助轮，在压力大时提供支撑。”" },
+      { title: "人际连接张力", icon: <User className="w-4 h-4" />, desc: "AI 交流的便捷性可能削弱现实社交的动力。", quote: "“如果我因为跟 AI 倾诉而逃避跟伴侣沟通，这就是红灯。”" },
+      { title: "自主性侵蚀", icon: <Brain className="w-4 h-4" />, desc: "用户开始质疑频繁使用 AI 是否影响了独立性。", quote: "“我变得更独立还是更依赖了？老实说，两者都有。”" },
+      { title: "设计敏感度", icon: <Sparkles className="w-4 h-4" />, desc: "用户意识到 AI 设计如何塑造了他们的情感期待。", quote: "“我最想改变的是那种'友谊的幻觉'。”" }
     ],
     strategies: [
       { title: "反思性提示", desc: "在对话中加入停顿，引导用户评估当前的自我调节状态。" },
@@ -937,7 +937,6 @@ function Modal4({ lang }: { lang: Language }) {
 function ModalVibe({ lang }: { lang: Language }) {
   const t = translations[lang];
   const [activeTab, setActiveTab] = useState<"a" | "b">("a");
-
   return (
     <div className="font-sans">
       <div className="p-6 md:p-10 pb-4 border-b border-ink/10">
@@ -948,26 +947,18 @@ function ModalVibe({ lang }: { lang: Language }) {
         <h2 className="text-3xl md:text-4xl font-serif font-black text-ink mb-1">Vibe Coding</h2>
         <p className="text-sm text-[#6D28D9] italic">{lang === "zh" ? "用自然语言指令驱动 AI，把想法变成可交互的产品" : "Turning ideas into interactive products with natural language"}</p>
       </div>
-
       <div className="flex border-b border-ink/10">
-        <button
-          onClick={() => setActiveTab("a")}
-          className={`flex-1 p-4 text-left transition-all border-b-[3px] ${activeTab === "a" ? "border-[#E91E8C] bg-[#FFF0F7]" : "border-transparent hover:bg-ink/5"}`}
-        >
+        <button onClick={() => setActiveTab("a")} className={`flex-1 p-4 text-left transition-all border-b-[3px] ${activeTab === "a" ? "border-[#E91E8C] bg-[#FFF0F7]" : "border-transparent hover:bg-ink/5"}`}>
           <span className="block text-[9px] font-black uppercase tracking-widest text-[#E91E8C] mb-1">{t.proj1Label}</span>
           <span className="block text-sm font-bold text-ink mb-1">{t.proj1Title}</span>
           <span className="block text-[10px] text-[#E91E8C]">{t.proj1Status}</span>
         </button>
-        <button
-          onClick={() => setActiveTab("b")}
-          className={`flex-1 p-4 text-left transition-all border-b-[3px] ${activeTab === "b" ? "border-[#CA8A04] bg-[#FFFBEB]" : "border-transparent hover:bg-ink/5"}`}
-        >
+        <button onClick={() => setActiveTab("b")} className={`flex-1 p-4 text-left transition-all border-b-[3px] ${activeTab === "b" ? "border-[#CA8A04] bg-[#FFFBEB]" : "border-transparent hover:bg-ink/5"}`}>
           <span className="block text-[9px] font-black uppercase tracking-widest text-[#CA8A04] mb-1">{t.proj2Label}</span>
           <span className="block text-sm font-bold text-ink mb-1">{t.proj2Title}</span>
           <span className="block text-[10px] text-[#185FA5]">{t.proj2Status}</span>
         </button>
       </div>
-
       {activeTab === "a" && (
         <div className="p-6 md:p-10">
           <div className="border-2 border-ink rounded-2xl overflow-hidden shadow-[3px_3px_0_rgba(45,45,45,1)] mb-4">
@@ -1005,17 +996,10 @@ function ModalVibe({ lang }: { lang: Language }) {
               <text x="12" y="15" fontSize="9" fill="#9CA3AF" fontFamily="sans-serif" fontWeight="500">London · Interactive Tour Planner</text>
             </svg>
           </div>
-
           <div className="flex gap-3 mb-6 flex-wrap">
-            <a href="https://yangyang-london.vercel.app" target="_blank" rel="noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#E91E8C] text-white text-xs font-bold border-2 border-[#C2185B] shadow-[2px_2px_0_#880E4F]">
-              ↗ {lang === "zh" ? "打开工具" : "Open Tool"}
-            </a>
-            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-ink/30 text-xs font-bold border-2 border-ink/15 cursor-not-allowed">
-              📁 {lang === "zh" ? "源码（私有）" : "Source (Private)"}
-            </span>
+            <a href="https://yangyang-london.vercel.app" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#E91E8C] text-white text-xs font-bold border-2 border-[#C2185B] shadow-[2px_2px_0_#880E4F]">↗ {lang === "zh" ? "打开工具" : "Open Tool"}</a>
+            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-ink/30 text-xs font-bold border-2 border-ink/15 cursor-not-allowed">📁 {lang === "zh" ? "源码（私有）" : "Source (Private)"}</span>
           </div>
-
           <div className="flex items-center gap-3 my-4">
             <span className="text-[10px] font-black uppercase tracking-widest text-ink/30 whitespace-nowrap">AI PM 工作流分析</span>
             <div className="h-px flex-1 bg-ink/10" />
@@ -1032,28 +1016,23 @@ function ModalVibe({ lang }: { lang: Language }) {
                 <div>
                   <p className="text-[13px] font-bold text-ink mb-1">{row.title}</p>
                   <p className="text-[11px] text-ink/55 leading-relaxed">{row.desc}</p>
-                  <div className="flex gap-1.5 mt-1.5 flex-wrap">
-                    {row.tags.map(tag => <span key={tag} className="text-[9px] px-1.5 py-0.5 rounded bg-ink/5 text-ink/50">{tag}</span>)}
-                  </div>
+                  <div className="flex gap-1.5 mt-1.5 flex-wrap">{row.tags.map(tag => <span key={tag} className="text-[9px] px-1.5 py-0.5 rounded bg-ink/5 text-ink/50">{tag}</span>)}</div>
                 </div>
               </div>
             ))}
           </div>
-
           <div className="mt-4 p-4 border-l-[3px] border-[#E91E8C] bg-[#FFF0F7] rounded-r-xl">
             <span className="text-[9px] font-black uppercase tracking-widest text-ink/30 block mb-2">PM 反思 & 延伸</span>
             <p className="text-xs text-ink/65 leading-relaxed italic">{lang === "zh" ? "我在这个过程中的角色是：需求定义者与产品测试者——识别真实痛点，将其转化为可执行的设计决策，并在迭代中持续验证产品是否解决了最初的问题。" : "My role in this process was: problem definer and product tester — identifying real pain points, translating them into actionable design decisions, and continuously validating whether the product solved the original problem."}</p>
-            <p className="text-xs text-ink/65 leading-relaxed italic mt-2">{lang === "zh" ? "这个工具从一个朋友的小案例出发，但背后的逻辑可以直接扩展：地方导游面临同样的信息不对称——他们熟悉景点，却不掌握游客偏好。将结构化问卷与地图导览结合，可以成为面向导游的定制化行程生成工具，让每一次导览都从"了解这个人"开始。" : "This tool started from a small personal case, but the logic scales directly: local guides face the same information asymmetry — they know the sights, but not the visitor's preferences. Combining structured questionnaires with map-based guidance could become a customised itinerary tool for guides, where every tour starts with getting to know this person."}</p>
+            <p className="text-xs text-ink/65 leading-relaxed italic mt-2">{lang === "zh" ? "这个工具从一个朋友的小案例出发，但背后的逻辑可以直接扩展：地方导游面临同样的信息不对称——他们熟悉景点，却不掌握游客偏好。将结构化问卷与地图导览结合，可以成为面向导游的定制化行程生成工具，让每一次导览都从「了解这个人」开始。" : "This tool started from a small personal case, but the logic scales directly: local guides face the same information asymmetry — they know the sights, but not the visitor preferences. Combining structured questionnaires with map-based guidance could become a customised itinerary tool for guides, where every tour starts with getting to know this person."}</p>
           </div>
         </div>
       )}
-
       {activeTab === "b" && (
         <div className="p-6 md:p-10">
           <div className="flex items-center gap-2 p-3 bg-blue-50 rounded-xl mb-4 text-xs text-blue-700">
             ⏳ {lang === "zh" ? "制作中 — 正在另一个对话中迭代优化，完成后将更新链接" : "In progress — being refined in another session, link will be updated on completion"}
           </div>
-
           <div className="border-2 border-ink rounded-2xl overflow-hidden shadow-[3px_3px_0_rgba(45,45,45,1)] mb-4">
             <div className="flex items-center gap-2 px-3 py-2 bg-[#FEF3C7]">
               <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57] flex-shrink-0" />
@@ -1064,8 +1043,6 @@ function ModalVibe({ lang }: { lang: Language }) {
             </div>
             <svg viewBox="0 0 640 130" xmlns="http://www.w3.org/2000/svg" className="w-full block" style={{background:"#FFFBEB"}}>
               <rect x="20" y="10" width="600" height="110" rx="6" fill="none" stroke="#D97706" strokeWidth="1" strokeDasharray="4,3" opacity="0.35"/>
-              <line x1="20" y1="55" x2="620" y2="55" stroke="#FDE68A" strokeWidth="0.8"/>
-              <line x1="20" y1="80" x2="620" y2="80" stroke="#FDE68A" strokeWidth="0.8"/>
               <rect x="20" y="10" width="42" height="42" rx="4" fill="#FEF9C3" stroke="#CA8A04" strokeWidth="1.8"/>
               <text x="41" y="30" textAnchor="middle" fontSize="9" fill="#92400E" fontFamily="sans-serif" fontWeight="700">GO</text>
               <text x="41" y="43" textAnchor="middle" fontSize="7" fill="#B45309" fontFamily="sans-serif">出发</text>
@@ -1087,10 +1064,6 @@ function ModalVibe({ lang }: { lang: Language }) {
               <rect x="151" y="10" width="38" height="9" rx="2" fill="#2563EB"/>
               <text x="170" y="28" textAnchor="middle" fontSize="7.5" fill="#1E3A8A" fontFamily="sans-serif" fontWeight="600">杭州</text>
               <text x="170" y="39" textAnchor="middle" fontSize="7" fill="#1D4ED8" fontFamily="sans-serif">M240</text>
-              <rect x="193" y="10" width="38" height="42" rx="3" fill="#EFF6FF" stroke="#2563EB" strokeWidth="1"/>
-              <rect x="193" y="10" width="38" height="9" rx="2" fill="#2563EB"/>
-              <text x="212" y="28" textAnchor="middle" fontSize="7.5" fill="#1E3A8A" fontFamily="sans-serif" fontWeight="600">苏州</text>
-              <text x="212" y="39" textAnchor="middle" fontSize="7" fill="#1D4ED8" fontFamily="sans-serif">M260</text>
               <rect x="235" y="10" width="38" height="42" rx="3" fill="#F5F3FF" stroke="#7C3AED" strokeWidth="1"/>
               <rect x="235" y="10" width="38" height="9" rx="2" fill="#7C3AED"/>
               <text x="254" y="28" textAnchor="middle" fontSize="7.5" fill="#4C1D95" fontFamily="sans-serif" fontWeight="600">南京</text>
@@ -1108,25 +1081,18 @@ function ModalVibe({ lang }: { lang: Language }) {
               <rect x="400" y="15" width="130" height="20" rx="7" fill="#FEF3C7"/>
               <rect x="400" y="25" width="130" height="10" fill="#FEF3C7"/>
               <text x="465" y="29" textAnchor="middle" fontSize="8.5" fill="#92400E" fontFamily="sans-serif" fontWeight="700">💡 投资建议</text>
-              <line x1="408" y1="37" x2="522" y2="37" stroke="#FDE68A" strokeWidth="1"/>
               <text x="412" y="50" fontSize="7.5" fill="#4B5563" fontFamily="sans-serif" fontWeight="600">上海</text>
               <text x="460" y="50" fontSize="7.5" fill="#92400E" fontFamily="sans-serif">地价 M400</text>
               <text x="412" y="62" fontSize="7" fill="#4B5563" fontFamily="sans-serif">酒店收益</text>
               <text x="460" y="62" fontSize="7" fill="#16A34A" fontFamily="sans-serif" fontWeight="600">M1100/次</text>
               <text x="412" y="74" fontSize="7" fill="#4B5563" fontFamily="sans-serif">ROI</text>
               <text x="460" y="74" fontSize="7" fill="#D97706" fontFamily="sans-serif" fontWeight="700">175% ★ 推荐</text>
-              <rect x="412" y="80" width="108" height="12" rx="5" fill="#FEF3C7" stroke="#D97706" strokeWidth="1"/>
-              <text x="466" y="89" textAnchor="middle" fontSize="6.5" fill="#92400E" fontFamily="sans-serif" fontWeight="600">色组完整 → 建酒店</text>
               <text x="32" y="126" fontSize="8.5" fill="#9CA3AF" fontFamily="sans-serif" fontWeight="500">Monopoly · Investment Decision System</text>
             </svg>
           </div>
-
           <div className="flex gap-3 mb-6">
-            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-ink/30 text-xs font-bold border-2 border-ink/15 cursor-not-allowed">
-              ↗ {lang === "zh" ? "链接待更新" : "Link coming soon"}
-            </span>
+            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-ink/30 text-xs font-bold border-2 border-ink/15 cursor-not-allowed">↗ {lang === "zh" ? "链接待更新" : "Link coming soon"}</span>
           </div>
-
           <div className="flex items-center gap-3 my-4">
             <span className="text-[10px] font-black uppercase tracking-widest text-ink/30 whitespace-nowrap">AI PM 工作流分析</span>
             <div className="h-px flex-1 bg-ink/10" />
@@ -1143,14 +1109,11 @@ function ModalVibe({ lang }: { lang: Language }) {
                 <div>
                   <p className="text-[13px] font-bold text-ink mb-1">{row.title}</p>
                   <p className="text-[11px] text-ink/55 leading-relaxed">{row.desc}</p>
-                  <div className="flex gap-1.5 mt-1.5 flex-wrap">
-                    {row.tags.map(tag => <span key={tag} className="text-[9px] px-1.5 py-0.5 rounded bg-ink/5 text-ink/50">{tag}</span>)}
-                  </div>
+                  <div className="flex gap-1.5 mt-1.5 flex-wrap">{row.tags.map(tag => <span key={tag} className="text-[9px] px-1.5 py-0.5 rounded bg-ink/5 text-ink/50">{tag}</span>)}</div>
                 </div>
               </div>
             ))}
           </div>
-
           <div className="mt-4 p-4 border-l-[3px] border-[#CA8A04] bg-[#FFFBEB] rounded-r-xl">
             <span className="text-[9px] font-black uppercase tracking-widest text-ink/30 block mb-2">PM 反思</span>
             <p className="text-xs text-ink/65 leading-relaxed italic">{lang === "zh" ? "我在这个过程中的角色是：数据架构定义者与逻辑把关者——AI 能快速搭建界面结构，但棋盘数据的准确性与逻辑自洽需要 PM 逐一验证。这让我清楚看到 vibe coding 的边界：结构可以交给 AI，判断需要留给人。" : "My role in this process was: data architecture definer and logic gatekeeper — AI can quickly build interface structure, but the accuracy and logical consistency of the data requires the PM to verify each entry. Structure can go to AI, judgement stays with the human."}</p>
@@ -1306,7 +1269,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* ── VIBE CODING SECTION ── */}
+      {/* VIBE CODING */}
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-4 mb-12">
@@ -1319,7 +1282,7 @@ export default function App() {
             className="group cursor-pointer p-8 rounded-2xl border-2 border-ink bg-[#FFEDD5] retro-card-hover relative overflow-hidden max-w-sm"
           >
             <div className="flex justify-between items-start mb-8">
-              <div className="p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform text-[#6D28D9]">
+              <div className="p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform text-[#C2410C]">
                 <Zap className="w-8 h-8" />
               </div>
               <ArrowRight className="w-6 h-6 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
