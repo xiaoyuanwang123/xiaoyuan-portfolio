@@ -1006,7 +1006,7 @@ function ModalVibe2({ lang }: { lang: Language }) {
           </svg>
         </div>
         <div className="flex gap-3 mb-4">
-          <span className="inline-flex items-center px-4 py-2 rounded-full text-ink/30 text-xs font-bold border-2 border-ink/15 cursor-not-allowed">{lang === "zh" ? "↗ 打开工具" : "↗ Open Tool"}</span>
+          <a href="https://monopoly-tool.vercel.app" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#CA8A04] text-white text-xs font-bold border-2 border-[#B45309] shadow-[2px_2px_0_#92400E]">{lang === "zh" ? "↗ 打开工具" : "↗ Open Tool"}</a>
         </div>
         <div className="flex items-center gap-3 my-4">
           <span className="text-[10px] font-black uppercase tracking-widest text-ink/30 whitespace-nowrap">AI PM 工作流分析</span>
