@@ -978,13 +978,13 @@ function ModalVibe2({ lang }: { lang: Language }) {
         <p className="text-sm text-[#CA8A04] italic">{lang === "zh" ? "将棋盘规则数字化，构建地产投资决策系统" : "Digitising board game rules into a property investment decision system"}</p>
       </div>
       <div className="p-6 md:p-10">
-        <div className="flex items-center gap-2 p-3 bg-blue-50 rounded-xl mb-4 text-xs text-blue-700">
           {lang === "zh" ? "❆ 已上线 — 正在迭代优化，完成后将更新链接" : "In progress — being refined, link will be updated on completion"}
         </div>
         <div className="border-2 border-ink rounded-2xl overflow-hidden shadow-[3px_3px_0_rgba(45,45,45,1)] mb-4">
           <div className="flex items-center gap-2 px-3 py-2 bg-[#FEF3C7]">
             <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" /><span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" /><span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
-            <span className="flex-1 text-center text-[10px] text-ink/40 font-mono">{lang === "zh" ? "大富翁投资决策工具" : "Monopoly Investment Tool"}</span>
+            <span className="flex-1 text-center text-[10px] text-ink/40 font-mono">monopoly-tool.vercel.app</span>
+            <a href="https://monopoly-tool.vercel.app" target="_blank" rel="noreferrer" className="text-[11px] font-bold text-[#B45309]">↗ 打开</a>
             <span className="text-[11px] font-bold text-[#B45309]">❆ Live</span>
           </div>
           <svg viewBox="0 0 640 130" xmlns="http://www.w3.org/2000/svg" className="w-full block" style={{background:"#FFFBEB"}}>
