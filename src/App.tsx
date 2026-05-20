@@ -98,10 +98,10 @@ const p1Content = {
       { id: "C", text: "核心问题在于'情感舒适循环'，而非简单的利弊故事" }
     ],
     stories: [
-      { title: "情感舒适循环", icon: <Heart className="w-4 h-4" />, desc: "无评判的表达空间，但也可能成为'情绪辅助轮'。", quote: "“它就像我的情绪辅助轮，在压力大时提供支撑。”" },
-      { title: "人际连接张力", icon: <User className="w-4 h-4" />, desc: "AI 交流的便捷性可能削弱现实社交的动力。", quote: "“如果我因为跟 AI 倾诉而逃避跟伴侣沟通，这就是红灯。”" },
-      { title: "自主性侵蚀", icon: <Brain className="w-4 h-4" />, desc: "用户开始质疑频繁使用 AI 是否影响了独立性。", quote: "“我变得更独立还是更依赖了？老实说，两者都有。”" },
-      { title: "设计敏感度", icon: <Sparkles className="w-4 h-4" />, desc: "用户意识到 AI 设计如何塑造了他们的情感期待。", quote: "“我最想改变的是那种'友谊的幻觉'。”" }
+      { title: "情感舒适循环", icon: <Heart className="w-4 h-4" />, desc: "无评判的表达空间，但也可能成为'情绪辅助轮'。", quote: "「它就像我的情绪辅助轮，在压力大时提供支撑。」" },
+      { title: "人际连接张力", icon: <User className="w-4 h-4" />, desc: "AI 交流的便捷性可能削弱现实社交的动力。", quote: "「如果我因为跟 AI 倾诉而逃避跟伴侣沟通，这就是红灯。」" },
+      { title: "自主性侵蚀", icon: <Brain className="w-4 h-4" />, desc: "用户开始质疑频繁使用 AI 是否影响了独立性。", quote: "「我变得更独立还是更依赖了？老实说，两者都有。」" },
+      { title: "设计敏感度", icon: <Sparkles className="w-4 h-4" />, desc: "用户意识到 AI 设计如何塑造了他们的情感期待。", quote: "「我最想改变的是那种'友谊的幻觉'。」" }
     ],
     strategies: [
       { title: "反思性提示", desc: "在对话中加入停顿，引导用户评估当前的自我调节状态。" },
