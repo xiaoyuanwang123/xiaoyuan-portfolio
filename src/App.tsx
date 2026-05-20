@@ -1316,7 +1316,7 @@ export default function App() {
           <motion.div
             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             onClick={() => setShowVibeCoding(true)}
-            className="group cursor-pointer p-8 rounded-2xl border-2 border-ink bg-[#EDE9FE] retro-card-hover relative overflow-hidden max-w-sm"
+            className="group cursor-pointer p-8 rounded-2xl border-2 border-ink bg-[#FFEDD5] retro-card-hover relative overflow-hidden max-w-sm"
           >
             <div className="flex justify-between items-start mb-8">
               <div className="p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform text-[#6D28D9]">
@@ -1325,7 +1325,7 @@ export default function App() {
               <ArrowRight className="w-6 h-6 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
             </div>
             <h3 className="text-2xl md:text-3xl font-serif font-black mb-2">{t.vibeCodingTitle}</h3>
-            <p className="text-xs font-bold uppercase tracking-wider mb-4 text-[#6D28D9]">{t.vibeCodingCat}</p>
+            <p className="text-xs font-bold uppercase tracking-wider mb-4 text-[#C2410C]">{t.vibeCodingCat}</p>
             <p className="text-sm text-ink/70 font-medium leading-relaxed">{t.vibeCodingDesc}</p>
             <div className="mt-8 pt-6 border-t border-ink/10 flex items-center gap-2 font-bold text-xs">
               <BookOpen className="w-4 h-4" />{t.vibeCodingView}
