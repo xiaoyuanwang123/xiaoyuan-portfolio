@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Sparkles, Heart, Brain, Car, User, X, Languages, ArrowRight,
-  BookOpen, Target, Lightbulb, Plus, Flower2, Zap
+  BookOpen, Target, Lightbulb, Plus, Flower2, Zap, Flower2, Zap
 } from "lucide-react";
 
 type Language = "zh" | "en";
