@@ -1016,7 +1016,7 @@ function ModalVibe2({ lang }: { lang: Language }) {
           {([
             { n:"01", title: lang==="zh" ? "定义需求与痛点" : "Define the Problem", desc: lang==="zh" ? "大富翁棋盘数据复杂，玩家难以快速评估地产投资价值。核心需求：将棋盘规则数字化，辅助实时投资决策。" : "Monopoly board data is complex. Players struggle to evaluate property value quickly. Core need: digitise board rules to support real-time decision-making.", tags: ["规则数字化", "决策辅助"] },
             { n:"02", title: lang==="zh" ? "数据驱动的指令设计" : "Data-Driven Prompting", desc: lang==="zh" ? "用自然语言描述数据结构，让 AI 生成数据模型与交互界面。遇到数据匹配问题时，截图反馈精确纠正。" : "Described data structures in plain language, letting AI generate the data model and interface. Screenshots gave precise correction feedback.", tags: ["Claude.ai Artifact", "数据建模"] },
-            { n:"03", title: lang==="zh" ? "多轮数据校验" : "Multi-round Validation", desc: lang==="zh" ? "用棋盘原始数据逐条核验 AI 生成的数据表。数据准确性是系统可用的前提，这是 PM 的把关职责。" : "Verified AI-generated data tables line by line against the original board. Data accuracy is the prerequisite for a usable system.", tags: ["数据验证"] },
+            { n:"03", title: lang==="zh" ? "多轮数据校验" : "Multi-round Validation", desc: lang==="zh" ? "用棋盘原始数据逐条核验 AI 生成的数据表。数据准确性是系统可用的前提，" : "Verified AI-generated data tables line by line against the original board. Data accuracy is the prerequisite for a usable system.", tags: ["数据验证"] },
             { n:"04", title: lang==="zh" ? "部署上线" : "Deployed", desc: lang==="zh" ? "已部署至 Vercel，可直接在线体验。" : "Deployed to Vercel. Try it live now.", tags: ["Live"] },
           ] as {n:string;title:string;desc:string;tags:string[]}[]).map((row, i) => (
             <div key={i} className="flex gap-3 p-3.5 border-b border-ink/[0.07] bg-white last:border-b-0">
@@ -1031,7 +1031,7 @@ function ModalVibe2({ lang }: { lang: Language }) {
         </div>
         <div className="mt-4 p-4 border-l-[3px] border-[#CA8A04] bg-[#FFFBEB] rounded-r-xl">
           <span className="text-[9px] font-black uppercase tracking-widest text-ink/30 block mb-2">PM 反思</span>
-          <p className="text-xs text-ink/65 leading-relaxed italic">{lang === "zh" ? "我在这个过程中的角色是：数据架构定义者与逻辑把关者——AI 能快速搞建界面结构，但这款工具的价値在于：它让普通玩家也能完成原本需要较强经济学直觉才能快速完成的计算——ROI分析、豁价边界、流动性风险评估。AI 负责执行运算，玩家负责做决定。" : "My role was: data architecture definer and logic gatekeeper — AI can quickly build structure, but This tool lets ordinary players complete economic calculations that would otherwise require strong financial intuition — ROI analysis, auction price boundaries, liquidity risk assessment. AI handles the computation, the player makes the call."}</p>
+          <p className="text-xs text-ink/65 leading-relaxed italic">{lang === "zh" ? "我在这个过程中的角色是：数据架构定义者与逻辑把关者——AI 能快速搞建界面结构，但我在这个过程中的角色是：数据架构定义者与逻辑把关者。这款工具的价値在于：它让普通玩家也能完成原本需要较强经济学直觉才能快速完成的计算——ROI 分析、豁价边界、流动性风险评估。AI 负责执行运算，玩家负责做决定。" : "My role was: data architecture definer and logic gatekeeper — AI can quickly build structure, but This tool lets ordinary players complete economic calculations that would otherwise require strong financial intuition — ROI analysis, auction price boundaries, liquidity risk assessment. My role in this process was: data architecture definer and logic gatekeeper. This tool lets ordinary players complete calculations that would otherwise require strong economic intuition — ROI analysis, auction price boundaries, liquidity risk assessment. AI handles the computation, the player makes the call."}</p>
         </div>
       </div>
     </div>
