@@ -933,6 +933,7 @@ function ModalVibe1({ lang }: { lang: Language }) {
         <div className="flex gap-3 mb-4">
           <a href="https://yangyang-london.vercel.app" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#E91E8C] text-white text-xs font-bold border-2 border-[#C2185B]">{lang === "zh" ? "↗ 打开工具" : "↗ Open Tool"}</a>
           <span className="inline-flex items-center px-4 py-2 rounded-full text-ink/30 text-xs font-bold border-2 border-ink/15 cursor-not-allowed">{lang === "zh" ? "源码（私有）" : "Source (Private)"}</span>
+          <a href="https://raw.githubusercontent.com/xiaoyuanwang123/yangyang-london/main/index.html" download="london-tour.html" className="text-[11px] text-ink/40 underline mt-1 block">{lang === "zh" ? "无法访问？下载离线版本" : "Can't access? Download offline version"}</a>
         </div>
         <div className="flex items-center gap-3 my-4">
           <span className="text-[10px] font-black uppercase tracking-widest text-ink/30 whitespace-nowrap">AI PM 工作流分析</span>
@@ -1037,6 +1038,7 @@ function ModalVibe2({ lang }: { lang: Language }) {
         </div>
         <div className="flex gap-3 mb-4">
           <a href="https://monopoly-tool.vercel.app" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#CA8A04] text-white text-xs font-bold border-2 border-[#B45309] shadow-[2px_2px_0_#92400E]">{lang === "zh" ? "↗ 打开工具" : "↗ Open Tool"}</a>
+          <a href="https://raw.githubusercontent.com/xiaoyuanwang123/monopoly-tool/main/index.html" download="monopoly-tool.html" className="text-[11px] text-ink/40 underline mt-1 block">{lang === "zh" ? "无法访问？下载离线版本" : "Can't access? Download offline version"}</a>
         </div>
         <div className="flex items-center gap-3 my-4">
           <span className="text-[10px] font-black uppercase tracking-widest text-ink/30 whitespace-nowrap">AI PM 工作流分析</span>
