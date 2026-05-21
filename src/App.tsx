@@ -985,21 +985,54 @@ function ModalVibe2({ lang }: { lang: Language }) {
             <span className="text-[11px] font-bold text-[#B45309]">❆ Live</span>
           </div>
           <svg viewBox="0 0 640 130" xmlns="http://www.w3.org/2000/svg" className="w-full block" style={{background:"#FFFBEB"}}>
-            <rect x="20" y="10" width="42" height="42" rx="4" fill="#FEF9C3" stroke="#CA8A04" strokeWidth="1.8"/>
-            <text x="41" y="35" textAnchor="middle" fontSize="11" fill="#92400E" fontFamily="sans-serif" fontWeight="700">GO</text>
-            <rect x="578" y="10" width="42" height="42" rx="4" fill="#FEE2E2" stroke="#DC2626" strokeWidth="1.8"/>
-            <text x="599" y="35" textAnchor="middle" fontSize="9" fill="#991B1B" fontFamily="sans-serif" fontWeight="700">监狱</text>
-            <rect x="277" y="10" width="38" height="42" rx="3" fill="#FFFBEB" stroke="#CA8A04" strokeWidth="2"/>
-            <rect x="277" y="10" width="38" height="9" rx="2" fill="#CA8A04"/>
-            <text x="296" y="27" textAnchor="middle" fontSize="7.5" fill="#78350F" fontFamily="sans-serif" fontWeight="700">上海</text>
-            <text x="296" y="39" textAnchor="middle" fontSize="7" fill="#92400E" fontFamily="sans-serif">M400</text>
-            <circle cx="350" cy="75" r="13" fill="#FCD34D" stroke="#D97706" strokeWidth="2.5"/>
-            <text x="350" y="79" textAnchor="middle" fontSize="9" fill="#78350F" fontFamily="sans-serif" fontWeight="700">你</text>
-            <rect x="410" y="20" width="120" height="60" rx="6" fill="#FFFEF0" stroke="#CA8A04" strokeWidth="1.5"/>
-            <text x="470" y="38" textAnchor="middle" fontSize="8" fill="#92400E" fontFamily="sans-serif" fontWeight="700">投资建议</text>
-            <text x="422" y="52" fontSize="7" fill="#16A34A" fontFamily="sans-serif">上海 ROI 175%</text>
-            <text x="422" y="64" fontSize="7" fill="#D97706" fontFamily="sans-serif" fontWeight="700">★ 推荐购买</text>
-            <text x="32" y="120" fontSize="8" fill="#9CA3AF" fontFamily="sans-serif">Monopoly Investment System</text>
+            <rect x="8" y="8" width="624" height="114" rx="6" fill="none" stroke="#D97706" strokeWidth="1" strokeDasharray="4,3" opacity="0.4"/>
+            <rect x="8" y="8" width="52" height="52" rx="5" fill="#FEF9C3" stroke="#CA8A04" strokeWidth="1.5"/>
+            <text x="34" y="32" textAnchor="middle" fontSize="11" fill="#92400E" fontFamily="sans-serif" fontWeight="700">GO</text>
+            <text x="34" y="48" textAnchor="middle" fontSize="9" fill="#B45309" fontFamily="sans-serif">出发</text>
+            <rect x="68" y="8" width="46" height="52" rx="4" fill="#FFF7ED" stroke="#EA580C" strokeWidth="1"/>
+            <rect x="68" y="8" width="46" height="11" rx="3" fill="#EA580C"/>
+            <text x="91" y="19" textAnchor="middle" fontSize="8" fill="white" fontFamily="sans-serif" fontWeight="600">重庆</text>
+            <text x="91" y="38" textAnchor="middle" fontSize="9" fill="#7C2D12" fontFamily="sans-serif">M220</text>
+            <rect x="122" y="8" width="46" height="52" rx="4" fill="#FFF7ED" stroke="#EA580C" strokeWidth="1"/>
+            <rect x="122" y="8" width="46" height="11" rx="3" fill="#EA580C"/>
+            <text x="145" y="19" textAnchor="middle" fontSize="8" fill="white" fontFamily="sans-serif" fontWeight="600">宁波</text>
+            <text x="145" y="38" textAnchor="middle" fontSize="9" fill="#7C2D12" fontFamily="sans-serif">M220</text>
+            <rect x="176" y="8" width="46" height="52" rx="4" fill="#EFF6FF" stroke="#2563EB" strokeWidth="1"/>
+            <rect x="176" y="8" width="46" height="11" rx="3" fill="#2563EB"/>
+            <text x="199" y="19" textAnchor="middle" fontSize="8" fill="white" fontFamily="sans-serif" fontWeight="600">杭州</text>
+            <text x="199" y="38" textAnchor="middle" fontSize="9" fill="#1E3A8A" fontFamily="sans-serif">M240</text>
+            <rect x="230" y="8" width="46" height="52" rx="4" fill="#EFF6FF" stroke="#2563EB" strokeWidth="1"/>
+            <rect x="230" y="8" width="46" height="11" rx="3" fill="#2563EB"/>
+            <text x="253" y="19" textAnchor="middle" fontSize="8" fill="white" fontFamily="sans-serif" fontWeight="600">苏州</text>
+            <text x="253" y="38" textAnchor="middle" fontSize="9" fill="#1E3A8A" fontFamily="sans-serif">M260</text>
+            <rect x="284" y="8" width="46" height="52" rx="4" fill="#F5F3FF" stroke="#7C3AED" strokeWidth="1"/>
+            <rect x="284" y="8" width="46" height="11" rx="3" fill="#7C3AED"/>
+            <text x="307" y="19" textAnchor="middle" fontSize="8" fill="white" fontFamily="sans-serif" fontWeight="600">南京</text>
+            <text x="307" y="38" textAnchor="middle" fontSize="9" fill="#4C1D95" fontFamily="sans-serif">M300</text>
+            <rect x="338" y="8" width="52" height="52" rx="5" fill="#FFFBEB" stroke="#CA8A04" strokeWidth="2"/>
+            <rect x="338" y="8" width="52" height="13" rx="4" fill="#CA8A04"/>
+            <rect x="346" y="10" width="28" height="9" rx="3" fill="#DC2626"/>
+            <text x="360" y="18" textAnchor="middle" fontSize="7" fill="white" fontFamily="sans-serif" fontWeight="700">酒店</text>
+            <text x="364" y="34" textAnchor="middle" fontSize="9" fill="#78350F" fontFamily="sans-serif" fontWeight="700">上海</text>
+            <text x="364" y="48" textAnchor="middle" fontSize="9" fill="#92400E" fontFamily="sans-serif">M400</text>
+            <circle cx="430" cy="65" r="16" fill="#FCD34D" stroke="#D97706" strokeWidth="2.5"/>
+            <circle cx="430" cy="65" r="11" fill="#FBBF24" stroke="#B45309" strokeWidth="1.5"/>
+            <text x="430" y="69" textAnchor="middle" fontSize="10" fill="#78350F" fontFamily="sans-serif" fontWeight="700">你</text>
+            <rect x="490" y="20" width="110" height="68" rx="7" fill="#FFFEF0" stroke="#CA8A04" strokeWidth="1.5"/>
+            <rect x="490" y="20" width="110" height="18" rx="7" fill="#FEF3C7"/>
+            <rect x="490" y="30" width="110" height="8" fill="#FEF3C7"/>
+            <text x="545" y="33" textAnchor="middle" fontSize="8.5" fill="#92400E" fontFamily="sans-serif" fontWeight="700">投资建议</text>
+            <text x="502" y="50" fontSize="7.5" fill="#4B5563" fontFamily="sans-serif">上海中心 M400</text>
+            <text x="502" y="62" fontSize="7" fill="#16A34A" fontFamily="sans-serif" fontWeight="600">酒店收益 M2000/次</text>
+            <text x="502" y="74" fontSize="7" fill="#D97706" fontFamily="sans-serif" fontWeight="700">ROI 175% ★ 推荐</text>
+            <rect x="580" y="8" width="52" height="52" rx="5" fill="#FEE2E2" stroke="#DC2626" strokeWidth="1.5"/>
+            <text x="606" y="32" textAnchor="middle" fontSize="10" fill="#991B1B" fontFamily="sans-serif" fontWeight="700">监狱</text>
+            <text x="606" y="48" textAnchor="middle" fontSize="8" fill="#B91C1C" fontFamily="sans-serif">探视</text>
+            <rect x="8" y="70" width="52" height="52" rx="5" fill="#DCFCE7" stroke="#16A34A" strokeWidth="1.5"/>
+            <text x="34" y="96" textAnchor="middle" fontSize="8" fill="#15803D" fontFamily="sans-serif" fontWeight="600">免费停车</text>
+            <rect x="580" y="70" width="52" height="52" rx="5" fill="#EDE9FE" stroke="#7C3AED" strokeWidth="1.5"/>
+            <text x="606" y="96" textAnchor="middle" fontSize="8" fill="#5B21B6" fontFamily="sans-serif" fontWeight="600">去监狱</text>
+            <text x="20" y="125" fontSize="8.5" fill="#9CA3AF" fontFamily="sans-serif">Monopoly · Investment Decision System</text>
           </svg>
         </div>
         <div className="flex gap-3 mb-4">
