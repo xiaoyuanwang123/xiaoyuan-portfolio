@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大富翁投资决策系统</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#B45309;--gold-light:#FEF3C7;--gold-mid:#FDE68A;--gold-bright:#EF9F27;
+  --cream:#FFFDF5;--text:#1a0a00;--card:#FFFFFF;--border:#F0D090;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:
+  radial-gradient(circle at 10% 20%,rgba(239,159,39,0.12) 0%,transparent 40%),
+  radial-gradient(circle at 90% 80%,rgba(180,83,9,0.08) 0%,transparent 40%),
+  radial-gradient(circle at 50% 50%,rgba(254,243,199,0.4) 0%,transparent 70%);
+pointer-events:none;z-index:0}
+.float-coin{position:fixed;pointer-events:none;z-index:0;animation:floatCoin linear infinite;font-size:16px;opacity:0}
+@keyframes floatCoin{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:0.6}90%{opacity:0.4}100%{transform:translateY(-100px) rotate(360deg);opacity:0}}
+.page{max-width:520px;margin:0 auto;padding:16px;position:relative;z-index:1}
+.top-bar{display:flex;align-items:center;gap:12px;padding:16px;background:rgba(255,255,255,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;margin:-16px -16px 20px;border-radius:0 0 16px 16px;box-shadow:0 4px 20px rgba(180,83,9,0.08)}
+.mascot-svg{width:42px;height:42px;flex-shrink:0}
+.top-title{font-size:16px;font-weight:800;color:var(--text)}
+.top-sub{font-size:12px;color:var(--gold);font-weight:600;margin-top:1px}
+.setup-title{font-size:28px;font-weight:900;color:var(--text);margin-bottom:6px;line-height:1.2}
+.setup-sub{font-size:14px;color:#8B5E0A;margin-bottom:20px;font-weight:600}
+.card{background:rgba(255,255,255,0.9);border:1.5px solid var(--border);border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:0 4px 16px rgba(180,83,9,0.06)}
+.card-title{font-size:11px;font-weight:800;color:#92400E;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.08em}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.stat{background:var(--gold-light);border:1.5px solid var(--gold-mid);border-radius:12px;padding:10px;text-align:center}
+.stat-val{font-size:18px;font-weight:900;color:var(--gold)}
+.stat-val.green{color:#065F46}.stat-val.red{color:#991B1B}
+.stat-label{font-size:11px;color:#92400E;margin-top:2px;font-weight:700}
+.input-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.input-row label{font-size:13px;color:#78350F;flex-shrink:0;width:70px;font-weight:700}
+.input-row select,.input-row input{flex:1;font-size:13px;padding:9px 12px;border:1.5px solid var(--border);border-radius:10px;background:white;color:var(--text);font-family:'Nunito',sans-serif;outline:none;font-weight:600}
+.input-row select:focus,.input-row input:focus{border-color:var(--gold-bright)}
+.tabs{display:flex;gap:4px;margin-bottom:14px;background:var(--gold-light);padding:4px;border-radius:12px;border:1.5px solid var(--gold-mid)}
+.tab{flex:1;padding:8px;border:none;background:none;border-radius:9px;font-size:12px;cursor:pointer;color:#92400E;transition:all 0.15s;font-family:'Nunito',sans-serif;font-weight:700}
+.tab.active{background:white;color:var(--gold);box-shadow:0 2px 8px rgba(180,83,9,0.15)}
+.section{display:none}.section.active{display:block}
+.advice-box{border-radius:12px;padding:13px;margin-top:10px}
+.advice-buy{background:#ECFDF5;border:1.5px solid #6EE7B7}
+.advice-buy .at{color:#065F46}.advice-buy .ab{color:#047857}
+.advice-pass{background:var(--gold-light);border:1.5px solid var(--gold-bright)}
+.advice-pass .at{color:#78350F}.advice-pass .ab{color:#92400E}
+.advice-auction{background:#EFF6FF;border:1.5px solid #93C5FD}
+.advice-auction .at{color:#1E3A8A}.advice-auction .ab{color:#1D4ED8}
+.advice-warn{background:#FEF2F2;border:1.5px solid #FCA5A5}
+.advice-warn .at{color:#7F1D1D}.advice-warn .ab{color:#991B1B}
+.at{font-size:13px;font-weight:800;margin-bottom:5px}
+.ab{font-size:12px;line-height:1.6;font-weight:600}
+.btn{padding:9px 15px;border-radius:10px;font-size:13px;cursor:pointer;border:1.5px solid var(--border);background:white;color:var(--text);font-family:'Nunito',sans-serif;transition:all 0.15s;font-weight:700}
+.btn:hover{background:var(--gold-light)}
+.btn-primary{background:var(--text);color:white;border-color:var(--text)}
+.btn-primary:hover{opacity:0.85}
+.btn-start{background:linear-gradient(135deg,#D97706,#B45309);color:white;border:none;width:100%;padding:14px;font-size:15px;font-weight:900;border-radius:14px;cursor:pointer;font-family:'Nunito',sans-serif;box-shadow:0 4px 16px rgba(180,83,9,0.3);transition:all 0.2s}
+.btn-start:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(180,83,9,0.4)}
+.tracker-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+.player-track{border:1.5px solid var(--border);border-radius:12px;padding:10px;background:rgba(255,255,255,0.8)}
+.you-track{border-color:var(--gold-bright);background:var(--gold-light)}
+.pt-name{font-size:13px;font-weight:800;color:var(--text)}
+.pt-cash{font-size:12px;color:#065F46;font-weight:800}
+.pt-pos{font-size:11px;color:#92400E;margin-top:3px;font-weight:600}
+.event-list{max-height:200px;overflow-y:auto}
+.event-item{font-size:12px;padding:6px 0;border-bottom:1px solid var(--gold-light);color:#78350F;line-height:1.5;font-weight:600}
+.event-item:last-child{border-bottom:none}
+.event-item strong{color:var(--text)}
+.prop-mini{display:flex;align-items:center;gap:6px;padding:7px 0;border-bottom:1px solid var(--gold-light)}
+.prop-mini:last-child{border-bottom:none}
+.prop-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.prop-mini-name{font-size:13px;color:var(--text);font-weight:700;flex:1}
+.prop-mini-sub{font-size:11px;color:#92400E;font-weight:600}
+.house-dot{width:10px;height:10px;background:#639922;border-radius:2px;display:inline-block;margin-left:2px}
+.hotel-dot{width:12px;height:12px;background:#E24B4A;border-radius:2px;display:inline-block;margin-left:2px}
+.empty{font-size:13px;color:#92400E;text-align:center;padding:20px;font-style:italic;font-weight:600}
+.turn-banner{background:linear-gradient(135deg,rgba(254,243,199,0.9),rgba(253,230,138,0.9));border:1.5px solid var(--gold-bright);border-radius:12px;padding:11px 14px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+.tb-left{font-size:13px;font-weight:800;color:#78350F}
+.tb-right{font-size:12px;color:#92400E;font-weight:700}
+.player-row{display:flex;align-items:center;gap:10px;padding:11px;border:1.5px solid var(--border);border-radius:12px;background:white;margin-bottom:8px}
+.player-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.player-name-input{flex:1;font-size:13px;border:none;background:none;color:var(--text);outline:none;font-family:'Nunito',sans-serif;font-weight:700}
+.you-badge{font-size:11px;padding:3px 10px;border-radius:20px;background:var(--gold-light);color:var(--gold);flex-shrink:0;font-weight:800;border:1px solid var(--gold-mid)}
+.quick-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.section-header{font-size:18px;font-weight:900;color:var(--text);margin-bottom:4px}
+.row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--gold-light)}
+.row:last-child{border-bottom:none}
+.rl{font-size:12px;color:#92400E;font-weight:600}
+.rv{font-size:12px;font-weight:800;color:var(--text)}
+</style>
+</head>
+<body>
+
+<div class="float-coin" style="left:5%;animation-duration:8s;animation-delay:0s">🪙</div>
+<div class="float-coin" style="left:15%;animation-duration:12s;animation-delay:2s">💰</div>
+<div class="float-coin" style="left:30%;animation-duration:9s;animation-delay:4s">🪙</div>
+<div class="float-coin" style="left:50%;animation-duration:11s;animation-delay:1s">⭐</div>
+<div class="float-coin" style="left:65%;animation-duration:10s;animation-delay:3s">🪙</div>
+<div class="float-coin" style="left:80%;animation-duration:13s;animation-delay:5s">💰</div>
+<div class="float-coin" style="left:92%;animation-duration:8s;animation-delay:6s">🎲</div>
+
+<div class="page">
+<div class="top-bar">
+  <svg class="mascot-svg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+    <rect x="10" y="2" width="28" height="17" rx="4" fill="#1a0a00"/>
+    <rect x="6" y="16" width="36" height="6" rx="3" fill="#1a0a00"/>
+    <rect x="10" y="19" width="28" height="4" rx="2" fill="#EF9F27"/>
+    <ellipse cx="24" cy="33" rx="13" ry="12" fill="#FAEEDA"/>
+    <circle cx="18" cy="29" r="3.5" fill="#1a0a00"/>
+    <circle cx="30" cy="29" r="3.5" fill="#1a0a00"/>
+    <circle cx="19.5" cy="27.5" r="1.2" fill="white"/>
+    <circle cx="31.5" cy="27.5" r="1.2" fill="white"/>
+    <ellipse cx="14" cy="34" rx="3" ry="2" fill="#F0997B" opacity="0.6"/>
+    <ellipse cx="34" cy="34" rx="3" ry="2" fill="#F0997B" opacity="0.6"/>
+    <path d="M18 38 Q24 42 30 38" stroke="#1a0a00" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="24" cy="38" rx="6" ry="3.5" fill="white"/>
+    <rect x="16" y="41" width="16" height="6" rx="2" fill="#1a0a00"/>
+    <rect x="18" y="41" width="4" height="6" rx="1" fill="white"/>
+    <polygon points="22,43 24,40 26,43 24,46" fill="#EF9F27"/>
+    <polygon points="22,43 16,39 16,47" fill="#FBBF24"/>
+    <polygon points="26,43 32,39 32,47" fill="#FBBF24"/>
+    <circle cx="24" cy="43" r="2" fill="#B45309"/>
+    <circle cx="13" cy="43" r="4" fill="#FAEEDA"/>
+    <circle cx="35" cy="43" r="4" fill="#EF9F27" stroke="#B45309" stroke-width="1"/>
+    <text x="35" y="46" text-anchor="middle" font-size="5" fill="#412402" font-family="sans-serif" font-weight="700">M</text>
+  </svg>
+  <div>
+    <div class="top-title">大富翁投资决策系统</div>
+    <div class="top-sub" id="top-sub-text">输入玩家信息开始游戏</div>
+  </div>
+</div>
+
+<!-- SETUP -->
+<div id="setup-screen">
+  <div class="setup-title">开局设置 🎲</div>
+  <div class="setup-sub">告诉我玩家信息，我来帮你做投资决策</div>
+  <div class="card">
+    <div class="card-title">基本设置</div>
+    <div class="input-row"><label>玩家数</label>
+      <select id="num-players" onchange="renderPlayerSetup()">
+        <option value="2">2人</option><option value="3">3人</option>
+        <option value="4" selected>4人</option><option value="5">5人</option><option value="6">6人</option>
+      </select></div>
+    <div class="input-row"><label>你是</label>
+      <select id="you-index">
+        <option value="0">第1个玩家</option><option value="1">第2个玩家</option>
+        <option value="2">第3个玩家</option><option value="3" selected>第4个玩家</option>
+      </select></div>
+    <div class="input-row"><label>初始现金</label>
+      <select id="init-cash">
+        <option value="1500" selected>M1,500（标准）</option>
+        <option value="2000">M2,000（轻松）</option>
+        <option value="1000">M1,000（困难）</option>
+      </select></div>
+  </div>
+  <div class="card">
+    <div class="card-title">玩家名称</div>
+    <div id="player-rows"></div>
+  </div>
+  <button class="btn-start" onclick="startGame()">开始游戏 →</button>
+</div>
+
+<!-- GAME -->
+<div id="game-screen" style="display:none">
+  <div class="turn-banner">
+    <span class="tb-left" id="turn-text">轮到你了！</span>
+    <span class="tb-right" id="turn-sub">选择落地格子</span>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('advisor')">投资顾问</button>
+    <button class="tab" onclick="switchTab('tracker')">玩家追踪</button>
+    <button class="tab" onclick="switchTab('assets')">我的资产</button>
+    <button class="tab" onclick="switchTab('log')">记录</button>
+  </div>
+
+  <div class="section active" id="tab-advisor">
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-val green" id="s-cash">M1,500</div><div class="stat-label">我的现金</div></div>
+      <div class="stat"><div class="stat-val" id="s-props">0</div><div class="stat-label">地产数</div></div>
+      <div class="stat"><div class="stat-val" id="s-net">M1,500</div><div class="stat-label">净资产</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">当前落地</div>
+      <div class="input-row"><label>哪位玩家</label><select id="sel-player" onchange="onPlayerChange()"></select></div>
+      <div class="input-row"><label>落地格子</label>
+        <select id="sel-prop" onchange="updateAdvice()">
+          <option value="">— 选择格子 —</option>
+          <optgroup label="棕色组"><option value="重庆路">重庆路 M60</option><option value="江苏路">江苏路 M60</option></optgroup>
+          <optgroup label="浅蓝组"><option value="中山路">中山路 M100</option><option value="福州路">福州路 M100</option><option value="广州路">广州路 M120</option></optgroup>
+          <optgroup label="粉色组"><option value="西藏路">西藏路 M140</option><option value="四川路">四川路 M140</option><option value="南京路">南京路 M160</option></optgroup>
+          <optgroup label="橙色组"><option value="淮海路">淮海路 M180</option><option value="衡山路">衡山路 M180</option><option value="复兴路">复兴路 M200</option></optgroup>
+          <optgroup label="红色组"><option value="长安街">长安街 M220</option><option value="王府井">王府井 M220</option><option value="故宫大道">故宫大道 M240</option></optgroup>
+          <optgroup label="黄色组"><option value="外滩">外滩 M260</option><option value="东方明珠路">东方明珠路 M260</option><option value="浦东大道">浦东大道 M280</option></optgroup>
+          <optgroup label="绿色组"><option value="人民广场">人民广场 M300</option><option value="陆家嘴">陆家嘴 M300</option><option value="金融街">金融街 M320</option></optgroup>
+          <optgroup label="深蓝组"><option value="黄浦江畔">黄浦江畔 M350</option><option value="上海中心">上海中心 M400</option></optgroup>
+          <optgroup label="交通站"><option value="st1">火车站 M200</option><option value="st2">机场 M200</option><option value="st3">地铁站 M200</option><option value="st4">港口 M200</option></optgroup>
+          <optgroup label="公用事业"><option value="电力公司">电力公司 M150</option><option value="自来水公司">自来水公司 M150</option></optgroup>
+          <optgroup label="特殊格">
+            <option value="GO">经过GO +M200</option><option value="所得税">所得税</option>
+            <option value="豪华税">豪华税 -M100</option><option value="机会">机会卡</option>
+            <option value="社区基金">社区基金</option><option value="监狱">探视监狱</option>
+            <option value="去监狱">去监狱</option><option value="免费停车">免费停车</option>
+          </optgroup>
+        </select>
+      </div>
+      <div id="advice-area"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">快速调整</div>
+      <div class="quick-btns">
+        <button class="btn" onclick="quickCash(200,'经过GO')">+M200 GO</button>
+        <button class="btn" onclick="quickCash(-200,'所得税')">-M200 税</button>
+        <button class="btn" onclick="quickCash(-100,'豪华税')">-M100 税</button>
+        <button class="btn" onclick="toggleCustom()">自定义</button>
+      </div>
+      <div id="custom-area" style="display:none">
+        <div class="input-row"><label>金额</label><input type="number" id="c-amt" placeholder="正收入负支出"/></div>
+        <div class="input-row"><label>备注</label><input type="text" id="c-note" placeholder="如：付租金给玩家2"/></div>
+        <button class="btn btn-primary" onclick="applyCustom()">确认</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-tracker">
+    <div class="card">
+      <div class="card-title">记录其他玩家操作</div>
+      <div class="input-row"><label>玩家</label><select id="tr-player"></select></div>
+      <div class="input-row"><label>操作</label>
+        <select id="tr-action"><option value="buy">购买地产</option><option value="in">收入</option><option value="out">支出</option></select></div>
+      <div class="input-row"><label>地产/金额</label><input type="text" id="tr-detail" placeholder="如：上海中心 或 200"/></div>
+      <button class="btn btn-primary" onclick="addTrackerEvent()">记录</button>
+    </div>
+    <div class="tracker-grid" id="tracker-grid"></div>
+  </div>
+
+  <div class="section" id="tab-assets">
+    <div id="my-assets-list"></div>
+    <div class="card">
+      <div class="card-title">建房操作</div>
+      <div class="input-row"><label>选地产</label><select id="build-prop"></select></div>
+      <div class="input-row"><label>操作</label>
+        <select id="build-action">
+          <option value="house">建一栋房 M50</option>
+          <option value="hotel">升为酒店（需4房）M50</option>
+          <option value="sell">拆一栋房 回收M25</option>
+          <option value="mortgage">抵押 回收半价</option>
+        </select></div>
+      <button class="btn btn-primary" onclick="doBuild()">执行</button>
+    </div>
+  </div>
+
+  <div class="section" id="tab-log">
+    <div class="card"><div class="event-list" id="log-list"></div></div>
+  </div>
+</div>
+</div>
+
+<script>
+const COLORS=['#EF9F27','#E24B4A','#1D9E75','#185FA5','#7F77DD','#D4537E'];
+const AVATARS=['👑','🎯','🚀','⭐','🎲','💎'];
+const PROPS={
+  '重庆路':{price:60,group:'brown',color:'#8B4513',rent:[2,10,30,90,160,250],gs:2},
+  '江苏路':{price:60,group:'brown',color:'#8B4513',rent:[4,20,60,180,320,450],gs:2},
+  '中山路':{price:100,group:'lblue',color:'#87CEEB',rent:[6,30,90,270,400,550],gs:3},
+  '福州路':{price:100,group:'lblue',color:'#87CEEB',rent:[6,30,90,270,400,550],gs:3},
+  '广州路':{price:120,group:'lblue',color:'#87CEEB',rent:[8,40,100,300,450,600],gs:3},
+  '西藏路':{price:140,group:'pink',color:'#FF69B4',rent:[10,50,150,450,625,750],gs:3},
+  '四川路':{price:140,group:'pink',color:'#FF69B4',rent:[10,50,150,450,625,750],gs:3},
+  '南京路':{price:160,group:'pink',color:'#FF69B4',rent:[12,60,180,500,700,900],gs:3},
+  '淮海路':{price:180,group:'orange',color:'#FFA500',rent:[14,70,200,550,750,950],gs:3},
+  '衡山路':{price:180,group:'orange',color:'#FFA500',rent:[14,70,200,550,750,950],gs:3},
+  '复兴路':{price:200,group:'orange',color:'#FFA500',rent:[16,80,220,600,800,1000],gs:3},
+  '长安街':{price:220,group:'red',color:'#DC143C',rent:[18,90,250,700,875,1050],gs:3},
+  '王府井':{price:220,group:'red',color:'#DC143C',rent:[18,90,250,700,875,1050],gs:3},
+  '故宫大道':{price:240,group:'red',color:'#DC143C',rent:[20,100,300,750,925,1100],gs:3},
+  '外滩':{price:260,group:'yellow',color:'#DAA520',rent:[22,110,330,800,975,1150],gs:3},
+  '东方明珠路':{price:260,group:'yellow',color:'#DAA520',rent:[22,110,330,800,975,1150],gs:3},
+  '浦东大道':{price:280,group:'yellow',color:'#DAA520',rent:[24,120,360,850,1025,1200],gs:3},
+  '人民广场':{price:300,group:'green',color:'#228B22',rent:[26,130,390,900,1100,1275],gs:3},
+  '陆家嘴':{price:300,group:'green',color:'#228B22',rent:[26,130,390,900,1100,1275],gs:3},
+  '金融街':{price:320,group:'green',color:'#228B22',rent:[28,150,450,1000,1200,1400],gs:3},
+  '黄浦江畔':{price:350,group:'dblue',color:'#0047AB',rent:[35,175,500,1100,1300,1500],gs:2},
+  '上海中心':{price:400,group:'dblue',color:'#0047AB',rent:[50,200,600,1400,1700,2000],gs:2},
+  'st1':{price:200,group:'station',color:'#555',gs:4},
+  'st2':{price:200,group:'station',color:'#555',gs:4},
+  'st3':{price:200,group:'station',color:'#555',gs:4},
+  'st4':{price:200,group:'station',color:'#555',gs:4},
+  '电力公司':{price:150,group:'utility',color:'#888',gs:2},
+  '自来水公司':{price:150,group:'utility',color:'#888',gs:2},
+};
+let G={players:[],youIdx:0,initCash:1500,log:[],totalHouses:0,totalHotels:0};
+const fmt=n=>'M'+Math.abs(Math.round(n)).toLocaleString();
+const addLog=msg=>{G.log.unshift(msg);renderLog();};
+const renderLog=()=>{const el=document.getElementById('log-list');if(!el)return;el.innerHTML=G.log.length?G.log.map(l=>`<div class="event-item">${l}</div>`).join(''):'<div class="empty">暂无记录</div>';};
+function renderPlayerSetup(){
+  const n=parseInt(document.getElementById('num-players').value);
+  const youSel=document.getElementById('you-index');
+  youSel.innerHTML=Array.from({length:n},(_,i)=>`<option value="${i}"${i===n-1?' selected':''}>第${i+1}个玩家</option>`).join('');
+  document.getElementById('player-rows').innerHTML=Array.from({length:n},(_,i)=>`
+    <div class="player-row">
+      <div class="player-avatar" style="background:${COLORS[i]}20;color:${COLORS[i]}">${AVATARS[i]}</div>
+      <input class="player-name-input" id="pname-${i}" value="玩家${i+1}"/>
+      <span class="you-badge" id="you-mark-${i}" style="display:none">你</span>
+    </div>`).join('');
+  youSel.onchange=()=>{document.querySelectorAll('[id^=you-mark-]').forEach(el=>el.style.display='none');const ym=document.getElementById('you-mark-'+youSel.value);if(ym)ym.style.display='inline';};
+  const ym=document.getElementById('you-mark-'+parseInt(youSel.value));if(ym)ym.style.display='inline';
+}
+function startGame(){
+  const n=parseInt(document.getElementById('num-players').value);
+  G.youIdx=parseInt(document.getElementById('you-index').value);
+  G.initCash=parseInt(document.getElementById('init-cash').value);
+  G.players=Array.from({length:n},(_,i)=>({name:document.getElementById('pname-'+i)?.value||`玩家${i+1}`,cash:G.initCash,props:{},color:COLORS[i],avatar:AVATARS[i],isYou:i===G.youIdx}));
+  G.log=[];G.totalHouses=0;G.totalHotels=0;
+  addLog(`游戏开始 — ${n}名玩家，各持 ${fmt(G.initCash)}`);
+  document.getElementById('setup-screen').style.display='none';
+  document.getElementById('game-screen').style.display='block';
+  populateSelects();updateAll();
+}
+function populateSelects(){['sel-player','tr-player'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.innerHTML=G.players.map((p,i)=>`<option value="${i}"${p.isYou?' selected':''}>${p.avatar} ${p.name}${p.isYou?' (你)':''}</option>`).join('');});}
+function updateAll(){
+  const you=G.players[G.youIdx];
+  document.getElementById('s-cash').textContent=fmt(you.cash);
+  document.getElementById('s-cash').className='stat-val '+(you.cash<200?'red':'green');
+  document.getElementById('s-props').textContent=Object.keys(you.props).length;
+  const pv=Object.keys(you.props).reduce((s,k)=>s+(PROPS[k]?PROPS[k].price:0),0);
+  document.getElementById('s-net').textContent=fmt(you.cash+pv);
+  document.getElementById('top-sub-text').textContent=`现金 ${fmt(you.cash)} · ${Object.keys(you.props).length}块地产`;
+  updateTurnBanner();renderTrackerGrid();renderMyAssets();updateBuildSelect();
+}
+function updateTurnBanner(){const sel=document.getElementById('sel-player');const idx=sel?parseInt(sel.value):G.youIdx;const p=G.players[idx];if(!p)return;const isYou=idx===G.youIdx;document.getElementById('turn-text').textContent=isYou?`轮到你了，${p.name}！`:`现在：${p.avatar} ${p.name}`;document.getElementById('turn-sub').textContent=isYou?`现金 ${fmt(p.cash)}`:`追踪对手`;}
+function onPlayerChange(){updateTurnBanner();updateAdvice();}
+function whoOwns(key){for(let i=0;i<G.players.length;i++){if(G.players[i].props[key])return i;}return -1;}
+function groupOwned(group,pIdx){return Object.keys(G.players[pIdx].props).filter(k=>PROPS[k]&&PROPS[k].group===group).length;}
+function updateAdvice(){
+  const pIdx=parseInt(document.getElementById('sel-player').value);
+  const key=document.getElementById('sel-prop').value;
+  const area=document.getElementById('advice-area');
+  const player=G.players[pIdx];const isYou=pIdx===G.youIdx;
+  if(!key){area.innerHTML='';return;}
+  if(key==='GO'){if(isYou){player.cash+=200;addLog(`${player.avatar} ${player.name} 经过GO +M200 → ${fmt(player.cash)}`);updateAll();}area.innerHTML=`<div class="advice-box advice-buy"><div class="at">经过GO — 收取 M200</div><div class="ab">${isYou?'已记入账户。':'对手收入M200。'}</div></div>`;return;}
+  if(key==='所得税'){const assets=player.cash+Object.keys(player.props).reduce((s,k)=>s+(PROPS[k]?PROPS[k].price:0),0);const tax=Math.min(200,Math.round(assets*0.1));const btn=isYou?`<br><button class="btn btn-primary" style="margin-top:8px;font-size:12px" onclick="quickCash(-${tax},'所得税')">确认支付 ${fmt(tax)}</button>`:'';area.innerHTML=`<div class="advice-box advice-warn"><div class="at">所得税</div><div class="ab">总资产约 ${fmt(assets)}，10% = ${fmt(Math.round(assets*0.1))}。<br><strong>应付：${fmt(tax)}（选较低值）</strong>${btn}</div></div>`;return;}
+  if(key==='豪华税'){const btn=isYou?`<button class="btn btn-primary" style="margin-top:8px;font-size:12px" onclick="quickCash(-100,'豪华税')">确认支付 M100</button>`:'';area.innerHTML=`<div class="advice-box advice-warn"><div class="at">豪华税 M100</div><div class="ab">${btn||'对手支付M100。'}</div></div>`;return;}
+  if(key==='机会'||key==='社区基金'){area.innerHTML=`<div class="advice-box advice-auction"><div class="at">${key}</div><div class="ab">结果随机，用快速调整记录实际金额。</div></div>`;return;}
+  if(key==='监狱'){area.innerHTML=`<div class="advice-box advice-auction"><div class="at">探视监狱</div><div class="ab">无需任何操作。</div></div>`;return;}
+  if(key==='去监狱'){area.innerHTML=`<div class="advice-box advice-warn"><div class="at">去监狱！</div><div class="ab">直接入狱，不经过GO。下回合付M50或双骰子出狱。</div></div>`;return;}
+  if(key==='免费停车'){area.innerHTML=`<div class="advice-box advice-auction"><div class="at">免费停车</div><div class="ab">无需任何操作。</div></div>`;return;}
+  const p=PROPS[key];if(!p){area.innerHTML='';return;}
+  const ownerIdx=whoOwns(key);
+  if(ownerIdx>=0&&ownerIdx!==pIdx){const owner=G.players[ownerIdx];const m=owner.props[key];const houses=m?.houses||0;const hasHotel=m?.hotel||false;let rent=p.rent[0];if(p.group==='station'){const sc=Object.keys(owner.props).filter(k=>PROPS[k]?.group==='station').length;rent=[25,50,100,200][sc-1]||25;}else if(hasHotel)rent=p.rent[5];else if(houses>0)rent=p.rent[houses];else if(groupOwned(p.group,ownerIdx)===p.gs)rent=p.rent[0]*2;const btn=isYou?`<br><button class="btn btn-primary" style="margin-top:8px;font-size:12px" onclick="quickCash(-${rent},'付租金给${owner.name}')">确认支付 ${fmt(rent)}</button>`:'';area.innerHTML=`<div class="advice-box advice-warn"><div class="at">付租金给 ${owner.avatar} ${owner.name}</div><div class="ab">应付 <strong>${fmt(rent)}</strong>${hasHotel?' (酒店)':houses>0?` (${houses}栋房)`:''} ${btn}</div></div>`;return;}
+  if(ownerIdx===pIdx){area.innerHTML=`<div class="advice-box advice-buy"><div class="at">你的地产</div><div class="ab">等待对手落地收租。在「我的资产」可建房升级。</div></div>`;return;}
+  if(!isYou){area.innerHTML=`<div class="advice-box advice-auction"><div class="at">对手可能购入此地</div><div class="ab">地价 ${fmt(p.price)}，在玩家追踪中记录结果。</div></div>`;return;}
+  const cash=player.cash;const gOwned=groupOwned(p.group,pIdx);const canComplete=gOwned===p.gs-1;const baseRent=p.rent[0];const monoRent=baseRent*2;
+  let cls,title,body,showBtn=true;
+  if(cash<p.price){cls='warn';title='资金不足，无法购入';body=`需要 ${fmt(p.price)}，当前 ${fmt(cash)}，缺口 ${fmt(p.price-cash)}。`;showBtn=false;}
+  else if(canComplete){cls='buy';title='强烈建议购入 — 将完成色组垄断！';body=`购入 ${fmt(p.price)} → 垄断后租金 ${fmt(monoRent)}/次，ROI ${Math.round(monoRent/p.price*100)}%。垄断是大富翁最核心的收益策略。`;}
+  else if(p.group==='dblue'){cls='buy';title='建议购入 — 顶级地段';body=`${fmt(p.price)} | 基础租金 ${fmt(baseRent)} | ROI ${Math.round(baseRent/p.price*100)}%/次 | 高伤害必争之地。`;}
+  else if(p.price<=cash*0.35){cls='buy';title='建议购入';body=`${fmt(p.price)} | 租金 ${fmt(baseRent)} | 占用现金 ${Math.round(p.price/cash*100)}%，在可承受范围内。`;}
+  else if(p.price<=cash*0.55){cls='auction';title='可以购入，或等待拍卖';body=`${fmt(p.price)} | 占用现金 ${Math.round(p.price/cash*100)}%，稍重，注意流动性。`;}
+  else{cls='pass';title='建议放弃，资金压力过大';body=`${fmt(p.price)} 占现金 ${Math.round(p.price/cash*100)}%，流动性风险高。`;showBtn=false;}
+  const btn=showBtn?`<br><button class="btn btn-primary" style="margin-top:8px;font-size:12px" onclick="buyProp('${key}',${pIdx})">确认购入 ${fmt(p.price)}</button>`:'';
+  area.innerHTML=`<div class="advice-box advice-${cls}"><div class="at">${title}</div><div class="ab">${body}${btn}</div></div>`;
+}
+function buyProp(key,pIdx){const p=PROPS[key];const player=G.players[pIdx];if(!p||player.cash<p.price){alert('资金不足！');return;}player.cash-=p.price;player.props[key]={houses:0,hotel:false,mortgaged:false};addLog(`${player.avatar} ${player.name} 购入 <strong>${key}</strong> ${fmt(p.price)} → 剩余 ${fmt(player.cash)}`);updateAll();updateAdvice();}
+function quickCash(amt,note){const you=G.players[G.youIdx];you.cash+=amt;addLog(`${you.avatar} ${you.name} ${note}：${amt>0?'+':''}${fmt(amt)} → ${fmt(you.cash)}`);updateAll();}
+function toggleCustom(){const el=document.getElementById('custom-area');el.style.display=el.style.display==='none'?'block':'none';}
+function applyCustom(){const amt=parseInt(document.getElementById('c-amt').value)||0;const note=document.getElementById('c-note').value||'自定义';if(!amt){alert('请输入金额');return;}quickCash(amt,note);document.getElementById('c-amt').value='';document.getElementById('c-note').value='';document.getElementById('custom-area').style.display='none';}
+function addTrackerEvent(){const pIdx=parseInt(document.getElementById('tr-player').value);const action=document.getElementById('tr-action').value;const detail=document.getElementById('tr-detail').value.trim();const player=G.players[pIdx];if(!detail){alert('请输入内容');return;}if(action==='buy'){if(PROPS[detail]){player.props[detail]={houses:0,hotel:false,mortgaged:false};player.cash-=PROPS[detail].price;addLog(`${player.avatar} ${player.name} 购入 <strong>${detail}</strong>`);}else{addLog(`${player.avatar} ${player.name} 购入：${detail}`);}}else if(action==='in'){const amt=parseInt(detail)||0;player.cash+=amt;addLog(`${player.avatar} ${player.name} 收入 +${fmt(amt)}`);}else{const amt=parseInt(detail)||0;player.cash-=amt;addLog(`${player.avatar} ${player.name} 支出 -${fmt(amt)}`);}document.getElementById('tr-detail').value='';renderTrackerGrid();renderLog();}
+function renderTrackerGrid(){const el=document.getElementById('tracker-grid');if(!el)return;el.innerHTML=G.players.map(p=>{const keys=Object.keys(p.props);return `<div class="player-track${p.isYou?' you-track':''}"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><div style="width:28px;height:28px;border-radius:50%;background:${p.color}20;color:${p.color};display:flex;align-items:center;justify-content:center;font-size:13px">${p.avatar}</div><div><div class="pt-name">${p.name}${p.isYou?' 👑':''}</div><div class="pt-cash">${fmt(p.cash)}</div></div></div><div class="pt-pos">${keys.length?keys.slice(0,4).join('、')+(keys.length>4?`...共${keys.length}块`:''):'暂无地产'}</div></div>`;}).join('');}
+function renderMyAssets(){const el=document.getElementById('my-assets-list');if(!el)return;const you=G.players[G.youIdx];const keys=Object.keys(you.props);if(!keys.length){el.innerHTML='<div class="empty">暂无地产</div>';return;}el.innerHTML=`<div class="card">${keys.map(k=>{const p=PROPS[k];if(!p)return'';const m=you.props[k];const h=m.houses||0;return`<div class="prop-mini"><div class="prop-dot" style="background:${p.color}"></div><div class="prop-mini-name">${k}</div><div class="prop-mini-sub">${fmt(p.price)}</div>${m.hotel?'<span class="hotel-dot"></span>':Array(h).fill('<span class="house-dot"></span>').join('')}${m.mortgaged?'<span style="font-size:10px;color:#991B1B;margin-left:4px">抵押</span>':''}</div>`;}).join('')}</div>`;}
+function updateBuildSelect(){const el=document.getElementById('build-prop');if(!el)return;const you=G.players[G.youIdx];const keys=Object.keys(you.props).filter(k=>PROPS[k]&&!['station','utility'].includes(PROPS[k].group));el.innerHTML=keys.length?keys.map(k=>`<option value="${k}">${k}</option>`).join(''):'<option value="">无可操作地产</option>';}
+function doBuild(){const key=document.getElementById('build-prop').value;const action=document.getElementById('build-action').value;const you=G.players[G.youIdx];if(!key||!you.props[key]){alert('请选择地产');return;}const p=PROPS[key];const m=you.props[key];if(action==='house'){if(groupOwned(p.group,G.youIdx)<p.gs){alert('需拥有整个色组才能建房！');return;}if(m.hotel){alert('已有酒店！');return;}if((m.houses||0)>=4){alert('已有4栋，可升为酒店！');return;}if(G.totalHouses>=32){alert('全局房子已达上限32栋！');return;}if(you.cash<50){alert('需要M50');return;}you.cash-=50;m.houses=(m.houses||0)+1;G.totalHouses++;addLog(`${you.avatar} ${you.name} 在 <strong>${key}</strong> 建第${m.houses}栋房 -M50 → ${fmt(you.cash)}`);}else if(action==='hotel'){if((m.houses||0)<4){alert('需要4栋房才能升级！');return;}if(G.totalHotels>=12){alert('全局酒店已达上限！');return;}if(you.cash<50){alert('需要M50');return;}you.cash-=50;G.totalHouses-=4;m.houses=0;m.hotel=true;G.totalHotels++;addLog(`${you.avatar} ${you.name} 在 <strong>${key}</strong> 建成酒店 -M50 → ${fmt(you.cash)}`);}else if(action==='sell'){if((m.houses||0)<=0){alert('没有房子可拆！');return;}you.cash+=25;m.houses--;G.totalHouses--;addLog(`${you.avatar} ${you.name} 拆除 <strong>${key}</strong> 一栋房 +M25 → ${fmt(you.cash)}`);}else if(action==='mortgage'){if(m.mortgaged){alert('已经抵押！');return;}const gain=Math.round(p.price/2);you.cash+=gain;m.mortgaged=true;addLog(`${you.avatar} ${you.name} 抵押 <strong>${key}</strong> +${fmt(gain)} → ${fmt(you.cash)}`);} updateAll();}
+function switchTab(name){document.querySelectorAll('.tab').forEach((t,i)=>{['advisor','tracker','assets','log'].forEach((n,j)=>t.classList.toggle('active',i===j&&n===name));});document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('tab-'+name).classList.add('active');}
+renderPlayerSetup();
+</script>
+</body>
+</html>

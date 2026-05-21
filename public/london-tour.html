@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>欢迎阳阳来敦儿 🇬🇧</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pink-50: #fff0f5;
+  --pink-100: #ffd6e7;
+  --pink-200: #ffb3ce;
+  --pink-300: #ff85b3;
+  --pink-400: #e8668f;
+  --pink-500: #c9476f;
+  --blush: #f7e4ed;
+  --cream: #fffaf8;
+  --bow: #d4739a;
+  --bow-dark: #b05580;
+  --text: #5a3245;
+  --text-light: #9a6f83;
+  --white: #ffffff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Decorative BG ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255,182,193,0.18) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(255,182,193,0.15) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(247,228,237,0.3) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Floating hearts */
+.floating-hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.heart {
+  position: absolute;
+  opacity: 0;
+  animation: floatHeart linear infinite;
+  font-size: 14px;
+}
+
+@keyframes floatHeart {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.4; }
+  90% { opacity: 0.2; }
+  100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+}
+
+.wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 16px 60px;
+}
+
+/* ── COVER ── */
+.cover {
+  text-align: center;
+  padding: 48px 24px 40px;
+  position: relative;
+}
+
+.cover-cat {
+  margin: 0 auto 20px;
+  width: 140px;
+  height: 140px;
+  position: relative;
+}
+
+/* SVG cat embedded */
+.cover-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.cover-subtitle {
+  font-size: 14px;
+  color: var(--text-light);
+  font-weight: 400;
+}
+
+.paw-divider {
+  margin: 18px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--pink-300);
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+/* ── CARDS ── */
+.card {
+  background: var(--white);
+  border-radius: 20px;
+  border: 1.5px solid var(--pink-100);
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 20px rgba(200,100,140,0.07);
+  transition: box-shadow 0.2s;
+}
+
+.card:hover { box-shadow: 0 6px 28px rgba(200,100,140,0.12); }
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+.card-title .icon-badge {
+  width: 30px; height: 30px;
+  background: var(--pink-100);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+}
+
+/* ── DATE INPUT ── */
+.date-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.date-input-wrap {
+  flex: 1;
+  min-width: 140px;
+  position: relative;
+}
+
+.date-input-wrap input[type="date"] {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--pink-200);
+  border-radius: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--pink-50);
+  outline: none;
+  transition: border 0.2s;
+  cursor: pointer;
+}
+
+.date-input-wrap input[type="date"]:focus {
+  border-color: var(--bow);
+}
+
+.btn-weather {
+  background: linear-gradient(135deg, var(--bow), var(--pink-400));
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+  box-shadow: 0 3px 10px rgba(180,80,120,0.25);
+}
+
+.btn-weather:hover { transform: translateY(-1px); box-shadow: 0 5px 15px rgba(180,80,120,0.3); }
+
+.weather-result {
+  margin-top: 12px;
+  padding: 12px 16px;
+  background: var(--blush);
+  border-radius: 12px;
+  font-size: 13px;
+  color: var(--text);
+  display: none;
+  line-height: 1.6;
+}
+
+.weather-result.show { display: block; animation: fadeIn 0.3s ease; }
+
+/* ── QUESTIONS ── */
+.step-bar {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 18px;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--pink-100);
+  transition: all 0.3s;
+}
+
+.step-dot.active { background: var(--bow); transform: scale(1.4); }
+.step-dot.done { background: var(--pink-300); }
+
+.q-label-pill {
+  display: inline-block;
+  background: var(--pink-100);
+  color: var(--bow-dark);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.q-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: var(--text);
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.q-hint {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-bottom: 12px;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.options-grid.single-col { grid-template-columns: 1fr; }
+
+.opt-btn {
+  background: var(--pink-50);
+  border: 1.5px solid var(--pink-100);
+  border-radius: 14px;
+  padding: 12px 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.opt-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.6), transparent);
+  pointer-events: none;
+}
+
+.opt-btn:hover {
+  border-color: var(--pink-300);
+  background: var(--pink-100);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(200,100,140,0.15);
+}
+
+.opt-btn.selected {
+  border-color: var(--bow);
+  background: linear-gradient(135deg, var(--pink-100), #ffdce8);
+  box-shadow: 0 4px 14px rgba(180,80,120,0.2);
+}
+
+.opt-btn .o-icon {
+  font-size: 22px;
+  margin-bottom: 2px;
+}
+
+.opt-btn .o-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.opt-btn .o-sub {
+  font-size: 11px;
+  color: var(--text-light);
+  line-height: 1.3;
+}
+
+.opt-btn.selected .o-name { color: var(--bow-dark); }
+.opt-btn.selected .o-sub { color: var(--bow); }
+
+.check-mark {
+  position: absolute;
+  top: 8px; right: 8px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--bow);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.check-mark svg { width: 9px; height: 9px; }
+.opt-btn.selected .check-mark { display: flex; }
+
+.nav-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+  gap: 10px;
+}
+
+.btn-back {
+  background: transparent;
+  border: 1.5px solid var(--pink-200);
+  border-radius: 12px;
+  padding: 10px 18px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-back:hover { background: var(--pink-50); color: var(--text); }
+
+.btn-next {
+  background: linear-gradient(135deg, var(--bow), var(--pink-400));
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 11px 28px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(180,80,120,0.3);
+  margin-left: auto;
+}
+
+.btn-next:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(180,80,120,0.35); }
+.btn-next:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.screen { animation: fadeIn 0.35s ease forwards; }
+
+/* ── ITINERARY ── */
+.result-header {
+  text-align: center;
+  padding: 12px 0 20px;
+}
+
+.result-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.tag-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.chip {
+  background: var(--pink-100);
+  color: var(--bow-dark);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.stat-box {
+  background: var(--white);
+  border: 1.5px solid var(--pink-100);
+  border-radius: 14px;
+  text-align: center;
+  padding: 12px 8px;
+}
+
+.stat-box .sn {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--bow);
+  font-family: 'Playfair Display', serif;
+}
+
+.stat-box .sl {
+  font-size: 10px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+/* Day cards */
+.day-card {
+  background: var(--white);
+  border-radius: 18px;
+  border: 1.5px solid var(--pink-100);
+  overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: 0 3px 14px rgba(200,100,140,0.07);
+}
+
+.day-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+  user-select: none;
+}
+
+.day-header:hover { background: var(--pink-50); }
+
+.day-num-badge {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pink-200), var(--bow));
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(180,80,120,0.25);
+}
+
+.day-info { flex: 1; }
+
+.day-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  color: var(--text);
+}
+
+.day-sub {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+.day-arrow {
+  color: var(--pink-300);
+  font-size: 12px;
+  transition: transform 0.3s;
+}
+
+.day-body {
+  display: none;
+  border-top: 1.5px solid var(--pink-50);
+}
+
+.day-body.open { display: block; }
+
+/* Photo strip */
+.photo-strip {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.photo-strip::-webkit-scrollbar { display: none; }
+
+.photo-item {
+  flex-shrink: 0;
+  width: 90px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--pink-100);
+}
+
+.photo-item img {
+  width: 90px;
+  height: 70px;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-item .photo-label {
+  background: var(--pink-50);
+  font-size: 9px;
+  color: var(--text-light);
+  padding: 3px 5px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Activities */
+.activity-item {
+  display: flex;
+  gap: 10px;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--pink-50);
+}
+
+.activity-item:last-child { border-bottom: none; }
+
+.act-time {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-light);
+  min-width: 46px;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+
+.act-content { flex: 1; }
+
+.act-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.act-desc {
+  font-size: 12px;
+  color: var(--text-light);
+  line-height: 1.55;
+}
+
+.act-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 7px;
+}
+
+.tag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 9px;
+  border-radius: 20px;
+}
+
+.t-free { background: #e8f5e9; color: #388e3c; }
+.t-book { background: #fff3e0; color: #e65100; }
+.t-food { background: #fce4ec; color: #c62828; }
+.t-must { background: #f3e5f5; color: #6a1b9a; }
+.t-ic { background: #e3f2fd; color: #0d47a1; }
+.t-photo { background: #fce4ec; color: #ad1457; }
+
+.act-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--bow);
+  text-decoration: none;
+  margin-top: 5px;
+  font-weight: 700;
+}
+
+.act-link:hover { text-decoration: underline; }
+
+/* Restaurant section */
+.restaurant-section {
+  margin: 0 16px 14px;
+  background: var(--blush);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.rest-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--bow-dark);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rest-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.rest-card {
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--pink-100);
+  padding: 10px 10px 8px;
+}
+
+.rest-name { font-size: 12px; font-weight: 700; color: var(--text); }
+.rest-cuisine { font-size: 10px; color: var(--bow); font-weight: 600; margin: 2px 0; }
+.rest-dish { font-size: 10px; color: var(--text-light); }
+.rest-link { font-size: 10px; color: var(--bow); font-weight: 700; text-decoration: none; display: block; margin-top: 5px; }
+.rest-link:hover { text-decoration: underline; }
+
+/* Imperial College highlight */
+.ic-banner {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  border: 1.5px solid #90caf9;
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin: 0 16px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ic-icon { font-size: 26px; flex-shrink: 0; }
+
+.ic-text { flex: 1; }
+.ic-text .ic-name { font-size: 13px; font-weight: 700; color: #0d47a1; }
+.ic-text .ic-sub { font-size: 11px; color: #1565c0; margin-top: 2px; }
+
+/* Reset */
+.btn-reset {
+  display: block;
+  margin: 20px auto 0;
+  background: var(--pink-50);
+  border: 1.5px solid var(--pink-200);
+  border-radius: 12px;
+  padding: 11px 28px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  color: var(--text-light);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-reset:hover { background: var(--pink-100); color: var(--bow-dark); }
+
+/* Progress bar */
+.prog-wrap {
+  height: 4px;
+  background: var(--pink-100);
+  border-radius: 2px;
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+
+.prog-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pink-300), var(--bow));
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* Ribbon */
+.ribbon {
+  text-align: center;
+  margin: 6px 0 14px;
+}
+
+.ribbon span {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--bow), var(--pink-400));
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 16px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* Sparkle */
+@keyframes sparkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.sparkle {
+  display: inline-block;
+  animation: sparkle 1.8s ease-in-out infinite;
+}
+
+.sparkle:nth-child(2) { animation-delay: 0.6s; }
+.sparkle:nth-child(3) { animation-delay: 1.2s; }
+
+</style>
+</head>
+<body>
+
+<!-- Floating hearts background -->
+<div class="floating-hearts" id="hearts"></div>
+
+<div class="wrapper">
+
+  <!-- COVER -->
+  <div class="cover">
+    <!-- Cute cat SVG (original design inspired by Marie aesthetic) -->
+    <div class="cover-cat">
+      <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg" width="140" height="140">
+        <!-- Body -->
+        <ellipse cx="70" cy="100" rx="32" ry="28" fill="#fff5f8" stroke="#e8a0b8" stroke-width="1.5"/>
+        <!-- Head -->
+        <circle cx="70" cy="64" r="30" fill="#fff5f8" stroke="#e8a0b8" stroke-width="1.5"/>
+        <!-- Ears -->
+        <polygon points="44,42 38,20 58,38" fill="#fff5f8" stroke="#e8a0b8" stroke-width="1.5"/>
+        <polygon points="96,42 102,20 82,38" fill="#fff5f8" stroke="#e8a0b8" stroke-width="1.5"/>
+        <!-- Ear inner -->
+        <polygon points="46,40 41,24 57,38" fill="#f9c4d8"/>
+        <polygon points="94,40 99,24 83,38" fill="#f9c4d8"/>
+        <!-- Eyes -->
+        <circle cx="60" cy="62" r="5.5" fill="#5a3245"/>
+        <circle cx="80" cy="62" r="5.5" fill="#5a3245"/>
+        <circle cx="61.5" cy="60.5" r="1.8" fill="white"/>
+        <circle cx="81.5" cy="60.5" r="1.8" fill="white"/>
+        <!-- Nose -->
+        <ellipse cx="70" cy="71" rx="3.5" ry="2.5" fill="#f4a7c0"/>
+        <!-- Mouth -->
+        <path d="M66 74 Q70 78 74 74" fill="none" stroke="#e8a0b8" stroke-width="1.2" stroke-linecap="round"/>
+        <!-- Whiskers -->
+        <line x1="35" y1="68" x2="58" y2="70" stroke="#c9a0b8" stroke-width="0.8" opacity="0.7"/>
+        <line x1="35" y1="72" x2="57" y2="72" stroke="#c9a0b8" stroke-width="0.8" opacity="0.7"/>
+        <line x1="82" y1="70" x2="105" y2="68" stroke="#c9a0b8" stroke-width="0.8" opacity="0.7"/>
+        <line x1="83" y1="72" x2="105" y2="72" stroke="#c9a0b8" stroke-width="0.8" opacity="0.7"/>
+        <!-- Big bow -->
+        <ellipse cx="70" cy="90" rx="22" ry="13" fill="#d4739a" opacity="0.95"/>
+        <ellipse cx="70" cy="90" rx="22" ry="13" fill="none" stroke="#b05580" stroke-width="1"/>
+        <!-- Bow left wing -->
+        <path d="M48,90 Q36,78 40,86 Q36,94 48,90" fill="#c9466a" opacity="0.5"/>
+        <!-- Bow right wing -->
+        <path d="M92,90 Q104,78 100,86 Q104,94 92,90" fill="#c9466a" opacity="0.5"/>
+        <!-- Bow center -->
+        <ellipse cx="70" cy="90" rx="7" ry="7" fill="#e8809e"/>
+        <!-- Head bow -->
+        <g transform="translate(82,34) rotate(15)">
+          <ellipse cx="0" cy="0" rx="10" ry="6" fill="#d4739a"/>
+          <ellipse cx="-8" cy="-2" rx="7" ry="4" fill="#c9466a" opacity="0.7"/>
+          <ellipse cx="8" cy="-2" rx="7" ry="4" fill="#c9466a" opacity="0.7"/>
+          <circle cx="0" cy="0" r="3.5" fill="#e8809e"/>
+        </g>
+        <!-- Tail -->
+        <path d="M100,115 Q120,105 115,90 Q110,80 105,88" fill="none" stroke="#e8a0b8" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Paws -->
+        <ellipse cx="54" cy="122" rx="10" ry="6" fill="#fff5f8" stroke="#e8a0b8" stroke-width="1.2"/>
+        <ellipse cx="86" cy="122" rx="10" ry="6" fill="#fff5f8" stroke="#e8a0b8" stroke-width="1.2"/>
+        <!-- Paw toes -->
+        <circle cx="49" cy="121" r="2" fill="#f9c4d8"/>
+        <circle cx="54" cy="120" r="2" fill="#f9c4d8"/>
+        <circle cx="59" cy="121" r="2" fill="#f9c4d8"/>
+        <circle cx="81" cy="121" r="2" fill="#f9c4d8"/>
+        <circle cx="86" cy="120" r="2" fill="#f9c4d8"/>
+        <circle cx="91" cy="121" r="2" fill="#f9c4d8"/>
+      </svg>
+    </div>
+
+    <div class="cover-title">欢迎阳阳来敦儿 🇬🇧</div>
+    <div class="cover-subtitle">为你量身定制的5日伦敦小公主之旅</div>
+
+    <div class="paw-divider">
+      <span class="sparkle">✦</span>
+      <span>告诉我你的喜好，让我来规划</span>
+      <span class="sparkle">✦</span>
+      <span class="sparkle">✦</span>
+    </div>
+  </div>
+
+  <!-- DATE PICKER CARD -->
+  <div class="card" id="dateCard">
+    <div class="card-title">
+      <div class="icon-badge">📅</div>
+      <span>你打算什么时候来？</span>
+    </div>
+    <div class="date-row">
+      <div class="date-input-wrap">
+        <label style="font-size:11px;color:var(--text-light);font-weight:600;display:block;margin-bottom:5px;">抵达伦敦</label>
+        <input type="date" id="arrivalDate" />
+      </div>
+      <div class="date-input-wrap">
+        <label style="font-size:11px;color:var(--text-light);font-weight:600;display:block;margin-bottom:5px;">离开伦敦</label>
+        <input type="date" id="departureDate" />
+      </div>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:8px;align-items:center;">
+      <button class="btn-weather" onclick="checkWeather()">🌸 查看天气预测</button>
+    </div>
+    <div class="weather-result" id="weatherResult"></div>
+  </div>
+
+  <!-- QUIZ SECTION -->
+  <div class="card" id="quizCard">
+    <div class="step-bar" id="stepBar"></div>
+    <div class="prog-wrap">
+      <div class="prog-fill" id="progFill" style="width:0%"></div>
+    </div>
+    <div id="quizBody"></div>
+  </div>
+
+  <!-- ITINERARY (hidden at start) -->
+  <div id="itinerarySection" style="display:none"></div>
+
+</div>
+
+<script>
+// ── Floating hearts ──
+(function(){
+  const container = document.getElementById('hearts');
+  const symbols = ['♡','✿','✦','❀','·'];
+  for(let i=0;i<18;i++){
+    const el = document.createElement('div');
+    el.className='heart';
+    el.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+    el.style.left = Math.random()*100+'vw';
+    el.style.fontSize = (10+Math.random()*12)+'px';
+    el.style.animationDuration = (12+Math.random()*18)+'s';
+    el.style.animationDelay = (Math.random()*20)+'s';
+    el.style.color = ['#f4b8ce','#e8a0b8','#d4739a','#ffb3ce'][Math.floor(Math.random()*4)];
+    container.appendChild(el);
+  }
+})();
+
+// ── Weather ──
+async function checkWeather(){
+  const arrival = document.getElementById('arrivalDate').value;
+  if(!arrival){ 
+    alert('请先选择抵达日期哦 🐱'); 
+    return; 
+  }
+  const res = document.getElementById('weatherResult');
+  res.classList.add('show');
+  res.innerHTML = '🌸 正在查询天气...';
+
+  const date = new Date(arrival);
+  const month = date.getMonth()+1;
+  
+  const weatherData = {
+    1:  { emoji:'❄️🌧️', desc:'寒冷多雨', temp:'3–8°C', tip:'羽绒服+防水外套+围巾，室内景点优先' },
+    2:  { emoji:'🌥️❄️', desc:'阴冷微风', temp:'4–10°C', tip:'厚外套必备，可能有阳光日，随时带伞' },
+    3:  { emoji:'🌸🌤️', desc:'早春微凉', temp:'7–13°C', tip:'轻薄羽绒或风衣，Cherry blossom季节' },
+    4:  { emoji:'🌷☀️', desc:'温暖舒适', temp:'10–16°C', tip:'最美季节之一！牛仔外套足够，偶尔带小伞' },
+    5:  { emoji:'☀️🌼', desc:'春暖花开', temp:'13–18°C', tip:'薄外套+裙子刚好，户外活动最佳月份' },
+    6:  { emoji:'🌞🌈', desc:'初夏愉快', temp:'15–22°C', tip:'T恤+薄开衫，有时短暂小雨' },
+    7:  { emoji:'☀️🌤️', desc:'夏日伦敦', temp:'17–25°C', tip:'夏装可以！但伞不能少，英国天气捉摸不定' },
+    8:  { emoji:'🌤️🌞', desc:'盛夏微热', temp:'16–24°C', tip:'夏天最后的温暖，可能有阵雨' },
+    9:  { emoji:'🍂🌤️', desc:'秋意渐浓', temp:'13–19°C', tip:'风衣/轻薄夹克，秋色美景值得多拍' },
+    10: { emoji:'🍁🌧️', desc:'秋雨绵绵', temp:'9–14°C', tip:'防水外套+厚毛衣，室内博物馆天气' },
+    11: { emoji:'🌧️🌫️', desc:'阴雨多云', temp:'5–10°C', tip:'厚外套+防水鞋，下午茶是最好的选择' },
+    12: { emoji:'❄️🎄', desc:'寒冷节日', temp:'3–8°C', tip:'冬装齐全，圣诞市集美翻！Winterfest推荐' },
+  };
+  
+  const w = weatherData[month];
+  const dayOfWeek = ['日','一','二','三','四','五','六'][date.getDay()];
+  
+  res.innerHTML = `
+    <div style="display:flex;gap:12px;align-items:flex-start;">
+      <span style="font-size:32px;line-height:1">${w.emoji}</span>
+      <div>
+        <div style="font-weight:700;font-size:14px;color:var(--text);margin-bottom:3px;">
+          ${date.getFullYear()}年${month}月 · 周${dayOfWeek}抵达
+        </div>
+        <div style="font-size:13px;color:var(--bow-dark);font-weight:600;">${w.desc} · ${w.temp}</div>
+        <div style="font-size:12px;color:var(--text-light);margin-top:5px;line-height:1.6;">
+          👒 穿搭建议：${w.tip}
+        </div>
+        <div style="margin-top:8px;">
+          <a href="https://www.bbc.co.uk/weather/2643743" target="_blank" 
+             style="font-size:11px;color:var(--bow);font-weight:700;text-decoration:none;">
+            🔗 BBC 实时天气 →
+          </a>
+          &nbsp;&nbsp;
+          <a href="https://www.metoffice.gov.uk/weather/forecast/gcpvj0v07" target="_blank"
+             style="font-size:11px;color:var(--bow);font-weight:700;text-decoration:none;">
+            🌡️ Met Office →
+          </a>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ── Quiz Data ──
+const questions = [
+  {
+    id:'vibe', label:'旅行风格', text:'我更想带你去哪种地方玩？', hint:'可以多选，选出最喜欢的～',
+    multi:true,
+    options:[
+      { icon:'🏛️', name:'文化艺术', sub:'博物馆、历史、画廊', val:'culture' },
+      { icon:'🍽️', name:'美食探索', sub:'餐厅、市集、下午茶', val:'food' },
+      { icon:'🛍️', name:'购物漫游', sub:'集市、品牌、vintage', val:'shopping' },
+      { icon:'🌿', name:'公园散步', sub:'户外、放松、拍照', val:'nature' },
+      { icon:'🎭', name:'音乐剧/表演', sub:'West End 西区', val:'theatre' },
+      { icon:'📸', name:'拍照打卡', sub:'网红地点、街拍', val:'photo' },
+    ]
+  },
+  {
+    id:'pace', label:'节奏偏好', text:'你喜欢怎样的旅行节奏？', hint:'选一个最符合你的',
+    multi:false,
+    options:[
+      { icon:'🚀', name:'充实紧凑', sub:'每天排满，不虚此行', val:'packed' },
+      { icon:'☕', name:'悠闲自在', sub:'走走停停，随心所欲', val:'relaxed' },
+      { icon:'⚡', name:'上午冲，下午慢', sub:'早出发，下午找咖啡馆', val:'mixed' },
+      { icon:'🌙', name:'夜猫子模式', sub:'睡懒觉，玩到深夜', val:'night' },
+    ]
+  },
+  {
+    id:'food', label:'美食偏好', text:'你最想吃什么菜系？', hint:'可以多选，我来帮你排好餐厅',
+    multi:true,
+    options:[
+      { icon:'🫖', name:'英式体验', sub:'下午茶、炸鱼薯条、Sunday Roast', val:'british' },
+      { icon:'🍜', name:'亚洲美食', sub:'中餐、日料、泰国菜', val:'asian' },
+      { icon:'🍕', name:'欧洲风味', sub:'意餐、西班牙tapas', val:'european' },
+      { icon:'🥗', name:'网红轻食', sub:'健康、拍照、咖啡文化', val:'trendy' },
+      { icon:'🍖', name:'豪华大餐', sub:'牛排、米其林、fine dining', val:'fine' },
+      { icon:'🌮', name:'什么都行！', sub:'跟着直觉吃就好', val:'any' },
+    ]
+  },
+  {
+    id:'budget', label:'预算参考', text:'大概每天的预算是多少？', hint:'帮我给你推荐合适的餐厅和活动',
+    multi:false,
+    options:[
+      { icon:'💰', name:'精打细算', sub:'£50–80/天，多薅免费资源', val:'budget' },
+      { icon:'💳', name:'适中舒适', sub:'£100–150/天，偶尔小奢', val:'mid' },
+      { icon:'✨', name:'品质优先', sub:'£200+/天，好餐厅好体验', val:'premium' },
+      { icon:'🎯', name:'看具体情况', sub:'值得就花，不值就省', val:'selective' },
+    ]
+  }
+];
+
+let answers = {};
+let step = 0;
+const total = questions.length;
+
+function renderDots(){
+  const el = document.getElementById('stepBar');
+  el.innerHTML = Array.from({length:total+1},(_,i)=>{
+    let c='step-dot';
+    if(i<step) c+=' done';
+    else if(i===step) c+=' active';
+    return `<div class="${c}"></div>`;
+  }).join('');
+  document.getElementById('progFill').style.width = (step/total*100)+'%';
+}
+
+function renderQ(idx){
+  const q = questions[idx];
+  const sel = answers[q.id] || (q.multi?[]:'');
+  const optsHtml = q.options.map(o=>{
+    const isSel = q.multi ? sel.includes(o.val) : sel===o.val;
+    return `<button class="opt-btn${isSel?' selected':''}" onclick="pick('${q.id}','${o.val}',${q.multi})">
+      <div class="check-mark"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="o-icon">${o.icon}</div>
+      <div class="o-name">${o.name}</div>
+      <div class="o-sub">${o.sub}</div>
+    </button>`;
+  }).join('');
+
+  const hasAns = q.multi ? (sel.length>0) : !!sel;
+  const isLast = idx===total-1;
+
+  document.getElementById('quizBody').innerHTML = `
+    <div class="screen">
+      <div class="q-label-pill">问题 ${idx+1} / ${total}${q.multi?' · 多选':''}</div>
+      <div class="q-text">${q.text}</div>
+      ${q.hint?`<div class="q-hint">💌 ${q.hint}</div>`:''}
+      <div class="options-grid">${optsHtml}</div>
+      <div class="nav-row">
+        ${idx>0?'<button class="btn-back" onclick="goBack()">← 返回</button>':'<div></div>'}
+        <button class="btn-next" id="nextBtn" onclick="goNext()" ${hasAns?'':'disabled'}>
+          ${isLast?'生成我的行程 🎀':'下一题 →'}
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function pick(qId, val, multi){
+  if(multi){
+    if(!answers[qId]) answers[qId]=[];
+    const i=answers[qId].indexOf(val);
+    if(i>=0) answers[qId].splice(i,1);
+    else answers[qId].push(val);
+  } else {
+    answers[qId]=val;
+  }
+  renderQ(step);
+}
+
+function goNext(){
+  const q=questions[step];
+  const has = q.multi?(answers[q.id]&&answers[q.id].length>0):!!answers[q.id];
+  if(!has) return;
+  step++;
+  if(step>=total) buildItinerary();
+  else { renderQ(step); renderDots(); }
+}
+
+function goBack(){
+  if(step>0){ step--; renderQ(step); renderDots(); }
+}
+
+// ── ITINERARY DATA ──
+const DAYS = [
+  {
+    name:'大英博物馆 & 科文特花园',
+    sub:'Day 1 · 文化开场 + 热闹市集',
+    photos:[
+      { url:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/British_Museum_2014.JPG/320px-British_Museum_2014.JPG', label:'大英博物馆' },
+      { url:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Covent_Garden_Piazza.jpg/320px-Covent_Garden_Piazza.jpg', label:'科文特花园' },
+    ],
+    activities:[
+      { time:'09:30', name:'大英博物馆', desc:'罗塞塔石碑、埃及木乃伊，建议3–4小时。提前网上预约免费票，带上导览App。', tags:['free','must'], link:'https://www.britishmuseum.org', linkText:'官网预约' },
+      { time:'13:00', name:'Neal\'s Yard 午餐', desc:'Covent Garden旁的彩色庭院，照片超美！附近 Flat Iron 有经济实惠的牛排。', tags:['food','photo'], link:'https://www.coventgarden.london', linkText:'探索花园' },
+      { time:'15:00', name:'国家美术馆', desc:'特拉法加广场旁，梵高、达芬奇、莫奈……免费入场，可以只逛1小时精华区。', tags:['free','must'], link:'https://www.nationalgallery.org.uk', linkText:'查看展览' },
+      { time:'19:30', name:'晚餐：Dishoom Covent Garden', desc:'孟买风情餐厅，Bacon Naan Roll是传奇，氛围感很强，建议提前预约。', tags:['food','book'], link:'https://www.dishoom.com', linkText:'订位' },
+    ],
+    restaurants:[
+      { name:'Flat Iron', cuisine:'🥩 英式牛排', dish:'Flat Iron Steak', link:'https://flatironsteak.co.uk' },
+      { name:'Dishoom', cuisine:'🍛 孟买风情', dish:'Bacon Naan Roll', link:'https://www.dishoom.com' },
+      { name:'Scoop', cuisine:'🍦 意式冰淇淋', dish:'Pistachio Gelato', link:'https://www.scoopgelato.com' },
+      { name:'Monmouth Coffee', cuisine:'☕ 精品咖啡', dish:'Pour Over 黑咖啡', link:'https://monmouthcoffee.co.uk' },
+    ]
+  },
+  {
+    name:'帝国理工 & 南肯博物馆',
+    sub:'Day 2 · 固定行程 · 学术探索日',
+    photos:[
+      { url:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Imperial_College_London_main_entrance.jpg/320px-Imperial_College_London_main_entrance.jpg', label:'帝国理工' },
+      { url:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Natural_History_Museum_London_Jan_2006.jpg/320px-Natural_History_Museum_London_Jan_2006.jpg', label:'自然历史博物馆' },
+    ],
+    isIC: true,
+    activities:[
+      { time:'10:00', name:'帝国理工学院南肯辛顿校区', desc:'我带你逛校园！Queen\'s Tower下拍照、Imperial College Union、图书馆周边都是好机位，可以感受一下学术氛围~', tags:['ic','photo','must'], link:'https://www.imperial.ac.uk/visit/', linkText:'校园地图' },
+      { time:'12:00', name:'午餐：校园周边 / 骑士桥', desc:'推荐走到Gloucester Road找Ottolenghi或去Exhibition Road上的咖啡馆，或者进Natural Kitchen。', tags:['food'], link:null },
+      { time:'14:00', name:'自然历史博物馆', desc:'恐龙骨架超震撼，地球厅也很好玩。全部免费，建议2–3小时。', tags:['free','must'], link:'https://www.nhm.ac.uk', linkText:'规划参观' },
+      { time:'16:30', name:'V&A 博物馆', desc:'设计与装饰艺术，拍照特别好看。博物馆内的维多利亚式大厅下午茶推荐。', tags:['free','photo'], link:'https://www.vam.ac.uk', linkText:'今日展览' },
+      { time:'19:30', name:'晚餐：Min Jiang', desc:'Hyde Park旁景观中餐，北京烤鸭是镇店之宝，需提前预约。', tags:['food','book','must'], link:'https://www.minjiang.co.uk', linkText:'订位' },
+    ],
+    restaurants:[
+      { name:'Min Jiang', cuisine:'🦆 粤菜/北京菜', dish:'北京烤鸭', link:'https://www.minjiang.co.uk' },
+      { name:'Ottolenghi', cuisine:'🥗 中东轻食', dish:'Shakshuka', link:'https://ottolenghi.co.uk' },
+      { name:'Benugo', cuisine:'☕ 博物馆咖啡', dish:'自制三明治', link:'https://www.benugo.com' },
+      { name:'Natural Kitchen', cuisine:'🌿 有机健康', dish:'Grain Bowl', link:null },
+    ]
+  },
+  {
+    name:'南岸艺术走廊 & Borough Market',
+    sub:'Day 3 · 泰晤士河畔的美好一天',
+    photos:[
+      { url:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Tate_Modern_2016.jpg/320px-Tate_Modern_2016.jpg', label:'泰特现代' },
+      { url:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Tower_of_London_viewed_from_the_River_Thames.jpg/320px-Tower_of_London_viewed_from_the_River_Thames.jpg', label:'伦敦塔' },
+    ],
+    activities:[
+      { time:'10:00', name:'Borough Market', desc:'伦敦最古老食品市集，一定要喝Monmouth咖啡+买奶酪！市集地点就在南岸。', tags:['food','must','photo'], link:'https://boroughmarket.org.uk', linkText:'市集信息' },
+      { time:'12:00', name:'泰特现代美术馆', desc:'当代艺术殿堂，免费常设展，10楼可以看整个泰晤士河。Turbine Hall常有装置艺术。', tags:['free','photo'], link:'https://www.tate.org.uk/visit/tate-modern', linkText:'查看展览' },
+      { time:'15:00', name:'塔桥漫步', desc:'走过塔桥，到河对岸拍全景。Tower of London提前买票进去逛（有皇冠珠宝！）', tags:['book','must','photo'], link:'https://www.hrp.org.uk/tower-of-london/', linkText:'购票' },
+      { time:'19:00', name:'西区音乐剧（推荐！）', desc:'Hamilton、Les Misérables、Phantom of the Opera——提前1–2周买票，这是伦敦独有的体验！', tags:['book','must','theatre'], link:'https://www.londontheatre.co.uk', linkText:'查看剧目' },
+    ],
+    restaurants:[
+      { name:'Padella', cuisine:'🍝 意大利面', dish:'Pici Cacio e Pepe', link:'https://padella.co' },
+      { name:'Arabica', cuisine:'🧆 中东菜', dish:'Halloumi Fries', link:'https://arabicafood.com' },
+      { name:'Hawksmoor Borough', cuisine:'🥩 英式牛排', dish:'Bone-in Ribeye', link:'https://thehawksmoor.com' },
+      { name:'Maltby Street Market', cuisine:'🧀 街头小食', dish:'周末限定', link:'https://www.maltby.st' },
+    ]
+  },
+  {
+    name:'Notting Hill & 波特贝罗古董市集',
+    sub:'Day 4 · 彩色街头 + 下午茶',
+    photos:[
+      { url:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Portobello_Road_Market.jpg/320px-Portobello_Road_Market.jpg', label:'波特贝罗市集' },
+      { url:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Notting_Hill.jpg/320px-Notting_Hill.jpg', label:'Notting Hill' },
+    ],
+    activities:[
+      { time:'10:00', name:'Portobello Road Market', desc:'古董、花卉、街头小吃混搭，彩色房子是伦敦最上镜的街道。周六规模最大！', tags:['photo','must','free'], link:'https://www.portobelloroad.co.uk', linkText:'开放时间' },
+      { time:'13:00', name:'午餐：The Shed', desc:'Notting Hill 本地人最爱，食材来自Sussex农场，很地道很舒服。', tags:['food','book'], link:'https://theshed-restaurant.com', linkText:'订位' },
+      { time:'15:30', name:'英式下午茶', desc:'Sketch是粉色梦幻茶室（照片必拍！），或选 Fortnum & Mason 皇家级体验。需提前预约。', tags:['food','book','must','photo'], link:'https://sketch.london/afternoon-tea', linkText:'预约Sketch' },
+      { time:'18:30', name:'Hyde Park 黄昏漫步', desc:'穿过Hyde Park，路过蛇形画廊，傍晚的阳光在伦敦特别美，要多拍！', tags:['free','photo'], link:'https://www.royalparks.org.uk/parks/hyde-park', linkText:'公园地图' },
+    ],
+    restaurants:[
+      { name:'Sketch', cuisine:'🫖 英式下午茶', dish:'粉色茶室三层架', link:'https://sketch.london' },
+      { name:'The Shed', cuisine:'🌱 英式农场菜', dish:'Seasonal Roast', link:'https://theshed-restaurant.com' },
+      { name:'Granger & Co', cuisine:'🥞 澳式早午餐', dish:'Ricotta Hotcakes', link:'https://grangerandco.com' },
+      { name:'Lisboa Patisserie', cuisine:'🥐 葡式蛋挞', dish:'Pastel de Nata', link:null },
+    ]
+  },
+  {
+    name:'皇室伦敦 & 告别之旅',
+    sub:'Day 5 · 白金汉宫 + 伴手礼 + 最后晚餐',
+    photos:[
+      { url:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Buckingham_Palace_-_Entrance.jpg/320px-Buckingham_Palace_-_Entrance.jpg', label:'白金汉宫' },
+      { url:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Fortnum_%26_Mason_1.jpg/220px-Fortnum_%26_Mason_1.jpg', label:'Fortnum & Mason' },
+    ],
+    activities:[
+      { time:'09:30', name:'白金汉宫换岗仪式', desc:'每天11:00进行，提前30分钟去占好位子。免费观看，要注意是否有特殊取消。', tags:['free','royal','must'], link:'https://www.rct.uk/visit/the-changing-of-the-guard', linkText:'时间确认' },
+      { time:'11:30', name:'圣詹姆斯公园漫步', desc:'白金汉宫旁边就是，走路5分钟。喂小松鼠、拍天鹅，英国最美的皇家公园。', tags:['free','photo'], link:null },
+      { time:'14:00', name:'Fortnum & Mason 下午茶 / 伴手礼', desc:'英国皇室御用食品店，买茶叶、饼干、果酱作伴手礼超合适。顺便在这里吃最后一次下午茶！', tags:['food','must','book'], link:'https://www.fortnumandmason.com/restaurants', linkText:'预约' },
+      { time:'17:00', name:'Oxford Street / Carnaby Street 扫货', desc:'最后购物机会！记得带好护照办理VAT退税。Carnaby Street有独立品牌，比Oxford Street更有趣。', tags:['shopping'], link:'https://www.carnaby.co.uk', linkText:'品牌地图' },
+      { time:'19:30', name:'告别晚餐：Barrafina', desc:'米其林星级西班牙小食，是送你离开前最好的留念。建议提前在官网订位。', tags:['food','book','must'], link:'https://barrafina.co.uk', linkText:'订位' },
+    ],
+    restaurants:[
+      { name:'Barrafina', cuisine:'🦞 西班牙米其林', dish:'Gambas al Ajillo', link:'https://barrafina.co.uk' },
+      { name:'Fortnum & Mason', cuisine:'🫖 皇室下午茶', dish:'Classic Afternoon Tea', link:'https://www.fortnumandmason.com' },
+      { name:'Bao Soho', cuisine:'🥟 台湾小食', dish:'经典40天猪控肉包', link:'https://baolondon.com' },
+      { name:'Yauatcha Soho', cuisine:'🍵 粤式点心', dish:'米其林港式点心', link:'https://www.yauatcha.com' },
+    ]
+  }
+];
+
+function buildItinerary(){
+  document.getElementById('quizCard').style.display='none';
+
+  const vibes=(answers.vibe||[]);
+  const foods=(answers.food||[]);
+  const budget=answers.budget||'mid';
+
+  const vibeLabels={ culture:'文化探索', food:'美食体验', shopping:'购物达人', nature:'公园漫步', theatre:'音乐剧', photo:'拍照打卡' };
+  const foodLabels={ british:'英式体验', asian:'亚洲美食', european:'欧洲风味', trendy:'网红轻食', fine:'豪华大餐', any:'随缘吃货' };
+  const budgetLabel={ budget:'精打细算', mid:'适中舒适', premium:'品质优先', selective:'灵活出击' }[budget]||'适中舒适';
+
+  const chips = [
+    ...vibes.map(v=>vibeLabels[v]),
+    ...foods.map(f=>foodLabels[f]),
+    budgetLabel
+  ].filter(Boolean).map(c=>`<span class="chip">${c}</span>`).join('');
+
+  const daysHtml = DAYS.map((day, di)=>{
+    const photosHtml = day.photos && day.photos.length>0 ? `
+      <div class="photo-strip">
+        ${day.photos.map(p=>`
+          <div class="photo-item">
+            <img src="${p.url}" alt="${p.label}" onerror="this.style.display='none'"/>
+            <div class="photo-label">${p.label}</div>
+          </div>
+        `).join('')}
+      </div>
+    ` : '';
+
+    const icBanner = day.isIC ? `
+      <div class="ic-banner">
+        <div class="ic-icon">🎓</div>
+        <div class="ic-text">
+          <div class="ic-name">帝国理工学院 固定行程</div>
+          <div class="ic-sub">我的学校！带你参观南肯校区，感受一下 ~</div>
+        </div>
+      </div>
+    ` : '';
+
+    const actsHtml = day.activities.map(a=>{
+      const tagHtml=(a.tags||[]).map(t=>{
+        const map={free:['t-free','免费'],book:['t-book','需预约'],food:['t-food','美食'],must:['t-must','强推'],ic:['t-ic','帝国理工'],photo:['t-photo','📸打卡'],theatre:['t-must','音乐剧'],royal:['t-free','皇家'],shopping:['t-book','购物']};
+        const [cls,lb]=map[t]||['t-free',t];
+        return `<span class="tag ${cls}">${lb}</span>`;
+      }).join('');
+      const linkHtml=a.link?`<a class="act-link" href="${a.link}" target="_blank">${a.linkText} →</a>`:'';
+      return `<div class="activity-item">
+        <div class="act-time">${a.time}</div>
+        <div class="act-content">
+          <div class="act-name">${a.name}</div>
+          <div class="act-desc">${a.desc}</div>
+          <div class="act-tags">${tagHtml}</div>
+          ${linkHtml}
+        </div>
+      </div>`;
+    }).join('');
+
+    const restsHtml = `
+      <div class="restaurant-section">
+        <div class="rest-title">🍴 今日餐厅推荐</div>
+        <div class="rest-grid">
+          ${day.restaurants.map(r=>`
+            <div class="rest-card">
+              <div class="rest-name">${r.name}</div>
+              <div class="rest-cuisine">${r.cuisine}</div>
+              <div class="rest-dish">代表菜：${r.dish}</div>
+              ${r.link?`<a href="${r.link}" target="_blank" class="rest-link">预约 / 菜单 →</a>`:'<span style="font-size:10px;color:var(--text-light)">walk-in</span>'}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+
+    return `
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDay(${di})">
+          <div class="day-num-badge">D${di+1}</div>
+          <div class="day-info">
+            <div class="day-name">${day.name}</div>
+            <div class="day-sub">${day.sub}</div>
+          </div>
+          <div class="day-arrow" id="arr-${di}">▼</div>
+        </div>
+        <div class="day-body${di===0?' open':''}" id="db-${di}">
+          ${photosHtml}
+          ${icBanner}
+          ${actsHtml}
+          ${restsHtml}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('itinerarySection').style.display='block';
+  document.getElementById('itinerarySection').innerHTML = `
+    <div class="result-header">
+      <div class="ribbon"><span>✨ 专属行程已生成 ✨</span></div>
+      <div class="result-title">阳阳的伦敦5日行程</div>
+      <div class="tag-chips">${chips}</div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-box"><div class="sn">5</div><div class="sl">天行程</div></div>
+      <div class="stat-box"><div class="sn">25+</div><div class="sl">精选景点</div></div>
+      <div class="stat-box"><div class="sn">20+</div><div class="sl">餐厅推荐</div></div>
+    </div>
+    ${daysHtml}
+    <button class="btn-reset" onclick="resetAll()">🐾 重新规划</button>
+  `;
+
+  document.getElementById('itinerarySection').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleDay(idx){
+  const body=document.getElementById('db-'+idx);
+  const arr=document.getElementById('arr-'+idx);
+  const isOpen=body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  arr.style.transform=isOpen?'rotate(0)':'rotate(180deg)';
+}
+
+function resetAll(){
+  answers={};
+  step=0;
+  document.getElementById('quizCard').style.display='block';
+  document.getElementById('itinerarySection').style.display='none';
+  renderQ(0);
+  renderDots();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Set default dates
+const today = new Date();
+const fmt = d => d.toISOString().split('T')[0];
+document.getElementById('arrivalDate').value = fmt(new Date(today.getFullYear(), today.getMonth()+1, 1));
+document.getElementById('departureDate').value = fmt(new Date(today.getFullYear(), today.getMonth()+1, 6));
+
+renderQ(0);
+renderDots();
+</script>
+</body>
+</html>
