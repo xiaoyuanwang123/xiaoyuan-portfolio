@@ -849,7 +849,71 @@ function Modal3({ lang }: { lang: Language }) {
       </section>
 
       <section className="mb-24">
-        <SH i={2} label="Interaction Design" />
+        <SH i={2} label={lang === "zh" ? "核心产品决策" : "Key Product Decisions"} />
+        <div className="grid md:grid-cols-3 gap-6 mb-6">
+          {(lang === "zh" ? [
+            { num: "01", title: "两阶段递进交互设计", desc: "先分类再定位，而非直接点击——分类是认知层面的理解，定位是感知层面的执行，两个能力需要分开训练和评估。这个交互逻辑来自对医学生学习路径的分析。" },
+            { num: "02", title: "数据质检保障体验可信度", desc: "公开数据集中有运动伪影、视野不完整的图像——如果直接用，用户会误以为是自己判断错误。我们人工筛选每类50张高质量图片，保证每次训练反馈都是可信的。这是产品体验决策，不只是技术决策。" },
+            { num: "03", title: "即时反馈而非延迟批改", desc: "传统学习是做完整套题再批改。我们改为每题即时反馈——来自行为科学的即时纠错原理，比延迟批改更能建立正确的感知模式。用户训练后正确率从约48%提升至83%（N=15）验证了这个设计决策。" }
+          ] : [
+            { num: "01", title: "Two-stage progressive interaction", desc: "Classify first, then locate — classification is cognitive understanding, location is perceptual execution. These two skills need separate training and evaluation, based on analysis of medical students' learning paths." },
+            { num: "02", title: "Data curation for feedback trust", desc: "The public dataset contains motion artifacts and incomplete scans — if used directly, users would blame themselves for wrong answers. We manually curated 50 high-quality images per class to ensure every piece of feedback is trustworthy. A product experience decision, not just a technical one." },
+            { num: "03", title: "Immediate feedback over delayed marking", desc: "Traditional learning: finish all questions, then review. We switched to per-question instant feedback — from behavioural science principles of immediate error correction. Users improved from ~48% to 83% accuracy (N=15), validating this design decision." }
+          ]).map((item, i) => (
+            <div key={i} className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
+              <span className="text-4xl font-serif font-black text-ink/10 block mb-3">{item.num}</span>
+              <h6 className="text-sm font-black mb-3">{item.title}</h6>
+              <p className="text-xs font-medium text-ink/60 leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+        <div className="p-4 bg-terracotta/5 border-l-4 border-terracotta rounded-r-xl mb-10">
+          <p className="text-sm font-bold text-terracotta italic">
+            {lang === "zh" ? "「医学生缺的不是知识，是练习机会和即时反馈。」— 核心设计洞察" : '"Medical students don\'t lack knowledge — they lack practice opportunities and immediate feedback." — Core design insight'}
+          </p>
+        </div>
+
+        <SH i={3} label={lang === "zh" ? "分工说明" : "Division of Work"} />
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="p-6 bg-white border-2 border-blue-400 rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
+            <span className="inline-block px-3 py-1 bg-blue-50 text-blue-700 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4">{lang === "zh" ? "我 · 产品设计 + GUI + V6分割" : "My role · Product design + GUI + V6 segmentation"}</span>
+            {(lang === "zh" ? [
+              "交互流程与两阶段训练设计",
+              "MATLAB App Designer GUI 独立开发",
+              "V6 分割路径（冠状面 / 矢状面）"
+            ] : [
+              "Interaction flow and two-stage training design",
+              "MATLAB App Designer GUI — developed independently",
+              "V6 segmentation pipeline (coronal / sagittal planes)"
+            ]).map((item, i) => (
+              <div key={i} className="flex gap-2 items-center mb-2">
+                <span className="text-green-500 text-xs">✓</span>
+                <span className="text-xs font-medium text-ink/60">{item}</span>
+              </div>
+            ))}
+          </div>
+          <div className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
+            <span className="inline-block px-3 py-1 bg-ink/5 text-ink/50 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4">{lang === "zh" ? "Partner · 模型训练 + 数据 + V5分割" : "Partner · Model training + data + V5 segmentation"}</span>
+            {(lang === "zh" ? [
+              "ResNet-18 模型训练（94.31% 准确率）",
+              "数据集人工质检筛选（每类50张）",
+              "V5 分割路径（轴状面）"
+            ] : [
+              "ResNet-18 model training (94.31% accuracy)",
+              "Manual dataset curation (50 images per class)",
+              "V5 segmentation pipeline (axial plane)"
+            ]).map((item, i) => (
+              <div key={i} className="flex gap-2 items-center mb-2">
+                <span className="text-ink/30 text-xs">·</span>
+                <span className="text-xs font-medium text-ink/60">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mb-24">
+        <SH i={4} label="Interaction Design" />
         <div className="text-center mb-12">
           <p className="text-xl font-serif font-black">{lang === "zh" ? "用户 → 判断 → 反馈 → 学习" : "Observe → Judge → Feedback → Learn"}</p>
         </div>
@@ -872,7 +936,7 @@ function Modal3({ lang }: { lang: Language }) {
       </section>
 
       <section className="mb-24">
-        <SH i={3} label="How it works" />
+        <SH i={5} label="How it works" />
         <div className="grid md:grid-cols-2 gap-12">
           <div className="p-8 bg-ink text-paper rounded-[2.5rem]">
             <h5 className="text-xl font-serif font-black mb-6">{p.howItWorks.classification.title}</h5>
@@ -914,7 +978,7 @@ function Modal3({ lang }: { lang: Language }) {
       </section>
 
       <section>
-        <SH i={4} label="Limitations & Next Steps" />
+        <SH i={6} label="Limitations & Next Steps" />
         <div className="grid md:grid-cols-3 gap-6">
           {[
             { title: lang === "zh" ? "定位精度有限" : "Localization Accuracy", desc: lang === "zh" ? "当前版本对边界模糊的肿瘤定位仍不稳定，影响用户判断反馈的可靠性。" : "Localization is unstable for tumors with blurred boundaries, reducing feedback reliability." },
