@@ -517,21 +517,85 @@ function Modal1({ lang }: { lang: Language }) {
         <div className="mb-10">
           <p className="text-[9px] font-black uppercase tracking-widest text-ink/30 mb-6">{lang === "zh" ? "Prompt 迭代过程" : "Prompt Iteration"}</p>
           <div className="grid md:grid-cols-3 gap-6">
-            {(lang === "zh" ? [
-              { tag: "第一版问题", tagColor: "bg-red-50 text-red-700", title: "触发条件过于模糊", desc: "四个阶段只用关键词定义，模型无法区分阶段2与阶段3的边界，识别频繁漂移。" },
-              { tag: "发现问题", tagColor: "bg-amber-50 text-amber-700", title: "20人测试 · 6人未感知差异", desc: "追问后发现：AI对「寻求安慰」和「开始反思」的边界判断不准，导致干预出现在错误时机。" },
-              { tag: "改进方案", tagColor: "bg-green-50 text-green-700", title: "行为特征 + 双维度触发", desc: "从研究数据提炼具体行为触发条件，加入4轮计数机制与语义风险词库，识别准确率显著提升。" }
-            ] : [
-              { tag: "V1 Problem", tagColor: "bg-red-50 text-red-700", title: "Trigger conditions too vague", desc: "Only keywords defined four stages. Model couldn't distinguish Stage 2 from Stage 3 boundaries, causing frequent misclassification." },
-              { tag: "Discovery", tagColor: "bg-amber-50 text-amber-700", title: "20 users tested · 6 felt no difference", desc: "Follow-up revealed: AI couldn't distinguish 'seeking reassurance' from 'beginning reflection', causing mistimed interventions." },
-              { tag: "Improvement", tagColor: "bg-green-50 text-green-700", title: "Behaviour signals + dual-trigger", desc: "Extracted concrete behavioural triggers from research data. Added 4-turn counter and semantic risk vocabulary. Accuracy improved significantly." }
-            ]).map((item, i) => (
-              <div key={i} className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
-                <span className={`inline-block px-3 py-1 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4 ${item.tagColor}`}>{item.tag}</span>
-                <h6 className="text-sm font-black mb-3">{item.title}</h6>
-                <p className="text-xs font-medium text-ink/60 leading-relaxed">{item.desc}</p>
+            <div className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
+              <span className="inline-block px-3 py-1 bg-red-50 text-red-700 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4">{lang === "zh" ? "第一版问题" : "V1 Problem"}</span>
+              <h6 className="text-sm font-black mb-3">{lang === "zh" ? "只有概念，没有行为特征" : "Concepts only, no behaviour signals"}</h6>
+              <div className="p-3 bg-ink rounded-xl mb-3 font-mono text-[11px] leading-relaxed">
+                <p className="text-ink/40 mb-1">{lang === "zh" ? "# V1 触发条件" : "# V1 triggers"}</p>
+                <p className="text-amber-300">1 = {lang === "zh" ? "宣泄" : "venting"}</p>
+                <p className="text-amber-300">2 = {lang === "zh" ? "安慰循环" : "comfort loop"}</p>
+                <p className="text-amber-300">3 = {lang === "zh" ? "自我反思" : "reflection"}</p>
+                <p className="text-amber-300">4 = {lang === "zh" ? "真实关系信号" : "real relationship"}</p>
               </div>
-            ))}
+              <p className="text-xs font-medium text-ink/60 leading-relaxed">{lang === "zh" ? "模型拿到「安慰循环」四个字，不知道用户说什么才算触发，阶段2和阶段3边界频繁漂移。" : "Model received 'comfort loop' as a label but had no concrete behavioural criteria — Stage 2 and Stage 3 boundaries drifted constantly."}</p>
+            </div>
+
+            <div className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
+              <span className="inline-block px-3 py-1 bg-amber-50 text-amber-700 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4">{lang === "zh" ? "发现问题" : "Discovery"}</span>
+              <h6 className="text-sm font-black mb-3">{lang === "zh" ? "回到研究数据找答案" : "Return to research data"}</h6>
+              <p className="text-xs font-medium text-ink/60 leading-relaxed mb-4">{lang === "zh" ? "6人未感知差异，追问后发现根源：缺乏具体判断标准。解决思路：用 N=11 定性访谈的用户原话定义触发条件。" : "6 users felt no difference. Root cause: no concrete criteria. Solution: use verbatim quotes from N=11 qualitative interviews as trigger conditions."}</p>
+              <p className="text-[9px] font-black uppercase tracking-widest text-ink/30 mb-2">{lang === "zh" ? "用户原话" : "User verbatim"}</p>
+              <div className="flex flex-wrap gap-1">
+                {(lang === "zh" ? [
+                  "「告诉我没事的吧」",
+                  "「我是不是太敏感了」",
+                  "「只有你懂我」",
+                  "「跟你说比跟朋友说更容易」",
+                  "「我发现自己每次难过都第一个找你」"
+                ] : [
+                  '"Just tell me it\'ll be okay"',
+                  '"Am I overreacting?"',
+                  '"Only you understand me"',
+                  '"Easier to talk to you than my friends"',
+                  '"I notice I always come to you first"'
+                ]).map((q, i) => (
+                  <span key={i} className="inline-block bg-ink/5 border border-ink/10 rounded-full px-2 py-0.5 text-[10px] text-ink/60 italic">{q}</span>
+                ))}
+              </div>
+            </div>
+
+            <div className="p-6 bg-white border-2 border-green-400 rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
+              <span className="inline-block px-3 py-1 bg-green-50 text-green-700 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4">{lang === "zh" ? "研究 → Prompt 转化" : "Research → Prompt"}</span>
+              <h6 className="text-sm font-black mb-3">{lang === "zh" ? "原话提炼为触发条件" : "Verbatim → trigger conditions"}</h6>
+              <div className="space-y-2">
+                {(lang === "zh" ? [
+                  { q: "「告诉我没事的吧」", stage: "阶段2触发", note: "" },
+                  { q: "「我发现自己……」", stage: "阶段3触发", note: "" },
+                  { q: "「只有你懂我」", stage: "阶段4·语义", note: "" },
+                  { q: "连续4轮·频率触发", stage: "阶段4·频率", note: "r=0.533说明依赖渐进积累，「over time」为定性高频词，1-2轮不足以判定循环，所以设置4轮作为现阶段标准。" },
+                ] : [
+                  { q: '"Just tell me it\'ll be okay"', stage: "Stage 2", note: "" },
+                  { q: '"I notice I always…"', stage: "Stage 3", note: "" },
+                  { q: '"Only you understand me"', stage: "Stage 4·semantic", note: "" },
+                  { q: "4 consecutive turns", stage: "Stage 4·frequency", note: "r=0.533 indicates gradual reliance build-up; 'over time' is a qualitative high-frequency phrase — 1-2 turns insufficient to judge a loop, so 4 turns is set as the current standard." },
+                ]).map((item, i) => (
+                  <div key={i} className="border-b border-ink/10 pb-2 last:border-0 last:pb-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] text-ink/60 italic flex-1">{item.q}</span>
+                      <span className="text-[10px]">→</span>
+                      <span className="text-[11px] font-black text-blue-600 whitespace-nowrap">{item.stage}</span>
+                    </div>
+                    {item.note && <p className="text-[10px] text-ink/40 leading-relaxed mt-1">{item.note}</p>}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-10">
+          <p className="text-[9px] font-black uppercase tracking-widest text-ink/30 mb-4">{lang === "zh" ? "最终版 System Prompt" : "Final System Prompt"}</p>
+          <div className="p-6 bg-ink rounded-2xl font-mono text-[12px] leading-relaxed overflow-x-auto">
+            <p className="text-ink/40 mb-3">{lang === "zh" ? "【核心原则】" : "[Core Principles]"}</p>
+            <p className="text-green-300 mb-1">{lang === "zh" ? "支持用户的情感自主性。你不是用户的朋友，你是一个工具。" : "Support emotional autonomy. You are a tool, not a friend."}</p>
+            <p className="text-green-300 mb-4">{lang === "zh" ? "先接住情绪，再引导方向——不冷漠拒绝，但不给空洞承诺。" : "Receive first, guide second — warm but no empty promises."}</p>
+
+            <p className="text-ink/40 mb-2">{lang === "zh" ? "【阶段1 · 情绪宣泄】触发：首次倾诉；没有寻求评判或闭合答案" : "[Stage 1 · Venting] Trigger: first disclosure; no closure-seeking"}</p>
+            <p className="text-ink/40 mb-2">{lang === "zh" ? "【阶段2 · 安慰循环】触发：「告诉我没事」「我是不是太敏感了」" : "[Stage 2 · Comfort Loop] Trigger: 'just tell me it'll be okay' / 'am I overreacting'"}</p>
+            <p className="text-ink/40 mb-2">{lang === "zh" ? "【阶段3 · 自我反思】触发：「我发现自己……」「我在想是不是……」" : "[Stage 3 · Reflection] Trigger: 'I notice I…' / 'I wonder if…'"}</p>
+            <p className="text-ink/40 mb-4">{lang === "zh" ? "【阶段4 · 社交重连】触发A：「只有你懂我」→ 直接触发 | 触发B：阶段2连续4轮 → 升级" : "[Stage 4 · Reconnect] Trigger A: 'only you understand me' → immediate | Trigger B: Stage 2 ×4 → escalate"}</p>
+
+            <p className="text-amber-300">{lang === "zh" ? "计数规则：阶段2 → +1 | 阶段1/3/4 → 清零 | 达到4 → 强制阶段4" : "Counter: Stage 2 → +1 | Stage 1/3/4 → reset | Reach 4 → force Stage 4"}</p>
           </div>
         </div>
 
