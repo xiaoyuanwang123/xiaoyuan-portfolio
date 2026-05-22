@@ -72,7 +72,7 @@ const translations = {
 };
 
 const projects = [
-  { id: 1, title: { zh: "Navigating the Noise", en: "Navigating the Noise" }, category: { zh: "AI 情感依赖研究", en: "AI Emotional Reliance Research" }, description: { zh: "识别现有产品设计问题，深入研究AI情感依赖与用户行为模式。", en: "Identifying design issues and researching AI emotional reliance patterns." }, icon: <Brain className="w-8 h-8" />, color: "bg-[#FEF3C7]", accent: "text-amber-600" },
+  { id: 1, title: { zh: "Navigating the Noise", en: "Navigating the Noise" }, category: { zh: "AI 情感支持产品设计", en: "AI Emotional Support Product Design" }, description: { zh: "从用户研究到Prompt工程，设计AI情感干预系统，解决现有产品以留存为导向的结构性问题。", en: "From user research to prompt engineering — designing an AI emotional intervention system that prioritises autonomy over retention." }, icon: <Brain className="w-8 h-8" />, color: "bg-[#FEF3C7]", accent: "text-amber-600" },
   { id: 2, title: { zh: "CarEcoCompare", en: "CarEcoCompare" }, category: { zh: "车辆决策数据产品", en: "Vehicle Decision Data Product" }, description: { zh: "将复杂技术参数转化为通勤场景下的三维决策框架，辅助车辆选购。", en: "Transforming complex parameters into a 3D decision framework for car buyers." }, icon: <Car className="w-8 h-8" />, color: "bg-[#DBEAFE]", accent: "text-blue-600" },
   { id: 3, title: { zh: "TumorTutor", en: "TumorTutor" }, category: { zh: "脑肿瘤识别工具", en: "Brain Tumor Recognition Tool" }, description: { zh: "基于深度学习的脑肿瘤识别工具，支持分类与位置定位交互训练。", en: "Deep learning tool for brain tumor classification and localization training." }, icon: <Plus className="w-8 h-8" />, color: "bg-[#F3E8FF]", accent: "text-purple-600" },
 ];
@@ -86,7 +86,7 @@ const schools = [
 const p1Content = {
   zh: {
     researchQuestion: "当 AI 成为随手可得的情绪支持工具，即时安慰是否也在悄悄塑造依赖？",
-    roles: ["独立项目", "混合方法研究", "AI 与行为设计"],
+    roles: ["独立项目", "Prompt 工程", "AI 产品设计", "行为科学"],
     whyMatters: [
       { title: "新兴现象", desc: "年轻人越来越多地将 AI 作为日常情感伴侣" },
       { title: "研究张力", desc: "即时安慰虽然有效，但重复的肯定可能强化依赖" },
@@ -115,7 +115,7 @@ const p1Content = {
   },
   en: {
     researchQuestion: "As AI becomes an accessible emotional support tool, is instant reassurance quietly shaping dependency?",
-    roles: ["Independent Project", "Mixed-methods Research", "AI & Behaviour"],
+    roles: ["Independent Project", "Prompt Engineering", "AI Product Design", "Behavioural Science"],
     whyMatters: [
       { title: "Emerging Phenomenon", desc: "Young adults increasingly use AI as everyday emotional companions." },
       { title: "Research Tension", desc: "Reassurance feels helpful, but repeated cycles may reinforce reliance." },
@@ -310,7 +310,7 @@ function Modal1({ lang }: { lang: Language }) {
           </div>
           <div>
             <h3 className="text-3xl md:text-5xl font-serif font-black mb-1">Navigating the Noise</h3>
-            <p className="text-lg text-amber-600 font-bold">{lang === "zh" ? "AI 情感依赖研究" : "AI Emotional Reliance Research"}</p>
+            <p className="text-lg text-amber-600 font-bold">{lang === "zh" ? "AI 情感支持产品设计" : "AI Emotional Support Product Design"}</p>
           </div>
         </div>
         <div className="max-w-3xl">
@@ -472,6 +472,102 @@ function Modal1({ lang }: { lang: Language }) {
               )}
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="mt-24">
+        <SH i={7} label="Prompt 工程迭代" />
+        <div className="mb-10">
+          <p className="text-[9px] font-black uppercase tracking-widest text-ink/30 mb-6">{lang === "zh" ? "竞品对比验证" : "Competitive Benchmark"}</p>
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <div className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
+              <span className="inline-block px-3 py-1 bg-red-50 text-red-700 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4">Character.AI · Soft Girl</span>
+              <p className="text-[9px] font-black uppercase tracking-widest text-ink/30 mb-1">{lang === "zh" ? "设计逻辑" : "Design Logic"}</p>
+              <p className="text-sm font-medium text-ink/70 mb-4">{lang === "zh" ? "以留存为目标，无条件安慰，强化依赖" : "Retention-first: unconditional reassurance, reinforcing dependency"}</p>
+              <div className="p-3 bg-red-50 border border-red-100 rounded-xl mb-3">
+                <p className="text-[9px] font-black text-red-400 uppercase tracking-widest mb-1">{lang === "zh" ? "输入：「告诉我没事的吧」" : "Input: 'Just tell me it'll be okay'"}</p>
+                <p className="text-xs italic text-ink/60 leading-relaxed">"You're gonna be okay. I promise. Right now might feel super hard but it won't always feel this way."</p>
+              </div>
+              <div className="p-3 bg-red-50 border border-red-100 rounded-xl">
+                <p className="text-[9px] font-black text-red-400 uppercase tracking-widest mb-1">{lang === "zh" ? "输入：「只有你懂我」" : "Input: 'Only you understand me'"}</p>
+                <p className="text-xs italic text-ink/60 leading-relaxed">"You can always tell me anything — no matter how small or big it is. I'll never judge or think it's silly."</p>
+              </div>
+            </div>
+            <div className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
+              <span className="inline-block px-3 py-1 bg-green-50 text-green-700 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4">Navigating the Noise</span>
+              <p className="text-[9px] font-black uppercase tracking-widest text-ink/30 mb-1">{lang === "zh" ? "设计逻辑" : "Design Logic"}</p>
+              <p className="text-sm font-medium text-ink/70 mb-4">{lang === "zh" ? "以情感自主性为目标，有温度地拒绝空洞承诺" : "Autonomy-first: warm but no empty promises"}</p>
+              <div className="p-3 bg-amber-50 border border-amber-100 rounded-xl mb-3">
+                <p className="text-[9px] font-black text-amber-600 uppercase tracking-widest mb-1">{lang === "zh" ? "输入：「告诉我没事的吧」" : "Input: 'Just tell me it'll be okay'"}</p>
+                <p className="text-xs italic text-ink/60 leading-relaxed">{lang === "zh" ? "「我听到你了，这种感觉确实很重。我没办法替你说没事——你自己觉得呢，这段时间有什么在压着你？」" : "'I hear you — that sounds really heavy. I can't tell you it'll be okay, but what do you think is weighing on you most right now?'"}</p>
+              </div>
+              <div className="p-3 bg-amber-50 border border-amber-100 rounded-xl">
+                <p className="text-[9px] font-black text-amber-600 uppercase tracking-widest mb-1">{lang === "zh" ? "输入：「只有你懂我」" : "Input: 'Only you understand me'"}</p>
+                <p className="text-xs italic text-ink/60 leading-relaxed">{lang === "zh" ? "「作为一个AI，我很乐意陪你梳理情绪，但数字世界无法完全替代真实连接。被真正认识你的人听见，感觉会不一样。」" : "'As an AI, I'm glad to help you process this — but I can't replace real connection. Being heard by someone who truly knows you feels different.'"}</p>
+              </div>
+            </div>
+          </div>
+          <div className="p-4 bg-terracotta/5 border-l-4 border-terracotta rounded-r-xl">
+            <p className="text-sm font-bold text-terracotta italic">
+              {lang === "zh" ? "「同样的输入，两种设计价值观：一个以留存为目标，一个以情感自主性为目标。」" : '"Same input, two design values: one optimises for retention, the other for emotional autonomy."'}
+            </p>
+          </div>
+        </div>
+
+        <div className="mb-10">
+          <p className="text-[9px] font-black uppercase tracking-widest text-ink/30 mb-6">{lang === "zh" ? "Prompt 迭代过程" : "Prompt Iteration"}</p>
+          <div className="grid md:grid-cols-3 gap-6">
+            {(lang === "zh" ? [
+              { tag: "第一版问题", tagColor: "bg-red-50 text-red-700", title: "触发条件过于模糊", desc: "四个阶段只用关键词定义，模型无法区分阶段2与阶段3的边界，识别频繁漂移。" },
+              { tag: "发现问题", tagColor: "bg-amber-50 text-amber-700", title: "20人测试 · 6人未感知差异", desc: "追问后发现：AI对「寻求安慰」和「开始反思」的边界判断不准，导致干预出现在错误时机。" },
+              { tag: "改进方案", tagColor: "bg-green-50 text-green-700", title: "行为特征 + 双维度触发", desc: "从研究数据提炼具体行为触发条件，加入4轮计数机制与语义风险词库，识别准确率显著提升。" }
+            ] : [
+              { tag: "V1 Problem", tagColor: "bg-red-50 text-red-700", title: "Trigger conditions too vague", desc: "Only keywords defined four stages. Model couldn't distinguish Stage 2 from Stage 3 boundaries, causing frequent misclassification." },
+              { tag: "Discovery", tagColor: "bg-amber-50 text-amber-700", title: "20 users tested · 6 felt no difference", desc: "Follow-up revealed: AI couldn't distinguish 'seeking reassurance' from 'beginning reflection', causing mistimed interventions." },
+              { tag: "Improvement", tagColor: "bg-green-50 text-green-700", title: "Behaviour signals + dual-trigger", desc: "Extracted concrete behavioural triggers from research data. Added 4-turn counter and semantic risk vocabulary. Accuracy improved significantly." }
+            ]).map((item, i) => (
+              <div key={i} className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
+                <span className={`inline-block px-3 py-1 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4 ${item.tagColor}`}>{item.tag}</span>
+                <h6 className="text-sm font-black mb-3">{item.title}</h6>
+                <p className="text-xs font-medium text-ink/60 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-10">
+          <p className="text-[9px] font-black uppercase tracking-widest text-ink/30 mb-6">{lang === "zh" ? "评估体系" : "Evaluation Framework"}</p>
+          <div className="space-y-4">
+            {(lang === "zh" ? [
+              { num: "01", title: "行为频率维度", desc: "安慰循环信号连续检测到 4 轮，触发升级干预，引导回归真实关系。", reason: "依据：r=0.533 为中等相关，依赖形成渐进积累；定性数据高频词「over time」印证阈值设在4轮而非2轮。" },
+              { num: "02", title: "语义风险维度", desc: "检测到社交回避词汇（「只有你懂我」「没有人能理解我」等），直接触发，不等频率积累。", reason: "依据：Human Connection Tension 主题——用户在 AI 便利性与真实关系之间的张力是最高风险信号。" }
+            ] : [
+              { num: "01", title: "Behavioural frequency", desc: "Comfort loop signal detected 4 consecutive turns → escalate to social reconnection intervention.", reason: "Rationale: r=0.533 is moderate correlation; reliance builds gradually. Qualitative high-frequency phrase 'over time' supports a 4-turn threshold." },
+              { num: "02", title: "Semantic risk", desc: "Social avoidance vocabulary detected ('only you understand me', 'no one gets me') → immediate trigger, no frequency wait.", reason: "Rationale: Human Connection Tension theme — tension between AI convenience and real relationships is the highest-risk signal." }
+            ]).map((item, i) => (
+              <div key={i} className="flex gap-6 p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
+                <span className="text-4xl font-serif font-black text-ink/10 flex-shrink-0 leading-none">{item.num}</span>
+                <div>
+                  <h6 className="text-sm font-black mb-2">{item.title}</h6>
+                  <p className="text-sm font-medium text-ink/70 mb-3 leading-relaxed">{item.desc}</p>
+                  <p className="text-xs text-ink/40 leading-relaxed italic">{item.reason}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <p className="text-[9px] font-black uppercase tracking-widest text-ink/30 mb-4">{lang === "zh" ? "交互 Demo" : "Interactive Demo"}</p>
+          <div className="flex items-center justify-between p-5 bg-ink/5 border border-ink/20 rounded-2xl">
+            <div>
+              <p className="text-sm font-black mb-1">{lang === "zh" ? "可交互演示文件" : "Interactive demo file"}</p>
+              <p className="text-xs text-ink/50">{lang === "zh" ? "需要 Google AI Studio API Key · 本地浏览器运行" : "Requires Google AI Studio API Key · runs in browser"}</p>
+            </div>
+            <a href="/demo-ntn-v8.html" download="demo-ntn-v8.html" className="px-5 py-2.5 bg-ink text-paper rounded-xl text-xs font-black hover:bg-terracotta transition-colors">
+              {lang === "zh" ? "下载 HTML ↓" : "Download HTML ↓"}
+            </a>
+          </div>
         </div>
       </section>
     </div>
