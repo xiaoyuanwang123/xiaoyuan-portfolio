@@ -271,26 +271,7 @@ function SH({ i, label }: { i: number; label: string }) {
         {String(i).padStart(2, "0")} / {label}
       </h5>
       <div className="h-px flex-1 bg-ink/10" />
-      <AnimatePresence>
-        {showVibe1 && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibe1(false)}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
-              <button onClick={() => setShowVibe1(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all"><X className="w-6 h-6" /></button>
-              <ModalVibe1 lang={lang} />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {showVibe2 && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibe2(false)}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
-              <button onClick={() => setShowVibe2(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all"><X className="w-6 h-6" /></button>
-              <ModalVibe2 lang={lang} />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
 
     </div>
   );
