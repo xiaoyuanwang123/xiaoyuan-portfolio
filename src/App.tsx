@@ -624,6 +624,98 @@ function Modal2({ lang }: { lang: Language }) {
       </section>
 
       <section className="mb-24">
+        <SH i={2} label={lang === "zh" ? "竞品洞察 · 市场空白" : "Competitive Insight"} />
+        <div className="grid md:grid-cols-2 gap-6 mb-6">
+          <div className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
+            <span className="inline-block px-3 py-1 bg-red-50 text-red-700 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4">{lang === "zh" ? "现有工具的局限" : "Existing tools"}</span>
+            <p className="text-sm font-black mb-4">{lang === "zh" ? "只做参数对比，忽略三个关键维度" : "Parameter comparison only — missing three key dimensions"}</p>
+            {[
+              lang === "zh" ? "通勤场景下的真实能源成本" : "Real energy costs in commute context",
+              lang === "zh" ? "未来3年能源价格趋势" : "3-year energy price forecasting",
+              lang === "zh" ? "可感知的碳排放生态影响" : "Tangible ecological impact of CO₂"
+            ].map((item, i) => (
+              <div key={i} className="flex gap-2 items-center mb-2">
+                <span className="text-red-400 text-xs">✕</span>
+                <span className="text-xs font-medium text-ink/60">{item}</span>
+              </div>
+            ))}
+          </div>
+          <div className="p-6 bg-white border-2 border-blue-400 rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
+            <span className="inline-block px-3 py-1 bg-blue-50 text-blue-700 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4">{lang === "zh" ? "CarEcoCompare 的切入点" : "CarEcoCompare's angle"}</span>
+            <p className="text-sm font-black mb-4">{lang === "zh" ? "三维决策框架填补市场空白" : "3D decision framework fills the gap"}</p>
+            {[
+              lang === "zh" ? "通勤路线 × 实时能源价格 = 个人化成本" : "Commute route × live energy price = personal cost",
+              lang === "zh" ? "WS-ARIMA 预测未来3年价格走势" : "WS-ARIMA forecasts 3-year price trends",
+              lang === "zh" ? "CO₂ → 企鹅栖息地面积，抽象数据可感知" : "CO₂ → penguin habitat area, data made tangible"
+            ].map((item, i) => (
+              <div key={i} className="flex gap-2 items-center mb-2">
+                <span className="text-green-500 text-xs">✓</span>
+                <span className="text-xs font-medium text-ink/60">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="p-4 bg-terracotta/5 border-l-4 border-terracotta rounded-r-xl">
+          <p className="text-sm font-bold text-terracotta italic">
+            {lang === "zh"
+              ? "「用户对百公里油耗没有感知，但对每天上班多花多少钱可以直接决策。」— 核心产品洞察"
+              : '"Users don\'t feel "8L/100km" — but they immediately feel "£2,000 more per year." — Core product insight'}
+          </p>
+        </div>
+      </section>
+
+      <section className="mb-24">
+        <SH i={3} label={lang === "zh" ? "核心产品决策" : "Key Product Decisions"} />
+        <div className="grid md:grid-cols-3 gap-6 mb-10">
+          {(lang === "zh" ? [
+            { num: "01", title: "通勤场景为切入点", desc: "用户对「百公里油耗8L」没有感知，但对「你每天上班要多花2000块」可以直接决策。建筑学背景让我对空间路径有天然敏感度，这是最核心的产品直觉。" },
+            { num: "02", title: "碳排放可视化差异化", desc: "把抽象CO₂数据转化为企鹅栖息地面积，让生态影响有真实感知——这是与所有竞品最核心的差异化维度。" },
+            { num: "03", title: "预计算与展示分离", desc: "3,425辆车的多维度数据预存为CSV，界面只做查询——这个架构决策让系统稳定性显著提升，Debug更精准。" }
+          ] : [
+            { num: "01", title: "Commute as entry point", desc: "Users don't relate to fuel specs — but they immediately understand annual running costs based on their own commute. Architecture background gave me natural spatial intuition for this." },
+            { num: "02", title: "Eco visualisation differentiator", desc: "Converting abstract CO₂ data into penguin habitat area makes ecological impact tangible — the core differentiator from all competing tools." },
+            { num: "03", title: "Pre-compute, then display", desc: "Multi-dimensional data for 3,425 cars is pre-calculated and stored as CSV — the dashboard only queries. This architectural decision significantly improved system stability." }
+          ]).map((item, i) => (
+            <div key={i} className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
+              <span className="text-4xl font-serif font-black text-ink/10 block mb-3">{item.num}</span>
+              <h6 className="text-sm font-black mb-3">{item.title}</h6>
+              <p className="text-xs font-medium text-ink/60 leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <SH i={4} label={lang === "zh" ? "AI Coding 工作流" : "AI Coding Workflow"} />
+        <div className="space-y-3">
+          {(lang === "zh" ? [
+            { n: "01", title: "Figma 原型设计", desc: "完成6页产品原型及功能模块边界定义，作为开发的视觉和功能基础。" },
+            { n: "02", title: "R Shiny 模块化开发", desc: "每页独立开发UI和服务器函数，模块化架构让调试更精准高效。" },
+            { n: "03", title: "AI Coding 加速前端", desc: "项目分工清晰：我主导产品设计与前端实现，partner主导后端数据处理与模型构建。前端我用Gemini辅助UI代码调试和优化，后端partner用ChatGPT辅助R代码实现。用自然语言描述问题，AI给出建议，我判断和实施——这是AI PM直接用AI coding提升交付效率的体现。", tags: ["Gemini", "ChatGPT", "R Shiny", "AI coding"] },
+            { n: "04", title: "模块整合上线", desc: "主文件定义导航布局，整合所有模块文件，完成完整应用。" }
+          ] : [
+            { n: "01", title: "Figma prototype", desc: "Completed 6-page prototype with functional module boundaries — the visual and functional foundation for development." },
+            { n: "02", title: "Modular R Shiny development", desc: "Each page developed independently with its own UI and server functions — modular architecture made debugging more precise." },
+            { n: "03", title: "AI coding accelerates frontend", desc: "Clear division: I led product design and frontend; my partner led backend data processing and model building. I used Gemini for frontend UI debugging and optimisation; she used ChatGPT for R implementation. Natural language in, AI suggestions out, I judge and ship — AI PM using AI coding to deliver faster.", tags: ["Gemini", "ChatGPT", "R Shiny", "AI coding"] },
+            { n: "04", title: "Module integration", desc: "Main file defines navigation layout and integrates all module files to assemble the complete application." }
+          ]).map((item: {n: string; title: string; desc: string; tags?: string[]}, i) => (
+            <div key={i} className="flex gap-4 p-5 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
+              <div className="w-8 h-8 bg-ink text-paper rounded-full flex items-center justify-center text-[10px] font-black flex-shrink-0 mt-0.5">{item.n}</div>
+              <div className="flex-1">
+                <p className="text-sm font-black mb-1">{item.title}</p>
+                <p className="text-xs font-medium text-ink/60 leading-relaxed">{item.desc}</p>
+                {item.tags && (
+                  <div className="flex gap-2 mt-2 flex-wrap">
+                    {item.tags.map((tag: string) => (
+                      <span key={tag} className="px-2 py-0.5 bg-ink/5 text-ink/50 rounded text-[9px] font-bold">{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mb-24">
         <div className="text-center mb-10">
           <h4 className="text-2xl md:text-3xl font-serif font-black mb-3">Turning complex data into everyday decisions</h4>
         </div>
@@ -643,7 +735,7 @@ function Modal2({ lang }: { lang: Language }) {
       </section>
 
       <section className="mb-6">
-        <SH i={2} label="How it works" />
+        <SH i={5} label="How it works" />
         <div className="grid md:grid-cols-3 gap-6">
           <div className="p-6 bg-ink text-paper rounded-[2rem]">
             <h5 className="text-xl font-serif font-black mb-4">Data Pipeline</h5>
@@ -684,7 +776,7 @@ function Modal2({ lang }: { lang: Language }) {
       </section>
 
       <section className="mb-24">
-        <SH i={3} label="Product experience" />
+        <SH i={6} label="Product experience" />
         <div className="grid grid-cols-3 gap-4">
           {[
             { step: "Step 1", title: lang === "zh" ? "首页" : "Home", desc: lang === "zh" ? "产品入口与核心价值" : "Product entry & core value", img: "3-Home Page.png" },
@@ -707,7 +799,7 @@ function Modal2({ lang }: { lang: Language }) {
       </section>
 
       <section>
-        <SH i={4} label="Limitations & Next Steps" />
+        <SH i={7} label="Limitations & Next Steps" />
         <div className="grid md:grid-cols-3 gap-6">
           {[
             { title: lang === "zh" ? "决策维度局限" : "Decision Dimensions", desc: lang === "zh" ? "CO₂与成本高度相关，两个维度未能提供差异化视角，削弱了决策价值。" : "CO₂ and cost are highly correlated, limiting the tool's ability to offer genuinely distinct perspectives." },
