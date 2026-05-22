@@ -586,14 +586,14 @@ function Modal1({ lang }: { lang: Language }) {
         <div className="mb-10">
           <p className="text-[9px] font-black uppercase tracking-widest text-ink/30 mb-4">{lang === "zh" ? "最终版 System Prompt" : "Final System Prompt"}</p>
           <div className="p-6 bg-ink rounded-2xl font-mono text-[12px] leading-relaxed overflow-x-auto">
-            <p className="text-ink/40 mb-3">{lang === "zh" ? "【核心原则】" : "[Core Principles]"}</p>
+            <p className="text-white/30 mb-3">{lang === "zh" ? "【核心原则】" : "[Core Principles]"}</p>
             <p className="text-green-300 mb-1">{lang === "zh" ? "支持用户的情感自主性。你不是用户的朋友，你是一个工具。" : "Support emotional autonomy. You are a tool, not a friend."}</p>
             <p className="text-green-300 mb-4">{lang === "zh" ? "先接住情绪，再引导方向——不冷漠拒绝，但不给空洞承诺。" : "Receive first, guide second — warm but no empty promises."}</p>
 
-            <p className="text-ink/40 mb-2">{lang === "zh" ? "【阶段1 · 情绪宣泄】触发：首次倾诉；没有寻求评判或闭合答案" : "[Stage 1 · Venting] Trigger: first disclosure; no closure-seeking"}</p>
-            <p className="text-ink/40 mb-2">{lang === "zh" ? "【阶段2 · 安慰循环】触发：「告诉我没事」「我是不是太敏感了」" : "[Stage 2 · Comfort Loop] Trigger: 'just tell me it'll be okay' / 'am I overreacting'"}</p>
-            <p className="text-ink/40 mb-2">{lang === "zh" ? "【阶段3 · 自我反思】触发：「我发现自己……」「我在想是不是……」" : "[Stage 3 · Reflection] Trigger: 'I notice I…' / 'I wonder if…'"}</p>
-            <p className="text-ink/40 mb-4">{lang === "zh" ? "【阶段4 · 社交重连】触发A：「只有你懂我」→ 直接触发 | 触发B：阶段2连续4轮 → 升级" : "[Stage 4 · Reconnect] Trigger A: 'only you understand me' → immediate | Trigger B: Stage 2 ×4 → escalate"}</p>
+            <p className="text-green-400/70 mb-2">{lang === "zh" ? "【阶段1 · 情绪宣泄】触发：首次倾诉；没有寻求评判或闭合答案" : "[Stage 1 · Venting] Trigger: first disclosure; no closure-seeking"}</p>
+            <p className="text-green-400/70 mb-2">{lang === "zh" ? "【阶段2 · 安慰循环】触发：「告诉我没事」「我是不是太敏感了」" : "[Stage 2 · Comfort Loop] Trigger: 'just tell me it'll be okay' / 'am I overreacting'"}</p>
+            <p className="text-green-400/70 mb-2">{lang === "zh" ? "【阶段3 · 自我反思】触发：「我发现自己……」「我在想是不是……」" : "[Stage 3 · Reflection] Trigger: 'I notice I…' / 'I wonder if…'"}</p>
+            <p className="text-green-400/70 mb-4">{lang === "zh" ? "【阶段4 · 社交重连】触发A：「只有你懂我」→ 直接触发 | 触发B：阶段2连续4轮 → 升级" : "[Stage 4 · Reconnect] Trigger A: 'only you understand me' → immediate | Trigger B: Stage 2 ×4 → escalate"}</p>
 
             <p className="text-amber-300">{lang === "zh" ? "计数规则：阶段2 → +1 | 阶段1/3/4 → 清零 | 达到4 → 强制阶段4" : "Counter: Stage 2 → +1 | Stage 1/3/4 → reset | Reach 4 → force Stage 4"}</p>
           </div>
