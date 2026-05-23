@@ -318,6 +318,28 @@
     transition: all 0.15s;
   }
   .next-btn:hover { background: #a93226; }
+  .model-answer-btn {
+    margin-top: 12px; margin-left: 10px; padding: 12px 22px;
+    background: transparent; color: rgba(245,240,232,0.6);
+    border: 1.5px solid rgba(245,240,232,0.2); border-radius: 10px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    font-family: 'Noto Sans SC', sans-serif; transition: all 0.2s;
+  }
+  .model-answer-btn:hover { border-color: var(--sage); color: var(--sage); }
+  .model-answer-wrap {
+    margin-top: 20px; border-top: 1px solid rgba(245,240,232,0.12); padding-top: 20px;
+  }
+  .model-answer-title {
+    font-size: 13px; font-weight: 700; color: var(--sage); letter-spacing: 0.08em;
+    margin-bottom: 14px; display: flex; align-items: center; gap: 6px;
+  }
+  .model-answer-body {
+    font-size: 13px; line-height: 1.85; color: rgba(245,240,232,0.82);
+    white-space: pre-wrap;
+  }
+  .model-answer-loading {
+    font-size: 13px; color: rgba(245,240,232,0.4); font-style: italic;
+  }
 
   /* complete screen */
   .complete-card {
@@ -373,6 +395,77 @@
 
   .divider { height: 1px; background: var(--border); }
 
+  /* cheat button */
+  .cheat-btn {
+    padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 700;
+    border: 1.5px solid var(--gold); background: rgba(212,160,23,0.08); color: var(--gold);
+    cursor: pointer; transition: all 0.15s; white-space: nowrap; flex-shrink: 0;
+  }
+  .cheat-btn:hover { background: var(--gold); color: var(--ink); }
+  .cheat-btn.open { background: var(--gold); color: var(--ink); }
+  .cheat-area {
+    margin-top: 18px; padding-top: 16px;
+    border-top: 1.5px dashed rgba(26,26,46,0.15);
+    font-size: 13px; line-height: 1.85; color: var(--ink);
+    white-space: pre-wrap;
+  }
+  .cheat-area-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: var(--gold);
+    margin-bottom: 10px; text-transform: uppercase;
+  }
+  .cheat-loading { color: var(--muted); font-style: italic; font-size: 13px; }
+
+  /* skip / end buttons */
+  .skip-btn {
+    padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 700;
+    border: 1.5px solid var(--border); background: var(--card); color: var(--muted);
+    cursor: pointer; transition: all 0.15s; margin-left: 8px; white-space: nowrap;
+  }
+  .skip-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .end-btn {
+    padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 700;
+    border: 1.5px solid var(--border); background: var(--card); color: var(--muted);
+    cursor: pointer; transition: all 0.15s; margin-left: 4px; white-space: nowrap;
+  }
+  .end-btn:hover { border-color: var(--red); color: var(--red); }
+
+  /* recap section */
+  .recap-section { margin-top: 24px; display: flex; flex-direction: column; gap: 16px; }
+  .recap-title {
+    font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 900;
+    color: var(--ink); margin-bottom: 4px;
+  }
+  .recap-card {
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .recap-card-header { display: flex; align-items: center; gap: 10px; }
+  .recap-q-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700;
+    background: var(--ink); color: var(--paper); padding: 2px 8px; border-radius: 4px;
+  }
+  .recap-q-tag {
+    font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 0.05em;
+    flex: 1;
+  }
+  .recap-q-avg { font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 900; }
+  .recap-q-text { font-size: 13px; color: var(--ink); line-height: 1.5; }
+  .recap-dims { display: flex; flex-wrap: wrap; gap: 6px; }
+  .recap-dim {
+    font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px;
+    border: 1.5px solid var(--border); color: var(--muted);
+  }
+  .recap-dim.s5 { border-color: var(--sage); color: var(--sage); background: rgba(74,124,89,0.06); }
+  .recap-dim.s4 { border-color: var(--gold); color: var(--gold); background: rgba(212,160,23,0.06); }
+  .recap-dim.s3 { border-color: #e67e22; color: #e67e22; background: rgba(230,126,34,0.06); }
+  .recap-dim.s2, .recap-dim.s1 { border-color: var(--red); color: var(--red); background: rgba(192,57,43,0.06); }
+  .recap-feedback {
+    padding: 12px 14px; background: rgba(26,26,46,0.03);
+    border-radius: 8px; display: flex; flex-direction: column; gap: 6px;
+  }
+  .recap-highlight { font-size: 13px; color: var(--sage); line-height: 1.5; }
+  .recap-suggest { font-size: 13px; color: var(--ink); line-height: 1.5; }
+
   /* scrollbar */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
@@ -397,15 +490,6 @@
 <div class="main">
   <!-- SIDEBAR -->
   <div class="sidebar">
-    <!-- API Key -->
-    <div class="sidebar-section">
-      <div class="sidebar-label">Claude API Key</div>
-      <input type="password" class="key-input" id="apiKey" placeholder="sk-ant-..." />
-      <div class="key-status" id="keyStatus"></div>
-    </div>
-
-    <div class="divider"></div>
-
     <!-- Stats -->
     <div class="sidebar-section">
       <div class="sidebar-label">本周战绩</div>
@@ -453,6 +537,13 @@
         <div class="setting-control" id="diffCtrl">
           <button class="btn-pill" data-val="friendly">友好</button>
           <button class="btn-pill active" data-val="strict">大厂</button>
+        </div>
+      </div>
+      <div class="setting-row">
+        <span class="setting-label">出题顺序</span>
+        <div class="setting-control" id="orderCtrl">
+          <button class="btn-pill" data-val="random">乱序</button>
+          <button class="btn-pill active" data-val="sequential">顺序</button>
         </div>
       </div>
     </div>
@@ -526,11 +617,17 @@
         </div>
         <div class="q-counter" id="qCounter">0 / 0</div>
         <div class="timer-display" id="timerDisplay">00:00</div>
+        <button class="skip-btn" onclick="skipQuestion()" title="跳过此题">跳过</button>
+        <button class="end-btn" onclick="confirmEnd()" title="结束练习">✕ 结束</button>
       </div>
 
       <div class="question-card" id="questionCard">
-        <div class="q-tag" id="qTag">基础问题</div>
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px;">
+          <div class="q-tag" id="qTag">基础问题</div>
+          <button class="cheat-btn" onclick="toggleCheat(this)" id="cheatBtn">💡 看答案</button>
+        </div>
         <div class="q-text" id="qText">问题加载中...</div>
+        <div id="cheatArea" style="display:none;"></div>
       </div>
 
       <div class="chat-area" id="chatArea"></div>
@@ -550,7 +647,7 @@
     <div class="screen" id="screen-kb">
       <div>
         <div class="section-title">📚 题库管理</div>
-        <div class="section-sub">粘贴你的面试宝典或面经，AI将基于这些内容出题和评分</div>
+        <div class="section-sub">王小元的面试宝典已内置 · 可直接编辑更新，保存后立即生效</div>
       </div>
       <textarea class="kb-textarea" id="kbContent" placeholder="在这里粘贴你的面试宝典内容、项目介绍、面经等...
 
@@ -563,6 +660,7 @@
 AI会基于这些内容为你生成个性化练习题。"></textarea>
       <div style="display:flex; gap:12px; align-items:center;">
         <button class="save-btn" onclick="saveKB()">💾 保存题库</button>
+        <button class="save-btn" style="background:var(--muted);" onclick="resetKB()">↩ 恢复默认宝典</button>
         <span id="kbSaveStatus" style="font-size:13px; color:var(--sage);"></span>
       </div>
       <div style="padding:16px; background:rgba(26,26,46,0.04); border-radius:10px; border:1px solid var(--border);">
@@ -590,11 +688,87 @@ AI会基于这些内容为你生成个性化练习题。"></textarea>
 </div>
 
 <script>
+// ── 内置面试宝典（王小元） ──
+const DEFAULT_KB = `# 王小元 · AI PM 面试宝典
+求职意向：AI 产品经理实习 · 帝国理工学院 · 设计与行为科学 MSc · 2026.09 毕业
+
+## 基础信息
+- 本硕建筑学背景，现帝国理工行为科学方向
+- 跨背景：建筑学空间逻辑 + 行为科学用户研究 + AI产品落地
+
+## 项目一：Navigating the Noise（AI情感支持产品）
+- 独立项目 · 帝国理工学院
+- 关键数据：r=0.533, p<.001 · N=60定量 · N=11定性 · 满意度8.9/10 · N=20测试
+- 核心洞察：AI情感产品以留存为核心，系统性强化依赖，r=0.533证明感知依赖与情绪负担显著正相关
+- 产品设计：四阶段回复干预模型（情绪宣泄→安慰循环→自我反思→社交重连）
+- 阶段2触发：「告诉我没事的吧」「我是不是太敏感了」→ 连续4轮触发干预
+- 阶段4触发：「只有你懂我」语义触发 OR 阶段2连续4轮频率触发
+- 4轮的依据：r=0.533中等相关，依赖渐进积累；宁可晚一轮，不过早打断情绪流动
+- 技术：Gemini API + System Prompt实现四阶段识别，双视角可交互Demo
+- 竞品：Character.AI（Soft Girl 260万次对话），以留存为核心 vs 本产品以情感自主性为核心
+- 迭代：第一版关键词识别不准 → 改用用户真实原话定义行为触发条件 → 70%感知差异 → 8.9/10满意度
+- 评估体系：阶段识别准确率（客观）+ 满意度8.9/10（主观）+ 70%感知差异（行为层）
+- 局限：N=20样本量小，测试用户都是帝国理工学生，代表性有限
+- 下一步：RAG把研究发现作为知识库，进一步精准化干预策略
+
+## 项目二：CarEcoCompare（车辆选购决策数据产品）
+- 双人合作 · 帝国理工学院
+- 关键数据：3,425辆全车型 · WS-ARIMA误差低约18个百分点 · 效率提升95%（7小时→15分钟）
+- 我的分工：产品方向定义、用户痛点挖掘、Figma全链路6页原型、前端UI调试（Gemini AI coding）
+- Partner分工：WS-ARIMA模型构建、后端R数据处理、数据集整理
+- 核心产品决策：以通勤场景为切入点（用户对「每天上班花多少钱」有直接感知，对「百公里油耗」没有感知）
+- 三维决策框架：当前成本 + 3年价格预测 + 碳排放
+- 数据来源：VCA官方车辆数据库 + 英国政府能源价格时间序列 + Google Maps API
+- WS-ARIMA选型理由：数据量少（24个月）不支持LSTM；能源价格驱动因素是宏观经济非季节性，Prophet不适合；滑动窗口聚焦近24个月，对近期价格趋势更敏感
+- 架构决策：数据预计算与界面展示分离，避免实时计算延迟
+
+## 项目三：TumorTutor（脑肿瘤MRI辅助判读工具）
+- 双人合作 · 帝国理工学院
+- 关键数据：94.31%综合准确率 · 200张人工质检高质量图片
+- 我的分工：产品方向、用户需求、人工质检200张图片、V6路径（轴状面分割）、交互设计、项目管理
+- Partner分工：V5路径（冠状/矢状面）、算法优化、数据处理
+- 目标用户：医学院学生，刚接触影像学阶段
+- 解决问题：缺自主练习机会 + 反馈滞后 + 理论实操脱节
+- 核心准确率：Meningioma 96.15% / Pituitary 97.44% / Glioma 89.33%（胶质瘤边界弥散最难）
+- Glioma最低的原因：边界弥散、形状不规则，与周围脑组织难区分，临床本身最难诊断
+- 迭代困难：前四版统一椭圆约束，冠状/矢状面完全失效（把眼眶颌骨识别成肿瘤）
+- 解决方案：检测底部中心像素亮度区分切面类型 → 双路径策略（5轮迭代出来）
+- 产品策略：人工质检200张保证数据质量（产品层面解法而非技术硬拼）
+- 风险兜底产品策略：94.31%≠100%，剩余5.69%错误率需要产品层面兜底
+
+## 项目四：Vibe Coding项目
+- 行程规划工具：选择题代替填空题，5分钟规划5日行程，2小时从想法到上线，部署Vercel
+- 大富翁决策工具：棋盘规则数字化，实时计算ROI+拍卖边界+流动性风险
+- 核心价值：AI coding最大价值是把想法快速变成可给真实用户用的产品（不是停在PPT层面）
+
+## 核心数据速查
+- r=0.533, p<.001：感知依赖与情绪负担Pearson相关，统计显著
+- R²=0.30：感知依赖能解释情绪负担30%的方差（OLS回归）
+- 8.9/10：NTN用户满意度（N=20）
+- 70%：感知到明显差异的用户比例
+- 94.31%：TumorTutor综合准确率
+- 200张：人工质检高质量图片数
+- 3,425辆：CarEcoCompare覆盖车型数
+- 18个百分点：WS-ARIMA vs 传统ARIMA误差降低
+- 95%：CarEcoCompare决策效率提升
+- 7小时→15分钟：选车决策时间
+- 700%：AI伴侣应用数量激增幅度
+
+## 第七章：AI技术深问
+- RAG核心价值：让模型「用事实说话」，解决知识截止/幻觉/私域盲区
+- 幻觉原因：数据噪声 + 训练目标（预测下一token非保证真实）+ 推理外推 + RLHF副作用
+- 幻觉解法：RAG提供真实资料 + 限制「只基于资料回答」+ 多模型交叉验证 + 引用来源
+- Agent核心组件：规划/记忆/工具/执行/反思
+- Fine-tuning vs RAG：知识更新快用RAG；需改变语气/风格/固定行业逻辑用Fine-tuning
+- AI PM vs 传统PM：额外需要理解模型能力边界 + 设计评测体系 + 管理不确定性
+- WS-ARIMA选型：数据量少（24月）+ 宏观经济驱动非季节性 + 滑动窗口对近期敏感
+- Prompt Engineering：早期非常重要（决定下限），但不是长期壁垒（执行层非战略层）
+`;
+
 // ── STATE ──
 let state = {
-  apiKey: '',
   kb: '',
-  settings: { qCount: 1, difficulty: 'strict' },
+  settings: { qCount: 1, difficulty: 'strict', orderMode: 'random' },
   selectedTopics: ['basic','ntn','car','tumor','vibe','open'],
   practice: { questions: [], current: 0, messages: [], scores: [], startTime: null, timer: null, turnCount: 0, maxTurns: 3 },
   stats: { totalQ: 0, avgScore: 0, todayQ: 0, totalDays: 0, streak: 0, history: [], practiceDays: {} },
@@ -615,17 +789,15 @@ function load() {
 
 // ── INIT ──
 load();
-document.getElementById('apiKey').value = state.apiKey || '';
-document.getElementById('kbContent').value = state.kb || '';
+// Use DEFAULT_KB if no custom KB saved
+if (!state.kb) state.kb = DEFAULT_KB;
+document.getElementById('kbContent').value = state.kb;
 updateStats();
 renderCalendar();
 applySettings();
-
-document.getElementById('apiKey').addEventListener('change', function() {
-  state.apiKey = this.value.trim();
-  save();
-  document.getElementById('keyStatus').textContent = state.apiKey ? '✓ Key已保存' : '';
-  document.getElementById('keyStatus').className = 'key-status ok';
+// restore topic selection UI
+document.querySelectorAll('#topicGrid .topic-card').forEach(card => {
+  card.classList.toggle('selected', state.selectedTopics.includes(card.dataset.topic));
 });
 
 // ── SCREENS ──
@@ -645,6 +817,9 @@ function applySettings() {
   document.querySelectorAll('#diffCtrl .btn-pill').forEach(b => {
     b.classList.toggle('active', b.dataset.val === state.settings.difficulty);
   });
+  document.querySelectorAll('#orderCtrl .btn-pill').forEach(b => {
+    b.classList.toggle('active', b.dataset.val === (state.settings.orderMode||'random'));
+  });
 }
 
 document.getElementById('qCountCtrl').addEventListener('click', e => {
@@ -652,6 +827,9 @@ document.getElementById('qCountCtrl').addEventListener('click', e => {
 });
 document.getElementById('diffCtrl').addEventListener('click', e => {
   if (e.target.dataset.val) { state.settings.difficulty = e.target.dataset.val; save(); applySettings(); }
+});
+document.getElementById('orderCtrl').addEventListener('click', e => {
+  if (e.target.dataset.val) { state.settings.orderMode = e.target.dataset.val; save(); applySettings(); }
 });
 
 // ── TOPICS ──
@@ -661,6 +839,7 @@ function toggleTopic(card) {
   if (idx >= 0) {
     if (state.selectedTopics.length > 1) { state.selectedTopics.splice(idx,1); card.classList.remove('selected'); }
   } else { state.selectedTopics.push(t); card.classList.add('selected'); }
+  save();
 }
 
 // ── KB ──
@@ -672,11 +851,19 @@ function saveKB() {
   setTimeout(() => s.textContent = '', 2000);
 }
 
+function resetKB() {
+  state.kb = DEFAULT_KB;
+  document.getElementById('kbContent').value = DEFAULT_KB;
+  save();
+  const s = document.getElementById('kbSaveStatus');
+  s.textContent = '✓ 已恢复默认宝典';
+  setTimeout(() => s.textContent = '', 2000);
+}
+
 // ── PRACTICE ──
 async function startPractice() {
-  if (!state.apiKey) { alert('请先在左侧输入 Claude API Key'); return; }
   showScreen('practice');
-  state.practice = { questions: [], current: 0, messages: [], scores: [], startTime: Date.now(), timer: null, turnCount: 0, maxTurns: 3 };
+  state.practice = { questions: [], current: 0, messages: [], scores: [], recap: [], startTime: Date.now(), timer: null, turnCount: 0, maxTurns: 3 };
   document.getElementById('chatArea').innerHTML = '';
   document.getElementById('feedbackArea').innerHTML = '';
   document.getElementById('answerInput').value = '';
@@ -709,22 +896,27 @@ async function generateQuestions() {
   };
   const topics = state.selectedTopics.map(t => topicMap[t]).join('；');
   const n = state.settings.qCount;
-  const kb = state.kb ? `\n\n面试者的背景资料：\n${state.kb.slice(0,3000)}` : '';
+  const kb = state.kb ? `\n\n面试者的背景资料（请严格基于此内容出题，引用其中真实数据和项目细节）：\n${state.kb.slice(0,3000)}` : '';
+  const orderNote = state.settings.orderMode === 'sequential'
+    ? `\n请按照题目难度从易到难，顺序排列，先考基础再考深度。`
+    : `\n请随机混合各类型题目顺序。`;
 
-  const prompt = `你是一个大厂AI产品经理面试官。请为以下候选人生成${n}道面试练习题。
+  const prompt = `你是一个大厂AI产品经理面试官。请严格根据以下要求生成${n}道面试练习题。
 
-题目范围：${topics}${kb}
+题目范围（只能从已选方向出题）：${topics}${kb}${orderNote}
 
-要求：
-1. 每道题都是面试中真实会问的问题
-2. 题目要有具体性，不要太宽泛
-3. 难度要体现大厂风格——有深度、有追问空间
-4. 严格按照以下JSON格式输出，不要有任何其他内容：
+出题原则（非常重要）：
+1. 必须严格限定在所选题目范围内，不得超出
+2. 聚焦产品经理核心能力：产品策略、优先级决策、指标设计、风险兜底、资源分配、商业化路径——而非UX/交互细节
+3. 如有背景资料，题目应引用其中具体数据（如94.31%准确率、r=0.533等），考察候选人对数据背后产品策略的理解
+4. 好题示例："这5%多的错误率作为PM你会如何设计后处理策略来兜底风险？"而非"你会如何优化界面？"
+5. 难度要体现大厂风格——有深度、有追问空间、考察取舍判断
+6. 严格按照以下JSON格式输出，不要有任何其他内容：
 
-{"questions":[{"tag":"题目类型","text":"题目内容"},{"tag":"题目类型","text":"题目内容"}]}`;
+{"questions":[{"tag":"题目类型","text":"题目内容"}]}`;
 
   try {
-    const res = await callClaude([{role:'user',content:prompt}], 800);
+    const res = await callClaude([{role:'user',content:prompt}], 1000);
     const match = res.match(/\{[\s\S]*\}/);
     if (match) {
       const parsed = JSON.parse(match[0]);
@@ -744,6 +936,11 @@ function showCurrentQuestion() {
   document.getElementById('chatArea').innerHTML = '';
   document.getElementById('feedbackArea').innerHTML = '';
   document.getElementById('answerInput').value = '';
+  // reset cheat area for new question
+  const cheatArea = document.getElementById('cheatArea');
+  if (cheatArea) { cheatArea.style.display = 'none'; cheatArea.innerHTML = ''; delete cheatArea.dataset.loaded; }
+  const cheatBtn = document.getElementById('cheatBtn');
+  if (cheatBtn) { cheatBtn.textContent = '💡 看答案'; cheatBtn.classList.remove('open'); }
   state.practice.messages = [];
   state.practice.turnCount = 0;
   updateProgress();
@@ -765,7 +962,7 @@ function updateProgress() {
 async function sendAnswer() {
   const input = document.getElementById('answerInput');
   const text = input.value.trim();
-  if (!text || !state.apiKey) return;
+  if (!text) return;
   input.value = '';
   input.style.height = 'auto';
   document.getElementById('sendBtn').disabled = true;
@@ -790,17 +987,23 @@ async function getFollowUp() {
   const q = state.practice.questions[state.practice.current];
   const kb = state.kb ? `\n\n候选人背景：${state.kb.slice(0,2000)}` : '';
   const diff = state.settings.difficulty === 'strict'
-    ? '你是严格的大厂面试官，要深挖细节，追问数据来源、具体实现方式、遇到的困难。不轻易满足于表面答案。'
-    : '你是友好的面试官，帮助候选人把答案说得更完整，适当引导。';
+    ? '你是严格的大厂产品经理面试官，专注考察产品策略、优先级判断、数据决策、风险兜底方案等PM核心能力。深挖细节，追问背后的产品逻辑和决策依据，不轻易满足于表面答案。不考察UI/UX设计细节。'
+    : '你是友好的产品经理面试官，帮助候选人把产品思维和决策逻辑说得更完整，适当引导。';
 
-  const messages = [
-    {role:'user', content:`${diff}${kb}\n\n面试题目：${q.text}\n\n请根据候选人的回答进行追问（1-2句话，直接问问题，不要有任何评价或前言）。这是第${state.practice.turnCount}轮追问，共${state.practice.maxTurns}轮。`},
-    ...state.practice.messages.map(m => ({role: m.role === 'user' ? 'user' : 'assistant', content: m.content})),
-    {role:'user', content:'请给出你的下一个追问（只问问题，不评价）：'}
-  ];
+  // Build properly alternating messages
+  const sysMsg = `${diff}${kb}\n\n面试题目：${q.text}\n\n你正在进行第${state.practice.turnCount}/${state.practice.maxTurns}轮追问。请给出1-2句追问，直接问问题，聚焦产品策略层面，不要评价，不要前言。`;
+  const convMessages = [];
+  for (let i = 0; i < state.practice.messages.length; i++) {
+    const m = state.practice.messages[i];
+    convMessages.push({ role: m.role === 'user' ? 'user' : 'assistant', content: m.content });
+  }
+  // Prepend system context as first user turn if conversation is empty
+  const messages = convMessages.length > 0
+    ? [{ role: 'user', content: sysMsg }, ...convMessages]
+    : [{ role: 'user', content: sysMsg }];
 
-  try { return await callClaude(messages, 200); }
-  catch(e) { return '能具体说说你是怎么做到的吗？'; }
+  try { return await callClaude(messages, 250); }
+  catch(e) { return '从产品策略的角度，你会如何优先处理这个问题？'; }
 }
 
 async function getFeedback() {
@@ -809,18 +1012,25 @@ async function getFeedback() {
   const kb = state.kb ? `\n\n候选人背景资料：${state.kb.slice(0,2000)}` : '';
   const conv = state.practice.messages.map(m => `${m.role==='user'?'候选人':'面试官'}：${m.content}`).join('\n');
 
-  const prompt = `你是严格的大厂AI产品经理面试官，请对候选人的回答进行评分和反馈。${kb}
+  const prompt = `你是严格的大厂AI产品经理面试官，请对候选人的回答进行评分和反馈。评分聚焦PM核心能力，不考察UX/UI设计细节。${kb}
 
 面试题目：${q.text}
 
 对话记录：
 ${conv}
 
+评分维度说明：
+- structure: 回答结构化程度（是否有清晰框架）
+- depth: 产品思维深度（策略层、决策依据、取舍逻辑）
+- data: 数据意识（是否用数据支撑观点，指标选择是否合理）
+- product: 产品策略能力（优先级、风险判断、后处理方案等PM核心）
+- expression: 表达清晰度
+
 请严格按照以下JSON格式输出评分（每项1-5分），不要有任何其他内容：
-{"scores":{"structure":3,"depth":3,"data":3,"product":3,"expression":3},"suggestion":"最重要的一条改进建议（1-2句话，直接具体）","highlight":"做得最好的一点（1句话）"}`;
+{"scores":{"structure":3,"depth":3,"data":3,"product":3,"expression":3},"suggestion":"最重要的一条改进建议，聚焦产品策略层面（1-2句话，直接具体）","highlight":"做得最好的一点（1句话）"}`;
 
   try {
-    const res = await callClaude([{role:'user',content:prompt}], 400);
+    const res = await callClaude([{role:'user',content:prompt}], 500);
     const match = res.match(/\{[\s\S]*\}/);
     hideTyping();
     if (match) {
@@ -830,7 +1040,7 @@ ${conv}
     }
   } catch(e) {
     hideTyping();
-    showFeedback({ scores:{structure:3,depth:3,data:3,product:3,expression:3}, suggestion:'请尝试用更具体的数据支撑你的观点。', highlight:'回答有一定结构感。' });
+    showFeedback({ scores:{structure:3,depth:3,data:3,product:3,expression:3}, suggestion:'请尝试从产品策略角度深化你的观点，说明取舍逻辑。', highlight:'回答有一定结构感。' });
   }
 }
 
@@ -861,19 +1071,158 @@ function showFeedback(fb) {
         <strong>✨ 亮点：</strong>${fb.highlight}<br><br>
         <strong>🎯 最重要的改进：</strong>${fb.suggestion}
       </div>
-      <button class="next-btn" onclick="${isLast ? 'completePractice()' : 'nextQuestion()'}">${isLast ? '🏆 完成练习' : '下一题 →'}</button>
+      <div style="display:flex; align-items:center; flex-wrap:wrap;">
+        <button class="next-btn" onclick="${isLast ? 'completePractice()' : 'nextQuestion()'}">${isLast ? '🏆 完成练习' : '下一题 →'}</button>
+        <button class="model-answer-btn" onclick="showModelAnswer(this)" data-qidx="${state.practice.current}">📖 查看参考答案</button>
+      </div>
+      <div id="modelAnswerArea"></div>
     </div>`;
+  // Scroll feedback into view
+  setTimeout(() => document.getElementById('feedbackArea').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
 
-  // record history
+  // record history + recap
   const q = state.practice.questions[state.practice.current];
+  if (!state.practice.recap) state.practice.recap = [];
+  state.practice.recap.push({
+    tag: q.tag,
+    question: q.text,
+    avg: avg,
+    scores: fb.scores,
+    highlight: fb.highlight,
+    suggestion: fb.suggestion,
+  });
   state.stats.history.unshift({
     date: new Date().toLocaleDateString('zh-CN'),
     question: q.text.slice(0,50) + (q.text.length>50?'...':''),
     avg: avg,
     tag: q.tag,
+    highlight: fb.highlight,
+    suggestion: fb.suggestion,
   });
   if (state.stats.history.length > 100) state.stats.history = state.stats.history.slice(0,100);
   save();
+}
+
+async function toggleCheat(btn) {
+  const area = document.getElementById('cheatArea');
+  if (area.style.display !== 'none') {
+    area.style.display = 'none';
+    btn.textContent = '💡 看答案';
+    btn.classList.remove('open');
+    return;
+  }
+  // show and load if not already loaded
+  area.style.display = 'block';
+  btn.classList.add('open');
+  btn.textContent = '💡 收起答案';
+  if (area.dataset.loaded) return; // already fetched
+
+  area.innerHTML = '<div class="cheat-area"><div class="cheat-loading">⏳ 生成参考答案中...</div></div>';
+
+  const q = state.practice.questions[state.practice.current];
+  if (!q) return;
+  const kb = state.kb || DEFAULT_KB;
+
+  const prompt = `你是一位资深大厂AI产品经理面试教练。请根据候选人背景，为以下题目生成一个高分参考答案框架，供候选人在答题前参考学习。
+
+候选人背景：
+${kb.slice(0, 4000)}
+
+面试题目：${q.text}
+
+输出格式要求：
+📌 核心框架（1-2句，用什么结构/角度切入）
+💡 关键论点（2-3条，每条带1句具体说明）
+📊 数据/案例支撑（从背景资料里找能用的真实数据或项目案例）
+🎯 结尾收束（1句，升华到产品/业务价值层面）
+
+要求：
+- 直接基于候选人的真实项目和数据，不要空泛
+- 控制在250字以内，是框架不是照读稿
+- 直接输出，不要任何前言`;
+
+  try {
+    const res = await callClaude([{role:'user', content: prompt}], 700);
+    area.innerHTML = `<div class="cheat-area"><div class="cheat-area-title">💡 参考答案框架</div>${res.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>')}</div>`;
+    area.dataset.loaded = '1';
+  } catch(e) {
+    area.innerHTML = '<div class="cheat-area"><div class="cheat-loading">生成失败，请重试</div></div>';
+    btn.classList.remove('open');
+    btn.textContent = '💡 看答案';
+    area.style.display = 'none';
+  }
+}
+
+async function showModelAnswer(btn) {
+  btn.disabled = true;
+  btn.textContent = '生成中...';
+  const area = document.getElementById('modelAnswerArea');
+  area.innerHTML = '<div class="model-answer-wrap"><div class="model-answer-loading">⏳ AI 正在生成参考答案，请稍候...</div></div>';
+
+  const qIdx = parseInt(btn.dataset.qidx);
+  const q = state.practice.questions[qIdx];
+  const kb = state.kb || DEFAULT_KB;
+
+  const prompt = `你是一位资深大厂AI产品经理面试教练。请根据候选人的背景资料，为以下面试题生成一个高质量的参考答案框架。
+
+候选人背景：
+${kb.slice(0, 4000)}
+
+面试题目：${q.text}
+
+要求：
+1. 答案要基于候选人真实的项目经历和数据（引用具体数字，如r=0.533、94.31%等）
+2. 结构清晰，分2-4个层次，每层有核心观点和支撑素材
+3. 聚焦产品策略层面的思维深度，不是表面描述
+4. 控制在300字以内，是「框架」而不是照读稿
+5. 用「📌 核心框架」「💡 关键论点」「📊 数据支撑」「🎯 结尾收束」等小标题组织内容
+6. 直接输出参考答案，不要有任何前言或解释`;
+
+  try {
+    const res = await callClaude([{role:'user', content: prompt}], 800);
+    area.innerHTML = `<div class="model-answer-wrap">
+      <div class="model-answer-title">📖 参考答案框架（基于你的宝典生成）</div>
+      <div class="model-answer-body">${res.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
+    </div>`;
+  } catch(e) {
+    area.innerHTML = '<div class="model-answer-wrap"><div class="model-answer-loading">生成失败，请重试</div></div>';
+    btn.disabled = false;
+    btn.textContent = '📖 查看参考答案';
+  }
+  setTimeout(() => area.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+function skipQuestion() {
+  if (state.practice.timer) {}  // keep timer running
+  const isLast = state.practice.current >= state.practice.questions.length - 1;
+  if (isLast) {
+    completePractice();
+  } else {
+    state.practice.current++;
+    showCurrentQuestion();
+  }
+}
+
+function confirmEnd() {
+  if (confirm('确定要结束本次练习吗？')) {
+    if (state.practice.timer) clearInterval(state.practice.timer);
+    // save whatever scores exist
+    if (state.practice.scores.length > 0) {
+      const allScores = state.practice.scores.flatMap(s => Object.values(s));
+      const avg = Math.round(allScores.reduce((a,b)=>a+b,0)/allScores.length*10)/10;
+      const today = new Date().toDateString();
+      if (!state.stats.practiceDays) state.stats.practiceDays = {};
+      const answered = state.practice.scores.length;
+      state.stats.practiceDays[today] = (state.stats.practiceDays[today]||0) + answered;
+      state.stats.totalQ = (state.stats.totalQ||0) + answered;
+      state.stats.todayQ = state.stats.practiceDays[today];
+      state.stats.totalDays = Object.keys(state.stats.practiceDays).length;
+      save();
+      updateStats();
+      renderCalendar();
+    }
+    showScreen('home');
+  }
 }
 
 function nextQuestion() {
@@ -918,6 +1267,31 @@ function completePractice() {
   renderCalendar();
 
   const emoji = avg >= 4.5 ? '🏆' : avg >= 3.5 ? '⚔️' : avg >= 2.5 ? '💪' : '🥷';
+  const recap = state.practice.recap || [];
+
+  // build per-question recap cards
+  const recapHTML = recap.length ? `
+    <div class="recap-section">
+      <div class="recap-title">📋 本次考后小结</div>
+      ${recap.map((r, i) => {
+        const scoreColor = r.avg >= 4 ? 'var(--sage)' : r.avg >= 3 ? 'var(--gold)' : 'var(--red)';
+        const dims = [{k:'structure',l:'结构'},{k:'depth',l:'深度'},{k:'data',l:'数据'},{k:'product',l:'产品'},{k:'expression',l:'表达'}];
+        const dimHTML = dims.map(d => `<span class="recap-dim s${r.scores[d.k]}">${d.l} ${r.scores[d.k]}</span>`).join('');
+        return `<div class="recap-card">
+          <div class="recap-card-header">
+            <span class="recap-q-num">Q${i+1}</span>
+            <span class="recap-q-tag">${r.tag}</span>
+            <span class="recap-q-avg" style="color:${scoreColor}">${r.avg}/5</span>
+          </div>
+          <div class="recap-q-text">${r.question.slice(0,80)}${r.question.length>80?'…':''}</div>
+          <div class="recap-dims">${dimHTML}</div>
+          <div class="recap-feedback">
+            <div class="recap-highlight">✨ ${r.highlight}</div>
+            <div class="recap-suggest">🎯 ${r.suggestion}</div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>` : '';
 
   document.getElementById('screen-practice').innerHTML = `
     <div class="complete-card">
@@ -944,7 +1318,8 @@ function completePractice() {
       </div>
       <button class="start-btn" onclick="startPractice()">再来一组 ⚔️</button>
       <button class="start-btn" style="background:rgba(245,240,232,0.15); margin-left:12px;" onclick="showScreen('home')">返回首页</button>
-    </div>`;
+    </div>
+    ${recapHTML}`;
 }
 
 // ── UI HELPERS ──
@@ -1050,13 +1425,12 @@ function renderHistory() {
 
 // ── CLAUDE API ──
 async function callClaude(messages, maxTokens=500) {
-  const isDeployed = !['localhost','127.0.0.1'].includes(window.location.hostname) && !window.location.protocol.startsWith('file');
-  const url = isDeployed ? '/api/claude' : 'https://api.anthropic.com/v1/messages';
-  const headers = {'Content-Type': 'application/json'};
-  if (!isDeployed) { headers['x-api-key'] = state.apiKey; headers['anthropic-version'] = '2023-06-01'; }
-  const res = await fetch(url, {
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
-    headers,
+    headers: {
+      'Content-Type': 'application/json',
+      'anthropic-version': '2023-06-01',
+    },
     body: JSON.stringify({
       model: 'claude-sonnet-4-20250514',
       max_tokens: maxTokens,

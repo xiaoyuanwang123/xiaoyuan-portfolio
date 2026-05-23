@@ -35,7 +35,7 @@ const translations = {
     proj3Title: "面试忍者 · AI PM 面试练习工具",
     proj3Status: "❆ 已上线",
     proj3Cat: "AI工具 · 面试训练 · 游戏化",
-    proj3Desc: "模拟大厂面试官追问，五维度评分+参考答案，每日打卡练习AI PM面试。",
+    proj3Desc: "模拟大厂面试官追问，五维度评分+参考答案+考后小结，内置完整面试宝典，每日打卡练习AI PM面试。",
     tags: ["AI", "研究", "产品", "设计", "心理学", "数据"],
     projectDetails: {
       1: { problem: "识别现有产品以留存为导向、结构性诱导用户依赖的设计问题。", solution: "提出反思性提示、边界提示、真实社交引导三项设计策略。", impact: "深入研究AI情感依赖与用户行为模式，作为毕业论文前期基础。", tools: "Python, Google Colab, OLS 回归, 情感分析" },
@@ -70,7 +70,7 @@ const translations = {
     proj3Title: "Interview Ninja · AI PM Practice Tool",
     proj3Status: "Live",
     proj3Cat: "AI Tool · Interview Training · Gamification",
-    proj3Desc: "Simulates real big-tech interview follow-up, 5-dimension scoring, reference answers, and daily streak practice.",
+    proj3Desc: "Big-tech style follow-up drills, 5-dimension scoring, reference answers, post-session recap. Built-in playbook, skip & end controls, daily streak practice.",
     tags: ["AI", "Research", "Product", "Design", "Psychology", "Data"],
     projectDetails: {
       1: { problem: "Identified design issues in existing products that induce structural user dependency.", solution: "Proposed three design strategies: reflective prompts, boundary cues, and social signposting.", impact: "Deep research into AI emotional reliance and user behavior patterns for thesis foundation.", tools: "Python, Google Colab, OLS Regression, Sentiment Analysis" },
