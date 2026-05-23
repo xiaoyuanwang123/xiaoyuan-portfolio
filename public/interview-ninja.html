@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>面试忍者 Interview Ninja</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --ink: #1a1a2e;
+    --paper: #f5f0e8;
+    --red: #c0392b;
+    --gold: #d4a017;
+    --sage: #4a7c59;
+    --muted: #8b8680;
+    --card: #ffffff;
+    --border: #e0d8cc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(192,57,43,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(212,160,23,0.05) 0%, transparent 50%);
+  }
+
+  /* ── HEADER ── */
+  .header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 32px;
+    border-bottom: 2px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-icon {
+    width: 44px; height: 44px;
+    background: var(--red);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    border: 2px solid var(--gold);
+  }
+  .logo-text { font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: 20px; }
+  .logo-sub { font-size: 11px; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; }
+  .streak-badge {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(212,160,23,0.15);
+    border: 1px solid var(--gold);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 13px; color: var(--gold); font-weight: 700;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .main { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 73px); }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    border-right: 2px solid var(--ink);
+    padding: 24px 20px;
+    display: flex; flex-direction: column; gap: 20px;
+    background: rgba(26,26,46,0.03);
+  }
+  .sidebar-section { }
+  .sidebar-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  /* stats */
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .stat-card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    text-align: center;
+  }
+  .stat-num { font-family: 'Noto Serif SC', serif; font-size: 24px; font-weight: 900; color: var(--red); }
+  .stat-label { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+  /* calendar heatmap */
+  .calendar { display: flex; flex-wrap: wrap; gap: 4px; }
+  .cal-day {
+    width: 16px; height: 16px; border-radius: 3px;
+    background: var(--border);
+    cursor: default;
+    transition: transform 0.1s;
+  }
+  .cal-day.done { background: var(--sage); }
+  .cal-day.today { background: var(--red); border: 2px solid var(--ink); }
+  .cal-day:hover { transform: scale(1.2); }
+
+  /* settings */
+  .setting-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .setting-label { font-size: 13px; font-weight: 500; }
+  .setting-control { display: flex; gap: 4px; }
+  .btn-pill {
+    padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700;
+    border: 1.5px solid var(--border); background: var(--card);
+    cursor: pointer; transition: all 0.15s; color: var(--ink);
+  }
+  .btn-pill.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .btn-pill:hover:not(.active) { border-color: var(--ink); }
+
+  /* nav buttons */
+  .nav-btn {
+    width: 100%; padding: 10px 14px;
+    display: flex; align-items: center; gap: 10px;
+    border: 1.5px solid var(--border); border-radius: 10px;
+    background: var(--card); cursor: pointer;
+    font-size: 13px; font-weight: 500; color: var(--ink);
+    transition: all 0.15s; text-align: left; margin-bottom: 6px;
+  }
+  .nav-btn:hover { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+  .nav-btn.active { background: var(--red); color: var(--paper); border-color: var(--red); }
+
+  /* api key input */
+  .key-input {
+    width: 100%; padding: 8px 10px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    font-size: 11px; font-family: 'JetBrains Mono', monospace;
+    background: var(--card); color: var(--ink);
+    outline: none;
+  }
+  .key-input:focus { border-color: var(--red); }
+  .key-status { font-size: 10px; margin-top: 4px; }
+  .key-status.ok { color: var(--sage); }
+  .key-status.err { color: var(--red); }
+
+  /* ── CONTENT AREA ── */
+  .content { padding: 32px; display: flex; flex-direction: column; gap: 24px; }
+
+  /* ── SCREENS ── */
+  .screen { display: none; }
+  .screen.active { display: flex; flex-direction: column; gap: 20px; }
+
+  /* home screen */
+  .home-hero {
+    background: var(--ink); color: var(--paper);
+    border-radius: 16px; padding: 40px;
+    position: relative; overflow: hidden;
+  }
+  .home-hero::before {
+    content: '🥷';
+    position: absolute; right: 32px; top: 50%; transform: translateY(-50%);
+    font-size: 80px; opacity: 0.15;
+  }
+  .home-hero h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 32px; font-weight: 900; margin-bottom: 8px;
+  }
+  .home-hero p { color: rgba(245,240,232,0.6); font-size: 14px; line-height: 1.6; max-width: 400px; }
+  .start-btn {
+    margin-top: 24px; padding: 14px 32px;
+    background: var(--red); color: var(--paper);
+    border: none; border-radius: 10px;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    font-family: 'Noto Sans SC', sans-serif;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .start-btn:hover { background: #a93226; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(192,57,43,0.4); }
+
+  .topic-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .topic-card {
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: 12px; padding: 16px;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .topic-card:hover { border-color: var(--red); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .topic-card.selected { border-color: var(--red); border-width: 2px; background: rgba(192,57,43,0.04); }
+  .topic-icon { font-size: 24px; margin-bottom: 8px; }
+  .topic-name { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .topic-count { font-size: 11px; color: var(--muted); }
+
+  /* practice screen */
+  .practice-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px;
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: 12px;
+  }
+  .progress-bar-wrap { flex: 1; margin: 0 20px; }
+  .progress-bar {
+    height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;
+  }
+  .progress-fill { height: 100%; background: var(--red); border-radius: 3px; transition: width 0.4s; }
+  .q-counter { font-size: 12px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .timer-display { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; color: var(--ink); min-width: 60px; text-align: right; }
+  .timer-display.urgent { color: var(--red); }
+
+  .question-card {
+    background: var(--card); border: 2px solid var(--ink);
+    border-radius: 16px; padding: 28px;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .q-tag {
+    display: inline-block; padding: 3px 10px;
+    background: var(--ink); color: var(--paper);
+    border-radius: 4px; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .q-text {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 20px; font-weight: 700; line-height: 1.5;
+    color: var(--ink);
+  }
+
+  /* chat area */
+  .chat-area {
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: 16px; padding: 20px;
+    display: flex; flex-direction: column; gap: 16px;
+    min-height: 300px; max-height: 400px; overflow-y: auto;
+  }
+  .msg { display: flex; gap: 12px; }
+  .msg.user { flex-direction: row-reverse; }
+  .msg-avatar {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+    border: 1.5px solid var(--border);
+  }
+  .msg.ai .msg-avatar { background: var(--ink); }
+  .msg.user .msg-avatar { background: var(--red); }
+  .msg-bubble {
+    max-width: 75%; padding: 12px 16px;
+    border-radius: 12px; font-size: 14px; line-height: 1.6;
+  }
+  .msg.ai .msg-bubble { background: rgba(26,26,46,0.05); border: 1px solid var(--border); border-top-left-radius: 2px; }
+  .msg.user .msg-bubble { background: var(--ink); color: var(--paper); border-top-right-radius: 2px; }
+  .msg-label { font-size: 10px; color: var(--muted); margin-bottom: 4px; font-weight: 600; letter-spacing: 0.1em; }
+  .msg.user .msg-label { text-align: right; }
+
+  .typing-indicator { display: flex; gap: 4px; align-items: center; padding: 4px 0; }
+  .typing-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--muted); animation: bounce 1.2s infinite;
+  }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce { 0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)} }
+
+  /* input area */
+  .input-area { display: flex; gap: 12px; align-items: flex-end; }
+  .answer-input {
+    flex: 1; padding: 14px 16px;
+    border: 2px solid var(--border); border-radius: 12px;
+    font-size: 14px; line-height: 1.5; resize: none;
+    font-family: 'Noto Sans SC', sans-serif; color: var(--ink);
+    background: var(--card); outline: none; min-height: 56px; max-height: 200px;
+    transition: border-color 0.2s;
+  }
+  .answer-input:focus { border-color: var(--red); }
+  .send-btn {
+    padding: 14px 20px; background: var(--red); color: var(--paper);
+    border: none; border-radius: 12px; cursor: pointer;
+    font-size: 16px; transition: all 0.15s; flex-shrink: 0;
+  }
+  .send-btn:hover { background: #a93226; }
+  .send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .voice-btn {
+    padding: 14px 16px; background: var(--card); color: var(--ink);
+    border: 2px solid var(--border); border-radius: 12px; cursor: pointer;
+    font-size: 16px; transition: all 0.15s; flex-shrink: 0;
+  }
+  .voice-btn:hover { border-color: var(--ink); }
+  .voice-btn.recording { background: var(--red); color: var(--paper); border-color: var(--red); animation: pulse 1s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.6} }
+
+  /* feedback card */
+  .feedback-card {
+    background: var(--ink); color: var(--paper);
+    border-radius: 16px; padding: 28px;
+  }
+  .feedback-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 18px; font-weight: 900; margin-bottom: 20px;
+    color: var(--gold);
+  }
+  .score-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 24px; }
+  .score-item { text-align: center; }
+  .score-circle {
+    width: 48px; height: 48px; border-radius: 50%;
+    border: 2px solid rgba(245,240,232,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 900;
+    margin: 0 auto 6px;
+  }
+  .score-circle.s5 { border-color: var(--sage); color: var(--sage); }
+  .score-circle.s4 { border-color: var(--gold); color: var(--gold); }
+  .score-circle.s3 { border-color: #e67e22; color: #e67e22; }
+  .score-circle.s2, .score-circle.s1 { border-color: var(--red); color: var(--red); }
+  .score-dim { font-size: 10px; color: rgba(245,240,232,0.5); }
+  .feedback-suggest {
+    padding: 14px 16px;
+    background: rgba(245,240,232,0.08); border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.7;
+    color: rgba(245,240,232,0.85);
+  }
+  .feedback-suggest strong { color: var(--gold); }
+  .next-btn {
+    margin-top: 20px; padding: 12px 28px;
+    background: var(--red); color: var(--paper);
+    border: none; border-radius: 10px;
+    font-size: 14px; font-weight: 700; cursor: pointer;
+    font-family: 'Noto Sans SC', sans-serif;
+    transition: all 0.15s;
+  }
+  .next-btn:hover { background: #a93226; }
+
+  /* complete screen */
+  .complete-card {
+    background: var(--ink); color: var(--paper);
+    border-radius: 20px; padding: 48px;
+    text-align: center;
+  }
+  .complete-emoji { font-size: 64px; margin-bottom: 16px; }
+  .complete-title { font-family: 'Noto Serif SC', serif; font-size: 28px; font-weight: 900; margin-bottom: 8px; }
+  .complete-sub { color: rgba(245,240,232,0.6); font-size: 15px; margin-bottom: 32px; }
+  .complete-stats { display: flex; gap: 32px; justify-content: center; margin-bottom: 32px; }
+  .complete-stat { text-align: center; }
+  .complete-stat-num { font-family: 'Noto Serif SC', serif; font-size: 36px; font-weight: 900; color: var(--gold); }
+  .complete-stat-label { font-size: 12px; color: rgba(245,240,232,0.5); margin-top: 4px; }
+
+  /* knowledge base screen */
+  .kb-textarea {
+    width: 100%; height: 400px; padding: 16px;
+    border: 2px solid var(--border); border-radius: 12px;
+    font-size: 13px; line-height: 1.7; resize: vertical;
+    font-family: 'Noto Sans SC', sans-serif; color: var(--ink);
+    background: var(--card); outline: none;
+  }
+  .kb-textarea:focus { border-color: var(--red); }
+  .save-btn {
+    padding: 12px 28px; background: var(--sage); color: var(--paper);
+    border: none; border-radius: 10px;
+    font-size: 14px; font-weight: 700; cursor: pointer;
+    font-family: 'Noto Sans SC', sans-serif; transition: all 0.15s;
+  }
+  .save-btn:hover { background: #3d6b4a; }
+
+  /* history screen */
+  .history-list { display: flex; flex-direction: column; gap: 12px; }
+  .history-item {
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: 12px; padding: 16px 20px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .history-date { font-size: 12px; color: var(--muted); min-width: 80px; }
+  .history-q { flex: 1; font-size: 13px; line-height: 1.4; }
+  .history-avg {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px; font-weight: 700; color: var(--red);
+    min-width: 40px; text-align: right;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 20px; font-weight: 900; margin-bottom: 4px;
+  }
+  .section-sub { font-size: 13px; color: var(--muted); }
+
+  .divider { height: 1px; background: var(--border); }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">
+    <div class="logo-icon">🥷</div>
+    <div>
+      <div class="logo-text">面试忍者</div>
+      <div class="logo-sub">Interview Ninja · AI PM Practice</div>
+    </div>
+  </div>
+  <div class="streak-badge">
+    🔥 <span id="streakNum">0</span> 天连胜
+  </div>
+</div>
+
+<div class="main">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <!-- API Key -->
+    <div class="sidebar-section">
+      <div class="sidebar-label">Claude API Key</div>
+      <input type="password" class="key-input" id="apiKey" placeholder="sk-ant-..." />
+      <div class="key-status" id="keyStatus"></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Stats -->
+    <div class="sidebar-section">
+      <div class="sidebar-label">本周战绩</div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num" id="totalQ">0</div>
+          <div class="stat-label">已练题数</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="avgScore">—</div>
+          <div class="stat-label">平均评分</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="todayQ">0</div>
+          <div class="stat-label">今日练习</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="totalDays">0</div>
+          <div class="stat-label">练习天数</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calendar -->
+    <div class="sidebar-section">
+      <div class="sidebar-label">打卡记录（近30天）</div>
+      <div class="calendar" id="calendar"></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Settings -->
+    <div class="sidebar-section">
+      <div class="sidebar-label">练习设置</div>
+      <div class="setting-row">
+        <span class="setting-label">题数</span>
+        <div class="setting-control" id="qCountCtrl">
+          <button class="btn-pill active" data-val="1">1题</button>
+          <button class="btn-pill" data-val="3">3题</button>
+          <button class="btn-pill" data-val="5">5题</button>
+        </div>
+      </div>
+      <div class="setting-row">
+        <span class="setting-label">难度</span>
+        <div class="setting-control" id="diffCtrl">
+          <button class="btn-pill" data-val="friendly">友好</button>
+          <button class="btn-pill active" data-val="strict">大厂</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Nav -->
+    <div class="sidebar-section">
+      <button class="nav-btn active" onclick="showScreen('home')" id="nav-home">🏠 首页</button>
+      <button class="nav-btn" onclick="showScreen('practice')" id="nav-practice">⚔️ 开始练习</button>
+      <button class="nav-btn" onclick="showScreen('kb')" id="nav-kb">📚 题库管理</button>
+      <button class="nav-btn" onclick="showScreen('history')" id="nav-history">📊 历史记录</button>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- HOME SCREEN -->
+    <div class="screen active" id="screen-home">
+      <div class="home-hero">
+        <h1>准备好了吗？🥷</h1>
+        <p>每日一练，成为面试忍者。严格模拟大厂面试官追问，快速提升你的AI PM面试表现。</p>
+        <button class="start-btn" onclick="startPractice()">⚔️ 开始今日练习</button>
+      </div>
+
+      <div>
+        <div class="section-title">选择练习方向</div>
+        <div class="section-sub" style="margin-bottom:16px">可多选，不选则随机抽题</div>
+        <div class="topic-grid" id="topicGrid">
+          <div class="topic-card selected" data-topic="basic" onclick="toggleTopic(this)">
+            <div class="topic-icon">🎯</div>
+            <div class="topic-name">基础问题</div>
+            <div class="topic-count">自我介绍 · 转专业 · PM特质</div>
+          </div>
+          <div class="topic-card selected" data-topic="ntn" onclick="toggleTopic(this)">
+            <div class="topic-icon">🧠</div>
+            <div class="topic-name">Navigating the Noise</div>
+            <div class="topic-count">用户调研 · Prompt工程 · 数据</div>
+          </div>
+          <div class="topic-card selected" data-topic="car" onclick="toggleTopic(this)">
+            <div class="topic-icon">🚗</div>
+            <div class="topic-name">CarEcoCompare</div>
+            <div class="topic-count">产品决策 · 数据分析 · 竞品</div>
+          </div>
+          <div class="topic-card selected" data-topic="tumor" onclick="toggleTopic(this)">
+            <div class="topic-icon">🔬</div>
+            <div class="topic-name">TumorTutor</div>
+            <div class="topic-count">交互设计 · 技术理解 · 分工</div>
+          </div>
+          <div class="topic-card selected" data-topic="vibe" onclick="toggleTopic(this)">
+            <div class="topic-icon">⚡</div>
+            <div class="topic-name">Vibe Coding</div>
+            <div class="topic-count">行程规划 · 大富翁工具</div>
+          </div>
+          <div class="topic-card selected" data-topic="open" onclick="toggleTopic(this)">
+            <div class="topic-icon">💡</div>
+            <div class="topic-name">开放问题</div>
+            <div class="topic-count">APP优化 · 产品设计 · 竞品</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRACTICE SCREEN -->
+    <div class="screen" id="screen-practice">
+      <div class="practice-header">
+        <div style="font-size:13px; font-weight:700;">⚔️ 练习中</div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+        </div>
+        <div class="q-counter" id="qCounter">0 / 0</div>
+        <div class="timer-display" id="timerDisplay">00:00</div>
+      </div>
+
+      <div class="question-card" id="questionCard">
+        <div class="q-tag" id="qTag">基础问题</div>
+        <div class="q-text" id="qText">问题加载中...</div>
+      </div>
+
+      <div class="chat-area" id="chatArea"></div>
+
+      <div class="input-area">
+        <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()" title="语音输入">🎤</button>
+        <textarea class="answer-input" id="answerInput" placeholder="输入你的回答..." rows="2"
+          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendAnswer()}"
+          oninput="autoResize(this)"></textarea>
+        <button class="send-btn" id="sendBtn" onclick="sendAnswer()">发送</button>
+      </div>
+
+      <div id="feedbackArea"></div>
+    </div>
+
+    <!-- KB SCREEN -->
+    <div class="screen" id="screen-kb">
+      <div>
+        <div class="section-title">📚 题库管理</div>
+        <div class="section-sub">粘贴你的面试宝典或面经，AI将基于这些内容出题和评分</div>
+      </div>
+      <textarea class="kb-textarea" id="kbContent" placeholder="在这里粘贴你的面试宝典内容、项目介绍、面经等...
+
+支持格式：
+- 你的项目详情和关键数据
+- 搜索到的面经题目
+- 真实面试后的反馈
+- 任何你想练习的内容
+
+AI会基于这些内容为你生成个性化练习题。"></textarea>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <button class="save-btn" onclick="saveKB()">💾 保存题库</button>
+        <span id="kbSaveStatus" style="font-size:13px; color:var(--sage);"></span>
+      </div>
+      <div style="padding:16px; background:rgba(26,26,46,0.04); border-radius:10px; border:1px solid var(--border);">
+        <div style="font-size:12px; font-weight:700; margin-bottom:8px; color:var(--muted);">💡 使用建议</div>
+        <div style="font-size:12px; color:var(--muted); line-height:1.7;">
+          把面试宝典的Markdown内容完整粘贴进来。AI会根据你的内容出题，并在评分时参考你项目的具体数据（r=0.533、94.31%等），给出更有针对性的反馈。
+        </div>
+      </div>
+    </div>
+
+    <!-- HISTORY SCREEN -->
+    <div class="screen" id="screen-history">
+      <div>
+        <div class="section-title">📊 历史记录</div>
+        <div class="section-sub">每次练习的题目和评分</div>
+      </div>
+      <div class="history-list" id="historyList">
+        <div style="text-align:center; padding:40px; color:var(--muted); font-size:14px;">
+          还没有练习记录，去开始第一次练习吧！
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── STATE ──
+let state = {
+  apiKey: '',
+  kb: '',
+  settings: { qCount: 1, difficulty: 'strict' },
+  selectedTopics: ['basic','ntn','car','tumor','vibe','open'],
+  practice: { questions: [], current: 0, messages: [], scores: [], startTime: null, timer: null, turnCount: 0, maxTurns: 3 },
+  stats: { totalQ: 0, avgScore: 0, todayQ: 0, totalDays: 0, streak: 0, history: [], practiceDays: {} },
+};
+
+// ── PERSIST ──
+function save() { try { localStorage.setItem('ninja', JSON.stringify(state)); } catch(e){} }
+function load() {
+  try {
+    const d = localStorage.getItem('ninja');
+    if (d) {
+      const parsed = JSON.parse(d);
+      state = { ...state, ...parsed };
+      state.practice = { questions: [], current: 0, messages: [], scores: [], startTime: null, timer: null, turnCount: 0, maxTurns: 3 };
+    }
+  } catch(e) {}
+}
+
+// ── INIT ──
+load();
+document.getElementById('apiKey').value = state.apiKey || '';
+document.getElementById('kbContent').value = state.kb || '';
+updateStats();
+renderCalendar();
+applySettings();
+
+document.getElementById('apiKey').addEventListener('change', function() {
+  state.apiKey = this.value.trim();
+  save();
+  document.getElementById('keyStatus').textContent = state.apiKey ? '✓ Key已保存' : '';
+  document.getElementById('keyStatus').className = 'key-status ok';
+});
+
+// ── SCREENS ──
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+  document.getElementById('nav-' + name).classList.add('active');
+  if (name === 'history') renderHistory();
+}
+
+// ── SETTINGS ──
+function applySettings() {
+  document.querySelectorAll('#qCountCtrl .btn-pill').forEach(b => {
+    b.classList.toggle('active', b.dataset.val == state.settings.qCount);
+  });
+  document.querySelectorAll('#diffCtrl .btn-pill').forEach(b => {
+    b.classList.toggle('active', b.dataset.val === state.settings.difficulty);
+  });
+}
+
+document.getElementById('qCountCtrl').addEventListener('click', e => {
+  if (e.target.dataset.val) { state.settings.qCount = parseInt(e.target.dataset.val); save(); applySettings(); }
+});
+document.getElementById('diffCtrl').addEventListener('click', e => {
+  if (e.target.dataset.val) { state.settings.difficulty = e.target.dataset.val; save(); applySettings(); }
+});
+
+// ── TOPICS ──
+function toggleTopic(card) {
+  const t = card.dataset.topic;
+  const idx = state.selectedTopics.indexOf(t);
+  if (idx >= 0) {
+    if (state.selectedTopics.length > 1) { state.selectedTopics.splice(idx,1); card.classList.remove('selected'); }
+  } else { state.selectedTopics.push(t); card.classList.add('selected'); }
+}
+
+// ── KB ──
+function saveKB() {
+  state.kb = document.getElementById('kbContent').value;
+  save();
+  const s = document.getElementById('kbSaveStatus');
+  s.textContent = '✓ 已保存';
+  setTimeout(() => s.textContent = '', 2000);
+}
+
+// ── PRACTICE ──
+async function startPractice() {
+  if (!state.apiKey) { alert('请先在左侧输入 Claude API Key'); return; }
+  showScreen('practice');
+  state.practice = { questions: [], current: 0, messages: [], scores: [], startTime: Date.now(), timer: null, turnCount: 0, maxTurns: 3 };
+  document.getElementById('chatArea').innerHTML = '';
+  document.getElementById('feedbackArea').innerHTML = '';
+  document.getElementById('answerInput').value = '';
+  startTimer();
+  await generateQuestions();
+  showCurrentQuestion();
+}
+
+function startTimer() {
+  state.practice.startTime = Date.now();
+  if (state.practice.timer) clearInterval(state.practice.timer);
+  state.practice.timer = setInterval(() => {
+    const elapsed = Math.floor((Date.now() - state.practice.startTime) / 1000);
+    const m = Math.floor(elapsed/60).toString().padStart(2,'0');
+    const s = (elapsed%60).toString().padStart(2,'0');
+    const el = document.getElementById('timerDisplay');
+    el.textContent = `${m}:${s}`;
+    el.className = 'timer-display' + (elapsed > 180 ? ' urgent' : '');
+  }, 1000);
+}
+
+async function generateQuestions() {
+  const topicMap = {
+    basic: '基础问题（自我介绍、为什么转专业、PM特质、APP体验优化）',
+    ntn: 'Navigating the Noise项目（用户调研、Prompt工程、评估体系、数据追问）',
+    car: 'CarEcoCompare项目（产品决策、竞品分析、数据指标、WS-ARIMA）',
+    tumor: 'TumorTutor项目（分工说明、交互设计、94.31%准确率、迭代困难）',
+    vibe: 'Vibe Coding项目（行程规划工具、大富翁工具、AI coding执行力）',
+    open: '开放性产品问题（功能设计、用户需求、产品平衡、竞品分析）',
+  };
+  const topics = state.selectedTopics.map(t => topicMap[t]).join('；');
+  const n = state.settings.qCount;
+  const kb = state.kb ? `\n\n面试者的背景资料：\n${state.kb.slice(0,3000)}` : '';
+
+  const prompt = `你是一个大厂AI产品经理面试官。请为以下候选人生成${n}道面试练习题。
+
+题目范围：${topics}${kb}
+
+要求：
+1. 每道题都是面试中真实会问的问题
+2. 题目要有具体性，不要太宽泛
+3. 难度要体现大厂风格——有深度、有追问空间
+4. 严格按照以下JSON格式输出，不要有任何其他内容：
+
+{"questions":[{"tag":"题目类型","text":"题目内容"},{"tag":"题目类型","text":"题目内容"}]}`;
+
+  try {
+    const res = await callClaude([{role:'user',content:prompt}], 800);
+    const match = res.match(/\{[\s\S]*\}/);
+    if (match) {
+      const parsed = JSON.parse(match[0]);
+      state.practice.questions = parsed.questions.slice(0, n);
+    }
+  } catch(e) {
+    state.practice.questions = [{ tag: '基础问题', text: '请做一个2分钟的自我介绍，重点突出你的项目经历和AI PM相关能力。' }];
+  }
+  updateProgress();
+}
+
+function showCurrentQuestion() {
+  const q = state.practice.questions[state.practice.current];
+  if (!q) return;
+  document.getElementById('qTag').textContent = q.tag;
+  document.getElementById('qText').textContent = q.text;
+  document.getElementById('chatArea').innerHTML = '';
+  document.getElementById('feedbackArea').innerHTML = '';
+  document.getElementById('answerInput').value = '';
+  state.practice.messages = [];
+  state.practice.turnCount = 0;
+  updateProgress();
+
+  // AI opening
+  const opening = state.settings.difficulty === 'strict'
+    ? '好，请回答这道题。我会根据你的回答进行追问。'
+    : '请放松，按你的思路回答这道题，我会帮你补充完善。';
+  addMessage('ai', opening);
+}
+
+function updateProgress() {
+  const total = state.practice.questions.length;
+  const current = state.practice.current;
+  document.getElementById('qCounter').textContent = `${current+1} / ${total}`;
+  document.getElementById('progressFill').style.width = `${(current/total)*100}%`;
+}
+
+async function sendAnswer() {
+  const input = document.getElementById('answerInput');
+  const text = input.value.trim();
+  if (!text || !state.apiKey) return;
+  input.value = '';
+  input.style.height = 'auto';
+  document.getElementById('sendBtn').disabled = true;
+
+  addMessage('user', text);
+  state.practice.messages.push({role:'user', content:text});
+  state.practice.turnCount++;
+
+  if (state.practice.turnCount >= state.practice.maxTurns) {
+    await getFeedback();
+  } else {
+    showTyping();
+    const reply = await getFollowUp();
+    hideTyping();
+    addMessage('ai', reply);
+    state.practice.messages.push({role:'assistant', content:reply});
+  }
+  document.getElementById('sendBtn').disabled = false;
+}
+
+async function getFollowUp() {
+  const q = state.practice.questions[state.practice.current];
+  const kb = state.kb ? `\n\n候选人背景：${state.kb.slice(0,2000)}` : '';
+  const diff = state.settings.difficulty === 'strict'
+    ? '你是严格的大厂面试官，要深挖细节，追问数据来源、具体实现方式、遇到的困难。不轻易满足于表面答案。'
+    : '你是友好的面试官，帮助候选人把答案说得更完整，适当引导。';
+
+  const messages = [
+    {role:'user', content:`${diff}${kb}\n\n面试题目：${q.text}\n\n请根据候选人的回答进行追问（1-2句话，直接问问题，不要有任何评价或前言）。这是第${state.practice.turnCount}轮追问，共${state.practice.maxTurns}轮。`},
+    ...state.practice.messages.map(m => ({role: m.role === 'user' ? 'user' : 'assistant', content: m.content})),
+    {role:'user', content:'请给出你的下一个追问（只问问题，不评价）：'}
+  ];
+
+  try { return await callClaude(messages, 200); }
+  catch(e) { return '能具体说说你是怎么做到的吗？'; }
+}
+
+async function getFeedback() {
+  showTyping();
+  const q = state.practice.questions[state.practice.current];
+  const kb = state.kb ? `\n\n候选人背景资料：${state.kb.slice(0,2000)}` : '';
+  const conv = state.practice.messages.map(m => `${m.role==='user'?'候选人':'面试官'}：${m.content}`).join('\n');
+
+  const prompt = `你是严格的大厂AI产品经理面试官，请对候选人的回答进行评分和反馈。${kb}
+
+面试题目：${q.text}
+
+对话记录：
+${conv}
+
+请严格按照以下JSON格式输出评分（每项1-5分），不要有任何其他内容：
+{"scores":{"structure":3,"depth":3,"data":3,"product":3,"expression":3},"suggestion":"最重要的一条改进建议（1-2句话，直接具体）","highlight":"做得最好的一点（1句话）"}`;
+
+  try {
+    const res = await callClaude([{role:'user',content:prompt}], 400);
+    const match = res.match(/\{[\s\S]*\}/);
+    hideTyping();
+    if (match) {
+      const fb = JSON.parse(match[0]);
+      state.practice.scores.push(fb.scores);
+      showFeedback(fb);
+    }
+  } catch(e) {
+    hideTyping();
+    showFeedback({ scores:{structure:3,depth:3,data:3,product:3,expression:3}, suggestion:'请尝试用更具体的数据支撑你的观点。', highlight:'回答有一定结构感。' });
+  }
+}
+
+function showFeedback(fb) {
+  const avg = Math.round(Object.values(fb.scores).reduce((a,b)=>a+b,0)/5*10)/10;
+  const dims = [
+    {key:'structure',label:'结构化'},
+    {key:'depth',label:'内容深度'},
+    {key:'data',label:'数据支撑'},
+    {key:'product',label:'产品思维'},
+    {key:'expression',label:'表达流畅'},
+  ];
+  const scoreHTML = dims.map(d => {
+    const v = fb.scores[d.key];
+    return `<div class="score-item">
+      <div class="score-circle s${v}">${v}</div>
+      <div class="score-dim">${d.label}</div>
+    </div>`;
+  }).join('');
+
+  const isLast = state.practice.current >= state.practice.questions.length - 1;
+
+  document.getElementById('feedbackArea').innerHTML = `
+    <div class="feedback-card">
+      <div class="feedback-title">⚔️ 评分反馈 · 综合 ${avg}/5</div>
+      <div class="score-grid">${scoreHTML}</div>
+      <div class="feedback-suggest">
+        <strong>✨ 亮点：</strong>${fb.highlight}<br><br>
+        <strong>🎯 最重要的改进：</strong>${fb.suggestion}
+      </div>
+      <button class="next-btn" onclick="${isLast ? 'completePractice()' : 'nextQuestion()'}">${isLast ? '🏆 完成练习' : '下一题 →'}</button>
+    </div>`;
+
+  // record history
+  const q = state.practice.questions[state.practice.current];
+  state.stats.history.unshift({
+    date: new Date().toLocaleDateString('zh-CN'),
+    question: q.text.slice(0,50) + (q.text.length>50?'...':''),
+    avg: avg,
+    tag: q.tag,
+  });
+  if (state.stats.history.length > 100) state.stats.history = state.stats.history.slice(0,100);
+  save();
+}
+
+function nextQuestion() {
+  state.practice.current++;
+  showCurrentQuestion();
+  document.getElementById('feedbackArea').innerHTML = '';
+  window.scrollTo(0,0);
+}
+
+function completePractice() {
+  if (state.practice.timer) clearInterval(state.practice.timer);
+  const allScores = state.practice.scores.flatMap(s => Object.values(s));
+  const avg = allScores.length ? Math.round(allScores.reduce((a,b)=>a+b,0)/allScores.length*10)/10 : 0;
+  const elapsed = Math.floor((Date.now() - state.practice.startTime)/1000);
+  const mins = Math.floor(elapsed/60);
+
+  // update stats
+  const today = new Date().toDateString();
+  if (!state.stats.practiceDays) state.stats.practiceDays = {};
+  state.stats.practiceDays[today] = (state.stats.practiceDays[today]||0) + state.practice.questions.length;
+  state.stats.totalQ = (state.stats.totalQ||0) + state.practice.questions.length;
+  state.stats.todayQ = state.stats.practiceDays[today];
+  state.stats.totalDays = Object.keys(state.stats.practiceDays).length;
+
+  // streak
+  let streak = 0;
+  const d = new Date();
+  while(true) {
+    if (state.stats.practiceDays[d.toDateString()]) { streak++; d.setDate(d.getDate()-1); }
+    else break;
+  }
+  state.stats.streak = streak;
+  document.getElementById('streakNum').textContent = streak;
+
+  // avg score
+  const allH = state.stats.history.slice(0,20);
+  if (allH.length) {
+    state.stats.avgScore = Math.round(allH.reduce((a,b)=>a+(b.avg||0),0)/allH.length*10)/10;
+  }
+  save();
+  updateStats();
+  renderCalendar();
+
+  const emoji = avg >= 4.5 ? '🏆' : avg >= 3.5 ? '⚔️' : avg >= 2.5 ? '💪' : '🥷';
+
+  document.getElementById('screen-practice').innerHTML = `
+    <div class="complete-card">
+      <div class="complete-emoji">${emoji}</div>
+      <div class="complete-title">练习完成！</div>
+      <div class="complete-sub">你又离面试忍者近了一步</div>
+      <div class="complete-stats">
+        <div class="complete-stat">
+          <div class="complete-stat-num">${avg}</div>
+          <div class="complete-stat-label">综合评分</div>
+        </div>
+        <div class="complete-stat">
+          <div class="complete-stat-num">${state.practice.questions.length}</div>
+          <div class="complete-stat-label">练习题数</div>
+        </div>
+        <div class="complete-stat">
+          <div class="complete-stat-num">${mins}分</div>
+          <div class="complete-stat-label">练习时长</div>
+        </div>
+        <div class="complete-stat">
+          <div class="complete-stat-num">${streak}🔥</div>
+          <div class="complete-stat-label">连续打卡</div>
+        </div>
+      </div>
+      <button class="start-btn" onclick="startPractice()">再来一组 ⚔️</button>
+      <button class="start-btn" style="background:rgba(245,240,232,0.15); margin-left:12px;" onclick="showScreen('home')">返回首页</button>
+    </div>`;
+}
+
+// ── UI HELPERS ──
+function addMessage(role, text) {
+  const area = document.getElementById('chatArea');
+  const div = document.createElement('div');
+  div.className = `msg ${role}`;
+  div.innerHTML = `
+    <div class="msg-avatar">${role==='ai'?'🥷':'👤'}</div>
+    <div>
+      <div class="msg-label">${role==='ai'?'面试官':'你'}</div>
+      <div class="msg-bubble">${text.replace(/\n/g,'<br>')}</div>
+    </div>`;
+  area.appendChild(div);
+  area.scrollTop = area.scrollHeight;
+}
+
+function showTyping() {
+  const area = document.getElementById('chatArea');
+  const div = document.createElement('div');
+  div.className = 'msg ai'; div.id = 'typing';
+  div.innerHTML = `<div class="msg-avatar">🥷</div><div><div class="msg-label">面试官</div><div class="msg-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div></div>`;
+  area.appendChild(div);
+  area.scrollTop = area.scrollHeight;
+}
+
+function hideTyping() {
+  const t = document.getElementById('typing');
+  if (t) t.remove();
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 200) + 'px';
+}
+
+// ── VOICE ──
+let recognition = null;
+function toggleVoice() {
+  const btn = document.getElementById('voiceBtn');
+  if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+    alert('你的浏览器不支持语音识别，请使用Chrome浏览器'); return;
+  }
+  if (recognition) { recognition.stop(); recognition = null; btn.classList.remove('recording'); btn.textContent='🎤'; return; }
+  recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  recognition.lang = 'zh-CN'; recognition.continuous = true; recognition.interimResults = true;
+  recognition.onresult = e => {
+    const input = document.getElementById('answerInput');
+    let final = '';
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      if (e.results[i].isFinal) final += e.results[i][0].transcript;
+    }
+    if (final) input.value += final;
+    autoResize(input);
+  };
+  recognition.onend = () => { btn.classList.remove('recording'); btn.textContent='🎤'; recognition=null; };
+  recognition.start();
+  btn.classList.add('recording'); btn.textContent='⏹';
+}
+
+// ── STATS ──
+function updateStats() {
+  document.getElementById('totalQ').textContent = state.stats.totalQ||0;
+  document.getElementById('avgScore').textContent = state.stats.avgScore||'—';
+  document.getElementById('todayQ').textContent = state.stats.todayQ||0;
+  document.getElementById('totalDays').textContent = state.stats.totalDays||0;
+  document.getElementById('streakNum').textContent = state.stats.streak||0;
+}
+
+function renderCalendar() {
+  const cal = document.getElementById('calendar');
+  cal.innerHTML = '';
+  const today = new Date();
+  for (let i = 29; i >= 0; i--) {
+    const d = new Date(today); d.setDate(today.getDate()-i);
+    const key = d.toDateString();
+    const div = document.createElement('div');
+    div.className = 'cal-day';
+    if (state.stats.practiceDays && state.stats.practiceDays[key]) div.classList.add('done');
+    if (i===0) div.classList.add('today');
+    div.title = `${d.getMonth()+1}/${d.getDate()}${state.stats.practiceDays&&state.stats.practiceDays[key]?' ✓':''}`;
+    cal.appendChild(div);
+  }
+}
+
+function renderHistory() {
+  const list = document.getElementById('historyList');
+  const h = state.stats.history||[];
+  if (!h.length) {
+    list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted);font-size:14px;">还没有练习记录，去开始第一次练习吧！</div>';
+    return;
+  }
+  list.innerHTML = h.map(item => `
+    <div class="history-item">
+      <div class="history-date">${item.date}</div>
+      <div>
+        <div style="font-size:10px;color:var(--muted);margin-bottom:3px;">${item.tag||''}</div>
+        <div class="history-q">${item.question}</div>
+      </div>
+      <div class="history-avg">${item.avg}</div>
+    </div>`).join('');
+}
+
+// ── CLAUDE API ──
+async function callClaude(messages, maxTokens=500) {
+  const isDeployed = !['localhost','127.0.0.1'].includes(window.location.hostname) && !window.location.protocol.startsWith('file');
+  const url = isDeployed ? '/api/claude' : 'https://api.anthropic.com/v1/messages';
+  const headers = {'Content-Type': 'application/json'};
+  if (!isDeployed) { headers['x-api-key'] = state.apiKey; headers['anthropic-version'] = '2023-06-01'; }
+  const res = await fetch(url, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: maxTokens,
+      messages: messages,
+    })
+  });
+  if (!res.ok) throw new Error(await res.text());
+  const data = await res.json();
+  return data.content[0].text;
+}
+</script>
+</body>
+</html>

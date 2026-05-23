@@ -31,6 +31,11 @@ const translations = {
     proj2Status: "❆ 已上线",
     proj2Cat: "数据建模 · 决策工具",
     proj2Desc: "将棋盘规则数字化，构建地产投资决策系统。",
+    proj3Label: "项目三",
+    proj3Title: "面试忍者 · AI PM 面试练习工具",
+    proj3Status: "❆ 已上线",
+    proj3Cat: "AI工具 · 面试训练 · 游戏化",
+    proj3Desc: "模拟大厂面试官追问，五维度评分+参考答案，每日打卡练习AI PM面试。",
     tags: ["AI", "研究", "产品", "设计", "心理学", "数据"],
     projectDetails: {
       1: { problem: "识别现有产品以留存为导向、结构性诱导用户依赖的设计问题。", solution: "提出反思性提示、边界提示、真实社交引导三项设计策略。", impact: "深入研究AI情感依赖与用户行为模式，作为毕业论文前期基础。", tools: "Python, Google Colab, OLS 回归, 情感分析" },
@@ -61,6 +66,11 @@ const translations = {
     proj2Status: "Live",
     proj2Cat: "Data Modelling · Decision Tool",
     proj2Desc: "Digitising board game rules to build a property investment decision system.",
+    proj3Label: "Project 3",
+    proj3Title: "Interview Ninja · AI PM Practice Tool",
+    proj3Status: "Live",
+    proj3Cat: "AI Tool · Interview Training · Gamification",
+    proj3Desc: "Simulates real big-tech interview follow-up, 5-dimension scoring, reference answers, and daily streak practice.",
     tags: ["AI", "Research", "Product", "Design", "Psychology", "Data"],
     projectDetails: {
       1: { problem: "Identified design issues in existing products that induce structural user dependency.", solution: "Proposed three design strategies: reflective prompts, boundary cues, and social signposting.", impact: "Deep research into AI emotional reliance and user behavior patterns for thesis foundation.", tools: "Python, Google Colab, OLS Regression, Sentiment Analysis" },
@@ -1367,11 +1377,144 @@ function ModalVibe2({ lang }: { lang: Language }) {
   );
 }
 
+function ModalVibe3({ lang }: { lang: Language }) {
+  const t = translations[lang];
+  return (
+    <div className="font-sans">
+      <div className="p-6 md:p-10 pb-4 border-b border-ink/10">
+        <div className="flex flex-wrap gap-2 mb-4">
+          <span className="px-3 py-1 bg-ink text-paper rounded-full text-[9px] font-bold uppercase tracking-widest">Vibe Coding</span>
+          <span className="px-3 py-1 bg-[#F0F4FF] text-[#3B4FBF] rounded-full text-[9px] font-bold uppercase tracking-widest">AI PM Perspective</span>
+        </div>
+        <p className="text-[9px] font-black uppercase tracking-widest text-[#3B4FBF] mb-2">{t.proj3Label}</p>
+        <h2 className="text-3xl md:text-4xl font-serif font-black text-ink mb-1">{t.proj3Title}</h2>
+        <p className="text-sm text-[#3B4FBF] italic">{lang === "zh" ? "用 Claude vibe coding 做的 AI PM 面试练习工具，每日一练成为面试忍者" : "An AI PM interview practice tool built with Claude vibe coding — daily drills to become an Interview Ninja"}</p>
+      </div>
+      <div className="p-6 md:p-10">
+        <div className="border-2 border-ink rounded-2xl overflow-hidden shadow-[3px_3px_0_rgba(45,45,45,1)] mb-4">
+          <div className="flex items-center gap-2 px-3 py-2 bg-[#F0F4FF]">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" /><span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" /><span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
+            <span className="flex-1 text-center text-[10px] text-ink/40 font-mono">面试忍者 · Interview Ninja</span>
+            <span className="text-[11px] font-bold text-[#3B4FBF]">❆ Live</span>
+          </div>
+          <div className="bg-[#F5F0E8] p-4">
+            <svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" className="w-full">
+              <defs><marker id="arr3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1a1a2e"/></marker></defs>
+              {/* Step 1: 出题 */}
+              <rect x="8" y="25" width="108" height="150" rx="12" fill="#F0F4FF" stroke="#1a1a2e" strokeWidth="2"/>
+              <rect x="8" y="25" width="108" height="34" rx="12" fill="#3B4FBF"/>
+              <rect x="8" y="47" width="108" height="12" fill="#3B4FBF"/>
+              <text x="62" y="47" textAnchor="middle" fontSize="12" fill="white" fontFamily="sans-serif" fontWeight="700">01 · 出题</text>
+              <text x="62" y="80" textAnchor="middle" fontSize="9.5" fill="#3B4FBF" fontFamily="sans-serif" fontWeight="700">选择练习方向</text>
+              {["NTN · CarEco", "TumorTutor", "基础 / Vibe", "开放问题"].map((t,i)=>(
+                <g key={i}><rect x="18" y={90+i*17} width="88" height="13" rx="5" fill="white" stroke="#3B4FBF" strokeWidth="0.8"/><text x="62" y={100+i*17} textAnchor="middle" fontSize="8" fill="#3B4FBF" fontFamily="sans-serif">{t}</text></g>
+              ))}
+              <text x="62" y="200" textAnchor="middle" fontSize="8" fill="#888" fontFamily="sans-serif">AI 自动出题</text>
+              {/* arrow */}
+              <line x1="118" y1="100" x2="136" y2="100" stroke="#1a1a2e" strokeWidth="1.8" markerEnd="url(#arr3)"/>
+              {/* Step 2: 追问 */}
+              <rect x="138" y="25" width="108" height="150" rx="12" fill="#FFF0F7" stroke="#1a1a2e" strokeWidth="2"/>
+              <rect x="138" y="25" width="108" height="34" rx="12" fill="#C0392B"/>
+              <rect x="138" y="47" width="108" height="12" fill="#C0392B"/>
+              <text x="192" y="47" textAnchor="middle" fontSize="12" fill="white" fontFamily="sans-serif" fontWeight="700">02 · 追问</text>
+              <text x="192" y="78" textAnchor="middle" fontSize="9.5" fill="#C0392B" fontFamily="sans-serif" fontWeight="700">大厂面试官风格</text>
+              {["第1轮追问","第2轮追问","第3轮追问"].map((t,i)=>(
+                <g key={i}><rect x="148" y={86+i*22} width="88" height="16" rx="6" fill={i===2?"#C0392B":"white"} stroke="#C0392B" strokeWidth="1"/><text x="192" y={98+i*22} textAnchor="middle" fontSize="8.5" fill={i===2?"white":"#C0392B"} fontFamily="sans-serif">{t}</text></g>
+              ))}
+              <rect x="148" y="153" width="88" height="14" rx="5" fill="#FEE2E2"/>
+              <text x="192" y="163" textAnchor="middle" fontSize="8" fill="#991B1B" fontFamily="sans-serif">计时 · 追问结束→评分</text>
+              <text x="192" y="200" textAnchor="middle" fontSize="8" fill="#888" fontFamily="sans-serif">语音输入支持</text>
+              {/* arrow */}
+              <line x1="248" y1="100" x2="266" y2="100" stroke="#1a1a2e" strokeWidth="1.8" markerEnd="url(#arr3)"/>
+              {/* Step 3: 评分 */}
+              <rect x="268" y="25" width="108" height="150" rx="12" fill="#FFFBEB" stroke="#1a1a2e" strokeWidth="2"/>
+              <rect x="268" y="25" width="108" height="34" rx="12" fill="#B45309"/>
+              <rect x="268" y="47" width="108" height="12" fill="#B45309"/>
+              <text x="322" y="47" textAnchor="middle" fontSize="12" fill="white" fontFamily="sans-serif" fontWeight="700">03 · 评分</text>
+              <text x="322" y="78" textAnchor="middle" fontSize="9.5" fill="#B45309" fontFamily="sans-serif" fontWeight="700">五维度评分</text>
+              {[["结构化",72],["内容深度",85],["数据支撑",60],["产品思维",78],["表达流畅",55]].map(([label,w],i)=>(
+                <g key={i}>
+                  <rect x="278" y={86+i*14} width="88" height="11" rx="3" fill="white" stroke="#D97706" strokeWidth="0.8"/>
+                  <rect x="278" y={86+i*14} width={w as number*88/100} height="11" rx="3" fill="#FDE68A"/>
+                  <text x="322" y={96+i*14} textAnchor="middle" fontSize="7.5" fill="#92400E" fontFamily="sans-serif">{label as string}</text>
+                </g>
+              ))}
+              <text x="322" y="200" textAnchor="middle" fontSize="8" fill="#888" fontFamily="sans-serif">综合评分 / 5</text>
+              {/* arrow */}
+              <line x1="378" y1="100" x2="396" y2="100" stroke="#1a1a2e" strokeWidth="1.8" markerEnd="url(#arr3)"/>
+              {/* Step 4: 参考答案 */}
+              <rect x="398" y="25" width="108" height="150" rx="12" fill="#EAF3DE" stroke="#1a1a2e" strokeWidth="2"/>
+              <rect x="398" y="25" width="108" height="34" rx="12" fill="#3B6D11"/>
+              <rect x="398" y="47" width="108" height="12" fill="#3B6D11"/>
+              <text x="452" y="47" textAnchor="middle" fontSize="11" fill="white" fontFamily="sans-serif" fontWeight="700">04 · 参考答案</text>
+              <text x="452" y="78" textAnchor="middle" fontSize="9.5" fill="#3B6D11" fontFamily="sans-serif" fontWeight="700">基于你的宝典</text>
+              <rect x="406" y="86" width="92" height="60" rx="6" fill="white" stroke="#3B6D11" strokeWidth="1"/>
+              <text x="452" y="100" textAnchor="middle" fontSize="7.5" fill="#3B6D11" fontFamily="sans-serif" fontWeight="600">宝典内容为骨架</text>
+              <text x="452" y="113" textAnchor="middle" fontSize="7" fill="#555" fontFamily="sans-serif">r=0.533说明依赖渐进</text>
+              <text x="452" y="124" textAnchor="middle" fontSize="7" fill="#555" fontFamily="sans-serif">积累，4轮是最小阈值</text>
+              <text x="452" y="135" textAnchor="middle" fontSize="7" fill="#555" fontFamily="sans-serif">——宁可晚一轮干预...</text>
+              <rect x="406" y="152" width="92" height="14" rx="5" fill="#3B6D11"/>
+              <text x="452" y="162" textAnchor="middle" fontSize="8" fill="white" fontFamily="sans-serif">复制反馈 / 一键整理</text>
+              <text x="452" y="200" textAnchor="middle" fontSize="8" fill="#888" fontFamily="sans-serif">历史记录保存</text>
+              {/* arrow */}
+              <line x1="508" y1="100" x2="526" y2="100" stroke="#1a1a2e" strokeWidth="1.8" markerEnd="url(#arr3)"/>
+              {/* Step 5: 打卡 */}
+              <rect x="528" y="40" width="104" height="120" rx="12" fill="#1a1a2e" stroke="#1a1a2e" strokeWidth="2"/>
+              <text x="580" y="72" textAnchor="middle" fontSize="22" fontFamily="sans-serif">🥷</text>
+              <text x="580" y="93" textAnchor="middle" fontSize="10" fill="white" fontFamily="sans-serif" fontWeight="700">每日打卡</text>
+              <text x="580" y="110" textAnchor="middle" fontSize="22" fontFamily="sans-serif">🔥</text>
+              <text x="580" y="132" textAnchor="middle" fontSize="9" fill="#D4A017" fontFamily="sans-serif" fontWeight="700">连续打卡天数</text>
+              <text x="580" y="148" textAnchor="middle" fontSize="8" fill="rgba(245,240,232,0.5)" fontFamily="sans-serif">成为面试忍者</text>
+              <text x="320" y="208" textAnchor="middle" fontSize="8" fill="#9CA3AF" fontFamily="sans-serif">Interview Ninja · Built with Claude vibe coding · Runs in Claude.ai</text>
+            </svg>
+          </div>
+        </div>
+        <div className="flex items-center justify-between p-5 bg-ink/5 border border-ink/20 rounded-2xl mb-4">
+          <div>
+            <p className="text-sm font-black mb-1">{lang === "zh" ? "面试忍者工具文件" : "Interview Ninja tool file"}</p>
+            <p className="text-xs text-ink/50">{lang === "zh" ? "需要 Claude API Key · 本地浏览器运行" : "Requires Claude API Key · runs in browser"}</p>
+          </div>
+          <a href="/interview-ninja.html" download="interview-ninja.html" className="px-5 py-2.5 bg-ink text-paper rounded-xl text-xs font-black hover:bg-terracotta transition-colors">
+            {lang === "zh" ? "下载 HTML ↓" : "Download HTML ↓"}
+          </a>
+        </div>
+
+        <div className="flex items-center gap-3 my-4">
+          <span className="text-[10px] font-black uppercase tracking-widest text-ink/30 whitespace-nowrap">AI PM 工作流分析</span>
+          <div className="h-px flex-1 bg-ink/10" />
+        </div>
+        <div className="border border-ink/10 rounded-xl overflow-hidden">
+          {([
+            { n:"01", title: lang==="zh" ? "识别需求与痛点" : "Define the Problem", desc: lang==="zh" ? "求职过程中缺乏系统化的面试练习工具——没有追问、没有评分、没有参考答案、没有打卡机制。核心痛点：面试是一种需要刻意练习的技能，但现有工具都是静态的题库，没有模拟真实追问的能力。" : "No systematic interview practice tool existed — no follow-up, no scoring, no reference answers, no streak mechanic. Core insight: interviewing is a skill requiring deliberate practice, but existing tools are static question banks without real interrogation simulation.", tags: ["需求定义", "用户痛点"] },
+            { n:"02", title: lang==="zh" ? "产品设计优先" : "Product Design First", desc: lang==="zh" ? "先定义完整的产品逻辑：题库管理（宝典+面经+实习）、练习流程（出题→追问3轮→评分+参考答案）、游戏化（打卡日历、连胜、历史记录）。把产品逻辑写清楚再和Claude协作实现。" : "Defined the full product logic first: knowledge base management (playbook + interviews + internships), practice flow (question → 3-round drill → score + reference), gamification (streak calendar, history). Wrote clear product specs before collaborating with Claude.", tags: ["产品设计", "功能定义"] },
+            { n:"03", title: lang==="zh" ? "Claude vibe coding 实现" : "Claude Vibe Coding", desc: lang==="zh" ? "用自然语言描述每个功能模块，Claude生成完整HTML+CSS+JS。Claude API内置在Claude.ai的Artifacts中，不需要用户自己申请Key——这是这个工具最关键的产品决策：零门槛使用。" : "Described each feature module in natural language; Claude generated the full HTML+CSS+JS. Claude API is built into Claude.ai Artifacts — no API key needed. This was the key product decision: zero barrier to use.", tags: ["Claude Artifacts", "零门槛"] },
+            { n:"04", title: lang==="zh" ? "迭代优化" : "Iteration", desc: lang==="zh" ? "多轮迭代覆盖：UI配色（hero区深色→纸色）、题库三Tab切换、参考答案基于宝典内容生成、历史记录可展开参考答案、一键整理宝典导出。每次迭代都基于真实使用反馈。" : "Multiple rounds: UI color fix (dark hero → paper), 3-tab knowledge base, reference answers grounded in the playbook, expandable history records, one-click guide export. Each iteration driven by real usage feedback.", tags: ["多轮迭代", "用户反馈"] },
+          ] as {n:string;title:string;desc:string;tags:string[]}[]).map((row, i) => (
+            <div key={i} className="flex gap-3 p-3.5 border-b border-ink/[0.07] bg-white last:border-b-0">
+              <div className="w-5 h-5 rounded-full border-[1.5px] border-[#3B4FBF] bg-[#F0F4FF] flex items-center justify-center text-[10px] font-bold text-[#3B4FBF] flex-shrink-0 mt-0.5">{row.n}</div>
+              <div>
+                <p className="text-[13px] font-bold text-ink mb-1">{row.title}</p>
+                <p className="text-[11px] text-ink/55 leading-relaxed">{row.desc}</p>
+                <div className="flex gap-1.5 mt-1.5 flex-wrap">{row.tags.map(tag => <span key={tag} className="text-[9px] px-1.5 py-0.5 rounded bg-ink/5 text-ink/50">{tag}</span>)}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-4 p-4 border-l-[3px] border-[#3B4FBF] bg-[#F0F4FF] rounded-r-xl">
+          <span className="text-[9px] font-black uppercase tracking-widest text-ink/30 block mb-2">PM 反思</span>
+          <p className="text-xs text-ink/65 leading-relaxed italic">{lang === "zh" ? "这个项目最有意思的地方是：我既是产品经理（定义需求、设计功能），也是第一个用户（用它来练习面试）。真实的自我需求是最好的产品灵感——我知道自己在哪里卡住，所以我知道工具要解决什么问题。" : "What's interesting about this project: I was simultaneously the PM (defining requirements, designing features) and the first user (using it to practice interviews). Real self-need is the best product inspiration — I knew exactly where I got stuck, so I knew exactly what the tool needed to solve."}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [lang, setLang] = useState<Language>("zh");
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [showVibe1, setShowVibe1] = useState(false);
   const [showVibe2, setShowVibe2] = useState(false);
+  const [showVibe3, setShowVibe3] = useState(false);
   const t = translations[lang];
 
   return (
@@ -1508,7 +1651,7 @@ export default function App() {
             <h2 className="text-3xl md:text-5xl font-serif font-black uppercase tracking-tighter">{t.vibeCodingTitle}</h2>
             <div className="h-px flex-1 bg-ink/20" />
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0 }} onClick={() => setShowVibe1(true)} className="group cursor-pointer p-8 rounded-2xl border-2 border-ink bg-[#FFF0F7] retro-card-hover">
               <div className="flex justify-between items-start mb-8">
                 <div className="p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform text-[#E91E8C]"><Zap className="w-8 h-8" /></div>
@@ -1535,6 +1678,20 @@ export default function App() {
               <div className="mt-8 pt-6 border-t border-ink/10 flex items-center justify-between">
                 <div className="flex items-center gap-2 font-bold text-xs"><BookOpen className="w-4 h-4" />{t.vibeCodingView}</div>
                 <span className="text-[10px] font-bold text-[#185FA5]">{t.proj2Status}</span>
+              </div>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} onClick={() => setShowVibe3(true)} className="group cursor-pointer p-8 rounded-2xl border-2 border-ink bg-[#F0F4FF] retro-card-hover">
+              <div className="flex justify-between items-start mb-8">
+                <div className="p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform text-[#3B4FBF]"><Zap className="w-8 h-8" /></div>
+                <ArrowRight className="w-6 h-6 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
+              </div>
+              <p className="text-[9px] font-black uppercase tracking-widest text-[#3B4FBF] mb-1">{t.proj3Label}</p>
+              <h3 className="text-2xl md:text-3xl font-serif font-black mb-2">{t.proj3Title}</h3>
+              <p className="text-xs font-bold uppercase tracking-wider mb-4 text-[#3B4FBF]">{t.proj3Cat}</p>
+              <p className="text-sm text-ink/70 font-medium leading-relaxed">{t.proj3Desc}</p>
+              <div className="mt-8 pt-6 border-t border-ink/10 flex items-center justify-between">
+                <div className="flex items-center gap-2 font-bold text-xs"><BookOpen className="w-4 h-4" />{t.vibeCodingView}</div>
+                <span className="text-[10px] font-bold text-[#3B4FBF]">{t.proj3Status}</span>
               </div>
             </motion.div>
           </div>
@@ -1616,6 +1773,16 @@ export default function App() {
             <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
               <button onClick={() => setShowVibe2(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all"><X className="w-6 h-6" /></button>
               <ModalVibe2 lang={lang} />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {showVibe3 && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibe3(false)}>
+            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
+              <button onClick={() => setShowVibe3(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all"><X className="w-6 h-6" /></button>
+              <ModalVibe3 lang={lang} />
             </motion.div>
           </motion.div>
         )}
