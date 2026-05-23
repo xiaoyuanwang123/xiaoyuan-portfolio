@@ -1478,6 +1478,10 @@ function ModalVibe3({ lang }: { lang: Language }) {
             {lang === "zh" ? "下载 HTML ↓" : "Download HTML ↓"}
           </a>
         </div>
+        <div className="flex gap-3 mb-4 items-center">
+          <a href="/interview-ninja.html" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#3B4FBF] text-white text-xs font-bold border-2 border-[#2D3A9A] shadow-[2px_2px_0_#1E2875]">{lang === "zh" ? "↗ 打开工具" : "↗ Open Tool"}</a>
+          <a href="/interview-ninja.html" download="interview-ninja.html" className="text-[11px] text-ink/40 underline mt-1">{lang === "zh" ? "无法访问？下载离线版本" : "Can't access? Download offline version"}</a>
+        </div>
 
         <div className="flex items-center gap-3 my-4">
           <span className="text-[10px] font-black uppercase tracking-widest text-ink/30 whitespace-nowrap">AI PM 工作流分析</span>
