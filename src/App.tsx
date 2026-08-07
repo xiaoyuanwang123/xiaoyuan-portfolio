@@ -82,9 +82,9 @@ const translations = {
 };
 
 const projects = [
-  { id: 1, title: { zh: "Navigating the Noise", en: "Navigating the Noise" }, chineseName: "回声之外", category: { zh: "AI 情感支持交互产品", en: "AI Emotional Support Interaction" }, description: { zh: "用可跳过、可纠正的反思机制，帮助用户识别反复求证模式，同时保留自然对话与自主选择。", en: "A correctable reflection layer that helps users notice repeated reassurance-seeking while preserving natural conversation and choice." }, icon: <Brain className="w-8 h-8" />, color: "bg-[#FEF3C7]", accent: "text-amber-600" },
-  { id: 2, title: { zh: "CarEcoCompare", en: "CarEcoCompare" }, chineseName: "选车有数", category: { zh: "车辆决策数据产品", en: "Vehicle Decision Data Product" }, description: { zh: "将复杂技术参数转化为通勤场景下的三维决策框架，辅助车辆选购。", en: "Transforming complex parameters into a 3D decision framework for car buyers." }, icon: <Car className="w-8 h-8" />, color: "bg-[#DBEAFE]", accent: "text-blue-600" },
-  { id: 3, title: { zh: "TumorTutor", en: "TumorTutor" }, chineseName: "阅影有方", category: { zh: "脑肿瘤识别工具", en: "Brain Tumor Recognition Tool" }, description: { zh: "基于深度学习的脑肿瘤识别工具，支持分类与位置定位交互训练。", en: "Deep learning tool for brain tumor classification and localization training." }, icon: <Plus className="w-8 h-8" />, color: "bg-[#F3E8FF]", accent: "text-purple-600" },
+  { id: 1, title: { zh: "回声之外", en: "Navigating the Noise" }, category: { zh: "AI 情感支持交互产品", en: "AI Emotional Support Interaction" }, description: { zh: "用可跳过、可纠正的反思机制，帮助用户识别反复求证模式，同时保留自然对话与自主选择。", en: "A correctable reflection layer that helps users notice repeated reassurance-seeking while preserving natural conversation and choice." }, icon: <Brain className="w-8 h-8" />, color: "bg-[#FEF3C7]", accent: "text-amber-600" },
+  { id: 2, title: { zh: "选车有数", en: "CarEcoCompare" }, category: { zh: "车辆决策数据产品", en: "Vehicle Decision Data Product" }, description: { zh: "将复杂技术参数转化为通勤场景下的三维决策框架，辅助车辆选购。", en: "Transforming complex parameters into a 3D decision framework for car buyers." }, icon: <Car className="w-8 h-8" />, color: "bg-[#DBEAFE]", accent: "text-blue-600" },
+  { id: 3, title: { zh: "阅影有方", en: "TumorTutor" }, category: { zh: "脑肿瘤识别工具", en: "Brain Tumor Recognition Tool" }, description: { zh: "基于深度学习的脑肿瘤识别工具，支持分类与位置定位交互训练。", en: "Deep learning tool for brain tumor classification and localization training." }, icon: <Plus className="w-8 h-8" />, color: "bg-[#F3E8FF]", accent: "text-purple-600" },
 ];
 
 const schools = [
@@ -675,7 +675,7 @@ function Modal1({ lang }: { lang: Language }) {
       <header className="mb-12">
         <div className="flex flex-col md:flex-row md:items-end gap-5 mb-8">
           <div className="p-5 bg-amber-100 border-2 border-ink rounded-3xl shadow-[3px_3px_0px_0px_rgba(45,45,45,1)] w-fit"><Brain className="w-10 h-10 text-amber-600" /></div>
-          <div><p className="text-[9px] font-black uppercase tracking-[.22em] text-amber-600 mb-2">AI PRODUCT · INDEPENDENT PROJECT</p><h3 className="text-3xl md:text-5xl font-serif font-black">Navigating the Noise</h3>{zh && <p className="text-lg font-serif font-black text-ink/50 mt-1">回声之外</p>}</div>
+          <div><p className="text-[9px] font-black uppercase tracking-[.22em] text-amber-600 mb-2">AI PRODUCT · INDEPENDENT PROJECT</p><h3 className="text-4xl md:text-6xl font-serif font-black">{zh ? "回声之外" : "Navigating the Noise"}</h3></div>
         </div>
         <h4 className="max-w-4xl text-xl md:text-3xl font-serif font-bold leading-tight mb-5">
           {zh ? "帮助用户识别反复求证，而不把关怀变成诊断。" : "Helping people notice repeated reassurance-seeking—without turning care into diagnosis."}
@@ -685,6 +685,11 @@ function Modal1({ lang }: { lang: Language }) {
         </p>
         <div className="flex flex-wrap gap-2 mt-6">{(zh ? ["独立研究与产品设计", "混合方法", "LLM Workflow", "可用性测试原型"] : ["Independent research & product design", "Mixed methods", "LLM workflow", "Usability-test prototype"]).map(x => <span key={x} className="px-3 py-1 bg-ink text-paper rounded-lg text-[9px] font-bold uppercase tracking-widest">{x}</span>)}</div>
       </header>
+
+      <div className="mb-5 p-4 bg-amber-50 rounded-2xl border-2 border-ink flex flex-col sm:flex-row sm:items-center gap-4">
+        <div className="flex-1"><p className="text-[9px] font-black uppercase tracking-[.18em] text-amber-700">V4 · FULL PROTOTYPE</p><p className="text-xs text-ink/60 mt-1">{zh ? "体验完整的三日对话、两种 Mirror、四种支持方向与周度回顾。" : "Try the full three-day flow, both Mirrors, four support directions, and weekly reflection."}</p></div>
+        <div className="flex gap-2"><a href="/ntn-v4-pretesting.html" target="_blank" rel="noreferrer" className="px-5 py-3 bg-amber-300 text-ink border-2 border-ink rounded-xl text-xs font-black text-center hover:bg-amber-200 transition-colors">{zh ? "在线体验 ↗" : "Open prototype ↗"}</a><a href="/ntn-v4-pretesting.html" download="NTN-V4-pre-testing.html" className="px-5 py-3 bg-ink text-paper border-2 border-ink rounded-xl text-xs font-black text-center hover:bg-terracotta transition-colors">{zh ? "下载 HTML ↓" : "Download HTML ↓"}</a></div>
+      </div>
 
       <section className="mb-24">
         <SH i={0} label={zh ? "产品功能动画" : "PRODUCT IN ACTION"} />
@@ -740,17 +745,6 @@ function Modal1({ lang }: { lang: Language }) {
         </figure>
       </section>
 
-      <section className="mb-24">
-        <SH i={6} label={zh ? "体验完整原型" : "TRY THE FULL PROTOTYPE"} />
-        <div className="p-7 md:p-9 bg-ink text-paper rounded-[2rem] border-2 border-ink shadow-[5px_5px_0px_0px_rgba(232,106,74,1)] flex flex-col md:flex-row md:items-center gap-7">
-          <div className="flex-1"><p className="text-[9px] font-black uppercase tracking-[.2em] text-amber-300 mb-3">V4 · USABILITY-TEST PROTOTYPE</p><h6 className="text-2xl font-serif font-black mb-3">{zh ? "在浏览器中体验三日压缩测试流程" : "Experience the compressed three-day study flow"}</h6><p className="text-sm text-paper/65 leading-relaxed">{zh ? "包含自然对话、Micro Mirror、Across-time Mirror、四种方向、Weekly Reflection、NTN 开关与反馈回收。建议使用桌面浏览器。" : "Includes natural conversation, both Mirrors, four directions, Weekly Reflection, NTN controls, and feedback capture. Desktop browser recommended."}</p></div>
-          <div className="flex flex-col sm:flex-row md:flex-col gap-3 shrink-0">
-            <a href="/ntn-v4-pretesting.html" target="_blank" rel="noreferrer" className="px-6 py-3 bg-amber-300 text-ink rounded-xl text-xs font-black text-center hover:bg-white transition-colors">{zh ? "在线体验 ↗" : "Open prototype ↗"}</a>
-            <a href="/ntn-v4-pretesting.html" download="NTN-V4-pre-testing.html" className="px-6 py-3 border border-paper/30 text-paper rounded-xl text-xs font-black text-center hover:bg-paper hover:text-ink transition-colors">{zh ? "下载 HTML ↓" : "Download HTML ↓"}</a>
-          </div>
-        </div>
-      </section>
-
     </div>
   );
 }
@@ -767,8 +761,7 @@ function Modal2({ lang }: { lang: Language }) {
               </div>
               <span className="text-[9px] font-black uppercase tracking-widest text-blue-600">From data to product</span>
             </div>
-            <h3 className="text-4xl md:text-6xl font-serif font-black mb-3">CarEcoCompare</h3>
-            {lang === "zh" && <p className="text-lg font-serif font-black text-ink/50 mb-3">选车有数</p>}
+            <h3 className="text-4xl md:text-6xl font-serif font-black mb-3">{lang === "zh" ? "选车有数" : "CarEcoCompare"}</h3>
             <p className="text-lg md:text-xl font-serif text-ink/70 mb-3 leading-tight">
               {lang === "zh" ? "帮助非专业用户同时理解用车成本与环境影响的决策工具" : "Helping non-professional users understand both running costs and environmental impact"}
             </p>
@@ -1005,8 +998,7 @@ function Modal3({ lang }: { lang: Language }) {
     <div className="p-6 md:p-12">
       <header className="mb-24">
         <div className="max-w-3xl">
-          <h3 className="text-4xl md:text-6xl font-serif font-black mb-2 leading-tight">{p.hero.title}</h3>
-          {lang === "zh" && <p className="text-lg font-serif font-black text-ink/50 mb-4">阅影有方</p>}
+          <h3 className="text-4xl md:text-6xl font-serif font-black mb-4 leading-tight">{lang === "zh" ? "阅影有方" : p.hero.title}</h3>
           <p className="text-terracotta font-bold text-lg mb-6">{p.hero.subtitle}</p>
           <p className="text-xl md:text-2xl font-serif italic text-ink/70 mb-4">"{p.hero.oneLiner}"</p>
           <p className={`text-sm font-bold mb-10 ${lang === "zh" ? "text-purple-600" : "text-purple-600 italic"}`}>
@@ -1751,7 +1743,6 @@ export default function App() {
                 </div>
                 {i === 0 && <p className="text-[9px] font-black uppercase tracking-[.2em] text-amber-700 mb-3">{lang === "zh" ? "核心项目 · 独立研究与开发" : "FEATURED · INDEPENDENT RESEARCH & BUILD"}</p>}
                 <h3 className={`${i === 0 ? "text-3xl md:text-5xl" : "text-2xl md:text-3xl"} font-serif font-black mb-2 relative`}>{project.title[lang]}</h3>
-                {lang === "zh" && <p className={`${i === 0 ? "text-lg" : "text-sm"} font-serif font-black text-ink/55 mb-2`}>{project.chineseName}</p>}
                 <p className={`text-xs font-bold uppercase tracking-wider ${i === 0 ? "mb-5" : "mb-3"} ${project.accent}`}>{project.category[lang]}</p>
                 <p className={`${i === 0 ? "text-base md:text-lg max-w-md" : "text-sm"} text-ink/70 font-medium leading-relaxed relative`}>{project.description[lang]}</p>
                 <div className={`${i === 0 ? "mt-auto pt-8" : "mt-5 pt-4"} border-t border-ink/10 flex items-center justify-between gap-2 font-bold text-xs relative`}>

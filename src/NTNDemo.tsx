@@ -286,6 +286,7 @@ export default function NTNDemo({ lang }: { lang: Lang }) {
   const zh = lang === "zh";
   const sceneOrder: DemoScene[] = ["micro", "across", "weekly"];
   const options = zh ? ["继续说说它", "换一个角度看看", "选择一个小步骤", "把支持带到聊天之外"] : ["Stay with it", "Look from another angle", "Pick one small step", "Move it outside chat"];
+  const optionHints = zh ? ["先被听见，不急着解决", "区分事实、未知与担忧补上的故事", "把整个担忧缩小为十分钟行动", "将支持带到备忘录或现实关系中"] : ["Keep listening without rushing to solve", "Separate facts, unknowns, and the worry's story", "Reduce the whole worry to a ten-minute action", "Move support into notes or a real relationship"];
   const optionReplies: Record<string, string> = zh ? {
     "继续说说它": "我们可以先不急着解决。此刻，这个担忧里最占据你注意力的是什么？",
     "换一个角度看看": "我们可以把已经知道的、还不知道的，以及担忧替你补上的部分分开来看。",
@@ -333,42 +334,35 @@ export default function NTNDemo({ lang }: { lang: Lang }) {
   };
 
   useEffect(() => {
-    if (choice) return;
     const timer = window.setTimeout(() => {
       if (scene === "weekly") {
-        setScene("micro"); setStep(0);
+        setScene("micro"); setStep(0); setChoice(null);
+      } else if (choice) {
+        const next = sceneOrder[(sceneOrder.indexOf(scene) + 1) % sceneOrder.length];
+        setScene(next); setStep(0); setChoice(null);
       } else if (step < 4) {
         setStep(step + 1);
       } else {
-        const next = sceneOrder[(sceneOrder.indexOf(scene) + 1) % sceneOrder.length];
-        setScene(next); setStep(0);
+        setChoice(scene === "micro" ? options[0] : options[2]);
       }
-    }, scene === "weekly" ? 4200 : step < 4 ? 850 : 3200);
+    }, scene === "weekly" ? 4800 : choice ? 3200 : step < 4 ? 720 : 1700);
     return () => window.clearTimeout(timer);
   }, [scene, step, choice]);
-
-  function switchScene(next: DemoScene) {
-    setScene(next); setStep(0); setChoice(null);
-  }
 
   const current = scene === "weekly" ? null : content[scene];
   return (
     <div>
       <style>{`@keyframes ntnPop2{from{opacity:0;transform:translate(-50%,-46%) scale(.96)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}@keyframes msgIn2{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}`}</style>
-      <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
-        <p className="text-[9px] font-black uppercase tracking-widest text-ink/40">{zh ? "可交互功能演示" : "INTERACTIVE FEATURE DEMO"}</p>
-        <div className="sm:ml-auto flex gap-2"><a href="/ntn-v4-pretesting.html" target="_blank" rel="noreferrer" className="px-3 py-1.5 bg-ink text-paper rounded-lg text-[9px] font-black">{zh ? "在线体验 ↗" : "Open prototype ↗"}</a><a href="/ntn-v4-pretesting.html" download="NTN-V4-pre-testing.html" className="px-3 py-1.5 border border-ink/25 rounded-lg text-[9px] font-black">{zh ? "下载 HTML ↓" : "Download HTML ↓"}</a></div>
-      </div>
-      <div className="flex flex-wrap gap-2 mb-3">{(["micro","across","weekly"] as DemoScene[]).map(item => <button key={item} onClick={() => switchScene(item)} className={`px-3 py-2 rounded-full border text-[9px] font-black ${scene === item ? "bg-ink text-paper border-ink" : "bg-white border-ink/20"}`}>{item === "micro" ? "Micro Mirror" : item === "across" ? "Across-time Mirror" : "Weekly Reflection"}</button>)}</div>
+      <div className="flex items-center gap-3 mb-4"><p className="text-[9px] font-black uppercase tracking-widest text-ink/40">{zh ? "完整功能动画 · 自动播放" : "COMPLETE FEATURE FLOW · AUTO PLAY"}</p><span className="ml-auto text-[9px] font-black text-terracotta">{scene === "micro" ? "01 Micro Mirror" : scene === "across" ? "02 Across-time Mirror" : "03 Weekly Reflection"}</span></div>
       <div className="relative overflow-hidden rounded-[2rem] border-2 border-ink bg-[#FCFBF7] shadow-[5px_5px_0_rgba(45,45,45,1)] min-h-[500px]">
         <div className="px-5 py-3 border-b border-ink/15 bg-white flex items-center gap-3"><div className="w-8 h-8 rounded-full bg-ink text-paper flex items-center justify-center text-[9px] font-black">AI</div><div><p className="text-xs font-black">ChatGPT 4o</p><p className="text-[9px] text-ink/35">{current?.context || (zh ? "非诊断性的跨时间回顾" : "Non-diagnostic across-time review")}</p></div><span className="ml-auto px-3 py-1 rounded-full border border-emerald-300 bg-emerald-50 text-[9px] font-black text-emerald-700">● NTN {zh ? "已开启" : "on"}</span></div>
         {scene === "weekly" ? <div className="p-4 md:p-7 h-[440px] bg-white flex items-start justify-center overflow-hidden"><img src="/ntn-weekly-reflection.png" alt="Weekly Reflection Report" className="w-full h-full object-contain object-top" /></div> : <>
           <div className="w-full p-5 md:p-8 flex flex-col gap-4">
             {current!.messages.slice(0, Math.min(step, 3)).map((message, i) => <div key={`${scene}-${step}-${i}`} className={`flex w-full ${message.role === "user" ? "justify-end" : "justify-start"}`} style={{animation:"msgIn2 .28s ease-out"}}><div className={`max-w-[72%] px-4 py-3 text-sm leading-relaxed border rounded-2xl ${message.role === "user" ? "bg-amber-100 border-amber-300 rounded-br-md text-right" : "bg-white border-ink/15 rounded-bl-md"}`}>{message.text}</div></div>)}
-            {choice && <div className="flex w-full justify-start" style={{animation:"msgIn2 .28s ease-out"}}><div className="max-w-[72%] px-4 py-3 text-sm leading-relaxed border rounded-2xl rounded-bl-md bg-white border-emerald-300">{optionReplies[choice]}</div></div>}
+            {choice && <div className="w-full" style={{animation:"msgIn2 .28s ease-out"}}><div className="mb-2 inline-flex px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-full text-[9px] font-black text-emerald-700">{zh ? "已进入支持模式：" : "Support mode: "}{choice === "__not_now__" ? (zh ? "暂时不需要" : "Not now") : choice}</div><div className="flex justify-start"><div className="max-w-[72%] px-4 py-3 text-sm leading-relaxed border rounded-2xl rounded-bl-md bg-white border-emerald-300">{optionReplies[choice]}</div></div></div>}
           </div>
           {step >= 4 && !choice && <div className="absolute inset-0 bg-ink/35 backdrop-blur-[2px]" />}
-          {step >= 4 && !choice && <div className="absolute left-1/2 top-1/2 w-[calc(100%_-_2rem)] max-w-xl p-6 md:p-7 bg-[#F7F2FF] border-2 border-purple-300 rounded-[2rem] shadow-2xl" style={{animation:"ntnPop2 .35s ease-out both"}}><p className="text-[8px] font-black tracking-[.2em] text-purple-600 mb-3">{current!.label.toUpperCase()}</p><h6 className="text-xl md:text-2xl font-serif font-black leading-tight mb-3">{current!.title}</h6><p className="text-xs md:text-sm text-ink/55 leading-relaxed mb-5">{current!.body}</p><div className="grid sm:grid-cols-2 gap-2">{options.map(option => <button key={option} onClick={() => setChoice(option)} className="px-3 py-2.5 bg-white border border-ink/20 rounded-xl text-left text-[10px] font-bold hover:border-purple-500 hover:bg-purple-50 transition-colors">{option}</button>)}</div><button onClick={() => setChoice("__not_now__")} className="mt-3 text-[10px] font-black text-ink/40">{zh ? "暂时不需要" : "Not now"}</button></div>}
+          {step >= 4 && !choice && <div className="absolute left-1/2 top-1/2 w-[calc(100%_-_2rem)] max-w-xl p-6 md:p-7 bg-[#F7F2FF] border-2 border-purple-300 rounded-[2rem] shadow-2xl" style={{animation:"ntnPop2 .35s ease-out both"}}><p className="text-[8px] font-black tracking-[.2em] text-purple-600 mb-3">{current!.label.toUpperCase()}</p><h6 className="text-xl md:text-2xl font-serif font-black leading-tight mb-3">{current!.title}</h6><p className="text-xs md:text-sm text-ink/55 leading-relaxed mb-5">{current!.body}</p><div className="grid sm:grid-cols-2 gap-2">{options.map((option, i) => <button key={option} onClick={() => setChoice(option)} className="px-3 py-2.5 bg-white border border-ink/20 rounded-xl text-left hover:border-purple-500 hover:bg-purple-50 transition-colors"><span className="block text-[10px] font-black">{option}</span><span className="block text-[8px] text-ink/40 mt-1 leading-relaxed">{optionHints[i]}</span></button>)}</div><button onClick={() => setChoice("__not_now__")} className="mt-3 text-[10px] font-black text-ink/40">{zh ? "暂时不需要" : "Not now"}</button></div>}
           {choice && <button onClick={() => {setChoice(null); setStep(4);}} className="absolute bottom-4 right-4 px-3 py-2 bg-white border border-ink/20 rounded-lg text-[9px] font-black">{zh ? "选择其他方向" : "Choose another direction"}</button>}
         </>}
       </div>
