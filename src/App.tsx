@@ -36,7 +36,7 @@ const translations = {
     proj3Status: "❆ 已上线",
     proj3Cat: "AI工具 · 面试训练 · 游戏化",
     proj3Desc: "模拟大厂面试官追问，五维度评分+参考答案+考后小结，内置完整面试宝典，每日打卡练习AI PM面试。",
-    tags: ["AI", "数字人", "多模态", "用户研究", "双语工作能力"],
+    tags: ["Multimodal AI", "Digital Human", "Generative AI Video", "Creative Tools", "Conversational AI", "Product Strategy"],
     projectDetails: {
       1: { problem: "用户在向 AI 倾诉情绪压力时，重复安慰可能让对话停留在反复求证，而不是走向新的理解或行动。", solution: "设计自然对话与模式识别反思双层架构，通过两类 Mirror、四个可选方向和周度回顾支持自主反思。", impact: "完成 N=60 定量、N=11 定性与 N=5 共创研究，并将证据转化为 V1–V4 可测试原型。", tools: "混合方法研究, Co-design, LLM Workflow, Web Prototype" },
       2: { problem: "非专业购车用户面临信息过载，难以评估长期成本与生态影响。", solution: "将复杂参数转化为三维决策框架：当前成本、三年预测、碳排放。", impact: "基于 RShiny 开发可运行产品，接入 Maps API，运用 ARIMA 模型预测价格。", tools: "R, Shiny, Maps API, ARIMA" },
@@ -71,7 +71,7 @@ const translations = {
     proj3Status: "Live",
     proj3Cat: "AI Tool · Interview Training · Gamification",
     proj3Desc: "Big-tech style follow-up drills, 5-dimension scoring, reference answers, post-session recap. Built-in playbook, skip & end controls, daily streak practice.",
-    tags: ["AI", "Digital Humans", "Multimodal", "User Research", "Bilingual Work"],
+    tags: ["Multimodal AI", "Digital Human", "Generative AI Video", "Creative Tools", "Conversational AI", "Product Strategy"],
     projectDetails: {
       1: { problem: "When people disclose emotional strain to AI, repeated reassurance can keep the conversation inside a validation loop rather than support new understanding or action.", solution: "Designed a two-layer conversation and reflection architecture with two Mirrors, four optional directions, and a weekly review.", impact: "Translated N=60 quantitative, N=11 qualitative, and N=5 co-design evidence into a V1–V4 testable prototype.", tools: "Mixed Methods, Co-design, LLM Workflow, Web Prototype" },
       2: { problem: "Non-professional car buyers face information overload regarding long-term costs and eco-impact.", solution: "Transformed complex parameters into a 3D decision framework: current cost, 3-year forecast, CO2.", impact: "Developed a functional RShiny app with Maps API integration and ARIMA price forecasting.", tools: "R, Shiny, Maps API, ARIMA" },
