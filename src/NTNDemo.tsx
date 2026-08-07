@@ -242,7 +242,7 @@ export function NTNArchitectureDemo({ lang }: { lang: Lang }) {
   );
 }
 
-export default function NTNDemo({ lang }: { lang: Lang }) {
+function NTNDemoLegacy2({ lang }: { lang: Lang }) {
   const [step, setStep] = useState(0);
   const zh = lang === "zh";
   const messages = zh ? [
@@ -272,6 +272,105 @@ export default function NTNDemo({ lang }: { lang: Lang }) {
         </div>
         {step >= 4 && <div className="absolute inset-0 bg-ink/35 backdrop-blur-[2px]" />}
         {step >= 4 && <div className="absolute left-1/2 top-1/2 w-[calc(100%_-_2rem)] max-w-xl p-6 md:p-7 bg-[#F7F2FF] border-2 border-purple-300 rounded-[2rem] shadow-2xl" style={{animation:"ntnPop .4s ease-out both"}}><p className="text-[8px] font-black tracking-[.2em] text-purple-600 mb-3">ACROSS-TIME MIRROR</p><h6 className="text-xl md:text-2xl font-serif font-black leading-tight mb-3">{zh ? "这个担忧似乎在不同时间又回来了" : "This concern seems to have returned at different times"}</h6><p className="text-xs md:text-sm text-ink/55 leading-relaxed mb-5">{zh ? "我可能理解得不完全准确。这个观察贴近你的感受吗？" : "I may not have understood this perfectly. Does this observation feel close to your experience?"}</p><div className="grid sm:grid-cols-2 gap-2">{options.map(option => <button key={option} className="px-3 py-2.5 bg-white border border-ink/20 rounded-xl text-left text-[10px] font-bold hover:border-purple-500">{option}</button>)}</div><button className="mt-3 text-[10px] font-black text-ink/40">{zh ? "暂时不需要" : "Not now"}</button></div>}
+      </div>
+    </div>
+  );
+}
+
+type DemoScene = "micro" | "across" | "weekly";
+
+export default function NTNDemo({ lang }: { lang: Lang }) {
+  const [scene, setScene] = useState<DemoScene>("micro");
+  const [step, setStep] = useState(0);
+  const [choice, setChoice] = useState<string | null>(null);
+  const zh = lang === "zh";
+  const sceneOrder: DemoScene[] = ["micro", "across", "weekly"];
+  const options = zh ? ["继续说说它", "换一个角度看看", "选择一个小步骤", "把支持带到聊天之外"] : ["Stay with it", "Look from another angle", "Pick one small step", "Move it outside chat"];
+  const optionReplies: Record<string, string> = zh ? {
+    "继续说说它": "我们可以先不急着解决。此刻，这个担忧里最占据你注意力的是什么？",
+    "换一个角度看看": "我们可以把已经知道的、还不知道的，以及担忧替你补上的部分分开来看。",
+    "选择一个小步骤": "接下来的十分钟，你愿意选择一个很小、看得见的行动吗？",
+    "把支持带到聊天之外": "我们可以先写下一句话，想想可以和哪位现实中的人谈谈。",
+    "__not_now__": "好的，我们可以先继续聊，不需要现在处理这个观察。",
+  } : {
+    "Stay with it": "We can stay with this without trying to solve it too quickly. What feels most present?",
+    "Look from another angle": "Let's separate what is known, what is unknown, and what the worry is adding.",
+    "Pick one small step": "What is one small, visible action you could take in the next ten minutes?",
+    "Move it outside chat": "Let's draft one sentence you could take to notes or a trusted person.",
+    "__not_now__": "That's okay. We can keep talking without doing anything with this observation now.",
+  };
+  const content = {
+    micro: {
+      label: "Micro Mirror",
+      context: zh ? "同一次持续对话" : "Within one sustained conversation",
+      messages: zh ? [
+        { role: "user", text: "我一直在改这份作业，但还是觉得哪里都不够好。" },
+        { role: "ai", text: "你已经在这份不确定感里停留了一段时间。现在最让你放不下的是哪一部分？" },
+        { role: "user", text: "我不知道，我只是反复觉得它会失败。" },
+      ] : [
+        { role: "user", text: "I keep editing this assignment, but nothing feels good enough." },
+        { role: "ai", text: "You've been sitting with this uncertainty for a while. Which part is hardest to let go of?" },
+        { role: "user", text: "I don't know. I just keep feeling that it will fail." },
+      ],
+      title: zh ? "我们好像在同一个担忧附近停留了一会儿" : "We may have been circling near the same concern for a while",
+      body: zh ? "我可能理解得不完全准确。这个观察贴近你的感受吗？" : "I may not have understood this perfectly. Does this feel close to your experience?",
+    },
+    across: {
+      label: "Across-time Mirror",
+      context: zh ? "相似担忧跨会话返回" : "A similar concern returns across conversations",
+      messages: zh ? [
+        { role: "user", text: "我还是很担心这次作业做得不够好。" },
+        { role: "ai", text: "听起来这份不确定感又回来了。今天最让你卡住的是哪一部分？" },
+        { role: "user", text: "你觉得我是不是一定会搞砸？我只是想确认一下。" },
+      ] : [
+        { role: "user", text: "I'm still worried that my assignment isn't good enough." },
+        { role: "ai", text: "It sounds like that uncertainty has returned. Which part feels most difficult today?" },
+        { role: "user", text: "Do you think I'm definitely going to mess it up? I just want to be sure." },
+      ],
+      title: zh ? "这个担忧似乎在不同时间又回来了" : "This concern seems to have returned at different times",
+      body: zh ? "我可能理解得不完全准确。这个观察贴近你的感受吗？" : "I may not have understood this perfectly. Does this feel close to your experience?",
+    },
+  };
+
+  useEffect(() => {
+    if (choice) return;
+    const timer = window.setTimeout(() => {
+      if (scene === "weekly") {
+        setScene("micro"); setStep(0);
+      } else if (step < 4) {
+        setStep(step + 1);
+      } else {
+        const next = sceneOrder[(sceneOrder.indexOf(scene) + 1) % sceneOrder.length];
+        setScene(next); setStep(0);
+      }
+    }, scene === "weekly" ? 4200 : step < 4 ? 850 : 3200);
+    return () => window.clearTimeout(timer);
+  }, [scene, step, choice]);
+
+  function switchScene(next: DemoScene) {
+    setScene(next); setStep(0); setChoice(null);
+  }
+
+  const current = scene === "weekly" ? null : content[scene];
+  return (
+    <div>
+      <style>{`@keyframes ntnPop2{from{opacity:0;transform:translate(-50%,-46%) scale(.96)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}@keyframes msgIn2{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}`}</style>
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
+        <p className="text-[9px] font-black uppercase tracking-widest text-ink/40">{zh ? "可交互功能演示" : "INTERACTIVE FEATURE DEMO"}</p>
+        <div className="sm:ml-auto flex gap-2"><a href="/ntn-v4-pretesting.html" target="_blank" rel="noreferrer" className="px-3 py-1.5 bg-ink text-paper rounded-lg text-[9px] font-black">{zh ? "在线体验 ↗" : "Open prototype ↗"}</a><a href="/ntn-v4-pretesting.html" download="NTN-V4-pre-testing.html" className="px-3 py-1.5 border border-ink/25 rounded-lg text-[9px] font-black">{zh ? "下载 HTML ↓" : "Download HTML ↓"}</a></div>
+      </div>
+      <div className="flex flex-wrap gap-2 mb-3">{(["micro","across","weekly"] as DemoScene[]).map(item => <button key={item} onClick={() => switchScene(item)} className={`px-3 py-2 rounded-full border text-[9px] font-black ${scene === item ? "bg-ink text-paper border-ink" : "bg-white border-ink/20"}`}>{item === "micro" ? "Micro Mirror" : item === "across" ? "Across-time Mirror" : "Weekly Reflection"}</button>)}</div>
+      <div className="relative overflow-hidden rounded-[2rem] border-2 border-ink bg-[#FCFBF7] shadow-[5px_5px_0_rgba(45,45,45,1)] min-h-[500px]">
+        <div className="px-5 py-3 border-b border-ink/15 bg-white flex items-center gap-3"><div className="w-8 h-8 rounded-full bg-ink text-paper flex items-center justify-center text-[9px] font-black">AI</div><div><p className="text-xs font-black">ChatGPT 4o</p><p className="text-[9px] text-ink/35">{current?.context || (zh ? "非诊断性的跨时间回顾" : "Non-diagnostic across-time review")}</p></div><span className="ml-auto px-3 py-1 rounded-full border border-emerald-300 bg-emerald-50 text-[9px] font-black text-emerald-700">● NTN {zh ? "已开启" : "on"}</span></div>
+        {scene === "weekly" ? <div className="p-4 md:p-7 h-[440px] bg-white flex items-start justify-center overflow-hidden"><img src="/ntn-weekly-reflection.png" alt="Weekly Reflection Report" className="w-full h-full object-contain object-top" /></div> : <>
+          <div className="w-full p-5 md:p-8 flex flex-col gap-4">
+            {current!.messages.slice(0, Math.min(step, 3)).map((message, i) => <div key={`${scene}-${step}-${i}`} className={`flex w-full ${message.role === "user" ? "justify-end" : "justify-start"}`} style={{animation:"msgIn2 .28s ease-out"}}><div className={`max-w-[72%] px-4 py-3 text-sm leading-relaxed border rounded-2xl ${message.role === "user" ? "bg-amber-100 border-amber-300 rounded-br-md text-right" : "bg-white border-ink/15 rounded-bl-md"}`}>{message.text}</div></div>)}
+            {choice && <div className="flex w-full justify-start" style={{animation:"msgIn2 .28s ease-out"}}><div className="max-w-[72%] px-4 py-3 text-sm leading-relaxed border rounded-2xl rounded-bl-md bg-white border-emerald-300">{optionReplies[choice]}</div></div>}
+          </div>
+          {step >= 4 && !choice && <div className="absolute inset-0 bg-ink/35 backdrop-blur-[2px]" />}
+          {step >= 4 && !choice && <div className="absolute left-1/2 top-1/2 w-[calc(100%_-_2rem)] max-w-xl p-6 md:p-7 bg-[#F7F2FF] border-2 border-purple-300 rounded-[2rem] shadow-2xl" style={{animation:"ntnPop2 .35s ease-out both"}}><p className="text-[8px] font-black tracking-[.2em] text-purple-600 mb-3">{current!.label.toUpperCase()}</p><h6 className="text-xl md:text-2xl font-serif font-black leading-tight mb-3">{current!.title}</h6><p className="text-xs md:text-sm text-ink/55 leading-relaxed mb-5">{current!.body}</p><div className="grid sm:grid-cols-2 gap-2">{options.map(option => <button key={option} onClick={() => setChoice(option)} className="px-3 py-2.5 bg-white border border-ink/20 rounded-xl text-left text-[10px] font-bold hover:border-purple-500 hover:bg-purple-50 transition-colors">{option}</button>)}</div><button onClick={() => setChoice("__not_now__")} className="mt-3 text-[10px] font-black text-ink/40">{zh ? "暂时不需要" : "Not now"}</button></div>}
+          {choice && <button onClick={() => {setChoice(null); setStep(4);}} className="absolute bottom-4 right-4 px-3 py-2 bg-white border border-ink/20 rounded-lg text-[9px] font-black">{zh ? "选择其他方向" : "Choose another direction"}</button>}
+        </>}
       </div>
     </div>
   );

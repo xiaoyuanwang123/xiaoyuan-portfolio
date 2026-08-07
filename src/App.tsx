@@ -12,7 +12,7 @@ const translations = {
   zh: {
     name: "王小元",
     role: "帝国理工学院研究生",
-    intro1: "目前在伦敦帝国理工学院攻读行为科学设计硕士。",
+    intro1: "伦敦帝国理工学院行为科学设计硕士在读。",
     intro2: "关注视觉与视频生成、实时数字人及多模态交互方向。",
     projectsTitle: "项目经历",
     aboutTitle: "教育背景",
