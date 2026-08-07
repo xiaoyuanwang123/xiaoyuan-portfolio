@@ -717,8 +717,37 @@ function Modal1({ lang }: { lang: Language }) {
         <NTNDemo lang={lang} />
       </section>
 
+      <section className="mb-24">
+        <SH i={5} label={zh ? "设计产出" : "DESIGN OUTPUT"} />
+        <figure className="mb-6 overflow-hidden rounded-[2rem] border-2 border-ink bg-white shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
+          <a href="/ntn-interaction-architecture.png" target="_blank" rel="noreferrer"><img src="/ntn-interaction-architecture.png" alt={zh ? "NTN 最终交互架构图" : "NTN final interaction architecture"} className="w-full h-auto" /></a>
+          <figcaption className="px-6 py-4 border-t border-ink/10"><p className="text-sm font-black">{zh ? "从支持需求到用户下一步选择" : "From support-seeking context to the user's next choice"}</p><p className="text-xs text-ink/50 mt-1">{zh ? "完整呈现信号识别、Mirror 与可选支持层之间的关系。" : "The complete relationship between signal recognition, Mirrors, and optional support."}</p></figcaption>
+        </figure>
+        <div className="grid md:grid-cols-2 gap-6 mb-6">
+          {[
+            { src: "/ntn-two-timescales.png", zhTitle: "两种时间尺度", enTitle: "Two temporal scales", zhText: "区分同次对话停留与跨会话重复。", enText: "Separating same-session dwelling from recurrence across conversations." },
+            { src: "/ntn-four-support-directions.png", zhTitle: "四种可选支持方向", enTitle: "Four optional support directions", zhText: "Mirror 之后由用户决定继续倾听、换角度、采取小步骤或走出对话。", enText: "After a Mirror, the user chooses how—if at all—to shift direction." },
+          ].map(item => <figure key={item.src} className="overflow-hidden rounded-2xl border-2 border-ink bg-white"><a href={item.src} target="_blank" rel="noreferrer"><img src={item.src} alt={zh ? item.zhTitle : item.enTitle} className="w-full aspect-[3/2] object-contain bg-white" /></a><figcaption className="px-5 py-4 border-t border-ink/10"><p className="text-sm font-black">{zh ? item.zhTitle : item.enTitle}</p><p className="text-xs text-ink/50 mt-1 leading-relaxed">{zh ? item.zhText : item.enText}</p></figcaption></figure>)}
+        </div>
+        <figure className="grid md:grid-cols-[.9fr_1.1fr] overflow-hidden rounded-[2rem] border-2 border-ink bg-[#F7F2FF]">
+          <div className="p-7 md:p-10 flex flex-col justify-center"><p className="text-[9px] font-black uppercase tracking-widest text-purple-600 mb-3">WEEKLY REFLECTION</p><h6 className="text-2xl font-serif font-black mb-3">{zh ? "把一周的对话变成可回看的线索" : "Turning a week of conversation into reviewable cues"}</h6><p className="text-sm text-ink/60 leading-relaxed">{zh ? "回顾使用用户说过的话呈现关注主题、模式变化与可能保留的行动，不测量情绪，也不评价是否‘进步’。" : "The report reflects concern strands, pattern shifts, and user-named actions without measuring emotion or scoring improvement."}</p></div>
+          <a href="/ntn-weekly-reflection.png" target="_blank" rel="noreferrer" className="bg-white"><img src="/ntn-weekly-reflection.png" alt={zh ? "Weekly Reflection 界面" : "Weekly Reflection interface"} className="w-full h-full max-h-[520px] object-contain object-top" /></a>
+        </figure>
+      </section>
+
+      <section className="mb-24">
+        <SH i={6} label={zh ? "体验完整原型" : "TRY THE FULL PROTOTYPE"} />
+        <div className="p-7 md:p-9 bg-ink text-paper rounded-[2rem] border-2 border-ink shadow-[5px_5px_0px_0px_rgba(232,106,74,1)] flex flex-col md:flex-row md:items-center gap-7">
+          <div className="flex-1"><p className="text-[9px] font-black uppercase tracking-[.2em] text-amber-300 mb-3">V4 · USABILITY-TEST PROTOTYPE</p><h6 className="text-2xl font-serif font-black mb-3">{zh ? "在浏览器中体验三日压缩测试流程" : "Experience the compressed three-day study flow"}</h6><p className="text-sm text-paper/65 leading-relaxed">{zh ? "包含自然对话、Micro Mirror、Across-time Mirror、四种方向、Weekly Reflection、NTN 开关与反馈回收。建议使用桌面浏览器。" : "Includes natural conversation, both Mirrors, four directions, Weekly Reflection, NTN controls, and feedback capture. Desktop browser recommended."}</p></div>
+          <div className="flex flex-col sm:flex-row md:flex-col gap-3 shrink-0">
+            <a href="/ntn-v4-pretesting.html" target="_blank" rel="noreferrer" className="px-6 py-3 bg-amber-300 text-ink rounded-xl text-xs font-black text-center hover:bg-white transition-colors">{zh ? "在线体验 ↗" : "Open prototype ↗"}</a>
+            <a href="/ntn-v4-pretesting.html" download="NTN-V4-pre-testing.html" className="px-6 py-3 border border-paper/30 text-paper rounded-xl text-xs font-black text-center hover:bg-paper hover:text-ink transition-colors">{zh ? "下载 HTML ↓" : "Download HTML ↓"}</a>
+          </div>
+        </div>
+      </section>
+
       <section>
-        <SH i={5} label={zh ? "当前产出与产品边界" : "CURRENT OUTPUT & PRODUCT BOUNDARIES"} />
+        <SH i={7} label={zh ? "当前产出与产品边界" : "CURRENT OUTPUT & PRODUCT BOUNDARIES"} />
         <div className="grid md:grid-cols-2 gap-6">
           <div className="p-7 bg-emerald-50 border-2 border-ink rounded-[2rem]"><h6 className="text-lg font-black mb-4">{zh ? "目前完成的产品产出" : "Current product output"}</h6><ul className="space-y-2 text-sm text-ink/65">{(zh ? ["可运行的多轮对话 Web Demo", "Micro 与 Across-time 两类 Mirror", "四种可选支持方向与周度回顾", "用户开关、低证据状态与反馈回收"] : ["A working multi-turn web demo", "Micro and Across-time Mirrors", "Four optional support directions and weekly reflection", "User controls, low-evidence states, and feedback capture"]).map(x => <li key={x}>→ {x}</li>)}</ul></div>
           <div className="p-7 bg-rose-50 border-2 border-ink rounded-[2rem]"><h6 className="text-lg font-black mb-4">{zh ? "产品边界" : "Product boundaries"}</h6><ul className="space-y-2 text-sm text-ink/65">{(zh ? ["不进行情绪测量、诊断或临床建议", "当前阈值用于压缩测试，不代表真实世界标准", "尚未验证长期使用效果", "跨会话监测仍需进一步验证隐私与实施可行性"] : ["No emotion measurement, diagnosis, or clinical advice", "Current thresholds support compressed testing, not real-world standards", "Long-term outcomes are not yet validated", "Cross-session monitoring needs further privacy and feasibility validation"]).map(x => <li key={x}>→ {x}</li>)}</ul></div>

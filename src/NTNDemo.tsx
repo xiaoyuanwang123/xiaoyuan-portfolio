@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Lang = "zh" | "en";
 type View = "micro" | "across" | "weekly";
@@ -64,14 +64,24 @@ const copy = {
 
 export default function NTNDemo({ lang }: { lang: Lang }) {
   const [view, setView] = useState<View>("micro");
+  const [paused, setPaused] = useState(false);
   const c = copy[lang];
   const current = c[view];
   const tabs: View[] = ["micro", "across", "weekly"];
 
+  useEffect(() => {
+    if (paused) return;
+    const timer = window.setInterval(() => {
+      setView(previous => tabs[(tabs.indexOf(previous) + 1) % tabs.length]);
+    }, 4200);
+    return () => window.clearInterval(timer);
+  }, [paused]);
+
   return (
     <div className="w-full">
+      <style>{`@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}`}</style>
       <p className="text-[9px] font-black uppercase tracking-widest text-ink/40 mb-4">{c.mode}</p>
-      <div className="border-2 border-ink rounded-[2rem] overflow-hidden bg-white shadow-[5px_5px_0px_0px_rgba(45,45,45,1)]">
+      <div className="border-2 border-ink rounded-[2rem] overflow-hidden bg-white shadow-[5px_5px_0px_0px_rgba(45,45,45,1)]" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
         <div className="grid md:grid-cols-2 border-b-2 border-ink">
           <div className="p-6 md:p-8 bg-paper border-b-2 md:border-b-0 md:border-r-2 border-ink">
             <p className="text-[9px] font-black uppercase tracking-widest text-amber-600 mb-2">01</p>
@@ -92,9 +102,10 @@ export default function NTNDemo({ lang }: { lang: Lang }) {
                 {c.tabs[i]}
               </button>
             ))}
+            <span className="ml-auto self-center text-[9px] font-black uppercase tracking-widest text-ink/35">{paused ? (lang === "zh" ? "已暂停" : "Paused") : (lang === "zh" ? "自动演示" : "Auto demo")}</span>
           </div>
           <div className="grid lg:grid-cols-[1.4fr_.8fr] gap-5">
-            <div className="p-6 md:p-8 rounded-2xl bg-[#F7F2FF] border-2 border-[#C9B8E8]">
+            <div key={view} className="p-6 md:p-8 rounded-2xl bg-[#F7F2FF] border-2 border-[#C9B8E8] animate-[fadeIn_.45s_ease-out]">
               <p className="text-[9px] font-black uppercase tracking-[0.18em] text-purple-600 mb-4">{current.eyebrow}</p>
               <h5 className="text-2xl md:text-3xl font-serif font-black leading-tight mb-4">{current.title}</h5>
               <p className="text-sm md:text-base text-ink/65 leading-relaxed mb-6">{current.body}</p>
