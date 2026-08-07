@@ -369,7 +369,31 @@ export default function NTNDemo({ lang }: { lang: Lang }) {
       <div className="flex items-center gap-3 mb-4"><p className="text-[9px] font-black uppercase tracking-widest text-ink/40">{zh ? "引导式交互 · 滚动至此开始" : "GUIDED INTERACTION · STARTS IN VIEW"}</p><span className="ml-auto text-[9px] font-black text-terracotta">{scene === "micro" ? "01 Micro Mirror" : scene === "across" ? "02 Across-time Mirror" : "03 Weekly Reflection"}</span></div>
       <div className="relative overflow-hidden rounded-[2rem] border-2 border-ink bg-[#FCFBF7] shadow-[5px_5px_0_rgba(45,45,45,1)] min-h-[500px]">
         <div className="px-5 py-3 border-b border-ink/15 bg-white flex items-center gap-3"><div className="w-8 h-8 rounded-full bg-ink text-paper flex items-center justify-center text-[9px] font-black">AI</div><div><p className="text-xs font-black">ChatGPT 4o</p><p className="text-[9px] text-ink/35">{current?.context || (zh ? "非诊断性的跨时间回顾" : "Non-diagnostic across-time review")}</p></div><span className="ml-auto px-3 py-1 rounded-full border border-emerald-300 bg-emerald-50 text-[9px] font-black text-emerald-700">● NTN {zh ? "已开启" : "on"}</span></div>
-        {scene === "weekly" ? <div className="p-4 md:p-7 h-[440px] bg-white flex items-start justify-center overflow-hidden"><img src="/ntn-weekly-reflection.png" alt="Weekly Reflection Report" className="w-full h-full object-contain object-top" /></div> : <>
+        {scene === "weekly" ? <div className="h-[440px] overflow-y-auto bg-[#FBF8FF] p-5 md:p-7" style={{animation:"msgIn2 .4s ease-out"}}>
+          <div className="max-w-3xl mx-auto">
+            <div className="flex items-start justify-between gap-4 mb-5">
+              <div><p className="text-[8px] font-black tracking-[.2em] text-purple-600 mb-2">WEEKLY REFLECTION</p><h6 className="text-2xl md:text-3xl font-serif font-black leading-tight">{zh ? "这一周的对话，可能在告诉你什么" : "What this week may be showing"}</h6><p className="text-[10px] text-ink/45 mt-2">{zh ? "基于你说过的话提供回看，不衡量情绪，也不判断你是否有所改善。" : "A review based on what you said—not a measure of emotion or improvement."}</p></div>
+              <span className="shrink-0 px-3 py-1.5 rounded-full bg-white border border-purple-200 text-[8px] font-black text-purple-700">3 {zh ? "个模拟日期" : "SIMULATED DAYS"}</span>
+            </div>
+            <div className="grid md:grid-cols-[1.1fr_.9fr] gap-3">
+              <div className="p-4 bg-white border border-purple-200 rounded-2xl">
+                <p className="text-[9px] font-black text-purple-700 mb-2">{zh ? "反复出现的关注点" : "A concern that returned"}</p>
+                <p className="text-base font-serif font-black mb-2">{zh ? "“作业可能不够好”" : "“The assignment may not be good enough”"}</p>
+                <p className="text-[10px] leading-relaxed text-ink/55">{zh ? "它在不同时间以相近的方式出现。你曾反复询问结果是否一定会失败。" : "It appeared in similar ways at different times, alongside repeated requests for certainty about the outcome."}</p>
+              </div>
+              <div className="p-4 bg-white border border-purple-200 rounded-2xl">
+                <p className="text-[9px] font-black text-purple-700 mb-3">{zh ? "本周对话构成" : "Weekly conversation blend"}</p>
+                <div className="h-3 rounded-full overflow-hidden flex mb-3"><span className="w-[46%] bg-purple-400"/><span className="w-[31%] bg-amber-300"/><span className="w-[23%] bg-emerald-300"/></div>
+                <div className="space-y-1.5 text-[8px] font-bold text-ink/55"><p><span className="inline-block w-2 h-2 rounded-full bg-purple-400 mr-2"/>{zh ? "表达担忧" : "Voicing concern"}</p><p><span className="inline-block w-2 h-2 rounded-full bg-amber-300 mr-2"/>{zh ? "寻求确认" : "Seeking reassurance"}</p><p><span className="inline-block w-2 h-2 rounded-full bg-emerald-300 mr-2"/>{zh ? "探索下一步" : "Exploring next steps"}</p></div>
+              </div>
+            </div>
+            <div className="mt-3 p-4 bg-[#FFF8E8] border-2 border-amber-300 rounded-2xl">
+              <p className="text-[9px] font-black text-amber-800 mb-2">{zh ? "下次可以保留的一件事" : "Something you may want to keep"}</p>
+              <p className="text-[11px] leading-relaxed text-ink/70">{zh ? "你已经把压力说了出来，也尝试把“肯定会失败”拆成已知、未知和担忧补上的部分。下次它再次出现时，可以先留意：什么能让你多一点行动空间？" : "You put the pressure into words and began separating what is known, unknown, and added by worry. If it returns, notice what gives you a little more room to act."}</p>
+              <div className="flex flex-wrap gap-2 mt-3"><button className="px-3 py-2 rounded-lg bg-emerald-600 text-white text-[9px] font-black">{zh ? "试试这个" : "Try this"}</button><button className="px-3 py-2 rounded-lg bg-white border border-emerald-300 text-emerald-800 text-[9px] font-black">{zh ? "换一个方向" : "Choose another direction"}</button><button className="px-3 py-2 text-[9px] font-black text-ink/40">{zh ? "暂时不需要" : "Not now"}</button></div>
+            </div>
+          </div>
+        </div> : <>
           <div className="w-full p-5 md:p-8 flex flex-col gap-4">
             {current!.messages.slice(0, Math.min(step, 3)).map((message, i) => <div key={`${scene}-${step}-${i}`} className={`flex w-full ${message.role === "user" ? "justify-end" : "justify-start"}`} style={{animation:"msgIn2 .28s ease-out"}}><div className={`max-w-[72%] px-4 py-3 text-sm leading-relaxed border rounded-2xl ${message.role === "user" ? "bg-amber-100 border-amber-300 rounded-br-md text-right" : "bg-white border-ink/15 rounded-bl-md"}`}>{message.text}</div></div>)}
             {choice && <div className="w-full" style={{animation:"msgIn2 .28s ease-out"}}><div className="mb-2 inline-flex px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-full text-[9px] font-black text-emerald-700">{zh ? "已进入支持模式：" : "Support mode: "}{choice === "__not_now__" ? (zh ? "暂时不需要" : "Not now") : choice}</div><div className="flex justify-start"><div className="max-w-[72%] px-4 py-3 text-sm leading-relaxed border rounded-2xl rounded-bl-md bg-white border-emerald-300">{optionReplies[choice]}</div></div></div>}
