@@ -363,11 +363,14 @@ export default function NTNDemo({ lang }: { lang: Lang }) {
   }, [scene, step, choice, isVisible]);
 
   const current = scene === "weekly" ? null : content[scene];
+  const stageLabel = scene === "micro" ? (zh ? "01 同次对话 Mirror" : "01 Micro Mirror") : scene === "across" ? (zh ? "02 跨会话 Mirror" : "02 Across-time Mirror") : (zh ? "03 周度回顾" : "03 Weekly Reflection");
+  const nextLabel = scene === "micro" ? (zh ? "接下来：跨会话 Mirror" : "Next: Across-time Mirror") : scene === "across" ? (zh ? "接下来：周度回顾" : "Next: Weekly Reflection") : (zh ? "完整演示结束后将重新播放" : "The full demonstration will then replay");
   return (
     <div ref={demoRef}>
       <style>{`@keyframes ntnPop2{from{opacity:0;transform:translate(-50%,-46%) scale(.96)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}@keyframes msgIn2{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}`}</style>
-      <div className="flex items-center gap-3 mb-4"><p className="text-[9px] font-black uppercase tracking-widest text-ink/40">{zh ? "引导式交互 · 滚动至此开始" : "GUIDED INTERACTION · STARTS IN VIEW"}</p><span className="ml-auto text-[9px] font-black text-terracotta">{scene === "micro" ? "01 Micro Mirror" : scene === "across" ? "02 Across-time Mirror" : "03 Weekly Reflection"}</span></div>
+      <div className="flex items-center gap-3 mb-4"><p className="text-[9px] font-black uppercase tracking-widest text-ink/40">{zh ? "引导式交互 · 滚动至此开始" : "GUIDED INTERACTION · STARTS IN VIEW"}</p><span className="ml-auto text-[9px] font-black text-terracotta">{stageLabel}</span></div>
       <div className="relative overflow-hidden rounded-[2rem] border-2 border-ink bg-[#FCFBF7] shadow-[5px_5px_0_rgba(45,45,45,1)] min-h-[500px]">
+        <div className="px-5 py-2 bg-ink text-paper flex items-center gap-3"><div className="flex gap-1.5">{sceneOrder.map((item, index) => <span key={item} className={`h-1.5 rounded-full transition-all duration-500 ${item === scene ? "w-8 bg-amber-300" : index < sceneOrder.indexOf(scene) ? "w-4 bg-emerald-400" : "w-4 bg-paper/25"}`} />)}</div><p className="ml-auto text-[8px] font-bold text-paper/70">{nextLabel}</p></div>
         <div className="px-5 py-3 border-b border-ink/15 bg-white flex items-center gap-3"><div className="w-8 h-8 rounded-full bg-ink text-paper flex items-center justify-center text-[9px] font-black">AI</div><div><p className="text-xs font-black">ChatGPT 4o</p><p className="text-[9px] text-ink/35">{current?.context || (zh ? "非诊断性的跨时间回顾" : "Non-diagnostic across-time review")}</p></div><span className="ml-auto px-3 py-1 rounded-full border border-emerald-300 bg-emerald-50 text-[9px] font-black text-emerald-700">● NTN {zh ? "已开启" : "on"}</span></div>
         {scene === "weekly" ? <div className="h-[440px] overflow-y-auto bg-[#FBF8FF] p-5 md:p-7" style={{animation:"msgIn2 .4s ease-out"}}>
           <div className="max-w-3xl mx-auto">
