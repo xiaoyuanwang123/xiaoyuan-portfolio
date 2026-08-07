@@ -1731,24 +1731,26 @@ export default function App() {
             <h2 className="text-3xl md:text-5xl font-serif font-black uppercase tracking-tighter font-elegant">{t.projectsTitle}</h2>
             <div className="h-px flex-1 bg-ink/20" />
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 md:grid-rows-2 gap-6">
             {projects.map((project, i) => (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
                 onClick={() => setSelectedProject(project.id)}
-                className={`group cursor-pointer p-8 rounded-2xl border-2 border-ink ${project.color} retro-card-hover relative overflow-hidden`}
+                className={`group cursor-pointer rounded-2xl border-2 border-ink ${project.color} retro-card-hover relative overflow-hidden ${i === 0 ? "p-8 md:row-span-2 md:min-h-[560px] md:flex md:flex-col" : "p-6 md:min-h-[268px]"}`}
               >
-                <div className="flex justify-between items-start mb-8">
-                  <div className={`p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0px_0px_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform ${project.accent}`}>
+                {i === 0 && <div className="absolute -right-16 -bottom-16 w-64 h-64 rounded-full bg-white/30 border-2 border-ink/5" />}
+                <div className={`flex justify-between items-start ${i === 0 ? "mb-8" : "mb-4"}`}>
+                  <div className={`${i === 0 ? "p-4" : "p-3"} bg-paper border border-ink rounded-xl shadow-[3px_3px_0px_0px_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform ${project.accent}`}>
                     {project.icon}
                   </div>
                   <ArrowRight className="w-6 h-6 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
                 </div>
-                <h3 className="text-2xl md:text-3xl font-serif font-black mb-2">{project.title[lang]}</h3>
-                <p className={`text-xs font-bold uppercase tracking-wider mb-4 ${project.accent}`}>{project.category[lang]}</p>
-                <p className="text-sm md:text-base text-ink/70 font-medium leading-relaxed">{project.description[lang]}</p>
-                <div className="mt-8 pt-6 border-t border-ink/10 flex items-center gap-2 font-bold text-xs">
+                {i === 0 && <p className="text-[9px] font-black uppercase tracking-[.2em] text-amber-700 mb-3">{lang === "zh" ? "核心项目 · 独立研究与开发" : "FEATURED · INDEPENDENT RESEARCH & BUILD"}</p>}
+                <h3 className={`${i === 0 ? "text-3xl md:text-5xl" : "text-2xl md:text-3xl"} font-serif font-black mb-2 relative`}>{project.title[lang]}</h3>
+                <p className={`text-xs font-bold uppercase tracking-wider ${i === 0 ? "mb-5" : "mb-3"} ${project.accent}`}>{project.category[lang]}</p>
+                <p className={`${i === 0 ? "text-base md:text-lg max-w-md" : "text-sm"} text-ink/70 font-medium leading-relaxed relative`}>{project.description[lang]}</p>
+                <div className={`${i === 0 ? "mt-auto pt-8" : "mt-5 pt-4"} border-t border-ink/10 flex items-center gap-2 font-bold text-xs relative`}>
                   <BookOpen className="w-4 h-4" />{t.viewMore}
                 </div>
               </motion.div>
