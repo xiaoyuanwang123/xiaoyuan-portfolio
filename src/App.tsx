@@ -12,7 +12,7 @@ const translations = {
   zh: {
     name: "王小元",
     role: "帝国理工学院研究生",
-    intro1: "目前在伦敦帝国理工学院攻读设计与行为科学硕士。",
+    intro1: "目前在伦敦帝国理工学院攻读行为科学设计硕士。",
     intro2: "关注视觉与视频生成、实时数字人及多模态交互方向。",
     projectsTitle: "项目经历",
     aboutTitle: "教育背景",
@@ -82,13 +82,13 @@ const translations = {
 };
 
 const projects = [
-  { id: 1, title: { zh: "Navigating the Noise", en: "Navigating the Noise" }, category: { zh: "AI 情感支持交互产品", en: "AI Emotional Support Interaction" }, description: { zh: "用可跳过、可纠正的反思机制，帮助用户识别反复求证模式，同时保留自然对话与自主选择。", en: "A correctable reflection layer that helps users notice repeated reassurance-seeking while preserving natural conversation and choice." }, icon: <Brain className="w-8 h-8" />, color: "bg-[#FEF3C7]", accent: "text-amber-600" },
-  { id: 2, title: { zh: "CarEcoCompare", en: "CarEcoCompare" }, category: { zh: "车辆决策数据产品", en: "Vehicle Decision Data Product" }, description: { zh: "将复杂技术参数转化为通勤场景下的三维决策框架，辅助车辆选购。", en: "Transforming complex parameters into a 3D decision framework for car buyers." }, icon: <Car className="w-8 h-8" />, color: "bg-[#DBEAFE]", accent: "text-blue-600" },
-  { id: 3, title: { zh: "TumorTutor", en: "TumorTutor" }, category: { zh: "脑肿瘤识别工具", en: "Brain Tumor Recognition Tool" }, description: { zh: "基于深度学习的脑肿瘤识别工具，支持分类与位置定位交互训练。", en: "Deep learning tool for brain tumor classification and localization training." }, icon: <Plus className="w-8 h-8" />, color: "bg-[#F3E8FF]", accent: "text-purple-600" },
+  { id: 1, title: { zh: "Navigating the Noise", en: "Navigating the Noise" }, chineseName: "回声之外", category: { zh: "AI 情感支持交互产品", en: "AI Emotional Support Interaction" }, description: { zh: "用可跳过、可纠正的反思机制，帮助用户识别反复求证模式，同时保留自然对话与自主选择。", en: "A correctable reflection layer that helps users notice repeated reassurance-seeking while preserving natural conversation and choice." }, icon: <Brain className="w-8 h-8" />, color: "bg-[#FEF3C7]", accent: "text-amber-600" },
+  { id: 2, title: { zh: "CarEcoCompare", en: "CarEcoCompare" }, chineseName: "选车有数", category: { zh: "车辆决策数据产品", en: "Vehicle Decision Data Product" }, description: { zh: "将复杂技术参数转化为通勤场景下的三维决策框架，辅助车辆选购。", en: "Transforming complex parameters into a 3D decision framework for car buyers." }, icon: <Car className="w-8 h-8" />, color: "bg-[#DBEAFE]", accent: "text-blue-600" },
+  { id: 3, title: { zh: "TumorTutor", en: "TumorTutor" }, chineseName: "阅影有方", category: { zh: "脑肿瘤识别工具", en: "Brain Tumor Recognition Tool" }, description: { zh: "基于深度学习的脑肿瘤识别工具，支持分类与位置定位交互训练。", en: "Deep learning tool for brain tumor classification and localization training." }, icon: <Plus className="w-8 h-8" />, color: "bg-[#F3E8FF]", accent: "text-purple-600" },
 ];
 
 const schools = [
-  { id: "icl", name: { zh: "伦敦帝国理工学院", en: "Imperial College London" }, degree: { zh: "设计与行为科学 理学硕士 (在读)", en: "MSc Design with Behavioural Science (Ongoing)" }, period: "2025.09 - 2026.09", image: "IC.jpg", rotation: "-2deg", zIndex: 10 },
+  { id: "icl", name: { zh: "伦敦帝国理工学院", en: "Imperial College London" }, degree: { zh: "行为科学设计 理学硕士 (在读)", en: "MSc Design with Behavioural Science (Ongoing)" }, period: "2025.09 - 2026.09", image: "IC.jpg", rotation: "-2deg", zIndex: 10 },
   { id: "nju", name: { zh: "南京大学", en: "Nanjing University" }, degree: { zh: "建筑学硕士 | 一等奖学金(x1)、二等奖学金(x2)", en: "Master of Architecture | 1st Class Scholarship (x1), 2nd Class (x2)" }, period: "2022.09 - 2025.06", image: "NJU.jpeg", rotation: "0deg", zIndex: 11 },
   { id: "wit", name: { zh: "武汉理工大学", en: "Wuhan University of Technology" }, degree: { zh: "建筑学学士 | GPA: 3.91/4.00; 优秀毕业生", en: "Bachelor of Architecture | GPA: 3.91/4.00; Outstanding Graduate" }, period: "2017.09 - 2022.06", image: "WHUT.jpg", rotation: "2deg", zIndex: 12 }
 ];
@@ -675,7 +675,7 @@ function Modal1({ lang }: { lang: Language }) {
       <header className="mb-12">
         <div className="flex flex-col md:flex-row md:items-end gap-5 mb-8">
           <div className="p-5 bg-amber-100 border-2 border-ink rounded-3xl shadow-[3px_3px_0px_0px_rgba(45,45,45,1)] w-fit"><Brain className="w-10 h-10 text-amber-600" /></div>
-          <div><p className="text-[9px] font-black uppercase tracking-[.22em] text-amber-600 mb-2">AI PRODUCT · INDEPENDENT PROJECT</p><h3 className="text-3xl md:text-5xl font-serif font-black">Navigating the Noise</h3></div>
+          <div><p className="text-[9px] font-black uppercase tracking-[.22em] text-amber-600 mb-2">AI PRODUCT · INDEPENDENT PROJECT</p><h3 className="text-3xl md:text-5xl font-serif font-black">Navigating the Noise</h3>{zh && <p className="text-lg font-serif font-black text-ink/50 mt-1">回声之外</p>}</div>
         </div>
         <h4 className="max-w-4xl text-xl md:text-3xl font-serif font-bold leading-tight mb-5">
           {zh ? "帮助用户识别反复求证，而不把关怀变成诊断。" : "Helping people notice repeated reassurance-seeking—without turning care into diagnosis."}
@@ -751,13 +751,6 @@ function Modal1({ lang }: { lang: Language }) {
         </div>
       </section>
 
-      <section>
-        <SH i={7} label={zh ? "当前产出与产品边界" : "CURRENT OUTPUT & PRODUCT BOUNDARIES"} />
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="p-7 bg-emerald-50 border-2 border-ink rounded-[2rem]"><h6 className="text-lg font-black mb-4">{zh ? "目前完成的产品产出" : "Current product output"}</h6><ul className="space-y-2 text-sm text-ink/65">{(zh ? ["可运行的多轮对话 Web Demo", "Micro 与 Across-time 两类 Mirror", "四种可选支持方向与周度回顾", "用户开关、低证据状态与反馈回收"] : ["A working multi-turn web demo", "Micro and Across-time Mirrors", "Four optional support directions and weekly reflection", "User controls, low-evidence states, and feedback capture"]).map(x => <li key={x}>→ {x}</li>)}</ul></div>
-          <div className="p-7 bg-rose-50 border-2 border-ink rounded-[2rem]"><h6 className="text-lg font-black mb-4">{zh ? "产品边界" : "Product boundaries"}</h6><ul className="space-y-2 text-sm text-ink/65">{(zh ? ["不进行情绪测量、诊断或临床建议", "当前阈值用于压缩测试，不代表真实世界标准", "尚未验证长期使用效果", "跨会话监测仍需进一步验证隐私与实施可行性"] : ["No emotion measurement, diagnosis, or clinical advice", "Current thresholds support compressed testing, not real-world standards", "Long-term outcomes are not yet validated", "Cross-session monitoring needs further privacy and feasibility validation"]).map(x => <li key={x}>→ {x}</li>)}</ul></div>
-        </div>
-      </section>
     </div>
   );
 }
@@ -775,6 +768,7 @@ function Modal2({ lang }: { lang: Language }) {
               <span className="text-[9px] font-black uppercase tracking-widest text-blue-600">From data to product</span>
             </div>
             <h3 className="text-4xl md:text-6xl font-serif font-black mb-3">CarEcoCompare</h3>
+            {lang === "zh" && <p className="text-lg font-serif font-black text-ink/50 mb-3">选车有数</p>}
             <p className="text-lg md:text-xl font-serif text-ink/70 mb-3 leading-tight">
               {lang === "zh" ? "帮助非专业用户同时理解用车成本与环境影响的决策工具" : "Helping non-professional users understand both running costs and environmental impact"}
             </p>
@@ -1011,7 +1005,8 @@ function Modal3({ lang }: { lang: Language }) {
     <div className="p-6 md:p-12">
       <header className="mb-24">
         <div className="max-w-3xl">
-          <h3 className="text-4xl md:text-6xl font-serif font-black mb-4 leading-tight">{p.hero.title}</h3>
+          <h3 className="text-4xl md:text-6xl font-serif font-black mb-2 leading-tight">{p.hero.title}</h3>
+          {lang === "zh" && <p className="text-lg font-serif font-black text-ink/50 mb-4">阅影有方</p>}
           <p className="text-terracotta font-bold text-lg mb-6">{p.hero.subtitle}</p>
           <p className="text-xl md:text-2xl font-serif italic text-ink/70 mb-4">"{p.hero.oneLiner}"</p>
           <p className={`text-sm font-bold mb-10 ${lang === "zh" ? "text-purple-600" : "text-purple-600 italic"}`}>
@@ -1756,6 +1751,7 @@ export default function App() {
                 </div>
                 {i === 0 && <p className="text-[9px] font-black uppercase tracking-[.2em] text-amber-700 mb-3">{lang === "zh" ? "核心项目 · 独立研究与开发" : "FEATURED · INDEPENDENT RESEARCH & BUILD"}</p>}
                 <h3 className={`${i === 0 ? "text-3xl md:text-5xl" : "text-2xl md:text-3xl"} font-serif font-black mb-2 relative`}>{project.title[lang]}</h3>
+                {lang === "zh" && <p className={`${i === 0 ? "text-lg" : "text-sm"} font-serif font-black text-ink/55 mb-2`}>{project.chineseName}</p>}
                 <p className={`text-xs font-bold uppercase tracking-wider ${i === 0 ? "mb-5" : "mb-3"} ${project.accent}`}>{project.category[lang]}</p>
                 <p className={`${i === 0 ? "text-base md:text-lg max-w-md" : "text-sm"} text-ink/70 font-medium leading-relaxed relative`}>{project.description[lang]}</p>
                 <div className={`${i === 0 ? "mt-auto pt-8" : "mt-5 pt-4"} border-t border-ink/10 flex items-center justify-between gap-2 font-bold text-xs relative`}>
@@ -1838,13 +1834,12 @@ export default function App() {
           </div>
           <div className="bg-paper/5 p-6 rounded-2xl border border-paper/10 min-w-[300px]">
             <div className="space-y-4">
-              <div className="flex justify-between items-center gap-8">
-                <p className="text-[9px] font-black uppercase tracking-[0.2em] text-paper/40">Location</p>
-                <p className="text-sm font-serif">London / Shanghai</p>
-              </div>
-              <div className="flex justify-between items-center gap-8">
+              <div className="flex justify-between items-start gap-8">
                 <p className="text-[9px] font-black uppercase tracking-[0.2em] text-paper/40">Email</p>
-                <p className="text-sm font-serif">xiaoyuan.wang.sylvia@outlook.com</p>
+                <div className="flex flex-col gap-1 text-right">
+                  <p className="text-sm font-serif">13072733711@163.com</p>
+                  <p className="text-sm font-serif">xiaoyuan.wang.sylvia@outlook.com</p>
+                </div>
               </div>
               <div className="pt-2 border-t border-paper/10">
                 <p className="text-[9px] font-black uppercase tracking-[0.2em] text-paper/40 mb-2">Phone</p>

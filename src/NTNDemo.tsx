@@ -62,7 +62,7 @@ const copy = {
   },
 };
 
-export function NTNArchitectureDemo({ lang }: { lang: Lang }) {
+function NTNArchitectureDemoLegacy({ lang }: { lang: Lang }) {
   const [view, setView] = useState<View>("micro");
   const [paused, setPaused] = useState(false);
   const c = copy[lang];
@@ -170,7 +170,7 @@ const chatCopy = {
   },
 };
 
-export default function NTNDemo({ lang }: { lang: Lang }) {
+function NTNDemoSplitLegacy({ lang }: { lang: Lang }) {
   const [step, setStep] = useState(0);
   const c = chatCopy[lang];
 
@@ -204,6 +204,74 @@ export default function NTNDemo({ lang }: { lang: Lang }) {
           </div>
         </div>
         <div className="h-1.5 bg-ink/5"><div className="h-full bg-terracotta transition-all duration-500" style={{ width: `${((step + 1) / 7) * 100}%` }} /></div>
+      </div>
+    </div>
+  );
+}
+
+export function NTNArchitectureDemo({ lang }: { lang: Lang }) {
+  const zh = lang === "zh";
+  const options = zh ? ["继续说说它", "换一个角度看看", "选择一个小步骤", "把支持带到聊天之外"] : ["Stay with it", "Look from another angle", "Pick one small step", "Move it outside chat"];
+  return (
+    <div className="space-y-5">
+      <div className="p-6 md:p-8 bg-white border-2 border-ink rounded-[2rem] shadow-[4px_4px_0_rgba(45,45,45,1)]">
+        <p className="text-[9px] font-black uppercase tracking-widest text-emerald-700 mb-2">LAYER 01</p>
+        <h6 className="text-xl font-black mb-2">{zh ? "自然对话层" : "Natural conversation layer"}</h6>
+        <p className="text-sm text-ink/55 leading-relaxed">{zh ? "AI 先正常倾听与回应；NTN 不会因为识别到信号，就立刻打断或拒绝安慰。" : "The AI listens and responds naturally first; NTN does not interrupt simply because a signal is noticed."}</p>
+      </div>
+      <div className="p-6 md:p-8 bg-amber-50 border-2 border-ink rounded-[2rem]">
+        <p className="text-[9px] font-black uppercase tracking-widest text-amber-700 mb-5">LAYER 02 · {zh ? "模式识别与反思层" : "PATTERN DETECTION & REFLECTION"}</p>
+        <div className="grid md:grid-cols-2 gap-5">
+          <div className="p-5 bg-white border-2 border-purple-300 rounded-2xl">
+            <h6 className="text-lg font-black mb-2">Mirror</h6>
+            <p className="text-xs text-ink/50 mb-4">{zh ? "当重复证据足够时，温和指出可能的模式。" : "Softly names a possible pattern when recurrence evidence is sufficient."}</p>
+            <div className="grid sm:grid-cols-2 gap-3">
+              <div className="p-4 bg-[#F7F2FF] rounded-xl border border-purple-200"><p className="font-black text-sm">Micro Mirror</p><p className="text-[10px] text-ink/45 mt-1">{zh ? "同一次持续对话" : "Within one sustained conversation"}</p></div>
+              <div className="p-4 bg-[#F7F2FF] rounded-xl border border-purple-200"><p className="font-black text-sm">Across-time Mirror</p><p className="text-[10px] text-ink/45 mt-1">{zh ? "跨不同会话再次出现" : "Recurrence across conversations"}</p></div>
+            </div>
+            <div className="mt-4 pt-4 border-t border-ink/10"><p className="text-[9px] font-black uppercase tracking-widest text-purple-600 mb-3">{zh ? "Mirror 后的四种支持方向" : "FOUR DIRECTIONS AFTER A MIRROR"}</p><div className="grid grid-cols-2 gap-2">{options.map(option => <div key={option} className="px-3 py-2 bg-paper border border-ink/15 rounded-lg text-[10px] font-bold">{option}</div>)}</div></div>
+          </div>
+          <div className="p-5 bg-white border-2 border-teal-300 rounded-2xl">
+            <h6 className="text-lg font-black mb-2">Weekly Reflection Report</h6>
+            <p className="text-xs text-ink/50 leading-relaxed">{zh ? "独立于单次 Mirror 的跨时间回顾：在证据足够时总结关注主题、对话模式与用户自己提到的行动。它不测量情绪，也不评价用户是否进步。" : "A separate across-time review that summarises concern strands, conversation patterns, and user-named actions when evidence is sufficient. It does not measure emotion or score improvement."}</p>
+            <div className="mt-5 grid grid-cols-3 gap-2">{["D1","D2","D3"].map((day, i) => <div key={day} className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-center"><div className={`h-2 rounded-full mb-2 ${i === 1 ? "bg-purple-300" : "bg-emerald-300"}`} /><span className="text-[9px] font-black text-ink/40">{day}</span></div>)}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function NTNDemo({ lang }: { lang: Lang }) {
+  const [step, setStep] = useState(0);
+  const zh = lang === "zh";
+  const messages = zh ? [
+    { role: "user", text: "我还是很担心这次作业做得不够好。" },
+    { role: "ai", text: "听起来这份不确定感又回来了。今天最让你卡住的是哪一部分？" },
+    { role: "user", text: "你觉得我是不是一定会搞砸？我只是想确认一下。" },
+  ] : [
+    { role: "user", text: "I'm still worried that my assignment isn't good enough." },
+    { role: "ai", text: "It sounds like that uncertainty has returned. Which part feels most difficult today?" },
+    { role: "user", text: "Do you think I'm definitely going to mess it up? I just want to be sure." },
+  ];
+  const options = zh ? ["继续说说它", "换一个角度看看", "选择一个小步骤", "把支持带到聊天之外"] : ["Stay with it", "Look from another angle", "Pick one small step", "Move it outside chat"];
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setStep(previous => (previous + 1) % 6), 1500);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  return (
+    <div>
+      <style>{`@keyframes ntnPop{from{opacity:0;transform:translate(-50%,-46%) scale(.96)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}`}</style>
+      <p className="text-[9px] font-black uppercase tracking-widest text-ink/40 mb-4">{zh ? "聊天界面动画 · 自动播放" : "CHAT INTERFACE · AUTO PLAY"}</p>
+      <div className="relative overflow-hidden rounded-[2rem] border-2 border-ink bg-[#FCFBF7] shadow-[5px_5px_0_rgba(45,45,45,1)] min-h-[470px]">
+        <div className="px-5 py-3 border-b border-ink/15 bg-white flex items-center gap-3"><div className="w-8 h-8 rounded-full bg-ink text-paper flex items-center justify-center text-[9px] font-black">AI</div><div><p className="text-xs font-black">ChatGPT 4o</p><p className="text-[9px] text-ink/35">{zh ? "模拟第 2 天" : "Simulated day 2"}</p></div><span className="ml-auto px-3 py-1 rounded-full border border-emerald-300 bg-emerald-50 text-[9px] font-black text-emerald-700">● NTN {zh ? "已开启" : "on"}</span></div>
+        <div className="max-w-2xl mx-auto p-6 md:p-9 flex flex-col gap-4">
+          {messages.slice(0, Math.min(step, 3)).map((message, i) => <div key={`${step}-${i}`} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`} style={{animation:"msgIn .35s ease-out"}}><div className={`max-w-[78%] px-4 py-3 text-sm leading-relaxed border rounded-2xl ${message.role === "user" ? "bg-amber-100 border-amber-300 rounded-br-md" : "bg-white border-ink/15 rounded-bl-md"}`}>{message.text}</div></div>)}
+        </div>
+        {step >= 4 && <div className="absolute inset-0 bg-ink/35 backdrop-blur-[2px]" />}
+        {step >= 4 && <div className="absolute left-1/2 top-1/2 w-[calc(100%_-_2rem)] max-w-xl p-6 md:p-7 bg-[#F7F2FF] border-2 border-purple-300 rounded-[2rem] shadow-2xl" style={{animation:"ntnPop .4s ease-out both"}}><p className="text-[8px] font-black tracking-[.2em] text-purple-600 mb-3">ACROSS-TIME MIRROR</p><h6 className="text-xl md:text-2xl font-serif font-black leading-tight mb-3">{zh ? "这个担忧似乎在不同时间又回来了" : "This concern seems to have returned at different times"}</h6><p className="text-xs md:text-sm text-ink/55 leading-relaxed mb-5">{zh ? "我可能理解得不完全准确。这个观察贴近你的感受吗？" : "I may not have understood this perfectly. Does this observation feel close to your experience?"}</p><div className="grid sm:grid-cols-2 gap-2">{options.map(option => <button key={option} className="px-3 py-2.5 bg-white border border-ink/20 rounded-xl text-left text-[10px] font-bold hover:border-purple-500">{option}</button>)}</div><button className="mt-3 text-[10px] font-black text-ink/40">{zh ? "暂时不需要" : "Not now"}</button></div>}
       </div>
     </div>
   );
