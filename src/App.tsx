@@ -1,4 +1,4 @@
-import NTNDemo from "./NTNDemo";
+import NTNDemo, { NTNArchitectureDemo } from "./NTNDemo";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -13,7 +13,7 @@ const translations = {
     name: "王小元",
     role: "帝国理工学院研究生",
     intro1: "目前在伦敦帝国理工学院攻读设计与行为科学硕士。",
-    intro2: "具备实时交互数字人、AI 直播助手与多模态产品经验，覆盖用户研究、交互链路设计、模型调优及可测试原型落地；可独立完成海外产品测评与双语信息整合。",
+    intro2: "关注视觉与视频生成、实时数字人及多模态交互方向。",
     projectsTitle: "项目经历",
     aboutTitle: "教育背景",
     viewMore: "查看详情",
@@ -48,7 +48,7 @@ const translations = {
     name: "Xiaoyuan Wang",
     role: "MSc Student at Imperial College London",
     intro1: "MSc Design with Behavioural Science student at Imperial College London.",
-    intro2: "Experience across real-time digital humans, AI live-streaming assistants, and multimodal products—from user research and interaction workflows to model tuning and testable prototypes; able to evaluate global products and synthesise information bilingually.",
+    intro2: "Focused on visual and video generation, real-time digital humans, and multimodal interaction.",
     projectsTitle: "Project Portfolio",
     aboutTitle: "Education",
     viewMore: "View Details",
@@ -718,7 +718,12 @@ function Modal1({ lang }: { lang: Language }) {
       </section>
 
       <section className="mb-24">
-        <SH i={4} label={zh ? "设计产出" : "DESIGN OUTPUT"} />
+        <SH i={4} label={zh ? "产品机制与交互架构" : "PRODUCT MECHANISM & ARCHITECTURE"} />
+        <NTNArchitectureDemo lang={lang} />
+      </section>
+
+      <section className="mb-24">
+        <SH i={5} label={zh ? "设计产出" : "DESIGN OUTPUT"} />
         <figure className="mb-6 overflow-hidden rounded-[2rem] border-2 border-ink bg-white shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
           <a href="/ntn-interaction-architecture.png" target="_blank" rel="noreferrer"><img src="/ntn-interaction-architecture.png" alt={zh ? "NTN 最终交互架构图" : "NTN final interaction architecture"} className="w-full h-auto" /></a>
           <figcaption className="px-6 py-4 border-t border-ink/10"><p className="text-sm font-black">{zh ? "从支持需求到用户下一步选择" : "From support-seeking context to the user's next choice"}</p><p className="text-xs text-ink/50 mt-1">{zh ? "完整呈现信号识别、Mirror 与可选支持层之间的关系。" : "The complete relationship between signal recognition, Mirrors, and optional support."}</p></figcaption>
@@ -736,7 +741,7 @@ function Modal1({ lang }: { lang: Language }) {
       </section>
 
       <section className="mb-24">
-        <SH i={5} label={zh ? "体验完整原型" : "TRY THE FULL PROTOTYPE"} />
+        <SH i={6} label={zh ? "体验完整原型" : "TRY THE FULL PROTOTYPE"} />
         <div className="p-7 md:p-9 bg-ink text-paper rounded-[2rem] border-2 border-ink shadow-[5px_5px_0px_0px_rgba(232,106,74,1)] flex flex-col md:flex-row md:items-center gap-7">
           <div className="flex-1"><p className="text-[9px] font-black uppercase tracking-[.2em] text-amber-300 mb-3">V4 · USABILITY-TEST PROTOTYPE</p><h6 className="text-2xl font-serif font-black mb-3">{zh ? "在浏览器中体验三日压缩测试流程" : "Experience the compressed three-day study flow"}</h6><p className="text-sm text-paper/65 leading-relaxed">{zh ? "包含自然对话、Micro Mirror、Across-time Mirror、四种方向、Weekly Reflection、NTN 开关与反馈回收。建议使用桌面浏览器。" : "Includes natural conversation, both Mirrors, four directions, Weekly Reflection, NTN controls, and feedback capture. Desktop browser recommended."}</p></div>
           <div className="flex flex-col sm:flex-row md:flex-col gap-3 shrink-0">
@@ -747,7 +752,7 @@ function Modal1({ lang }: { lang: Language }) {
       </section>
 
       <section>
-        <SH i={6} label={zh ? "当前产出与产品边界" : "CURRENT OUTPUT & PRODUCT BOUNDARIES"} />
+        <SH i={7} label={zh ? "当前产出与产品边界" : "CURRENT OUTPUT & PRODUCT BOUNDARIES"} />
         <div className="grid md:grid-cols-2 gap-6">
           <div className="p-7 bg-emerald-50 border-2 border-ink rounded-[2rem]"><h6 className="text-lg font-black mb-4">{zh ? "目前完成的产品产出" : "Current product output"}</h6><ul className="space-y-2 text-sm text-ink/65">{(zh ? ["可运行的多轮对话 Web Demo", "Micro 与 Across-time 两类 Mirror", "四种可选支持方向与周度回顾", "用户开关、低证据状态与反馈回收"] : ["A working multi-turn web demo", "Micro and Across-time Mirrors", "Four optional support directions and weekly reflection", "User controls, low-evidence states, and feedback capture"]).map(x => <li key={x}>→ {x}</li>)}</ul></div>
           <div className="p-7 bg-rose-50 border-2 border-ink rounded-[2rem]"><h6 className="text-lg font-black mb-4">{zh ? "产品边界" : "Product boundaries"}</h6><ul className="space-y-2 text-sm text-ink/65">{(zh ? ["不进行情绪测量、诊断或临床建议", "当前阈值用于压缩测试，不代表真实世界标准", "尚未验证长期使用效果", "跨会话监测仍需进一步验证隐私与实施可行性"] : ["No emotion measurement, diagnosis, or clinical advice", "Current thresholds support compressed testing, not real-world standards", "Long-term outcomes are not yet validated", "Cross-session monitoring needs further privacy and feasibility validation"]).map(x => <li key={x}>→ {x}</li>)}</ul></div>
@@ -1671,7 +1676,10 @@ export default function App() {
                 )}
               </h1>
               <p className="text-sm md:text-base text-ink/70 leading-relaxed max-w-xs font-medium">{t.intro1}</p>
-              <p className="text-sm md:text-base text-ink/50 leading-relaxed max-w-xs font-medium italic">{t.intro2}</p>
+              <div className="flex flex-wrap gap-2 max-w-md">
+                {t.tags.map(tag => <span key={tag} className="px-3 py-1.5 bg-white border border-ink rounded-full font-black text-[9px] shadow-[2px_2px_0_rgba(45,45,45,1)]">#{tag}</span>)}
+              </div>
+              <p className="text-xs md:text-sm text-ink/50 leading-relaxed max-w-sm font-medium">{t.intro2}</p>
             </motion.div>
 
             <motion.div
@@ -1816,14 +1824,9 @@ export default function App() {
 
       <section className="py-24 px-6 bg-paper/30">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-xl md:text-3xl font-serif font-black leading-tight text-ink mb-10">
-            {lang === "zh" ? `"${t.aboutText}"` : <span className="italic">"{t.aboutText}"</span>}
+          <p className="text-base md:text-xl font-serif font-bold leading-relaxed text-ink/70 max-w-3xl mx-auto">
+            {t.aboutText}
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {t.tags.map(tag => (
-              <span key={tag} className="px-6 py-2 bg-white border-2 border-ink rounded-full font-black text-xs hover:bg-terracotta hover:text-paper transition-all cursor-default shadow-[3px_3px_0px_0px_rgba(45,45,45,1)]">#{tag}</span>
-            ))}
-          </div>
         </div>
       </section>
 

@@ -62,7 +62,7 @@ const copy = {
   },
 };
 
-export default function NTNDemo({ lang }: { lang: Lang }) {
+export function NTNArchitectureDemo({ lang }: { lang: Lang }) {
   const [view, setView] = useState<View>("micro");
   const [paused, setPaused] = useState(false);
   const c = copy[lang];
@@ -132,6 +132,78 @@ export default function NTNDemo({ lang }: { lang: Lang }) {
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+const chatCopy = {
+  zh: {
+    label: "Chatbot 功能演示 · 自动播放",
+    day: "模拟第 2 天",
+    on: "NTN 已开启",
+    messages: [
+      { role: "user", text: "我还是很担心这次作业做得不够好。" },
+      { role: "ai", text: "听起来这份不确定感又回来了。今天最让你卡住的是哪一部分？" },
+      { role: "user", text: "你觉得我是不是一定会搞砸？我只是想确认一下。" },
+      { role: "ai", text: "你似乎很想先获得一个确定答案。我们可以先看看，是什么让这个答案此刻这么重要。" },
+    ],
+    mirrorEyebrow: "ACROSS-TIME MIRROR",
+    mirrorTitle: "这个担忧似乎在不同时间又回来了",
+    mirrorBody: "我可能理解得不完全准确。这个观察贴近你的感受吗？",
+    options: ["继续待一会儿", "换个角度看看", "选一个小步骤", "带到对话之外"],
+  },
+  en: {
+    label: "CHATBOT FEATURE DEMO · AUTO PLAY",
+    day: "Simulated day 2",
+    on: "NTN on",
+    messages: [
+      { role: "user", text: "I'm still worried that my assignment isn't good enough." },
+      { role: "ai", text: "It sounds like that uncertainty has returned. Which part feels most difficult today?" },
+      { role: "user", text: "Do you think I'm definitely going to mess it up? I just want to be sure." },
+      { role: "ai", text: "It sounds like a certain answer would feel important right now. We can first look at what makes that certainty feel necessary." },
+    ],
+    mirrorEyebrow: "ACROSS-TIME MIRROR",
+    mirrorTitle: "This concern seems to have returned at different times",
+    mirrorBody: "I may not have understood this perfectly. Does this observation feel close to your experience?",
+    options: ["Stay with it", "Try another angle", "Pick one small step", "Move it outside chat"],
+  },
+};
+
+export default function NTNDemo({ lang }: { lang: Lang }) {
+  const [step, setStep] = useState(0);
+  const c = chatCopy[lang];
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setStep(previous => (previous + 1) % 7), 1450);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const shownMessages = c.messages.slice(0, Math.min(step, 4));
+  const showTyping = step > 0 && step < 5 && step % 2 === 0;
+  const showMirror = step >= 5;
+
+  return (
+    <div className="w-full">
+      <style>{`@keyframes chatIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}`}</style>
+      <p className="text-[9px] font-black uppercase tracking-widest text-ink/40 mb-4">{c.label}</p>
+      <div className="overflow-hidden rounded-[2rem] border-2 border-ink bg-white shadow-[5px_5px_0_rgba(45,45,45,1)]">
+        <div className="px-5 py-3 border-b-2 border-ink bg-paper flex items-center gap-3">
+          <div className="w-8 h-8 rounded-full bg-ink text-paper flex items-center justify-center text-[9px] font-black">AI</div>
+          <div><p className="text-xs font-black">ChatGPT 4o</p><p className="text-[9px] text-ink/40">{c.day}</p></div>
+          <span className="ml-auto px-3 py-1 rounded-full bg-emerald-50 border border-emerald-300 text-[9px] font-black text-emerald-700">● {c.on}</span>
+        </div>
+        <div className="grid lg:grid-cols-[1.05fr_.95fr] min-h-[390px]">
+          <div className="p-5 md:p-7 bg-[#FCFBF7] border-b-2 lg:border-b-0 lg:border-r-2 border-ink flex flex-col gap-3">
+            {shownMessages.map((message, i) => <div key={`${step}-${i}`} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`} style={{ animation: "chatIn .35s ease-out" }}><div className={`max-w-[82%] px-4 py-3 rounded-2xl text-xs md:text-sm leading-relaxed border ${message.role === "user" ? "bg-amber-100 border-amber-300 rounded-br-md" : "bg-white border-ink/15 rounded-bl-md"}`}>{message.text}</div></div>)}
+            {showTyping && <div className="flex gap-1 px-4 py-3 bg-white border border-ink/15 rounded-2xl rounded-bl-md w-fit">{[0,1,2].map(i => <span key={i} className="w-1.5 h-1.5 bg-ink/50 rounded-full" style={{ animation: `blink 1s ${i * .18}s infinite` }} />)}</div>}
+            {step === 0 && <div className="m-auto text-xs text-ink/30 font-bold">{lang === "zh" ? "对话即将开始…" : "Conversation starting…"}</div>}
+          </div>
+          <div className="p-5 md:p-7 bg-[#F7F2FF] flex items-center">
+            {!showMirror ? <div className="w-full text-center"><div className="mx-auto w-14 h-14 rounded-full border-2 border-dashed border-purple-300 flex items-center justify-center text-purple-400 mb-4">✦</div><p className="text-sm font-black text-ink/60">{lang === "zh" ? "自然对话继续进行" : "Natural conversation continues"}</p><p className="text-[10px] text-ink/35 mt-2">{lang === "zh" ? "反思层等待足够的重复证据" : "The reflection layer waits for sufficient recurrence"}</p></div> : <div className="w-full p-5 bg-white border-2 border-purple-300 rounded-2xl shadow-[3px_3px_0_rgba(139,92,246,.2)]" style={{ animation: "chatIn .45s ease-out" }}><p className="text-[8px] font-black tracking-[.18em] text-purple-600 mb-3">{c.mirrorEyebrow}</p><h6 className="text-lg md:text-xl font-serif font-black leading-tight mb-3">{c.mirrorTitle}</h6><p className="text-xs text-ink/55 leading-relaxed mb-4">{c.mirrorBody}</p><div className="grid grid-cols-2 gap-2">{c.options.map(option => <div key={option} className="px-3 py-2 rounded-lg border border-ink/15 bg-paper text-[9px] font-bold">{option}</div>)}</div></div>}
+          </div>
+        </div>
+        <div className="h-1.5 bg-ink/5"><div className="h-full bg-terracotta transition-all duration-500" style={{ width: `${((step + 1) / 7) * 100}%` }} /></div>
       </div>
     </div>
   );
