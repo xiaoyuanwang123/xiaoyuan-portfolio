@@ -38,7 +38,7 @@ const translations = {
     proj3Desc: "模拟大厂面试官追问，五维度评分+参考答案+考后小结，内置完整面试宝典，每日打卡练习AI PM面试。",
     tags: ["AI", "研究", "产品", "设计", "心理学", "数据"],
     projectDetails: {
-      1: { problem: "识别现有产品以留存为导向、结构性诱导用户依赖的设计问题。", solution: "提出反思性提示、边界提示、真实社交引导三项设计策略。", impact: "深入研究AI情感依赖与用户行为模式，作为毕业论文前期基础。", tools: "Python, Google Colab, OLS 回归, 情感分析" },
+      1: { problem: "用户在向 AI 倾诉情绪压力时，重复安慰可能让对话停留在反复求证，而不是走向新的理解或行动。", solution: "设计自然对话与模式识别反思双层架构，通过两类 Mirror、四个可选方向和周度回顾支持自主反思。", impact: "完成 N=60 定量、N=11 定性与 N=5 共创研究，并将证据转化为 V1–V4 可测试原型。", tools: "混合方法研究, Co-design, LLM Workflow, Web Prototype" },
       2: { problem: "非专业购车用户面临信息过载，难以评估长期成本与生态影响。", solution: "将复杂参数转化为三维决策框架：当前成本、三年预测、碳排放。", impact: "基于 RShiny 开发可运行产品，接入 Maps API，运用 ARIMA 模型预测价格。", tools: "R, Shiny, Maps API, ARIMA" },
       3: { problem: "医学教育中自主练习工具缺失，学生难以准确识别脑肿瘤位置。", solution: "支持即时反馈的交互训练工具，包含肿瘤分类与位置定位两个模块。", impact: "分类模块基于 ResNet-18 迁移学习，测试集准确率达 94.31%。", tools: "MATLAB App Designer, ResNet-18, 图像处理" },
       4: { problem: "自闭症女孩在初潮前缺乏可预期的行动框架，易产生焦虑。", solution: "以自我决定理论(SDT)为框架，设计包含故事书、玩偶、产品的工具包。", impact: "与 autism charity 合作，通过 8 章节故事书帮助用户建立预期。", tools: "产品设计, 用户研究, SDT 理论" }
@@ -73,7 +73,7 @@ const translations = {
     proj3Desc: "Big-tech style follow-up drills, 5-dimension scoring, reference answers, post-session recap. Built-in playbook, skip & end controls, daily streak practice.",
     tags: ["AI", "Research", "Product", "Design", "Psychology", "Data"],
     projectDetails: {
-      1: { problem: "Identified design issues in existing products that induce structural user dependency.", solution: "Proposed three design strategies: reflective prompts, boundary cues, and social signposting.", impact: "Deep research into AI emotional reliance and user behavior patterns for thesis foundation.", tools: "Python, Google Colab, OLS Regression, Sentiment Analysis" },
+      1: { problem: "When people disclose emotional strain to AI, repeated reassurance can keep the conversation inside a validation loop rather than support new understanding or action.", solution: "Designed a two-layer conversation and reflection architecture with two Mirrors, four optional directions, and a weekly review.", impact: "Translated N=60 quantitative, N=11 qualitative, and N=5 co-design evidence into a V1–V4 testable prototype.", tools: "Mixed Methods, Co-design, LLM Workflow, Web Prototype" },
       2: { problem: "Non-professional car buyers face information overload regarding long-term costs and eco-impact.", solution: "Transformed complex parameters into a 3D decision framework: current cost, 3-year forecast, CO2.", impact: "Developed a functional RShiny app with Maps API integration and ARIMA price forecasting.", tools: "R, Shiny, Maps API, ARIMA" },
       3: { problem: "Lack of autonomous practice tools in medical education for brain tumor identification.", solution: "Interactive training tool with instant feedback, featuring classification and localization modules.", impact: "Classification module based on ResNet-18 transfer learning, achieving 94.31% accuracy.", tools: "MATLAB App Designer, ResNet-18, Image Processing" },
       4: { problem: "Autistic girls lack predictable frameworks before menarche, leading to anxiety.", solution: "Designed a toolkit based on Self-Determination Theory (SDT) with storybooks and dolls.", impact: "Collaborated with autism charity to help users build expectations through 8-chapter stories.", tools: "Product Design, User Research, SDT Framework" }
@@ -82,7 +82,7 @@ const translations = {
 };
 
 const projects = [
-  { id: 1, title: { zh: "Navigating the Noise", en: "Navigating the Noise" }, category: { zh: "AI 情感支持产品设计", en: "AI Emotional Support Product Design" }, description: { zh: "从用户研究到Prompt工程，设计AI情感干预系统，解决现有产品以留存为导向的结构性问题。", en: "From user research to prompt engineering — designing an AI emotional intervention system that prioritises autonomy over retention." }, icon: <Brain className="w-8 h-8" />, color: "bg-[#FEF3C7]", accent: "text-amber-600" },
+  { id: 1, title: { zh: "Navigating the Noise", en: "Navigating the Noise" }, category: { zh: "AI 情感支持交互产品", en: "AI Emotional Support Interaction" }, description: { zh: "用可跳过、可纠正的反思机制，帮助用户识别反复求证模式，同时保留自然对话与自主选择。", en: "A correctable reflection layer that helps users notice repeated reassurance-seeking while preserving natural conversation and choice." }, icon: <Brain className="w-8 h-8" />, color: "bg-[#FEF3C7]", accent: "text-amber-600" },
   { id: 2, title: { zh: "CarEcoCompare", en: "CarEcoCompare" }, category: { zh: "车辆决策数据产品", en: "Vehicle Decision Data Product" }, description: { zh: "将复杂技术参数转化为通勤场景下的三维决策框架，辅助车辆选购。", en: "Transforming complex parameters into a 3D decision framework for car buyers." }, icon: <Car className="w-8 h-8" />, color: "bg-[#DBEAFE]", accent: "text-blue-600" },
   { id: 3, title: { zh: "TumorTutor", en: "TumorTutor" }, category: { zh: "脑肿瘤识别工具", en: "Brain Tumor Recognition Tool" }, description: { zh: "基于深度学习的脑肿瘤识别工具，支持分类与位置定位交互训练。", en: "Deep learning tool for brain tumor classification and localization training." }, icon: <Plus className="w-8 h-8" />, color: "bg-[#F3E8FF]", accent: "text-purple-600" },
 ];
@@ -287,7 +287,7 @@ function SH({ i, label }: { i: number; label: string }) {
   );
 }
 
-function Modal1({ lang }: { lang: Language }) {
+function Modal1Legacy({ lang }: { lang: Language }) {
   const p = p1Content[lang];
   const [openStrategy, setOpenStrategy] = useState<number | null>(null);
 
@@ -642,6 +642,86 @@ function Modal1({ lang }: { lang: Language }) {
               {lang === "zh" ? "下载 HTML ↓" : "Download HTML ↓"}
             </a>
           </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function Modal1({ lang }: { lang: Language }) {
+  const zh = lang === "zh";
+  const evidence = zh ? [
+    { n: "N=60", title: "定量研究", text: "感知依赖与情绪负担呈显著正相关，为问题边界提供证据，而非用于诊断个体。" },
+    { n: "N=11", title: "深度访谈", text: "识别即时可用、无评判支持与重复求证之间的张力。" },
+    { n: "N=5", title: "Co-design", text: "将用户自主性、柔和语言、隐私边界与现实支持转化为设计要求。" },
+  ] : [
+    { n: "N=60", title: "Quantitative study", text: "Perceived reliance was positively associated with emotional strain, defining the problem space rather than diagnosing individuals." },
+    { n: "N=11", title: "In-depth interviews", text: "Revealed the tension between immediate, non-judgemental support and repeated reassurance-seeking." },
+    { n: "N=5", title: "Co-design", text: "Translated autonomy, gentle language, privacy boundaries, and real-world support into product requirements." },
+  ];
+  const requirements = zh ? [
+    ["不诊断、不评分", "Mirror 使用试探性语言，允许用户纠正或忽略。"],
+    ["保留选择权", "反思后提供四种平行方向，不强迫用户离开对话。"],
+    ["区分两种时间尺度", "Micro Mirror 处理同次对话；Across-time Mirror 处理跨会话返回。"],
+    ["让监测可控", "NTN 可关闭；关闭期间不分析，重新开启只处理之后的消息。"],
+  ] : [
+    ["No diagnosis or scoring", "Mirrors use tentative language and remain correctable or dismissible."],
+    ["Preserve choice", "Four equal directions follow a reflection; none forces the user to leave chat."],
+    ["Separate timescales", "Micro Mirror handles same-session dwelling; Across-time Mirror handles recurrence."],
+    ["Make monitoring controllable", "NTN can be disabled; re-enabling only applies to future messages."],
+  ];
+  return (
+    <div className="p-6 md:p-12">
+      <header className="mb-20">
+        <div className="flex flex-col md:flex-row md:items-end gap-5 mb-8">
+          <div className="p-5 bg-amber-100 border-2 border-ink rounded-3xl shadow-[3px_3px_0px_0px_rgba(45,45,45,1)] w-fit"><Brain className="w-10 h-10 text-amber-600" /></div>
+          <div><p className="text-[9px] font-black uppercase tracking-[.22em] text-amber-600 mb-2">AI PRODUCT · INDEPENDENT PROJECT</p><h3 className="text-3xl md:text-5xl font-serif font-black">Navigating the Noise</h3></div>
+        </div>
+        <h4 className="max-w-4xl text-xl md:text-3xl font-serif font-bold leading-tight mb-5">
+          {zh ? "帮助用户识别反复求证，而不把关怀变成诊断。" : "Helping people notice repeated reassurance-seeking—without turning care into diagnosis."}
+        </h4>
+        <p className="max-w-3xl text-sm md:text-base leading-relaxed text-ink/65 font-medium">
+          {zh ? "一款可嵌入通用 AI 对话的反思机制：保持自然回应，在有足够证据时提供可跳过、可纠正的 Mirror，并将选择权留给用户。" : "A reflection mechanism for general-purpose AI chat: preserve natural responses, offer a skippable and correctable Mirror only when evidence is sufficient, and leave the next move with the user."}
+        </p>
+        <div className="flex flex-wrap gap-2 mt-6">{(zh ? ["独立研究与产品设计", "混合方法", "LLM Workflow", "可用性测试原型"] : ["Independent research & product design", "Mixed methods", "LLM workflow", "Usability-test prototype"]).map(x => <span key={x} className="px-3 py-1 bg-ink text-paper rounded-lg text-[9px] font-bold uppercase tracking-widest">{x}</span>)}</div>
+      </header>
+
+      <section className="mb-24">
+        <SH i={1} label={zh ? "产品问题" : "PRODUCT CHALLENGE"} />
+        <div className="grid md:grid-cols-[1.2fr_.8fr] gap-6">
+          <div className="p-8 bg-white border-2 border-ink rounded-[2rem] shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]"><p className="text-xl md:text-2xl font-serif font-black leading-snug">{zh ? "用户向 AI 倾诉情绪压力时，持续收到相似安慰，可能只带来短暂缓解，却让对话停留在反复求证。" : "When users disclose emotional strain to AI, repeated reassurance may offer short-term relief while keeping the conversation inside a validation loop."}</p></div>
+          <div className="p-8 bg-amber-50 border-2 border-ink rounded-[2rem]"><p className="text-[9px] font-black uppercase tracking-widest text-amber-700 mb-3">DESIGN QUESTION</p><p className="text-base font-bold leading-relaxed">{zh ? "AI 如何在不增加焦虑、羞耻或临床判断感的前提下，帮助用户察觉反复的反刍与求证模式？" : "How might AI help users notice recurring rumination and reassurance-seeking without increasing anxiety, shame, or perceived clinical judgement?"}</p></div>
+        </div>
+      </section>
+
+      <section className="mb-24">
+        <SH i={2} label={zh ? "研究证据" : "RESEARCH EVIDENCE"} />
+        <div className="grid md:grid-cols-3 gap-5">{evidence.map(item => <div key={item.n} className="p-6 bg-white border-2 border-ink rounded-2xl"><span className="text-3xl font-serif font-black text-terracotta">{item.n}</span><h6 className="font-black mt-3 mb-2">{item.title}</h6><p className="text-xs leading-relaxed text-ink/60">{item.text}</p></div>)}</div>
+        <div className="grid md:grid-cols-3 gap-4 mt-6">
+          {[
+            { src: "1-correlation.png", zh: "依赖与情绪负担相关分析", en: "Reliance and emotional strain" },
+            { src: "1-Bunka Semantic Map.png", zh: "Bunka 语义主题地图", en: "Bunka semantic map" },
+            { src: "1-Interaction.png", zh: "研究洞察交互模型", en: "Insight interaction model" },
+          ].map(item => <figure key={item.src} className="overflow-hidden rounded-2xl border-2 border-ink bg-white"><img src={item.src} alt={zh ? item.zh : item.en} className="w-full aspect-[4/3] object-contain bg-white p-2" /><figcaption className="px-4 py-3 border-t border-ink/10 text-[9px] font-black uppercase tracking-wider text-ink/50">{zh ? item.zh : item.en}</figcaption></figure>)}
+        </div>
+        <p className="mt-5 text-[11px] text-ink/45 leading-relaxed">{zh ? "研究用于形成设计要求与原型假设；相关关系不等于因果，也不支持个体层面的临床判断。" : "The evidence informs design requirements and prototype hypotheses; association is not causation and does not support individual clinical judgement."}</p>
+      </section>
+
+      <section className="mb-24">
+        <SH i={3} label={zh ? "从发现到产品要求" : "FROM FINDINGS TO REQUIREMENTS"} />
+        <div className="grid md:grid-cols-2 gap-4">{requirements.map(([title, text], i) => <div key={title} className="flex gap-4 p-5 bg-paper border border-ink/15 rounded-2xl"><span className="w-8 h-8 shrink-0 rounded-full bg-ink text-paper flex items-center justify-center text-xs font-black">{i + 1}</span><div><h6 className="font-black mb-1">{title}</h6><p className="text-xs leading-relaxed text-ink/60">{text}</p></div></div>)}</div>
+      </section>
+
+      <section className="mb-24">
+        <SH i={4} label={zh ? "最终交互架构" : "FINAL INTERACTION ARCHITECTURE"} />
+        <NTNDemo lang={lang} />
+      </section>
+
+      <section>
+        <SH i={5} label={zh ? "当前产出与产品边界" : "CURRENT OUTPUT & PRODUCT BOUNDARIES"} />
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="p-7 bg-emerald-50 border-2 border-ink rounded-[2rem]"><h6 className="text-lg font-black mb-4">{zh ? "目前完成的产品产出" : "Current product output"}</h6><ul className="space-y-2 text-sm text-ink/65">{(zh ? ["可运行的多轮对话 Web Demo", "Micro 与 Across-time 两类 Mirror", "四种可选支持方向与周度回顾", "用户开关、低证据状态与反馈回收"] : ["A working multi-turn web demo", "Micro and Across-time Mirrors", "Four optional support directions and weekly reflection", "User controls, low-evidence states, and feedback capture"]).map(x => <li key={x}>→ {x}</li>)}</ul></div>
+          <div className="p-7 bg-rose-50 border-2 border-ink rounded-[2rem]"><h6 className="text-lg font-black mb-4">{zh ? "产品边界" : "Product boundaries"}</h6><ul className="space-y-2 text-sm text-ink/65">{(zh ? ["不进行情绪测量、诊断或临床建议", "当前阈值用于压缩测试，不代表真实世界标准", "尚未验证长期使用效果", "跨会话监测仍需进一步验证隐私与实施可行性"] : ["No emotion measurement, diagnosis, or clinical advice", "Current thresholds support compressed testing, not real-world standards", "Long-term outcomes are not yet validated", "Cross-session monitoring needs further privacy and feasibility validation"]).map(x => <li key={x}>→ {x}</li>)}</ul></div>
         </div>
       </section>
     </div>
