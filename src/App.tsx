@@ -13,11 +13,11 @@ const translations = {
     name: "王小元",
     role: "帝国理工学院研究生",
     intro1: "目前在伦敦帝国理工学院攻读设计与行为科学硕士。",
-    intro2: "我用研究和设计，把复杂系统转化为用户可以理解和使用的产品。",
+    intro2: "具备实时交互数字人、AI 直播助手与多模态产品经验，覆盖用户研究、交互链路设计、模型调优及可测试原型落地；可独立完成海外产品测评与双语信息整合。",
     projectsTitle: "项目经历",
     aboutTitle: "教育背景",
     viewMore: "查看详情",
-    aboutText: "好的设计不是给出答案，而是帮人找到自己的路。建筑、行为科学、AI 研究——这些构成了我的思考方式。研究与设计的交叉是我探索的方向。",
+    aboutText: "我希望继续学习如何把用户研究、行为科学与 AI 技术连接起来，将复杂问题转化为更清晰、可靠、真正服务于人的产品体验。",
     contactText: "欢迎一起交流学习！",
     vibeCodingTitle: "Vibe Coding",
     vibeCodingView: "查看详情",
@@ -36,7 +36,7 @@ const translations = {
     proj3Status: "❆ 已上线",
     proj3Cat: "AI工具 · 面试训练 · 游戏化",
     proj3Desc: "模拟大厂面试官追问，五维度评分+参考答案+考后小结，内置完整面试宝典，每日打卡练习AI PM面试。",
-    tags: ["AI", "研究", "产品", "设计", "心理学", "数据"],
+    tags: ["AI", "数字人", "多模态", "用户研究", "双语工作能力"],
     projectDetails: {
       1: { problem: "用户在向 AI 倾诉情绪压力时，重复安慰可能让对话停留在反复求证，而不是走向新的理解或行动。", solution: "设计自然对话与模式识别反思双层架构，通过两类 Mirror、四个可选方向和周度回顾支持自主反思。", impact: "完成 N=60 定量、N=11 定性与 N=5 共创研究，并将证据转化为 V1–V4 可测试原型。", tools: "混合方法研究, Co-design, LLM Workflow, Web Prototype" },
       2: { problem: "非专业购车用户面临信息过载，难以评估长期成本与生态影响。", solution: "将复杂参数转化为三维决策框架：当前成本、三年预测、碳排放。", impact: "基于 RShiny 开发可运行产品，接入 Maps API，运用 ARIMA 模型预测价格。", tools: "R, Shiny, Maps API, ARIMA" },
@@ -48,11 +48,11 @@ const translations = {
     name: "Xiaoyuan Wang",
     role: "MSc Student at Imperial College London",
     intro1: "MSc Design with Behavioural Science student at Imperial College London.",
-    intro2: "I use research and design to turn complex systems into products people can use.",
+    intro2: "Experience across real-time digital humans, AI live-streaming assistants, and multimodal products—from user research and interaction workflows to model tuning and testable prototypes; able to evaluate global products and synthesise information bilingually.",
     projectsTitle: "Project Portfolio",
     aboutTitle: "Education",
     viewMore: "View Details",
-    aboutText: "Good design doesn't hand people answers — it builds the conditions for them to find their own. Architecture, behavioural science, AI research — these are the lenses I look through. This intersection is where I belong.",
+    aboutText: "I am continuing to learn how user research, behavioural science, and AI can work together to turn complex problems into clearer, more reliable, and genuinely useful product experiences.",
     contactText: "Always happy to connect and exchange ideas!",
     vibeCodingTitle: "Vibe Coding",
     vibeCodingView: "View Details",
@@ -71,7 +71,7 @@ const translations = {
     proj3Status: "Live",
     proj3Cat: "AI Tool · Interview Training · Gamification",
     proj3Desc: "Big-tech style follow-up drills, 5-dimension scoring, reference answers, post-session recap. Built-in playbook, skip & end controls, daily streak practice.",
-    tags: ["AI", "Research", "Product", "Design", "Psychology", "Data"],
+    tags: ["AI", "Digital Humans", "Multimodal", "User Research", "Bilingual Work"],
     projectDetails: {
       1: { problem: "When people disclose emotional strain to AI, repeated reassurance can keep the conversation inside a validation loop rather than support new understanding or action.", solution: "Designed a two-layer conversation and reflection architecture with two Mirrors, four optional directions, and a weekly review.", impact: "Translated N=60 quantitative, N=11 qualitative, and N=5 co-design evidence into a V1–V4 testable prototype.", tools: "Mixed Methods, Co-design, LLM Workflow, Web Prototype" },
       2: { problem: "Non-professional car buyers face information overload regarding long-term costs and eco-impact.", solution: "Transformed complex parameters into a 3D decision framework: current cost, 3-year forecast, CO2.", impact: "Developed a functional RShiny app with Maps API integration and ARIMA price forecasting.", tools: "R, Shiny, Maps API, ARIMA" },
@@ -672,7 +672,7 @@ function Modal1({ lang }: { lang: Language }) {
   ];
   return (
     <div className="p-6 md:p-12">
-      <header className="mb-20">
+      <header className="mb-12">
         <div className="flex flex-col md:flex-row md:items-end gap-5 mb-8">
           <div className="p-5 bg-amber-100 border-2 border-ink rounded-3xl shadow-[3px_3px_0px_0px_rgba(45,45,45,1)] w-fit"><Brain className="w-10 h-10 text-amber-600" /></div>
           <div><p className="text-[9px] font-black uppercase tracking-[.22em] text-amber-600 mb-2">AI PRODUCT · INDEPENDENT PROJECT</p><h3 className="text-3xl md:text-5xl font-serif font-black">Navigating the Noise</h3></div>
@@ -685,6 +685,11 @@ function Modal1({ lang }: { lang: Language }) {
         </p>
         <div className="flex flex-wrap gap-2 mt-6">{(zh ? ["独立研究与产品设计", "混合方法", "LLM Workflow", "可用性测试原型"] : ["Independent research & product design", "Mixed methods", "LLM workflow", "Usability-test prototype"]).map(x => <span key={x} className="px-3 py-1 bg-ink text-paper rounded-lg text-[9px] font-bold uppercase tracking-widest">{x}</span>)}</div>
       </header>
+
+      <section className="mb-24">
+        <SH i={0} label={zh ? "产品功能动画" : "PRODUCT IN ACTION"} />
+        <NTNDemo lang={lang} />
+      </section>
 
       <section className="mb-24">
         <SH i={1} label={zh ? "产品问题" : "PRODUCT CHALLENGE"} />
@@ -713,12 +718,7 @@ function Modal1({ lang }: { lang: Language }) {
       </section>
 
       <section className="mb-24">
-        <SH i={4} label={zh ? "最终交互架构" : "FINAL INTERACTION ARCHITECTURE"} />
-        <NTNDemo lang={lang} />
-      </section>
-
-      <section className="mb-24">
-        <SH i={5} label={zh ? "设计产出" : "DESIGN OUTPUT"} />
+        <SH i={4} label={zh ? "设计产出" : "DESIGN OUTPUT"} />
         <figure className="mb-6 overflow-hidden rounded-[2rem] border-2 border-ink bg-white shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
           <a href="/ntn-interaction-architecture.png" target="_blank" rel="noreferrer"><img src="/ntn-interaction-architecture.png" alt={zh ? "NTN 最终交互架构图" : "NTN final interaction architecture"} className="w-full h-auto" /></a>
           <figcaption className="px-6 py-4 border-t border-ink/10"><p className="text-sm font-black">{zh ? "从支持需求到用户下一步选择" : "From support-seeking context to the user's next choice"}</p><p className="text-xs text-ink/50 mt-1">{zh ? "完整呈现信号识别、Mirror 与可选支持层之间的关系。" : "The complete relationship between signal recognition, Mirrors, and optional support."}</p></figcaption>
@@ -736,7 +736,7 @@ function Modal1({ lang }: { lang: Language }) {
       </section>
 
       <section className="mb-24">
-        <SH i={6} label={zh ? "体验完整原型" : "TRY THE FULL PROTOTYPE"} />
+        <SH i={5} label={zh ? "体验完整原型" : "TRY THE FULL PROTOTYPE"} />
         <div className="p-7 md:p-9 bg-ink text-paper rounded-[2rem] border-2 border-ink shadow-[5px_5px_0px_0px_rgba(232,106,74,1)] flex flex-col md:flex-row md:items-center gap-7">
           <div className="flex-1"><p className="text-[9px] font-black uppercase tracking-[.2em] text-amber-300 mb-3">V4 · USABILITY-TEST PROTOTYPE</p><h6 className="text-2xl font-serif font-black mb-3">{zh ? "在浏览器中体验三日压缩测试流程" : "Experience the compressed three-day study flow"}</h6><p className="text-sm text-paper/65 leading-relaxed">{zh ? "包含自然对话、Micro Mirror、Across-time Mirror、四种方向、Weekly Reflection、NTN 开关与反馈回收。建议使用桌面浏览器。" : "Includes natural conversation, both Mirrors, four directions, Weekly Reflection, NTN controls, and feedback capture. Desktop browser recommended."}</p></div>
           <div className="flex flex-col sm:flex-row md:flex-col gap-3 shrink-0">
@@ -747,7 +747,7 @@ function Modal1({ lang }: { lang: Language }) {
       </section>
 
       <section>
-        <SH i={7} label={zh ? "当前产出与产品边界" : "CURRENT OUTPUT & PRODUCT BOUNDARIES"} />
+        <SH i={6} label={zh ? "当前产出与产品边界" : "CURRENT OUTPUT & PRODUCT BOUNDARIES"} />
         <div className="grid md:grid-cols-2 gap-6">
           <div className="p-7 bg-emerald-50 border-2 border-ink rounded-[2rem]"><h6 className="text-lg font-black mb-4">{zh ? "目前完成的产品产出" : "Current product output"}</h6><ul className="space-y-2 text-sm text-ink/65">{(zh ? ["可运行的多轮对话 Web Demo", "Micro 与 Across-time 两类 Mirror", "四种可选支持方向与周度回顾", "用户开关、低证据状态与反馈回收"] : ["A working multi-turn web demo", "Micro and Across-time Mirrors", "Four optional support directions and weekly reflection", "User controls, low-evidence states, and feedback capture"]).map(x => <li key={x}>→ {x}</li>)}</ul></div>
           <div className="p-7 bg-rose-50 border-2 border-ink rounded-[2rem]"><h6 className="text-lg font-black mb-4">{zh ? "产品边界" : "Product boundaries"}</h6><ul className="space-y-2 text-sm text-ink/65">{(zh ? ["不进行情绪测量、诊断或临床建议", "当前阈值用于压缩测试，不代表真实世界标准", "尚未验证长期使用效果", "跨会话监测仍需进一步验证隐私与实施可行性"] : ["No emotion measurement, diagnosis, or clinical advice", "Current thresholds support compressed testing, not real-world standards", "Long-term outcomes are not yet validated", "Cross-session monitoring needs further privacy and feasibility validation"]).map(x => <li key={x}>→ {x}</li>)}</ul></div>
@@ -1750,8 +1750,9 @@ export default function App() {
                 <h3 className={`${i === 0 ? "text-3xl md:text-5xl" : "text-2xl md:text-3xl"} font-serif font-black mb-2 relative`}>{project.title[lang]}</h3>
                 <p className={`text-xs font-bold uppercase tracking-wider ${i === 0 ? "mb-5" : "mb-3"} ${project.accent}`}>{project.category[lang]}</p>
                 <p className={`${i === 0 ? "text-base md:text-lg max-w-md" : "text-sm"} text-ink/70 font-medium leading-relaxed relative`}>{project.description[lang]}</p>
-                <div className={`${i === 0 ? "mt-auto pt-8" : "mt-5 pt-4"} border-t border-ink/10 flex items-center gap-2 font-bold text-xs relative`}>
-                  <BookOpen className="w-4 h-4" />{t.viewMore}
+                <div className={`${i === 0 ? "mt-auto pt-8" : "mt-5 pt-4"} border-t border-ink/10 flex items-center justify-between gap-2 font-bold text-xs relative`}>
+                  <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" />{t.viewMore}</span>
+                  {i === 0 && <span className="text-[10px] font-black text-amber-700">● {lang === "zh" ? "已上线" : "LIVE"}</span>}
                 </div>
               </motion.div>
             ))}
