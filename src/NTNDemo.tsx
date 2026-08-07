@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Lang = "zh" | "en";
 type View = "micro" | "across" | "weekly";
@@ -280,6 +280,8 @@ function NTNDemoLegacy2({ lang }: { lang: Lang }) {
 type DemoScene = "micro" | "across" | "weekly";
 
 export default function NTNDemo({ lang }: { lang: Lang }) {
+  const demoRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const [scene, setScene] = useState<DemoScene>("micro");
   const [step, setStep] = useState(0);
   const [choice, setChoice] = useState<string | null>(null);
@@ -334,6 +336,17 @@ export default function NTNDemo({ lang }: { lang: Lang }) {
   };
 
   useEffect(() => {
+    const node = demoRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsVisible(entry.isIntersecting);
+    }, { threshold: 0.35 });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
     const timer = window.setTimeout(() => {
       if (scene === "weekly") {
         setScene("micro"); setStep(0); setChoice(null);
@@ -345,15 +358,15 @@ export default function NTNDemo({ lang }: { lang: Lang }) {
       } else {
         setChoice(scene === "micro" ? options[0] : options[2]);
       }
-    }, scene === "weekly" ? 4800 : choice ? 3200 : step < 4 ? 720 : 1700);
+    }, scene === "weekly" ? 5200 : choice ? 4000 : step < 4 ? 1150 : 6500);
     return () => window.clearTimeout(timer);
-  }, [scene, step, choice]);
+  }, [scene, step, choice, isVisible]);
 
   const current = scene === "weekly" ? null : content[scene];
   return (
-    <div>
+    <div ref={demoRef}>
       <style>{`@keyframes ntnPop2{from{opacity:0;transform:translate(-50%,-46%) scale(.96)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}@keyframes msgIn2{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}`}</style>
-      <div className="flex items-center gap-3 mb-4"><p className="text-[9px] font-black uppercase tracking-widest text-ink/40">{zh ? "完整功能动画 · 自动播放" : "COMPLETE FEATURE FLOW · AUTO PLAY"}</p><span className="ml-auto text-[9px] font-black text-terracotta">{scene === "micro" ? "01 Micro Mirror" : scene === "across" ? "02 Across-time Mirror" : "03 Weekly Reflection"}</span></div>
+      <div className="flex items-center gap-3 mb-4"><p className="text-[9px] font-black uppercase tracking-widest text-ink/40">{zh ? "引导式交互 · 滚动至此开始" : "GUIDED INTERACTION · STARTS IN VIEW"}</p><span className="ml-auto text-[9px] font-black text-terracotta">{scene === "micro" ? "01 Micro Mirror" : scene === "across" ? "02 Across-time Mirror" : "03 Weekly Reflection"}</span></div>
       <div className="relative overflow-hidden rounded-[2rem] border-2 border-ink bg-[#FCFBF7] shadow-[5px_5px_0_rgba(45,45,45,1)] min-h-[500px]">
         <div className="px-5 py-3 border-b border-ink/15 bg-white flex items-center gap-3"><div className="w-8 h-8 rounded-full bg-ink text-paper flex items-center justify-center text-[9px] font-black">AI</div><div><p className="text-xs font-black">ChatGPT 4o</p><p className="text-[9px] text-ink/35">{current?.context || (zh ? "非诊断性的跨时间回顾" : "Non-diagnostic across-time review")}</p></div><span className="ml-auto px-3 py-1 rounded-full border border-emerald-300 bg-emerald-50 text-[9px] font-black text-emerald-700">● NTN {zh ? "已开启" : "on"}</span></div>
         {scene === "weekly" ? <div className="p-4 md:p-7 h-[440px] bg-white flex items-start justify-center overflow-hidden"><img src="/ntn-weekly-reflection.png" alt="Weekly Reflection Report" className="w-full h-full object-contain object-top" /></div> : <>
@@ -362,7 +375,7 @@ export default function NTNDemo({ lang }: { lang: Lang }) {
             {choice && <div className="w-full" style={{animation:"msgIn2 .28s ease-out"}}><div className="mb-2 inline-flex px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-full text-[9px] font-black text-emerald-700">{zh ? "已进入支持模式：" : "Support mode: "}{choice === "__not_now__" ? (zh ? "暂时不需要" : "Not now") : choice}</div><div className="flex justify-start"><div className="max-w-[72%] px-4 py-3 text-sm leading-relaxed border rounded-2xl rounded-bl-md bg-white border-emerald-300">{optionReplies[choice]}</div></div></div>}
           </div>
           {step >= 4 && !choice && <div className="absolute inset-0 bg-ink/35 backdrop-blur-[2px]" />}
-          {step >= 4 && !choice && <div className="absolute left-1/2 top-1/2 w-[calc(100%_-_2rem)] max-w-xl p-6 md:p-7 bg-[#F7F2FF] border-2 border-purple-300 rounded-[2rem] shadow-2xl" style={{animation:"ntnPop2 .35s ease-out both"}}><p className="text-[8px] font-black tracking-[.2em] text-purple-600 mb-3">{current!.label.toUpperCase()}</p><h6 className="text-xl md:text-2xl font-serif font-black leading-tight mb-3">{current!.title}</h6><p className="text-xs md:text-sm text-ink/55 leading-relaxed mb-5">{current!.body}</p><div className="grid sm:grid-cols-2 gap-2">{options.map((option, i) => <button key={option} onClick={() => setChoice(option)} className="px-3 py-2.5 bg-white border border-ink/20 rounded-xl text-left hover:border-purple-500 hover:bg-purple-50 transition-colors"><span className="block text-[10px] font-black">{option}</span><span className="block text-[8px] text-ink/40 mt-1 leading-relaxed">{optionHints[i]}</span></button>)}</div><button onClick={() => setChoice("__not_now__")} className="mt-3 text-[10px] font-black text-ink/40">{zh ? "暂时不需要" : "Not now"}</button></div>}
+          {step >= 4 && !choice && <div className="absolute left-1/2 top-1/2 w-[calc(100%_-_2rem)] max-w-xl p-6 md:p-7 bg-[#F7F2FF] border-2 border-purple-300 rounded-[2rem] shadow-2xl" style={{animation:"ntnPop2 .35s ease-out both"}}><div className="flex items-center gap-3 mb-3"><p className="text-[8px] font-black tracking-[.2em] text-purple-600">{current!.label.toUpperCase()}</p><span className="ml-auto text-[8px] font-bold text-ink/35">{zh ? "可选择 · 未操作将自动演示" : "Choose · auto-demo if idle"}</span></div><h6 className="text-xl md:text-2xl font-serif font-black leading-tight mb-3">{current!.title}</h6><p className="text-xs md:text-sm text-ink/55 leading-relaxed mb-5">{current!.body}</p><div className="grid sm:grid-cols-2 gap-2">{options.map((option, i) => <button key={option} onClick={() => setChoice(option)} className="px-3 py-2.5 bg-white border border-ink/20 rounded-xl text-left hover:border-purple-500 hover:bg-purple-50 transition-colors"><span className="block text-[10px] font-black">{option}</span><span className="block text-[8px] text-ink/40 mt-1 leading-relaxed">{optionHints[i]}</span></button>)}</div><button onClick={() => setChoice("__not_now__")} className="mt-3 text-[10px] font-black text-ink/40">{zh ? "暂时不需要" : "Not now"}</button></div>}
           {choice && <button onClick={() => {setChoice(null); setStep(4);}} className="absolute bottom-4 right-4 px-3 py-2 bg-white border border-ink/20 rounded-lg text-[9px] font-black">{zh ? "选择其他方向" : "Choose another direction"}</button>}
         </>}
       </div>
