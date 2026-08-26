@@ -1,9 +1,10 @@
 import NTNDemo, { NTNArchitectureDemo } from "./NTNDemo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
-  Sparkles, Heart, Brain, Car, User, X, Languages, ArrowRight,
-  BookOpen, Target, Lightbulb, Plus, Flower2, Zap
+  Sparkles, Heart, Brain, Car, User, Languages, ArrowLeft, ArrowRight,
+  BookOpen, Target, Lightbulb, Plus, Flower2, Zap, Download,
+  ExternalLink, Play, GitBranch, CheckCircle2, X
 } from "lucide-react";
 
 type Language = "zh" | "en";
@@ -38,7 +39,7 @@ const translations = {
     proj3Desc: "模拟大厂面试官追问，五维度评分+参考答案+考后小结，内置完整面试宝典，每日打卡练习AI PM面试。",
     tags: ["多模态 AI", "数字人", "AI 视频生成", "对话式 AI", "双语工作能力"],
     projectDetails: {
-      1: { problem: "用户在向 AI 倾诉情绪压力时，重复安慰可能让对话停留在反复求证，而不是走向新的理解或行动。", solution: "设计自然对话与模式识别反思双层架构，通过两类 Mirror、四个可选方向和周度回顾支持自主反思。", impact: "完成 N=60 定量、N=11 定性与 N=5 共创研究，并将证据转化为 V1–V4 可测试原型。", tools: "混合方法研究, Co-design, LLM Workflow, Web Prototype" },
+      1: { problem: "用户在向 AI 倾诉情绪压力时，重复安慰可能让对话停留在反复求证，而不是走向新的理解或行动。", solution: "设计自然对话与模式识别反思双层架构，通过两类 Mirror、四个可选方向和周度回顾支持自主反思。", impact: "完成五轮原型迭代，并以 13 位参与者与 3 位专家的正式评估证据形成 V5 最终规范。", tools: "混合方法研究, Co-design, LLM Workflow, Web Prototype" },
       2: { problem: "非专业购车用户面临信息过载，难以评估长期成本与生态影响。", solution: "将复杂参数转化为三维决策框架：当前成本、三年预测、碳排放。", impact: "基于 RShiny 开发可运行产品，接入 Maps API，运用 ARIMA 模型预测价格。", tools: "R, Shiny, Maps API, ARIMA" },
       3: { problem: "医学教育中自主练习工具缺失，学生难以准确识别脑肿瘤位置。", solution: "支持即时反馈的交互训练工具，包含肿瘤分类与位置定位两个模块。", impact: "分类模块基于 ResNet-18 迁移学习，测试集准确率达 94.31%。", tools: "MATLAB App Designer, ResNet-18, 图像处理" },
       4: { problem: "自闭症女孩在初潮前缺乏可预期的行动框架，易产生焦虑。", solution: "以自我决定理论(SDT)为框架，设计包含故事书、玩偶、产品的工具包。", impact: "与 autism charity 合作，通过 8 章节故事书帮助用户建立预期。", tools: "产品设计, 用户研究, SDT 理论" }
@@ -73,7 +74,7 @@ const translations = {
     proj3Desc: "Big-tech style follow-up drills, 5-dimension scoring, reference answers, post-session recap. Built-in playbook, skip & end controls, daily streak practice.",
     tags: ["Multimodal AI", "Digital Human", "AI Video Generation", "Conversational AI", "Bilingual Work"],
     projectDetails: {
-      1: { problem: "When people disclose emotional strain to AI, repeated reassurance can keep the conversation inside a validation loop rather than support new understanding or action.", solution: "Designed a two-layer conversation and reflection architecture with two Mirrors, four optional directions, and a weekly review.", impact: "Translated N=60 quantitative, N=11 qualitative, and N=5 co-design evidence into a V1–V4 testable prototype.", tools: "Mixed Methods, Co-design, LLM Workflow, Web Prototype" },
+      1: { problem: "When people disclose emotional strain to AI, repeated reassurance can keep the conversation inside a validation loop rather than support new understanding or action.", solution: "Designed a two-layer conversation and reflection architecture with two Mirrors, four optional directions, and a weekly review.", impact: "Completed five prototype iterations and translated formal evaluation with 13 participants and 3 experts into the final V5 specification.", tools: "Mixed Methods, Co-design, LLM Workflow, Web Prototype" },
       2: { problem: "Non-professional car buyers face information overload regarding long-term costs and eco-impact.", solution: "Transformed complex parameters into a 3D decision framework: current cost, 3-year forecast, CO2.", impact: "Developed a functional RShiny app with Maps API integration and ARIMA price forecasting.", tools: "R, Shiny, Maps API, ARIMA" },
       3: { problem: "Lack of autonomous practice tools in medical education for brain tumor identification.", solution: "Interactive training tool with instant feedback, featuring classification and localization modules.", impact: "Classification module based on ResNet-18 transfer learning, achieving 94.31% accuracy.", tools: "MATLAB App Designer, ResNet-18, Image Processing" },
       4: { problem: "Autistic girls lack predictable frameworks before menarche, leading to anxiety.", solution: "Designed a toolkit based on Self-Determination Theory (SDT) with storybooks and dolls.", impact: "Collaborated with autism charity to help users build expectations through 8-chapter stories.", tools: "Product Design, User Research, SDT Framework" }
@@ -82,7 +83,7 @@ const translations = {
 };
 
 const projects = [
-  { id: 1, title: { zh: "回声之外", en: "Navigating the Noise" }, category: { zh: "AI 情感支持交互产品", en: "AI Emotional Support Interaction" }, description: { zh: "用可跳过、可纠正的反思机制，帮助用户识别反复求证模式，同时保留自然对话与自主选择。", en: "A correctable reflection layer that helps users notice repeated reassurance-seeking while preserving natural conversation and choice." }, icon: <Brain className="w-8 h-8" />, color: "bg-[#FEF3C7]", accent: "text-amber-600" },
+  { id: 1, title: { zh: "回声之外", en: "Navigating the Noise" }, category: { zh: "AI 情感支持", en: "AI Emotional Support" }, description: { zh: "用可跳过、可纠正的反思机制，帮助用户识别反复求证模式，同时保留自然对话与自主选择。", en: "A correctable reflection layer that helps users notice repeated reassurance-seeking while preserving natural conversation and choice." }, icon: <Brain className="w-8 h-8" />, color: "bg-[#FEF3C7]", accent: "text-amber-600" },
   { id: 2, title: { zh: "选车有数", en: "CarEcoCompare" }, category: { zh: "车辆决策数据产品", en: "Vehicle Decision Data Product" }, description: { zh: "将复杂技术参数转化为通勤场景下的三维决策框架，辅助车辆选购。", en: "Transforming complex parameters into a 3D decision framework for car buyers." }, icon: <Car className="w-8 h-8" />, color: "bg-[#DBEAFE]", accent: "text-blue-600" },
   { id: 3, title: { zh: "阅影有方", en: "TumorTutor" }, category: { zh: "脑肿瘤识别工具", en: "Brain Tumor Recognition Tool" }, description: { zh: "基于深度学习的脑肿瘤识别工具，支持分类与位置定位交互训练。", en: "Deep learning tool for brain tumor classification and localization training." }, icon: <Plus className="w-8 h-8" />, color: "bg-[#F3E8FF]", accent: "text-purple-600" },
 ];
@@ -648,7 +649,7 @@ function Modal1Legacy({ lang }: { lang: Language }) {
   );
 }
 
-function Modal1({ lang }: { lang: Language }) {
+function Modal1LegacyV4({ lang }: { lang: Language }) {
   const zh = lang === "zh";
   const evidence = zh ? [
     { n: "N=60", title: "定量研究", text: "感知依赖与情绪负担呈显著正相关，为问题边界提供证据，而非用于诊断个体。" },
@@ -749,9 +750,145 @@ function Modal1({ lang }: { lang: Language }) {
   );
 }
 
+function Modal1({ lang }: { lang: Language }) {
+  const zh = lang === "zh";
+  const [pathwayStep, setPathwayStep] = useState(0);
+  const iteration = zh ? [
+    { version: "V1–V3", title: "探索交互机制", goal: "验证什么", text: "反思提示、Mirror 与 Weekly Reflection 能否被理解，而不显得像诊断或说教。", result: "形成两种时间尺度、柔和语言和用户控制的核心方向。", image: "ntn-v3.webp" },
+    { version: "V4", title: "构建可评估体验", goal: "做了什么", text: "把开放输入、三日压缩流程、两类 Mirror 和四条支持方向整合为完整测试原型。", result: "让参与者能够真正经历整条路径，而不只是评价静态概念。", image: "ntn-v4.webp" },
+    { version: "V5", title: "用证据收敛规则", goal: "改变什么", text: "根据参与者与专家反馈，重写触发资格、回应顺序、完成状态与关闭逻辑。", result: "最终产出是一套更清晰、可控且有伦理边界的交互规范。", image: "ntn-weekly-reflection.webp" },
+  ] : [
+    { version: "V1–V3", title: "Explore the mechanism", goal: "What was tested", text: "Could reflection prompts, Mirrors, and weekly reflection be understood without feeling diagnostic or instructional?", result: "Established two timescales, tentative language, and user control as the core direction.", image: "ntn-v3.webp" },
+    { version: "V4", title: "Build an evaluable experience", goal: "What was built", text: "Combined open input, a compressed three-day flow, two Mirrors, and four directions into a complete test prototype.", result: "Participants could experience the pathway rather than judge isolated screens.", image: "ntn-v4.webp" },
+    { version: "V5", title: "Converge through evidence", goal: "What changed", text: "Participant and expert feedback rewrote eligibility, response order, completion states, and off-state logic.", result: "The final output is a clearer, controllable, ethically bounded interaction specification.", image: "ntn-weekly-reflection.webp" },
+  ];
+  const evaluation = zh ? [
+    ["柔和、可跳过的 Mirror 被整体接受", "保留试探性语言、纠正权与跳过入口。"],
+    ["不同用户需要不同形式的支持", "四条方向保持平行，不设唯一正确路径。"],
+    ["小步骤能把反思转化为行动", "V5 将该方向扩展为可完成的多轮体验。"],
+    ["专家关注误判、隐私与临床化风险", "增加资格规则、关闭逻辑、数据限制与非诊断边界。"],
+  ] : [
+    ["Gentle, skippable Mirrors were broadly accepted", "Retained tentative language, correction, and skip controls."],
+    ["Different users needed different forms of support", "Kept four directions equal rather than prescribing one route."],
+    ["Small steps could turn reflection into action", "V5 expanded this direction into a completable multi-turn experience."],
+    ["Experts prioritised false positives, privacy, and clinical overreach", "Added eligibility rules, off-state logic, data limits, and non-diagnostic boundaries."],
+  ];
+  return (
+    <div className="w-full max-w-[1440px] mx-auto px-12 py-8 md:px-24 md:py-16 lg:px-32">
+      <header className="mb-20">
+        <div className="flex flex-col md:flex-row md:items-end gap-5 mb-8">
+          <div className="p-5 bg-amber-100 border-2 border-ink rounded-3xl shadow-[3px_3px_0px_0px_rgba(45,45,45,1)] w-fit"><Brain className="w-10 h-10 text-amber-600" /></div>
+          <div><p className="text-[9px] font-black uppercase tracking-[.22em] text-amber-600 mb-2">{zh ? "AI 产品 · 独立研究与设计" : "AI PRODUCT · INDEPENDENT PROJECT"}</p><h3 className="text-3xl md:text-5xl font-serif font-black">{zh ? "回声之外" : "Navigating the Noise"}</h3></div>
+        </div>
+        <h4 className="max-w-4xl text-xl md:text-3xl font-serif font-bold leading-tight mb-5">
+          {zh ? "帮助用户识别反复求证，而不把关怀变成诊断。" : "Helping people notice repeated reassurance-seeking—without turning care into diagnosis."}
+        </h4>
+        <p className="max-w-3xl text-sm md:text-base leading-relaxed text-ink/65 font-medium">
+          {zh ? "一款可嵌入通用 AI 对话的反思机制：保持自然回应，在有足够证据时提供可跳过、可纠正的 Mirror，并将选择权留给用户。" : "A reflection mechanism for general-purpose AI chat: preserve natural responses, offer a skippable and correctable Mirror only when evidence is sufficient, and leave the next move with the user."}
+        </p>
+        <div className="flex flex-wrap gap-2 mt-6">{(zh ? ["独立研究与产品设计", "混合方法", "LLM Workflow", "可用性测试原型"] : ["Independent research & product design", "Mixed methods", "LLM workflow", "Usability-test prototype"]).map(x => <span key={x} className="px-3 py-1 bg-ink text-paper rounded-lg text-[9px] font-bold uppercase tracking-widest">{x}</span>)}</div>
+      </header>
+
+      <section className="mb-20 -mt-10">
+        <div className="rounded-[2rem] border-2 border-ink bg-ink overflow-hidden shadow-[8px_8px_0px_0px_rgba(194,65,12,.35)]">
+          <div className="p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-5 text-paper">
+            <div className="flex items-start gap-4">
+              <div className="w-11 h-11 rounded-xl bg-amber-300 text-ink flex items-center justify-center shrink-0"><Play className="w-5 h-5" fill="currentColor" /></div>
+              <div><p className="text-[9px] font-black uppercase tracking-[.2em] text-amber-300 mb-1">V5 · FINAL PARTICIPANT EXPERIENCE</p><h5 className="text-xl md:text-2xl font-serif font-black">{zh ? "先体验，再看设计如何形成" : "Experience it before reading the process"}</h5><p className="text-xs text-paper/60 mt-1">{zh ? "三日压缩流程 · 两类 Mirror · 四种支持方向 · Weekly Reflection" : "Three-day flow · two Mirrors · four directions · weekly reflection"}</p></div>
+            </div>
+            <div className="flex flex-wrap gap-2 shrink-0">
+              <a href={`/ntn-v5-participant-final.html?lang=${zh ? "zh" : "en"}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-300 text-ink text-xs font-black hover:bg-amber-200 transition-colors"><ExternalLink className="w-4 h-4" />{zh ? "新窗口体验" : "Open full experience"}</a>
+              <a href="/ntn-v5-participant-final.html" download="NTN-V5-Participant-Final.html" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-paper/30 text-paper text-xs font-black hover:bg-paper/10 transition-colors"><Download className="w-4 h-4" />{zh ? "下载 HTML" : "Download HTML"}</a>
+            </div>
+          </div>
+          <div className="bg-paper border-t-2 border-ink p-2 md:p-3"><iframe key={lang} src={`/ntn-v5-participant-final.html?lang=${zh ? "zh" : "en"}`} title={zh ? "NTN V5 最终参与者体验" : "NTN V5 final participant experience"} className="w-full h-[520px] md:h-[650px] rounded-[1.35rem] border border-ink/20 bg-white" loading="lazy" /></div>
+        </div>
+      </section>
+
+      <section className="mb-24">
+        <SH i={1} label={zh ? "产品问题" : "PRODUCT CHALLENGE"} />
+        <p className="w-full text-base md:text-lg font-semibold text-ink/75 leading-relaxed mb-6">{zh ? "研究关注的不是用户是否应该向 AI 寻求支持，而是产品如何在保留即时帮助价值的同时，让反复求证与反刍模式有机会被用户自己看见。" : "The project does not ask whether people should seek support from AI; it asks how a product can preserve immediate help while enabling users to notice recurring reassurance-seeking and rumination for themselves."}</p>
+        <div className="grid md:grid-cols-[1.2fr_.8fr] gap-6">
+          <div className="p-8 bg-white border-2 border-ink rounded-[2rem] shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]"><p className="text-xl md:text-2xl font-serif font-black leading-snug">{zh ? "用户向 AI 倾诉情绪压力时，持续收到相似安慰，可能只带来短暂缓解，却让对话停留在反复求证。" : "When users disclose emotional strain to AI, repeated reassurance may offer short-term relief while keeping the conversation inside a validation loop."}</p></div>
+          <div className="p-8 bg-amber-50 border-2 border-ink rounded-[2rem]"><p className="text-[9px] font-black uppercase tracking-widest text-amber-700 mb-3">DESIGN QUESTION</p><p className="text-base font-bold leading-relaxed">{zh ? "AI 如何在不增加焦虑、羞耻或临床判断感的前提下，帮助用户察觉反复的反刍与求证模式？" : "How might AI help users notice recurring rumination and reassurance-seeking without increasing anxiety, shame, or perceived clinical judgement?"}</p></div>
+        </div>
+      </section>
+
+      <section className="mb-20">
+        <SH i={2} label={zh ? "最终系统与机制" : "FINAL SYSTEM & MECHANISM"} />
+        <p className="w-full text-base md:text-lg font-semibold text-ink/75 leading-relaxed mb-6">{zh ? "最终系统以自然对话为主层，并在证据充分时加入可纠正、可跳过的条件式反思；它把即时回应、模式判断、用户选择与长期回顾组织成一套连续但彼此受限的交互架构。" : "The final system keeps natural conversation as the primary layer and adds correctable, skippable reflection only when evidence qualifies, linking immediate response, pattern judgement, user choice, and longitudinal review within one bounded architecture."}</p>
+        <div className="grid lg:grid-cols-[1.7fr_.75fr] gap-5 items-stretch">
+          <figure className="overflow-hidden rounded-[2rem] border-2 border-ink bg-white flex items-center"><img src={zh ? "/ntn-v5-interaction-architecture-zh.webp" : "/ntn-v5-interaction-architecture.webp"} alt={zh ? "NTN 理想状态交互架构" : "NTN final interaction architecture"} className="w-full h-auto" /></figure>
+          <div className="grid grid-cols-1 gap-3">{(zh ? [["自然对话", "先回应具体任务、情绪表达或用户已有觉察。"], ["条件判断", "综合证据，并区分同次停留与跨时间重复。"], ["反思与选择", "Mirror 保持暂定且可纠正，由用户决定下一步。"], ["长期回顾", "只汇总可追溯的担忧线索与选择，并允许删除。"]] : [["Natural conversation", "Respond first to tasks, emotion, or existing awareness."], ["Conditional judgement", "Combine evidence and separate dwelling from recurrence."], ["Reflection and choice", "Keep Mirrors tentative and let the user decide."], ["Longitudinal review", "Summarise only traceable strands and choices, with deletion."]]).map(([title,text],i)=><div key={title} className="p-5 rounded-2xl border border-ink/15 bg-white flex flex-col justify-center"><span className="text-[9px] font-black text-terracotta">0{i+1}</span><h6 className="text-base font-black mt-1">{title}</h6><p className="text-xs text-ink/55 mt-2 leading-relaxed">{text}</p></div>)}</div>
+        </div>
+      </section>
+
+      <section className="mb-20">
+        <SH i={3} label={zh ? "核心交互链路" : "CORE INTERACTION PATHWAY"} />
+        <p className="w-full text-base md:text-lg font-semibold text-ink/75 leading-relaxed mb-6">{zh ? "架构定义系统包含什么，链路则说明系统在何时做出何种判断：当前需要决定普通回应，同次与跨时间证据决定 Mirror 是否出现，Mirror 后的用户回应再决定支持方向与退出方式。" : "The architecture defines what the system contains; the pathway explains when each judgement occurs: present need shapes the ordinary reply, same-session and across-time evidence govern Mirror eligibility, and the user's post-Mirror response determines support and exit."}</p>
+        <figure className="relative overflow-hidden rounded-[2rem] border-2 border-ink bg-white shadow-[5px_5px_0px_0px_rgba(45,45,45,1)]"><img src={zh ? "/ntn-v5-response-pathway-zh.webp" : "/ntn-v5-response-pathway.webp"} alt={zh ? "NTN V5 对话回应链路" : "NTN V5 conversational response pathway"} className="w-full h-auto" /><div className="absolute inset-x-0 top-0 bottom-[3.2rem]" aria-label={zh ? "选择链路阶段" : "Select pathway stage"}>{["top-[13%] h-[25%]","top-[38%] h-[19%]","top-[57%] h-[22%]","top-[79%] h-[21%]"].map((position,step)=><button key={step} type="button" aria-label={zh ? `查看链路阶段 ${step+1}` : `View pathway stage ${step+1}`} aria-pressed={pathwayStep===step} onClick={()=>setPathwayStep(step)} className={`absolute inset-x-0 w-full border-0 transition-colors ${position} ${pathwayStep===step ? "bg-amber-300/10 ring-2 ring-inset ring-amber-500/45" : "bg-transparent hover:bg-white/10"}`} />)}</div><figcaption className="relative px-5 py-4 border-t border-ink/10 text-xs text-ink/55 bg-white">{zh ? "点击图中的任一阶段，下方将显示对应的设计判断。" : "Click any stage in the pathway to show its design rationale below."}</figcaption></figure>
+        <p className="w-full mt-6 mb-6 text-base md:text-lg font-semibold text-ink/75 leading-relaxed">{zh ? "这条链路把“识别模式”转化为一组可检查的产品规则：每一步都有明确证据来源、回应方式和返回自然对话的出口，因此 Mirror 是对话中的条件式反思节点，而不是持续接管对话的模式。" : "The pathway turns pattern recognition into inspectable product rules: every stage has an evidence source, a response, and an exit to ordinary conversation, making the Mirror a conditional reflection point rather than a mode that takes over the exchange."}</p>
+        <NTNDemo lang={lang} activeStep={pathwayStep} onStepChange={setPathwayStep} showSelector={false} />
+        <div className="grid md:grid-cols-3 gap-3 mt-5">{(zh ? [
+          ["自然回应保持优先", "普通回应与模式识别分层，先保持对话质量。"],
+          ["结论来自组合证据", "同次停留与跨时间返回使用不同的证据规则。"],
+          ["下一步由用户决定", "Mirror 打开多个选择，并允许用户直接返回对话。"],
+        ] : [
+          ["Natural response remains primary", "Ordinary response and pattern reflection are separated."],
+          ["Combined evidence supports judgement", "Dwelling and recurrence use different evidence rules."],
+          ["The user chooses the next step", "A Mirror opens directions and preserves a return to conversation."],
+        ]).map(([title, text], i) => <div key={title} className="p-4 rounded-2xl border border-ink/15 bg-paper"><span className="text-[9px] font-black text-terracotta">0{i + 1}</span><h6 className="text-sm font-black mt-1 mb-1">{title}</h6><p className="text-xs text-ink/55 leading-relaxed">{text}</p></div>)}</div>
+      </section>
+
+      <section className="mb-20">
+        <SH i={4} label={zh ? "三阶段迭代" : "THREE-STAGE ITERATION"} />
+        <p className="w-full text-base md:text-lg font-semibold text-ink/75 leading-relaxed mb-6">{zh ? "链路确定了最终规则，而三阶段迭代解释这些规则如何形成：项目先验证反思机制是否有价值，再把抽象机制转化为可体验流程，最后依据正式评估收紧触发、控制与退出条件。" : "The pathway states the final rules; the three-stage iteration shows how they formed—first testing the value of reflection, then making the mechanism experiential, and finally tightening triggers, controls, and exits through formal evaluation."}</p>
+        <div className="grid md:grid-cols-3 gap-5">{iteration.map((item) => <article key={item.version} className="overflow-hidden bg-white border-2 border-ink rounded-2xl"><div className="p-5"><div className="flex items-center gap-2 mb-2"><GitBranch className="w-4 h-4 text-terracotta" /><span className="text-xs font-black text-terracotta">{item.version}</span></div><h6 className="text-lg font-black mb-3">{item.title}</h6><p className="text-[9px] font-black uppercase tracking-widest text-ink/40 mb-1">{item.goal}</p><p className="text-xs leading-relaxed text-ink/65">{item.text}</p></div><img src={`/${item.image}`} alt={`${item.version} ${item.title}`} className="w-full aspect-[16/10] object-cover object-top border-y border-ink/10" /><p className="p-4 text-xs font-medium leading-relaxed bg-amber-50"><span className="font-black text-terracotta">→ </span>{item.result}</p></article>)}</div>
+      </section>
+
+      <section className="mb-20">
+        <SH i={5} label={zh ? "评估如何推动 V5" : "HOW EVALUATION SHAPED V5"} />
+        <p className="w-full text-base md:text-lg font-semibold text-ink/75 leading-relaxed mb-6">{zh ? "正式评估把“能够运行”的原型推进为“规则能够被解释”的 V5：参与者证据揭示体验中的清晰度、时机与压力，专家证据检查安全、可实施性与边界，两者共同决定哪些机制保留、收紧或关闭。" : "Formal evaluation moved the prototype from functioning to explainable: participant evidence revealed clarity, timing, and pressure in use, while expert evidence tested safety, feasibility, and boundaries; together they determined what V5 retained, tightened, or closed."}</p>
+        <div className="grid lg:grid-cols-2 gap-5 mb-6">
+          <figure className="overflow-hidden rounded-2xl border-2 border-ink bg-white"><img src={zh ? "/ntn-participant-evaluation-zh.webp" : "/ntn-participant-evaluation.webp"} alt={zh ? "参与者评估分析" : "Participant evaluation analysis"} className="w-full h-auto" /><figcaption className="p-4 border-t border-ink/10"><strong className="block text-xs mb-1">{zh ? "参与者体验证据" : "Participant experience evidence"}</strong><span className="block text-[10px] text-ink/50">{zh ? "比较 Mirror、四个支持方向与 Weekly Reflection 的清晰度、时机、语气和感知价值。" : "Comparing clarity, timing, tone, and perceived value across Mirrors, support directions, and weekly reflection."}</span></figcaption></figure>
+          <figure className="overflow-hidden rounded-2xl border-2 border-ink bg-white"><img src={zh ? "/ntn-expert-evaluation-zh.webp" : "/ntn-expert-evaluation.webp"} alt={zh ? "专家评估分析" : "Expert evaluation analysis"} className="w-full h-auto" /><figcaption className="p-4 border-t border-ink/10"><strong className="block text-xs mb-1">{zh ? "专家审查证据" : "Expert review evidence"}</strong><span className="block text-[10px] text-ink/50">{zh ? "汇总 AI 安全、产品和心理学视角对机制价值、风险和可实施性的判断。" : "Synthesising AI safety, product, and psychology perspectives on value, risk, and feasibility."}</span></figcaption></figure>
+        </div>
+        <div className="grid md:grid-cols-[.62fr_1.38fr] gap-5">
+          <div className="p-7 rounded-[2rem] bg-ink text-paper"><p className="text-[9px] uppercase tracking-[.2em] text-paper/50 font-black mb-4">FORMAL EVALUATION</p><div className="flex gap-8"><div><strong className="text-5xl font-serif text-amber-300">13</strong><p className="text-xs mt-1">{zh ? "参与者" : "participants"}</p></div><div><strong className="text-5xl font-serif text-amber-300">3</strong><p className="text-xs mt-1">{zh ? "专家" : "experts"}</p></div></div><p className="text-xs text-paper/55 leading-relaxed mt-6">{zh ? "作品集只呈现改变设计的证据，不展开数据表。" : "Only evidence that changed the design is shown here."}</p></div>
+          <div className="grid gap-3">{evaluation.map(([finding, change]) => <div key={finding} className="p-4 bg-white border border-ink/15 rounded-2xl flex gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" /><div><p className="text-sm font-black">{finding}</p><p className="text-xs text-ink/55 mt-1">→ {change}</p></div></div>)}</div>
+        </div>
+      </section>
+
+      <section className="mb-20">
+        <SH i={6} label={zh ? "研究基础" : "RESEARCH FOUNDATIONS"} />
+        <p className="w-full text-base md:text-lg font-semibold text-ink/75 leading-relaxed mb-6">{zh ? "NTN 的理论逻辑从“为何使用 AI”走向“何时形成循环”，再转化为“如何以自主、有限且可纠正的方式介入”；文献在这里提供设计依据，而不是替原型证明临床效果。" : "NTN's theoretical chain moves from why people turn to AI, to when interaction may become cyclical, and finally to how reflection can remain autonomous, bounded, and correctable; the literature informs design rather than proving clinical effect."}</p>
+        <div className="grid md:grid-cols-2 gap-4">
+          {(zh ? [
+            ["01 · 支持为何具有吸引力", "即时、可用与无评判感解释了学生为何把通用 AI 用于情绪支持。", "Luo et al. (2025); Al-Zahrani (2025); Rackoff, Zhang & Newman (2025)"],
+            ["02 · 舒适如何可能变成循环", "短期缓解可能伴随持续求证；设计应关注确定性寻求的功能，而不是简单计算消息次数。", "Parrish & Radomsky (2010); Radomsky et al. (2019); Nolen-Hoeksema et al. (2008)"],
+            ["03 · AI 关系中的收益与风险并存", "情感支持、陪伴与依赖风险可以同时存在，因此产品需要识别风险但避免把所有使用病理化。", "Laestadius et al. (2024); Phang et al. (2025); Fang et al. (2025)"],
+            ["04 · 反思必须保留自主与边界", "自主、胜任与联结被转化为可跳过、可纠正、非评分式的交互要求，并以受限干预作为比较基准。", "Deci & Ryan (1985); Ryan & Deci (2000); Alberts, Lyngs & Lukoff (2024)"],
+          ] : [
+            ["01 · Why support attracts use", "Immediacy, availability, and non-judgement help explain why students turn to general-purpose AI for emotional support.", "Luo et al. (2025); Al-Zahrani (2025); Rackoff, Zhang & Newman (2025)"],
+            ["02 · How comfort may become cyclical", "Short-term relief can coexist with continued reassurance-seeking, so design attends to function rather than message counts.", "Parrish & Radomsky (2010); Radomsky et al. (2019); Nolen-Hoeksema et al. (2008)"],
+            ["03 · Benefit and risk can coexist", "Support, companionship, and dependency risk may occur together; design should recognise risk without pathologising all use.", "Laestadius et al. (2024); Phang et al. (2025); Fang et al. (2025)"],
+            ["04 · Reflection needs autonomy and limits", "Autonomy, competence, and relatedness become skippable, correctable, non-scored interaction requirements.", "Deci & Ryan (1985); Ryan & Deci (2000); Alberts, Lyngs & Lukoff (2024)"],
+          ]).map(([title,logic,papers]) => <article key={title} className="p-5 rounded-2xl border border-ink/15 bg-white"><h6 className="text-sm font-black text-terracotta mb-2">{title}</h6><p className="text-sm text-ink/70 leading-relaxed">{logic}</p><p className="mt-3 pt-3 border-t border-ink/10 text-[10px] font-semibold text-ink/45 leading-relaxed">{papers}</p></article>)}
+        </div>
+      </section>
+
+      <section>
+        <SH i={7} label={zh ? "边界" : "BOUNDARIES"} />
+        <p className="w-full text-base md:text-lg font-semibold text-ink/75 leading-relaxed mb-6">{zh ? "研究与评估共同限定了这项工作的结论范围：NTN 提供的是一套可讨论、可测试的交互规范，其价值在于让反思机制更透明、更可控，而不是声称识别或治疗心理问题。" : "Research and evaluation define the limits of the claim: NTN is a discussable, testable interaction specification whose value lies in making reflection transparent and controllable—not in identifying or treating psychological conditions."}</p>
+        <div className="p-6 bg-rose-50 border-2 border-ink rounded-[2rem] flex flex-col md:flex-row md:items-center gap-4 md:justify-between"><p className="max-w-3xl text-sm leading-relaxed text-ink/70">{zh ? "NTN 是经过形成性评估的交互设计规范，而非临床工具：它不诊断、不测量情绪，也不声称已经验证长期效果。" : "NTN is a formatively evaluated interaction specification, not a clinical tool: it does not diagnose, measure emotion, or claim validated long-term outcomes."}</p><span className="px-4 py-2 rounded-full bg-white border border-ink/15 text-[10px] font-black uppercase tracking-widest whitespace-nowrap">DESIGN, NOT DIAGNOSIS</span></div>
+      </section>
+    </div>
+  );
+}
+
 function Modal2({ lang }: { lang: Language }) {
   return (
-    <div className="p-6 md:p-12">
+    <div className="w-full max-w-[1440px] mx-auto px-12 py-8 md:px-24 md:py-16 lg:px-32">
       <header className="mb-20">
         <div className="flex flex-col md:flex-row gap-10 items-center">
           <div className="flex-1">
@@ -759,7 +896,7 @@ function Modal2({ lang }: { lang: Language }) {
               <div className="p-3 bg-blue-100 border-2 border-ink rounded-2xl shadow-[3px_3px_0px_0px_rgba(45,45,45,1)]">
                 <Car className="w-6 h-6 text-blue-600" />
               </div>
-              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600">From data to product</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600">{lang === "zh" ? "从数据到产品" : "From data to product"}</span>
             </div>
             <h3 className="text-4xl md:text-6xl font-serif font-black mb-3">{lang === "zh" ? "选车有数" : "CarEcoCompare"}</h3>
             <p className="text-lg md:text-xl font-serif text-ink/70 mb-3 leading-tight">
@@ -995,7 +1132,7 @@ function Modal2({ lang }: { lang: Language }) {
 function Modal3({ lang }: { lang: Language }) {
   const p = p3Content[lang];
   return (
-    <div className="p-6 md:p-12">
+    <div className="w-full max-w-[1440px] mx-auto px-12 py-8 md:px-24 md:py-16 lg:px-32">
       <header className="mb-24">
         <div className="max-w-3xl">
           <h3 className="text-4xl md:text-6xl font-serif font-black mb-4 leading-tight">{lang === "zh" ? "阅影有方" : p.hero.title}</h3>
@@ -1622,6 +1759,14 @@ export default function App() {
   const [showVibe3, setShowVibe3] = useState(false);
   const t = translations[lang];
 
+  const detailOpen = selectedProject !== null || showVibe1 || showVibe2;
+  useEffect(() => {
+    if (!detailOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previousOverflow; };
+  }, [detailOpen]);
+
   return (
     <div className={`min-h-screen relative selection:bg-terracotta/20 ${lang === "zh" ? "lang-zh" : ""}`}>
       <div className="texture-overlay" />
@@ -1726,28 +1871,26 @@ export default function App() {
             <h2 className="text-3xl md:text-5xl font-serif font-black uppercase tracking-tighter font-elegant">{t.projectsTitle}</h2>
             <div className="h-px flex-1 bg-ink/20" />
           </div>
-          <div className="grid md:grid-cols-2 md:grid-rows-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-5 md:auto-rows-[250px]">
             {projects.map((project, i) => (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
                 onClick={() => setSelectedProject(project.id)}
-                className={`group cursor-pointer rounded-2xl border-2 border-ink ${project.color} retro-card-hover relative overflow-hidden ${i === 0 ? "p-8 md:row-span-2 md:min-h-[560px] md:flex md:flex-col" : "p-6 md:min-h-[268px]"}`}
+                className={`group cursor-pointer p-6 rounded-2xl border-2 border-ink ${project.color} retro-card-hover relative overflow-hidden flex flex-col ${project.id === 1 ? "md:row-span-2 md:p-8" : ""}`}
               >
-                {i === 0 && <div className="absolute -right-16 -bottom-16 w-64 h-64 rounded-full bg-white/30 border-2 border-ink/5" />}
-                <div className={`flex justify-between items-start ${i === 0 ? "mb-8" : "mb-4"}`}>
-                  <div className={`${i === 0 ? "p-4" : "p-3"} bg-paper border border-ink rounded-xl shadow-[3px_3px_0px_0px_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform ${project.accent}`}>
+                <div className="flex justify-between items-start mb-5">
+                  <div className={`p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0px_0px_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform ${project.accent}`}>
                     {project.icon}
                   </div>
                   <ArrowRight className="w-6 h-6 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
                 </div>
-                {i === 0 && <p className="text-[9px] font-black uppercase tracking-[.2em] text-amber-700 mb-3">{lang === "zh" ? "核心项目 · 独立研究与开发" : "FEATURED · INDEPENDENT RESEARCH & BUILD"}</p>}
-                <h3 className={`${i === 0 ? "text-3xl md:text-5xl" : "text-2xl md:text-3xl"} font-serif font-black mb-2 relative`}>{project.title[lang]}</h3>
-                <p className={`text-xs font-bold uppercase tracking-wider ${i === 0 ? "mb-5" : "mb-3"} ${project.accent}`}>{project.category[lang]}</p>
-                <p className={`${i === 0 ? "text-base md:text-lg max-w-md" : "text-sm"} text-ink/70 font-medium leading-relaxed relative`}>{project.description[lang]}</p>
-                <div className={`${i === 0 ? "mt-auto pt-8" : "mt-5 pt-4"} border-t border-ink/10 flex items-center justify-between gap-2 font-bold text-xs relative`}>
-                  <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" />{t.viewMore}</span>
-                  {i === 0 && <span className="text-[10px] font-black text-amber-700">● {lang === "zh" ? "已上线" : "LIVE"}</span>}
+                <h3 className="text-2xl md:text-3xl font-serif font-black mb-2">{project.title[lang]}</h3>
+                <p className={`text-xs font-bold uppercase tracking-wider mb-4 ${project.accent}`}>{project.category[lang]}</p>
+                <p className="text-sm md:text-base text-ink/70 font-medium leading-relaxed">{project.description[lang]}</p>
+                {project.id === 1 && <div className="mt-auto pt-6 text-base md:text-lg font-semibold leading-relaxed text-[#806F58]">{(lang === "zh" ? ["帝国理工硕士毕业设计", "独立研究与开发", "研究型设计"] : ["Imperial College MSc Thesis", "Independent Research & Development", "Research-led Design"]).map(item => <p key={item}>{item}</p>)}</div>}
+                <div className={`${project.id === 1 ? "mt-4" : "mt-auto"} pt-4 border-t border-ink/10 flex items-center gap-2 font-bold text-xs`}>
+                  <BookOpen className="w-4 h-4" />{t.viewMore}
                 </div>
               </motion.div>
             ))}
@@ -1850,10 +1993,10 @@ export default function App() {
 
       <AnimatePresence>
         {selectedProject && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setSelectedProject(null)}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
-              <button onClick={() => setSelectedProject(null)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all">
-                <X className="w-6 h-6" />
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] bg-paper overflow-y-auto">
+            <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 24 }} className="bg-paper w-full min-h-screen relative">
+              <button aria-label={lang === "zh" ? "返回项目列表" : "Back to projects"} onClick={() => setSelectedProject(null)} className="fixed top-5 right-5 md:top-7 md:right-8 z-[120] p-3 bg-paper/90 backdrop-blur border-2 border-ink rounded-full shadow-[4px_4px_0_rgba(45,45,45,1)] hover:-translate-x-1 transition-all">
+                <ArrowLeft className="w-6 h-6" />
               </button>
               {selectedProject === 1 && <Modal1 lang={lang} />}
               {selectedProject === 2 && <Modal2 lang={lang} />}
@@ -1864,9 +2007,9 @@ export default function App() {
       </AnimatePresence>
       <AnimatePresence>
         {showVibe1 && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibe1(false)}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
-              <button onClick={() => setShowVibe1(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all"><X className="w-6 h-6" /></button>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] bg-paper overflow-y-auto">
+            <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 24 }} className="bg-paper w-full min-h-screen relative">
+              <button aria-label={lang === "zh" ? "返回作品集" : "Back to portfolio"} onClick={() => setShowVibe1(false)} className="fixed top-5 right-5 md:top-7 md:right-8 z-[120] p-3 bg-paper/90 backdrop-blur border-2 border-ink rounded-full shadow-[4px_4px_0_rgba(45,45,45,1)] hover:-translate-x-1 transition-all"><ArrowLeft className="w-6 h-6" /></button>
               <ModalVibe1 lang={lang} />
             </motion.div>
           </motion.div>
@@ -1874,9 +2017,9 @@ export default function App() {
       </AnimatePresence>
       <AnimatePresence>
         {showVibe2 && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibe2(false)}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
-              <button onClick={() => setShowVibe2(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all"><X className="w-6 h-6" /></button>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] bg-paper overflow-y-auto">
+            <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 24 }} className="bg-paper w-full min-h-screen relative">
+              <button aria-label={lang === "zh" ? "返回作品集" : "Back to portfolio"} onClick={() => setShowVibe2(false)} className="fixed top-5 right-5 md:top-7 md:right-8 z-[120] p-3 bg-paper/90 backdrop-blur border-2 border-ink rounded-full shadow-[4px_4px_0_rgba(45,45,45,1)] hover:-translate-x-1 transition-all"><ArrowLeft className="w-6 h-6" /></button>
               <ModalVibe2 lang={lang} />
             </motion.div>
           </motion.div>

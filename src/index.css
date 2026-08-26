@@ -53,6 +53,11 @@
   100% { transform: translateY(0px) rotate(0deg); }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -82,4 +87,3 @@
 .strategy-card {
   @apply p-8 bg-paper border-2 border-ink rounded-[2rem] relative overflow-hidden;
 }
-
