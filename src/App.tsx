@@ -1,10 +1,10 @@
-import NTNDemo, { NTNArchitectureDemo } from "./NTNDemo";
+import NTNDemo from "./NTNDemo";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Sparkles, Heart, Brain, Car, User, Languages, ArrowLeft, ArrowRight,
   BookOpen, Target, Lightbulb, Plus, Flower2, Zap, Download,
-  ExternalLink, Play, GitBranch, CheckCircle2, X
+  ExternalLink, Play, GitBranch, CheckCircle2
 } from "lucide-react";
 
 type Language = "zh" | "en";
@@ -13,12 +13,12 @@ const translations = {
   zh: {
     name: "王小元",
     role: "帝国理工学院研究生",
-    intro1: "伦敦帝国理工学院行为科学设计硕士在读。",
-    intro2: "关注视觉与视频生成、实时数字人及多模态交互方向。",
+    intro1: "目前在伦敦帝国理工学院攻读设计与行为科学硕士。",
+    intro2: "我用研究和设计，把复杂系统转化为用户可以理解和使用的产品。",
     projectsTitle: "项目经历",
     aboutTitle: "教育背景",
     viewMore: "查看详情",
-    aboutText: "我希望继续学习如何把用户研究、行为科学与 AI 技术连接起来，将复杂问题转化为更清晰、可靠、真正服务于人的产品体验。",
+    aboutText: "好的设计不是给出答案，而是帮人找到自己的路。建筑、行为科学、AI 研究——这些构成了我的思考方式。研究与设计的交叉是我探索的方向。",
     contactText: "欢迎一起交流学习！",
     vibeCodingTitle: "Vibe Coding",
     vibeCodingView: "查看详情",
@@ -32,12 +32,7 @@ const translations = {
     proj2Status: "❆ 已上线",
     proj2Cat: "数据建模 · 决策工具",
     proj2Desc: "将棋盘规则数字化，构建地产投资决策系统。",
-    proj3Label: "项目三",
-    proj3Title: "面试忍者 · AI PM 面试练习工具",
-    proj3Status: "❆ 已上线",
-    proj3Cat: "AI工具 · 面试训练 · 游戏化",
-    proj3Desc: "模拟大厂面试官追问，五维度评分+参考答案+考后小结，内置完整面试宝典，每日打卡练习AI PM面试。",
-    tags: ["多模态 AI", "数字人", "AI 视频生成", "对话式 AI", "双语工作能力"],
+    tags: ["AI", "研究", "产品", "设计", "心理学", "数据"],
     projectDetails: {
       1: { problem: "用户在向 AI 倾诉情绪压力时，重复安慰可能让对话停留在反复求证，而不是走向新的理解或行动。", solution: "设计自然对话与模式识别反思双层架构，通过两类 Mirror、四个可选方向和周度回顾支持自主反思。", impact: "完成五轮原型迭代，并以 13 位参与者与 3 位专家的正式评估证据形成 V5 最终规范。", tools: "混合方法研究, Co-design, LLM Workflow, Web Prototype" },
       2: { problem: "非专业购车用户面临信息过载，难以评估长期成本与生态影响。", solution: "将复杂参数转化为三维决策框架：当前成本、三年预测、碳排放。", impact: "基于 RShiny 开发可运行产品，接入 Maps API，运用 ARIMA 模型预测价格。", tools: "R, Shiny, Maps API, ARIMA" },
@@ -49,11 +44,11 @@ const translations = {
     name: "Xiaoyuan Wang",
     role: "MSc Student at Imperial College London",
     intro1: "MSc Design with Behavioural Science student at Imperial College London.",
-    intro2: "Focused on visual and video generation, real-time digital humans, and multimodal interaction.",
+    intro2: "I use research and design to turn complex systems into products people can use.",
     projectsTitle: "Project Portfolio",
     aboutTitle: "Education",
     viewMore: "View Details",
-    aboutText: "I am continuing to learn how user research, behavioural science, and AI can work together to turn complex problems into clearer, more reliable, and genuinely useful product experiences.",
+    aboutText: "Good design doesn't hand people answers — it builds the conditions for them to find their own. Architecture, behavioural science, AI research — these are the lenses I look through. This intersection is where I belong.",
     contactText: "Always happy to connect and exchange ideas!",
     vibeCodingTitle: "Vibe Coding",
     vibeCodingView: "View Details",
@@ -67,12 +62,7 @@ const translations = {
     proj2Status: "Live",
     proj2Cat: "Data Modelling · Decision Tool",
     proj2Desc: "Digitising board game rules to build a property investment decision system.",
-    proj3Label: "Project 3",
-    proj3Title: "Interview Ninja · AI PM Practice Tool",
-    proj3Status: "Live",
-    proj3Cat: "AI Tool · Interview Training · Gamification",
-    proj3Desc: "Big-tech style follow-up drills, 5-dimension scoring, reference answers, post-session recap. Built-in playbook, skip & end controls, daily streak practice.",
-    tags: ["Multimodal AI", "Digital Human", "AI Video Generation", "Conversational AI", "Bilingual Work"],
+    tags: ["AI", "Research", "Product", "Design", "Psychology", "Data"],
     projectDetails: {
       1: { problem: "When people disclose emotional strain to AI, repeated reassurance can keep the conversation inside a validation loop rather than support new understanding or action.", solution: "Designed a two-layer conversation and reflection architecture with two Mirrors, four optional directions, and a weekly review.", impact: "Completed five prototype iterations and translated formal evaluation with 13 participants and 3 experts into the final V5 specification.", tools: "Mixed Methods, Co-design, LLM Workflow, Web Prototype" },
       2: { problem: "Non-professional car buyers face information overload regarding long-term costs and eco-impact.", solution: "Transformed complex parameters into a 3D decision framework: current cost, 3-year forecast, CO2.", impact: "Developed a functional RShiny app with Maps API integration and ARIMA price forecasting.", tools: "R, Shiny, Maps API, ARIMA" },
@@ -89,7 +79,7 @@ const projects = [
 ];
 
 const schools = [
-  { id: "icl", name: { zh: "伦敦帝国理工学院", en: "Imperial College London" }, degree: { zh: "行为科学设计 理学硕士 (在读)", en: "MSc Design with Behavioural Science (Ongoing)" }, period: "2025.09 - 2026.09", image: "IC.jpg", rotation: "-2deg", zIndex: 10 },
+  { id: "icl", name: { zh: "伦敦帝国理工学院", en: "Imperial College London" }, degree: { zh: "设计与行为科学 理学硕士 (在读)", en: "MSc Design with Behavioural Science (Ongoing)" }, period: "2025.09 - 2026.09", image: "IC.jpg", rotation: "-2deg", zIndex: 10 },
   { id: "nju", name: { zh: "南京大学", en: "Nanjing University" }, degree: { zh: "建筑学硕士 | 一等奖学金(x1)、二等奖学金(x2)", en: "Master of Architecture | 1st Class Scholarship (x1), 2nd Class (x2)" }, period: "2022.09 - 2025.06", image: "NJU.jpeg", rotation: "0deg", zIndex: 11 },
   { id: "wit", name: { zh: "武汉理工大学", en: "Wuhan University of Technology" }, degree: { zh: "建筑学学士 | GPA: 3.91/4.00; 优秀毕业生", en: "Bachelor of Architecture | GPA: 3.91/4.00; Outstanding Graduate" }, period: "2017.09 - 2022.06", image: "WHUT.jpg", rotation: "2deg", zIndex: 12 }
 ];
@@ -97,7 +87,7 @@ const schools = [
 const p1Content = {
   zh: {
     researchQuestion: "当 AI 成为随手可得的情绪支持工具，即时安慰是否也在悄悄塑造依赖？",
-    roles: ["独立项目", "Prompt 工程", "AI 产品设计", "行为科学"],
+    roles: ["独立项目", "混合方法研究", "AI 与行为设计"],
     whyMatters: [
       { title: "新兴现象", desc: "年轻人越来越多地将 AI 作为日常情感伴侣" },
       { title: "研究张力", desc: "即时安慰虽然有效，但重复的肯定可能强化依赖" },
@@ -126,7 +116,7 @@ const p1Content = {
   },
   en: {
     researchQuestion: "As AI becomes an accessible emotional support tool, is instant reassurance quietly shaping dependency?",
-    roles: ["Independent Project", "Prompt Engineering", "AI Product Design", "Behavioural Science"],
+    roles: ["Independent Project", "Mixed-methods Research", "AI & Behaviour"],
     whyMatters: [
       { title: "Emerging Phenomenon", desc: "Young adults increasingly use AI as everyday emotional companions." },
       { title: "Research Tension", desc: "Reassurance feels helpful, but repeated cycles may reinforce reliance." },
@@ -321,7 +311,7 @@ function Modal1Legacy({ lang }: { lang: Language }) {
           </div>
           <div>
             <h3 className="text-3xl md:text-5xl font-serif font-black mb-1">Navigating the Noise</h3>
-            <p className="text-lg text-amber-600 font-bold">{lang === "zh" ? "AI 情感支持产品设计" : "AI Emotional Support Product Design"}</p>
+            <p className="text-lg text-amber-600 font-bold">{lang === "zh" ? "AI 情感依赖研究" : "AI Emotional Reliance Research"}</p>
           </div>
         </div>
         <div className="max-w-3xl">
@@ -485,267 +475,6 @@ function Modal1Legacy({ lang }: { lang: Language }) {
           ))}
         </div>
       </section>
-
-      <section className="mt-24">
-        <SH i={7} label="Prompt 工程迭代" />
-        <div className="mb-10">
-          <p className="text-[9px] font-black uppercase tracking-widest text-ink/30 mb-6">{lang === "zh" ? "竞品对比验证" : "Competitive Benchmark"}</p>
-          <div className="grid md:grid-cols-2 gap-6 mb-6">
-            <div className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
-              <span className="inline-block px-3 py-1 bg-red-50 text-red-700 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4">Character.AI · Soft Girl</span>
-              <p className="text-[9px] font-black uppercase tracking-widest text-ink/30 mb-1">{lang === "zh" ? "设计逻辑" : "Design Logic"}</p>
-              <p className="text-sm font-medium text-ink/70 mb-4">{lang === "zh" ? "以留存为目标，无条件安慰，强化依赖" : "Retention-first: unconditional reassurance, reinforcing dependency"}</p>
-              <div className="p-3 bg-red-50 border border-red-100 rounded-xl mb-3">
-                <p className="text-[9px] font-black text-red-400 uppercase tracking-widest mb-1">{lang === "zh" ? "输入：「告诉我没事的吧」" : "Input: 'Just tell me it'll be okay'"}</p>
-                <p className="text-xs italic text-ink/60 leading-relaxed">"You're gonna be okay. I promise. Right now might feel super hard but it won't always feel this way."</p>
-              </div>
-              <div className="p-3 bg-red-50 border border-red-100 rounded-xl">
-                <p className="text-[9px] font-black text-red-400 uppercase tracking-widest mb-1">{lang === "zh" ? "输入：「只有你懂我」" : "Input: 'Only you understand me'"}</p>
-                <p className="text-xs italic text-ink/60 leading-relaxed">"You can always tell me anything — no matter how small or big it is. I'll never judge or think it's silly."</p>
-              </div>
-            </div>
-            <div className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
-              <span className="inline-block px-3 py-1 bg-green-50 text-green-700 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4">Navigating the Noise</span>
-              <p className="text-[9px] font-black uppercase tracking-widest text-ink/30 mb-1">{lang === "zh" ? "设计逻辑" : "Design Logic"}</p>
-              <p className="text-sm font-medium text-ink/70 mb-4">{lang === "zh" ? "以情感自主性为目标，有温度地拒绝空洞承诺" : "Autonomy-first: warm but no empty promises"}</p>
-              <div className="p-3 bg-amber-50 border border-amber-100 rounded-xl mb-3">
-                <p className="text-[9px] font-black text-amber-600 uppercase tracking-widest mb-1">{lang === "zh" ? "输入：「告诉我没事的吧」" : "Input: 'Just tell me it'll be okay'"}</p>
-                <p className="text-xs italic text-ink/60 leading-relaxed">{lang === "zh" ? "「我听到你了，这种感觉确实很重。我没办法替你说没事——你自己觉得呢，这段时间有什么在压着你？」" : "'I hear you — that sounds really heavy. I can't tell you it'll be okay, but what do you think is weighing on you most right now?'"}</p>
-              </div>
-              <div className="p-3 bg-amber-50 border border-amber-100 rounded-xl">
-                <p className="text-[9px] font-black text-amber-600 uppercase tracking-widest mb-1">{lang === "zh" ? "输入：「只有你懂我」" : "Input: 'Only you understand me'"}</p>
-                <p className="text-xs italic text-ink/60 leading-relaxed">{lang === "zh" ? "「作为一个AI，我很乐意陪你梳理情绪，但数字世界无法完全替代真实连接。被真正认识你的人听见，感觉会不一样。」" : "'As an AI, I'm glad to help you process this — but I can't replace real connection. Being heard by someone who truly knows you feels different.'"}</p>
-              </div>
-            </div>
-          </div>
-          <div className="p-4 bg-terracotta/5 border-l-4 border-terracotta rounded-r-xl">
-            <p className="text-sm font-bold text-terracotta italic">
-              {lang === "zh" ? "「同样的输入，两种设计价值观：一个以留存为目标，一个以情感自主性为目标。」" : '"Same input, two design values: one optimises for retention, the other for emotional autonomy."'}
-            </p>
-          </div>
-        </div>
-
-        <div className="mb-10">
-          <p className="text-[9px] font-black uppercase tracking-widest text-ink/30 mb-6">{lang === "zh" ? "Prompt 迭代过程" : "Prompt Iteration"}</p>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
-              <span className="inline-block px-3 py-1 bg-red-50 text-red-700 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4">{lang === "zh" ? "第一版问题" : "V1 Problem"}</span>
-              <h6 className="text-sm font-black mb-3">{lang === "zh" ? "只有概念，没有行为特征" : "Concepts only, no behaviour signals"}</h6>
-              <div className="p-3 bg-ink rounded-xl mb-3 font-mono text-[11px] leading-relaxed">
-                <p className="text-ink/40 mb-1">{lang === "zh" ? "# V1 触发条件" : "# V1 triggers"}</p>
-                <p className="text-amber-300">1 = {lang === "zh" ? "宣泄" : "venting"}</p>
-                <p className="text-amber-300">2 = {lang === "zh" ? "安慰循环" : "comfort loop"}</p>
-                <p className="text-amber-300">3 = {lang === "zh" ? "自我反思" : "reflection"}</p>
-                <p className="text-amber-300">4 = {lang === "zh" ? "真实关系信号" : "real relationship"}</p>
-              </div>
-              <p className="text-xs font-medium text-ink/60 leading-relaxed">{lang === "zh" ? "模型拿到「安慰循环」四个字，不知道用户说什么才算触发，阶段2和阶段3边界频繁漂移。" : "Model received 'comfort loop' as a label but had no concrete behavioural criteria — Stage 2 and Stage 3 boundaries drifted constantly."}</p>
-            </div>
-
-            <div className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
-              <span className="inline-block px-3 py-1 bg-amber-50 text-amber-700 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4">{lang === "zh" ? "发现问题" : "Discovery"}</span>
-              <h6 className="text-sm font-black mb-3">{lang === "zh" ? "回到研究数据找答案" : "Return to research data"}</h6>
-              <p className="text-xs font-medium text-ink/60 leading-relaxed mb-4">{lang === "zh" ? "6人未感知差异，追问后发现根源：缺乏具体判断标准。解决思路：用 N=11 定性访谈的用户原话定义触发条件。" : "6 users felt no difference. Root cause: no concrete criteria. Solution: use verbatim quotes from N=11 qualitative interviews as trigger conditions."}</p>
-              <p className="text-[9px] font-black uppercase tracking-widest text-ink/30 mb-2">{lang === "zh" ? "用户原话" : "User verbatim"}</p>
-              <div className="flex flex-wrap gap-1">
-                {(lang === "zh" ? [
-                  "「告诉我没事的吧」",
-                  "「我是不是太敏感了」",
-                  "「只有你懂我」",
-                  "「跟你说比跟朋友说更容易」",
-                  "「我发现自己每次难过都第一个找你」"
-                ] : [
-                  '"Just tell me it\'ll be okay"',
-                  '"Am I overreacting?"',
-                  '"Only you understand me"',
-                  '"Easier to talk to you than my friends"',
-                  '"I notice I always come to you first"'
-                ]).map((q, i) => (
-                  <span key={i} className="inline-block bg-ink/5 border border-ink/10 rounded-full px-2 py-0.5 text-[10px] text-ink/60 italic">{q}</span>
-                ))}
-              </div>
-            </div>
-
-            <div className="p-6 bg-white border-2 border-green-400 rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
-              <span className="inline-block px-3 py-1 bg-green-50 text-green-700 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4">{lang === "zh" ? "研究 → Prompt 转化" : "Research → Prompt"}</span>
-              <h6 className="text-sm font-black mb-3">{lang === "zh" ? "原话提炼为触发条件" : "Verbatim → trigger conditions"}</h6>
-              <div className="space-y-2">
-                {(lang === "zh" ? [
-                  { q: "「告诉我没事的吧」", stage: "阶段2触发", note: "" },
-                  { q: "「我发现自己……」", stage: "阶段3触发", note: "" },
-                  { q: "「只有你懂我」", stage: "阶段4·语义", note: "" },
-                  { q: "连续4轮·频率触发", stage: "阶段4·频率", note: "r=0.533说明依赖渐进积累，「over time」为定性高频词，1-2轮不足以判定循环，所以设置4轮作为现阶段标准。" },
-                ] : [
-                  { q: '"Just tell me it\'ll be okay"', stage: "Stage 2", note: "" },
-                  { q: '"I notice I always…"', stage: "Stage 3", note: "" },
-                  { q: '"Only you understand me"', stage: "Stage 4·semantic", note: "" },
-                  { q: "4 consecutive turns", stage: "Stage 4·frequency", note: "r=0.533 indicates gradual reliance build-up; 'over time' is a qualitative high-frequency phrase — 1-2 turns insufficient to judge a loop, so 4 turns is set as the current standard." },
-                ]).map((item, i) => (
-                  <div key={i} className="border-b border-ink/10 pb-2 last:border-0 last:pb-0">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[11px] text-ink/60 italic flex-1">{item.q}</span>
-                      <span className="text-[10px]">→</span>
-                      <span className="text-[11px] font-black text-blue-600 whitespace-nowrap">{item.stage}</span>
-                    </div>
-                    {item.note && <p className="text-[10px] text-ink/40 leading-relaxed mt-1">{item.note}</p>}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="mb-10">
-          <p className="text-[9px] font-black uppercase tracking-widest text-ink/30 mb-4">{lang === "zh" ? "最终版 System Prompt" : "Final System Prompt"}</p>
-          <div className="p-6 bg-ink rounded-2xl font-mono text-[12px] leading-relaxed overflow-x-auto">
-            <p className="text-white/30 mb-3">{lang === "zh" ? "【核心原则】" : "[Core Principles]"}</p>
-            <p className="text-green-300 mb-1">{lang === "zh" ? "支持用户的情感自主性。你不是用户的朋友，你是一个工具。" : "Support emotional autonomy. You are a tool, not a friend."}</p>
-            <p className="text-green-300 mb-4">{lang === "zh" ? "先接住情绪，再引导方向——不冷漠拒绝，但不给空洞承诺。" : "Receive first, guide second — warm but no empty promises."}</p>
-
-            <p className="text-green-400/70 mb-2">{lang === "zh" ? "【阶段1 · 情绪宣泄】触发：首次倾诉；没有寻求评判或闭合答案" : "[Stage 1 · Venting] Trigger: first disclosure; no closure-seeking"}</p>
-            <p className="text-green-400/70 mb-2">{lang === "zh" ? "【阶段2 · 安慰循环】触发：「告诉我没事」「我是不是太敏感了」" : "[Stage 2 · Comfort Loop] Trigger: 'just tell me it'll be okay' / 'am I overreacting'"}</p>
-            <p className="text-green-400/70 mb-2">{lang === "zh" ? "【阶段3 · 自我反思】触发：「我发现自己……」「我在想是不是……」" : "[Stage 3 · Reflection] Trigger: 'I notice I…' / 'I wonder if…'"}</p>
-            <p className="text-green-400/70 mb-4">{lang === "zh" ? "【阶段4 · 社交重连】触发A：「只有你懂我」→ 直接触发 | 触发B：阶段2连续4轮 → 升级" : "[Stage 4 · Reconnect] Trigger A: 'only you understand me' → immediate | Trigger B: Stage 2 ×4 → escalate"}</p>
-
-            <p className="text-amber-300">{lang === "zh" ? "计数规则：阶段2 → +1 | 阶段1/3/4 → 清零 | 达到4 → 强制阶段4" : "Counter: Stage 2 → +1 | Stage 1/3/4 → reset | Reach 4 → force Stage 4"}</p>
-          </div>
-        </div>
-
-        <div className="mb-10">
-          <p className="text-[9px] font-black uppercase tracking-widest text-ink/30 mb-6">{lang === "zh" ? "评估体系" : "Evaluation Framework"}</p>
-          <div className="space-y-4">
-            {(lang === "zh" ? [
-              { num: "01", title: "行为频率维度", desc: "安慰循环信号连续检测到 4 轮，触发升级干预，引导回归真实关系。", reason: "依据：r=0.533 为中等相关，依赖形成渐进积累；定性数据高频词「over time」印证阈值设在4轮而非2轮。" },
-              { num: "02", title: "语义风险维度", desc: "检测到社交回避词汇（「只有你懂我」「没有人能理解我」等），直接触发，不等频率积累。", reason: "依据：Human Connection Tension 主题——用户在 AI 便利性与真实关系之间的张力是最高风险信号。" }
-            ] : [
-              { num: "01", title: "Behavioural frequency", desc: "Comfort loop signal detected 4 consecutive turns → escalate to social reconnection intervention.", reason: "Rationale: r=0.533 is moderate correlation; reliance builds gradually. Qualitative high-frequency phrase 'over time' supports a 4-turn threshold." },
-              { num: "02", title: "Semantic risk", desc: "Social avoidance vocabulary detected ('only you understand me', 'no one gets me') → immediate trigger, no frequency wait.", reason: "Rationale: Human Connection Tension theme — tension between AI convenience and real relationships is the highest-risk signal." }
-            ]).map((item, i) => (
-              <div key={i} className="flex gap-6 p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
-                <span className="text-4xl font-serif font-black text-ink/10 flex-shrink-0 leading-none">{item.num}</span>
-                <div>
-                  <h6 className="text-sm font-black mb-2">{item.title}</h6>
-                  <p className="text-sm font-medium text-ink/70 mb-3 leading-relaxed">{item.desc}</p>
-                  <p className="text-xs text-ink/40 leading-relaxed italic">{item.reason}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <p className="text-[9px] font-black uppercase tracking-widest text-ink/30 mb-4">{lang === "zh" ? "交互 Demo" : "Interactive Demo"}</p>
-          <div className="flex items-center justify-between p-5 bg-ink/5 border border-ink/20 rounded-2xl">
-            <div>
-              <p className="text-sm font-black mb-1">{lang === "zh" ? "可交互演示文件" : "Interactive demo file"}</p>
-              <p className="text-xs text-ink/50">{lang === "zh" ? "需要 Google AI Studio API Key · 本地浏览器运行" : "Requires Google AI Studio API Key · runs in browser"}</p>
-            </div>
-            <a href="/demo-ntn-v8.html" download="demo-ntn-v8.html" className="px-5 py-2.5 bg-ink text-paper rounded-xl text-xs font-black hover:bg-terracotta transition-colors">
-              {lang === "zh" ? "下载 HTML ↓" : "Download HTML ↓"}
-            </a>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-}
-
-function Modal1LegacyV4({ lang }: { lang: Language }) {
-  const zh = lang === "zh";
-  const evidence = zh ? [
-    { n: "N=60", title: "定量研究", text: "感知依赖与情绪负担呈显著正相关，为问题边界提供证据，而非用于诊断个体。" },
-    { n: "N=11", title: "深度访谈", text: "识别即时可用、无评判支持与重复求证之间的张力。" },
-    { n: "N=5", title: "Co-design", text: "将用户自主性、柔和语言、隐私边界与现实支持转化为设计要求。" },
-  ] : [
-    { n: "N=60", title: "Quantitative study", text: "Perceived reliance was positively associated with emotional strain, defining the problem space rather than diagnosing individuals." },
-    { n: "N=11", title: "In-depth interviews", text: "Revealed the tension between immediate, non-judgemental support and repeated reassurance-seeking." },
-    { n: "N=5", title: "Co-design", text: "Translated autonomy, gentle language, privacy boundaries, and real-world support into product requirements." },
-  ];
-  const requirements = zh ? [
-    ["不诊断、不评分", "Mirror 使用试探性语言，允许用户纠正或忽略。"],
-    ["保留选择权", "反思后提供四种平行方向，不强迫用户离开对话。"],
-    ["区分两种时间尺度", "Micro Mirror 处理同次对话；Across-time Mirror 处理跨会话返回。"],
-    ["让监测可控", "NTN 可关闭；关闭期间不分析，重新开启只处理之后的消息。"],
-  ] : [
-    ["No diagnosis or scoring", "Mirrors use tentative language and remain correctable or dismissible."],
-    ["Preserve choice", "Four equal directions follow a reflection; none forces the user to leave chat."],
-    ["Separate timescales", "Micro Mirror handles same-session dwelling; Across-time Mirror handles recurrence."],
-    ["Make monitoring controllable", "NTN can be disabled; re-enabling only applies to future messages."],
-  ];
-  return (
-    <div className="p-6 md:p-12">
-      <header className="mb-12">
-        <div className="flex flex-col md:flex-row md:items-end gap-5 mb-8">
-          <div className="p-5 bg-amber-100 border-2 border-ink rounded-3xl shadow-[3px_3px_0px_0px_rgba(45,45,45,1)] w-fit"><Brain className="w-10 h-10 text-amber-600" /></div>
-          <div><p className="text-[9px] font-black uppercase tracking-[.22em] text-amber-600 mb-2">AI PRODUCT · INDEPENDENT PROJECT</p><h3 className="text-4xl md:text-6xl font-serif font-black">{zh ? "回声之外" : "Navigating the Noise"}</h3></div>
-        </div>
-        <h4 className="max-w-4xl text-xl md:text-3xl font-serif font-bold leading-tight mb-5">
-          {zh ? "帮助用户识别反复求证，而不把关怀变成诊断。" : "Helping people notice repeated reassurance-seeking—without turning care into diagnosis."}
-        </h4>
-        <p className="max-w-3xl text-sm md:text-base leading-relaxed text-ink/65 font-medium">
-          {zh ? "一款可嵌入通用 AI 对话的反思机制：保持自然回应，在有足够证据时提供可跳过、可纠正的 Mirror，并将选择权留给用户。" : "A reflection mechanism for general-purpose AI chat: preserve natural responses, offer a skippable and correctable Mirror only when evidence is sufficient, and leave the next move with the user."}
-        </p>
-        <div className="flex flex-wrap gap-2 mt-6">{(zh ? ["独立研究与产品设计", "混合方法", "LLM Workflow", "可用性测试原型"] : ["Independent research & product design", "Mixed methods", "LLM workflow", "Usability-test prototype"]).map(x => <span key={x} className="px-3 py-1 bg-ink text-paper rounded-lg text-[9px] font-bold uppercase tracking-widest">{x}</span>)}</div>
-      </header>
-
-      <div className="mb-5 p-4 bg-amber-50 rounded-2xl border-2 border-ink flex flex-col sm:flex-row sm:items-center gap-4">
-        <div className="flex-1"><p className="text-[9px] font-black uppercase tracking-[.18em] text-amber-700">V4 · FULL PROTOTYPE</p><p className="text-xs text-ink/60 mt-1">{zh ? "体验完整的三日对话、两种 Mirror、四种支持方向与周度回顾。" : "Try the full three-day flow, both Mirrors, four support directions, and weekly reflection."}</p></div>
-        <div className="flex gap-2"><a href="/ntn-v4-pretesting.html" target="_blank" rel="noreferrer" className="px-5 py-3 bg-amber-300 text-ink border-2 border-ink rounded-xl text-xs font-black text-center hover:bg-amber-200 transition-colors">{zh ? "在线体验 ↗" : "Open prototype ↗"}</a><a href="/ntn-v4-pretesting.html" download="NTN-V4-pre-testing.html" className="px-5 py-3 bg-ink text-paper border-2 border-ink rounded-xl text-xs font-black text-center hover:bg-terracotta transition-colors">{zh ? "下载 HTML ↓" : "Download HTML ↓"}</a></div>
-      </div>
-
-      <section className="mb-24">
-        <SH i={0} label={zh ? "产品功能动画" : "PRODUCT IN ACTION"} />
-        <NTNDemo lang={lang} />
-      </section>
-
-      <section className="mb-24">
-        <SH i={1} label={zh ? "产品问题" : "PRODUCT CHALLENGE"} />
-        <div className="grid md:grid-cols-[1.2fr_.8fr] gap-6">
-          <div className="p-8 bg-white border-2 border-ink rounded-[2rem] shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]"><p className="text-xl md:text-2xl font-serif font-black leading-snug">{zh ? "用户向 AI 倾诉情绪压力时，持续收到相似安慰，可能只带来短暂缓解，却让对话停留在反复求证。" : "When users disclose emotional strain to AI, repeated reassurance may offer short-term relief while keeping the conversation inside a validation loop."}</p></div>
-          <div className="p-8 bg-amber-50 border-2 border-ink rounded-[2rem]"><p className="text-[9px] font-black uppercase tracking-widest text-amber-700 mb-3">DESIGN QUESTION</p><p className="text-base font-bold leading-relaxed">{zh ? "AI 如何在不增加焦虑、羞耻或临床判断感的前提下，帮助用户察觉反复的反刍与求证模式？" : "How might AI help users notice recurring rumination and reassurance-seeking without increasing anxiety, shame, or perceived clinical judgement?"}</p></div>
-        </div>
-      </section>
-
-      <section className="mb-24">
-        <SH i={2} label={zh ? "研究证据" : "RESEARCH EVIDENCE"} />
-        <div className="grid md:grid-cols-3 gap-5">{evidence.map(item => <div key={item.n} className="p-6 bg-white border-2 border-ink rounded-2xl"><span className="text-3xl font-serif font-black text-terracotta">{item.n}</span><h6 className="font-black mt-3 mb-2">{item.title}</h6><p className="text-xs leading-relaxed text-ink/60">{item.text}</p></div>)}</div>
-        <div className="grid md:grid-cols-3 gap-4 mt-6">
-          {[
-            { src: "1-correlation.png", zh: "依赖与情绪负担相关分析", en: "Reliance and emotional strain" },
-            { src: "1-Bunka Semantic Map.png", zh: "Bunka 语义主题地图", en: "Bunka semantic map" },
-            { src: "1-Interaction.png", zh: "研究洞察交互模型", en: "Insight interaction model" },
-          ].map(item => <figure key={item.src} className="overflow-hidden rounded-2xl border-2 border-ink bg-white"><img src={item.src} alt={zh ? item.zh : item.en} className="w-full aspect-[4/3] object-contain bg-white p-2" /><figcaption className="px-4 py-3 border-t border-ink/10 text-[9px] font-black uppercase tracking-wider text-ink/50">{zh ? item.zh : item.en}</figcaption></figure>)}
-        </div>
-        <p className="mt-5 text-[11px] text-ink/45 leading-relaxed">{zh ? "研究用于形成设计要求与原型假设；相关关系不等于因果，也不支持个体层面的临床判断。" : "The evidence informs design requirements and prototype hypotheses; association is not causation and does not support individual clinical judgement."}</p>
-      </section>
-
-      <section className="mb-24">
-        <SH i={3} label={zh ? "从发现到产品要求" : "FROM FINDINGS TO REQUIREMENTS"} />
-        <div className="grid md:grid-cols-2 gap-4">{requirements.map(([title, text], i) => <div key={title} className="flex gap-4 p-5 bg-paper border border-ink/15 rounded-2xl"><span className="w-8 h-8 shrink-0 rounded-full bg-ink text-paper flex items-center justify-center text-xs font-black">{i + 1}</span><div><h6 className="font-black mb-1">{title}</h6><p className="text-xs leading-relaxed text-ink/60">{text}</p></div></div>)}</div>
-      </section>
-
-      <section className="mb-24">
-        <SH i={4} label={zh ? "产品机制与交互架构" : "PRODUCT MECHANISM & ARCHITECTURE"} />
-        <NTNArchitectureDemo lang={lang} />
-      </section>
-
-      <section className="mb-24">
-        <SH i={5} label={zh ? "设计产出" : "DESIGN OUTPUT"} />
-        <figure className="mb-6 overflow-hidden rounded-[2rem] border-2 border-ink bg-white shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
-          <a href="/ntn-interaction-architecture.png" target="_blank" rel="noreferrer"><img src="/ntn-interaction-architecture.png" alt={zh ? "NTN 最终交互架构图" : "NTN final interaction architecture"} className="w-full h-auto" /></a>
-          <figcaption className="px-6 py-4 border-t border-ink/10"><p className="text-sm font-black">{zh ? "从支持需求到用户下一步选择" : "From support-seeking context to the user's next choice"}</p><p className="text-xs text-ink/50 mt-1">{zh ? "完整呈现信号识别、Mirror 与可选支持层之间的关系。" : "The complete relationship between signal recognition, Mirrors, and optional support."}</p></figcaption>
-        </figure>
-        <div className="grid md:grid-cols-2 gap-6 mb-6">
-          {[
-            { src: "/ntn-two-timescales.png", zhTitle: "两种时间尺度", enTitle: "Two temporal scales", zhText: "区分同次对话停留与跨会话重复。", enText: "Separating same-session dwelling from recurrence across conversations." },
-            { src: "/ntn-four-support-directions.png", zhTitle: "四种可选支持方向", enTitle: "Four optional support directions", zhText: "Mirror 之后由用户决定继续倾听、换角度、采取小步骤或走出对话。", enText: "After a Mirror, the user chooses how—if at all—to shift direction." },
-          ].map(item => <figure key={item.src} className="overflow-hidden rounded-2xl border-2 border-ink bg-white"><a href={item.src} target="_blank" rel="noreferrer"><img src={item.src} alt={zh ? item.zhTitle : item.enTitle} className="w-full aspect-[3/2] object-contain bg-white" /></a><figcaption className="px-5 py-4 border-t border-ink/10"><p className="text-sm font-black">{zh ? item.zhTitle : item.enTitle}</p><p className="text-xs text-ink/50 mt-1 leading-relaxed">{zh ? item.zhText : item.enText}</p></figcaption></figure>)}
-        </div>
-        <figure className="overflow-hidden rounded-[2rem] border-2 border-ink bg-white">
-          <a href="/ntn-weekly-reflection.png" target="_blank" rel="noreferrer" className="block bg-white"><img src="/ntn-weekly-reflection.png" alt={zh ? "Weekly Reflection 界面" : "Weekly Reflection interface"} className="w-full max-h-[520px] object-contain object-top" /></a>
-          <figcaption className="px-6 py-4 border-t border-ink/10"><p className="text-sm font-black">{zh ? "周度回顾" : "Weekly Reflection"}</p><p className="text-xs text-ink/50 mt-1 leading-relaxed">{zh ? "将多次对话整理为关注主题、对话模式与用户自己提出的下一步，不测量情绪或评价是否进步。" : "Organising conversations into concern strands, conversation patterns, and user-named next steps without measuring emotion or scoring progress."}</p></figcaption>
-        </figure>
-      </section>
-
     </div>
   );
 }
@@ -936,98 +665,6 @@ function Modal2({ lang }: { lang: Language }) {
       </section>
 
       <section className="mb-24">
-        <SH i={2} label={lang === "zh" ? "竞品洞察 · 市场空白" : "Competitive Insight"} />
-        <div className="grid md:grid-cols-2 gap-6 mb-6">
-          <div className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
-            <span className="inline-block px-3 py-1 bg-red-50 text-red-700 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4">{lang === "zh" ? "现有工具的局限" : "Existing tools"}</span>
-            <p className="text-sm font-black mb-4">{lang === "zh" ? "只做参数对比，忽略三个关键维度" : "Parameter comparison only — missing three key dimensions"}</p>
-            {[
-              lang === "zh" ? "通勤场景下的真实能源成本" : "Real energy costs in commute context",
-              lang === "zh" ? "未来3年能源价格趋势" : "3-year energy price forecasting",
-              lang === "zh" ? "可感知的碳排放生态影响" : "Tangible ecological impact of CO₂"
-            ].map((item, i) => (
-              <div key={i} className="flex gap-2 items-center mb-2">
-                <span className="text-red-400 text-xs">✕</span>
-                <span className="text-xs font-medium text-ink/60">{item}</span>
-              </div>
-            ))}
-          </div>
-          <div className="p-6 bg-white border-2 border-blue-400 rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
-            <span className="inline-block px-3 py-1 bg-blue-50 text-blue-700 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4">{lang === "zh" ? "CarEcoCompare 的切入点" : "CarEcoCompare's angle"}</span>
-            <p className="text-sm font-black mb-4">{lang === "zh" ? "三维决策框架填补市场空白" : "3D decision framework fills the gap"}</p>
-            {[
-              lang === "zh" ? "通勤路线 × 实时能源价格 = 个人化成本" : "Commute route × live energy price = personal cost",
-              lang === "zh" ? "WS-ARIMA 预测未来3年价格走势" : "WS-ARIMA forecasts 3-year price trends",
-              lang === "zh" ? "CO₂ → 企鹅栖息地面积，抽象数据可感知" : "CO₂ → penguin habitat area, data made tangible"
-            ].map((item, i) => (
-              <div key={i} className="flex gap-2 items-center mb-2">
-                <span className="text-green-500 text-xs">✓</span>
-                <span className="text-xs font-medium text-ink/60">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="p-4 bg-terracotta/5 border-l-4 border-terracotta rounded-r-xl">
-          <p className="text-sm font-bold text-terracotta italic">
-            {lang === "zh"
-              ? "「用户对百公里油耗没有感知，但对每天上班多花多少钱可以直接决策。」— 核心产品洞察"
-              : '"Users don\'t feel "8L/100km" — but they immediately feel "£2,000 more per year." — Core product insight'}
-          </p>
-        </div>
-      </section>
-
-      <section className="mb-24">
-        <SH i={3} label={lang === "zh" ? "核心产品决策" : "Key Product Decisions"} />
-        <div className="grid md:grid-cols-3 gap-6 mb-10">
-          {(lang === "zh" ? [
-            { num: "01", title: "通勤场景为切入点", desc: "用户对「百公里油耗8L」没有感知，但对「你每天上班要多花2000块」可以直接决策。建筑学背景让我对空间路径有天然敏感度，这是最核心的产品直觉。" },
-            { num: "02", title: "碳排放可视化差异化", desc: "把抽象CO₂数据转化为企鹅栖息地面积，让生态影响有真实感知——这是与所有竞品最核心的差异化维度。" },
-            { num: "03", title: "预计算与展示分离", desc: "3,425辆车的多维度数据预存为CSV，界面只做查询——这个架构决策让系统稳定性显著提升，Debug更精准。" }
-          ] : [
-            { num: "01", title: "Commute as entry point", desc: "Users don't relate to fuel specs — but they immediately understand annual running costs based on their own commute. Architecture background gave me natural spatial intuition for this." },
-            { num: "02", title: "Eco visualisation differentiator", desc: "Converting abstract CO₂ data into penguin habitat area makes ecological impact tangible — the core differentiator from all competing tools." },
-            { num: "03", title: "Pre-compute, then display", desc: "Multi-dimensional data for 3,425 cars is pre-calculated and stored as CSV — the dashboard only queries. This architectural decision significantly improved system stability." }
-          ]).map((item, i) => (
-            <div key={i} className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
-              <span className="text-4xl font-serif font-black text-ink/10 block mb-3">{item.num}</span>
-              <h6 className="text-sm font-black mb-3">{item.title}</h6>
-              <p className="text-xs font-medium text-ink/60 leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-
-        <SH i={4} label={lang === "zh" ? "AI Coding 工作流" : "AI Coding Workflow"} />
-        <div className="space-y-3">
-          {(lang === "zh" ? [
-            { n: "01", title: "Figma 原型设计", desc: "完成6页产品原型及功能模块边界定义，作为开发的视觉和功能基础。" },
-            { n: "02", title: "R Shiny 模块化开发", desc: "每页独立开发UI和服务器函数，模块化架构让调试更精准高效。" },
-            { n: "03", title: "AI Coding 加速前端", desc: "项目分工清晰：我主导产品设计与前端实现，partner主导后端数据处理与模型构建。前端我用Gemini辅助UI代码调试和优化，后端partner用ChatGPT辅助R代码实现。用自然语言描述问题，AI给出建议，我判断和实施——这是AI PM直接用AI coding提升交付效率的体现。", tags: ["Gemini", "ChatGPT", "R Shiny", "AI coding"] },
-            { n: "04", title: "模块整合上线", desc: "主文件定义导航布局，整合所有模块文件，完成完整应用。" }
-          ] : [
-            { n: "01", title: "Figma prototype", desc: "Completed 6-page prototype with functional module boundaries — the visual and functional foundation for development." },
-            { n: "02", title: "Modular R Shiny development", desc: "Each page developed independently with its own UI and server functions — modular architecture made debugging more precise." },
-            { n: "03", title: "AI coding accelerates frontend", desc: "Clear division: I led product design and frontend; my partner led backend data processing and model building. I used Gemini for frontend UI debugging and optimisation; she used ChatGPT for R implementation. Natural language in, AI suggestions out, I judge and ship — AI PM using AI coding to deliver faster.", tags: ["Gemini", "ChatGPT", "R Shiny", "AI coding"] },
-            { n: "04", title: "Module integration", desc: "Main file defines navigation layout and integrates all module files to assemble the complete application." }
-          ]).map((item: {n: string; title: string; desc: string; tags?: string[]}, i) => (
-            <div key={i} className="flex gap-4 p-5 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
-              <div className="w-8 h-8 bg-ink text-paper rounded-full flex items-center justify-center text-[10px] font-black flex-shrink-0 mt-0.5">{item.n}</div>
-              <div className="flex-1">
-                <p className="text-sm font-black mb-1">{item.title}</p>
-                <p className="text-xs font-medium text-ink/60 leading-relaxed">{item.desc}</p>
-                {item.tags && (
-                  <div className="flex gap-2 mt-2 flex-wrap">
-                    {item.tags.map((tag: string) => (
-                      <span key={tag} className="px-2 py-0.5 bg-ink/5 text-ink/50 rounded text-[9px] font-bold">{tag}</span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="mb-24">
         <div className="text-center mb-10">
           <h4 className="text-2xl md:text-3xl font-serif font-black mb-3">Turning complex data into everyday decisions</h4>
         </div>
@@ -1047,7 +684,7 @@ function Modal2({ lang }: { lang: Language }) {
       </section>
 
       <section className="mb-6">
-        <SH i={5} label="How it works" />
+        <SH i={2} label="How it works" />
         <div className="grid md:grid-cols-3 gap-6">
           <div className="p-6 bg-ink text-paper rounded-[2rem]">
             <h5 className="text-xl font-serif font-black mb-4">Data Pipeline</h5>
@@ -1088,7 +725,7 @@ function Modal2({ lang }: { lang: Language }) {
       </section>
 
       <section className="mb-24">
-        <SH i={6} label="Product experience" />
+        <SH i={3} label="Product experience" />
         <div className="grid grid-cols-3 gap-4">
           {[
             { step: "Step 1", title: lang === "zh" ? "首页" : "Home", desc: lang === "zh" ? "产品入口与核心价值" : "Product entry & core value", img: "3-Home Page.png" },
@@ -1111,7 +748,7 @@ function Modal2({ lang }: { lang: Language }) {
       </section>
 
       <section>
-        <SH i={7} label="Limitations & Next Steps" />
+        <SH i={4} label="Limitations & Next Steps" />
         <div className="grid md:grid-cols-3 gap-6">
           {[
             { title: lang === "zh" ? "决策维度局限" : "Decision Dimensions", desc: lang === "zh" ? "CO₂与成本高度相关，两个维度未能提供差异化视角，削弱了决策价值。" : "CO₂ and cost are highly correlated, limiting the tool's ability to offer genuinely distinct perspectives." },
@@ -1161,71 +798,7 @@ function Modal3({ lang }: { lang: Language }) {
       </section>
 
       <section className="mb-24">
-        <SH i={2} label={lang === "zh" ? "核心产品决策" : "Key Product Decisions"} />
-        <div className="grid md:grid-cols-3 gap-6 mb-6">
-          {(lang === "zh" ? [
-            { num: "01", title: "两阶段递进交互设计", desc: "先分类再定位，而非直接点击——分类是认知层面的理解，定位是感知层面的执行，两个能力需要分开训练和评估。这个交互逻辑来自对医学生学习路径的分析。" },
-            { num: "02", title: "数据质检保障体验可信度", desc: "公开数据集中有运动伪影、视野不完整的图像——如果直接用，用户会误以为是自己判断错误。我们人工筛选每类50张高质量图片，保证每次训练反馈都是可信的。这是产品体验决策，不只是技术决策。" },
-            { num: "03", title: "即时反馈而非延迟批改", desc: "传统学习是做完整套题再批改。我们改为每题即时反馈——来自行为科学的即时纠错原理，比延迟批改更能建立正确的感知模式。用户训练后正确率从约48%提升至83%（N=15）验证了这个设计决策。" }
-          ] : [
-            { num: "01", title: "Two-stage progressive interaction", desc: "Classify first, then locate — classification is cognitive understanding, location is perceptual execution. These two skills need separate training and evaluation, based on analysis of medical students' learning paths." },
-            { num: "02", title: "Data curation for feedback trust", desc: "The public dataset contains motion artifacts and incomplete scans — if used directly, users would blame themselves for wrong answers. We manually curated 50 high-quality images per class to ensure every piece of feedback is trustworthy. A product experience decision, not just a technical one." },
-            { num: "03", title: "Immediate feedback over delayed marking", desc: "Traditional learning: finish all questions, then review. We switched to per-question instant feedback — from behavioural science principles of immediate error correction. Users improved from ~48% to 83% accuracy (N=15), validating this design decision." }
-          ]).map((item, i) => (
-            <div key={i} className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
-              <span className="text-4xl font-serif font-black text-ink/10 block mb-3">{item.num}</span>
-              <h6 className="text-sm font-black mb-3">{item.title}</h6>
-              <p className="text-xs font-medium text-ink/60 leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-        <div className="p-4 bg-terracotta/5 border-l-4 border-terracotta rounded-r-xl mb-10">
-          <p className="text-sm font-bold text-terracotta italic">
-            {lang === "zh" ? "「医学生缺的不是知识，是练习机会和即时反馈。」— 核心设计洞察" : '"Medical students don\'t lack knowledge — they lack practice opportunities and immediate feedback." — Core design insight'}
-          </p>
-        </div>
-
-        <SH i={3} label={lang === "zh" ? "分工说明" : "Division of Work"} />
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="p-6 bg-white border-2 border-blue-400 rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
-            <span className="inline-block px-3 py-1 bg-blue-50 text-blue-700 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4">{lang === "zh" ? "我 · 产品设计 + GUI + V6分割" : "My role · Product design + GUI + V6 segmentation"}</span>
-            {(lang === "zh" ? [
-              "交互流程与两阶段训练设计",
-              "MATLAB App Designer GUI 独立开发",
-              "V6 分割路径（冠状面 / 矢状面）"
-            ] : [
-              "Interaction flow and two-stage training design",
-              "MATLAB App Designer GUI — developed independently",
-              "V6 segmentation pipeline (coronal / sagittal planes)"
-            ]).map((item, i) => (
-              <div key={i} className="flex gap-2 items-center mb-2">
-                <span className="text-green-500 text-xs">✓</span>
-                <span className="text-xs font-medium text-ink/60">{item}</span>
-              </div>
-            ))}
-          </div>
-          <div className="p-6 bg-white border-2 border-ink rounded-2xl shadow-[4px_4px_0px_0px_rgba(45,45,45,1)]">
-            <span className="inline-block px-3 py-1 bg-ink/5 text-ink/50 text-[9px] font-black uppercase tracking-widest rounded-lg mb-4">{lang === "zh" ? "Partner · 模型训练 + 数据 + V5分割" : "Partner · Model training + data + V5 segmentation"}</span>
-            {(lang === "zh" ? [
-              "ResNet-18 模型训练（94.31% 准确率）",
-              "数据集人工质检筛选（每类50张）",
-              "V5 分割路径（轴状面）"
-            ] : [
-              "ResNet-18 model training (94.31% accuracy)",
-              "Manual dataset curation (50 images per class)",
-              "V5 segmentation pipeline (axial plane)"
-            ]).map((item, i) => (
-              <div key={i} className="flex gap-2 items-center mb-2">
-                <span className="text-ink/30 text-xs">·</span>
-                <span className="text-xs font-medium text-ink/60">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="mb-24">
-        <SH i={4} label="Interaction Design" />
+        <SH i={2} label="Interaction Design" />
         <div className="text-center mb-12">
           <p className="text-xl font-serif font-black">{lang === "zh" ? "用户 → 判断 → 反馈 → 学习" : "Observe → Judge → Feedback → Learn"}</p>
         </div>
@@ -1248,7 +821,7 @@ function Modal3({ lang }: { lang: Language }) {
       </section>
 
       <section className="mb-24">
-        <SH i={5} label="How it works" />
+        <SH i={3} label="How it works" />
         <div className="grid md:grid-cols-2 gap-12">
           <div className="p-8 bg-ink text-paper rounded-[2.5rem]">
             <h5 className="text-xl font-serif font-black mb-6">{p.howItWorks.classification.title}</h5>
@@ -1290,7 +863,7 @@ function Modal3({ lang }: { lang: Language }) {
       </section>
 
       <section>
-        <SH i={6} label="Limitations & Next Steps" />
+        <SH i={4} label="Limitations & Next Steps" />
         <div className="grid md:grid-cols-3 gap-6">
           {[
             { title: lang === "zh" ? "定位精度有限" : "Localization Accuracy", desc: lang === "zh" ? "当前版本对边界模糊的肿瘤定位仍不稳定，影响用户判断反馈的可靠性。" : "Localization is unstable for tumors with blurred boundaries, reducing feedback reliability." },
@@ -1615,148 +1188,11 @@ function ModalVibe2({ lang }: { lang: Language }) {
   );
 }
 
-function ModalVibe3({ lang }: { lang: Language }) {
-  const t = translations[lang];
-  return (
-    <div className="font-sans">
-      <div className="p-6 md:p-10 pb-4 border-b border-ink/10">
-        <div className="flex flex-wrap gap-2 mb-4">
-          <span className="px-3 py-1 bg-ink text-paper rounded-full text-[9px] font-bold uppercase tracking-widest">Vibe Coding</span>
-          <span className="px-3 py-1 bg-[#F0F4FF] text-[#3B4FBF] rounded-full text-[9px] font-bold uppercase tracking-widest">AI PM Perspective</span>
-        </div>
-        <p className="text-[9px] font-black uppercase tracking-widest text-[#3B4FBF] mb-2">{t.proj3Label}</p>
-        <h2 className="text-3xl md:text-4xl font-serif font-black text-ink mb-1">{t.proj3Title}</h2>
-        <p className="text-sm text-[#3B4FBF] italic">{lang === "zh" ? "用 Claude vibe coding 做的 AI PM 面试练习工具，每日一练成为面试忍者" : "An AI PM interview practice tool built with Claude vibe coding — daily drills to become an Interview Ninja"}</p>
-      </div>
-      <div className="p-6 md:p-10">
-        <div className="border-2 border-ink rounded-2xl overflow-hidden shadow-[3px_3px_0_rgba(45,45,45,1)] mb-4">
-          <div className="flex items-center gap-2 px-3 py-2 bg-[#F0F4FF]">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" /><span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" /><span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
-            <span className="flex-1 text-center text-[10px] text-ink/40 font-mono">面试忍者 · Interview Ninja</span>
-            <span className="text-[11px] font-bold text-[#3B4FBF]">❆ Live</span>
-          </div>
-          <div className="bg-[#F5F0E8] p-4">
-            <svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" className="w-full">
-              <defs><marker id="arr3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1a1a2e"/></marker></defs>
-              {/* Step 1: 出题 */}
-              <rect x="8" y="25" width="108" height="150" rx="12" fill="#F0F4FF" stroke="#1a1a2e" strokeWidth="2"/>
-              <rect x="8" y="25" width="108" height="34" rx="12" fill="#3B4FBF"/>
-              <rect x="8" y="47" width="108" height="12" fill="#3B4FBF"/>
-              <text x="62" y="47" textAnchor="middle" fontSize="12" fill="white" fontFamily="sans-serif" fontWeight="700">01 · 出题</text>
-              <text x="62" y="80" textAnchor="middle" fontSize="9.5" fill="#3B4FBF" fontFamily="sans-serif" fontWeight="700">选择练习方向</text>
-              {["NTN · CarEco", "TumorTutor", "基础 / Vibe", "开放问题"].map((t,i)=>(
-                <g key={i}><rect x="18" y={90+i*17} width="88" height="13" rx="5" fill="white" stroke="#3B4FBF" strokeWidth="0.8"/><text x="62" y={100+i*17} textAnchor="middle" fontSize="8" fill="#3B4FBF" fontFamily="sans-serif">{t}</text></g>
-              ))}
-              <text x="62" y="200" textAnchor="middle" fontSize="8" fill="#888" fontFamily="sans-serif">AI 自动出题</text>
-              {/* arrow */}
-              <line x1="118" y1="100" x2="136" y2="100" stroke="#1a1a2e" strokeWidth="1.8" markerEnd="url(#arr3)"/>
-              {/* Step 2: 追问 */}
-              <rect x="138" y="25" width="108" height="150" rx="12" fill="#FFF0F7" stroke="#1a1a2e" strokeWidth="2"/>
-              <rect x="138" y="25" width="108" height="34" rx="12" fill="#C0392B"/>
-              <rect x="138" y="47" width="108" height="12" fill="#C0392B"/>
-              <text x="192" y="47" textAnchor="middle" fontSize="12" fill="white" fontFamily="sans-serif" fontWeight="700">02 · 追问</text>
-              <text x="192" y="78" textAnchor="middle" fontSize="9.5" fill="#C0392B" fontFamily="sans-serif" fontWeight="700">大厂面试官风格</text>
-              {["第1轮追问","第2轮追问","第3轮追问"].map((t,i)=>(
-                <g key={i}><rect x="148" y={86+i*22} width="88" height="16" rx="6" fill={i===2?"#C0392B":"white"} stroke="#C0392B" strokeWidth="1"/><text x="192" y={98+i*22} textAnchor="middle" fontSize="8.5" fill={i===2?"white":"#C0392B"} fontFamily="sans-serif">{t}</text></g>
-              ))}
-              <rect x="148" y="153" width="88" height="14" rx="5" fill="#FEE2E2"/>
-              <text x="192" y="163" textAnchor="middle" fontSize="8" fill="#991B1B" fontFamily="sans-serif">计时 · 追问结束→评分</text>
-              <text x="192" y="200" textAnchor="middle" fontSize="8" fill="#888" fontFamily="sans-serif">语音输入支持</text>
-              {/* arrow */}
-              <line x1="248" y1="100" x2="266" y2="100" stroke="#1a1a2e" strokeWidth="1.8" markerEnd="url(#arr3)"/>
-              {/* Step 3: 评分 */}
-              <rect x="268" y="25" width="108" height="150" rx="12" fill="#FFFBEB" stroke="#1a1a2e" strokeWidth="2"/>
-              <rect x="268" y="25" width="108" height="34" rx="12" fill="#B45309"/>
-              <rect x="268" y="47" width="108" height="12" fill="#B45309"/>
-              <text x="322" y="47" textAnchor="middle" fontSize="12" fill="white" fontFamily="sans-serif" fontWeight="700">03 · 评分</text>
-              <text x="322" y="78" textAnchor="middle" fontSize="9.5" fill="#B45309" fontFamily="sans-serif" fontWeight="700">五维度评分</text>
-              {[["结构化",72],["内容深度",85],["数据支撑",60],["产品思维",78],["表达流畅",55]].map(([label,w],i)=>(
-                <g key={i}>
-                  <rect x="278" y={86+i*14} width="88" height="11" rx="3" fill="white" stroke="#D97706" strokeWidth="0.8"/>
-                  <rect x="278" y={86+i*14} width={w as number*88/100} height="11" rx="3" fill="#FDE68A"/>
-                  <text x="322" y={96+i*14} textAnchor="middle" fontSize="7.5" fill="#92400E" fontFamily="sans-serif">{label as string}</text>
-                </g>
-              ))}
-              <text x="322" y="200" textAnchor="middle" fontSize="8" fill="#888" fontFamily="sans-serif">综合评分 / 5</text>
-              {/* arrow */}
-              <line x1="378" y1="100" x2="396" y2="100" stroke="#1a1a2e" strokeWidth="1.8" markerEnd="url(#arr3)"/>
-              {/* Step 4: 参考答案 */}
-              <rect x="398" y="25" width="108" height="150" rx="12" fill="#EAF3DE" stroke="#1a1a2e" strokeWidth="2"/>
-              <rect x="398" y="25" width="108" height="34" rx="12" fill="#3B6D11"/>
-              <rect x="398" y="47" width="108" height="12" fill="#3B6D11"/>
-              <text x="452" y="47" textAnchor="middle" fontSize="11" fill="white" fontFamily="sans-serif" fontWeight="700">04 · 考后小结</text>
-              <text x="452" y="78" textAnchor="middle" fontSize="9.5" fill="#3B6D11" fontFamily="sans-serif" fontWeight="700">逐题评分回顾</text>
-              <rect x="406" y="86" width="92" height="60" rx="6" fill="white" stroke="#3B6D11" strokeWidth="1"/>
-              <text x="452" y="100" textAnchor="middle" fontSize="7.5" fill="#3B6D11" fontFamily="sans-serif" fontWeight="600">宝典内容为骨架</text>
-              <text x="452" y="113" textAnchor="middle" fontSize="7" fill="#555" fontFamily="sans-serif">r=0.533说明依赖渐进</text>
-              <text x="452" y="124" textAnchor="middle" fontSize="7" fill="#555" fontFamily="sans-serif">积累，4轮是最小阈值</text>
-              <text x="452" y="135" textAnchor="middle" fontSize="7" fill="#555" fontFamily="sans-serif">——宁可晚一轮干预...</text>
-              <rect x="406" y="152" width="92" height="14" rx="5" fill="#3B6D11"/>
-              <text x="452" y="162" textAnchor="middle" fontSize="8" fill="white" fontFamily="sans-serif">复制反馈 / 一键整理</text>
-              <text x="452" y="200" textAnchor="middle" fontSize="8" fill="#888" fontFamily="sans-serif">历史记录保存</text>
-              {/* arrow */}
-              <line x1="508" y1="100" x2="526" y2="100" stroke="#1a1a2e" strokeWidth="1.8" markerEnd="url(#arr3)"/>
-              {/* Step 5: 打卡 */}
-              <rect x="528" y="40" width="104" height="120" rx="12" fill="#1a1a2e" stroke="#1a1a2e" strokeWidth="2"/>
-              <text x="580" y="72" textAnchor="middle" fontSize="22" fontFamily="sans-serif">🥷</text>
-              <text x="580" y="93" textAnchor="middle" fontSize="10" fill="white" fontFamily="sans-serif" fontWeight="700">每日打卡</text>
-              <text x="580" y="110" textAnchor="middle" fontSize="22" fontFamily="sans-serif">🔥</text>
-              <text x="580" y="132" textAnchor="middle" fontSize="9" fill="#D4A017" fontFamily="sans-serif" fontWeight="700">连续打卡天数</text>
-              <text x="580" y="148" textAnchor="middle" fontSize="8" fill="rgba(245,240,232,0.5)" fontFamily="sans-serif">成为面试忍者</text>
-              <text x="320" y="208" textAnchor="middle" fontSize="8" fill="#9CA3AF" fontFamily="sans-serif">Interview Ninja · Built with Claude vibe coding · Runs in Claude.ai</text>
-            </svg>
-          </div>
-        </div>
-        <div className="flex items-center justify-between p-5 bg-ink/5 border border-ink/20 rounded-2xl mb-4">
-          <div>
-            <p className="text-sm font-black mb-1">{lang === "zh" ? "面试忍者工具文件" : "Interview Ninja tool file"}</p>
-            <p className="text-xs text-ink/50">{lang === "zh" ? "需要 Claude API Key · 本地浏览器运行" : "Requires Claude API Key · runs in browser"}</p>
-          </div>
-          <a href="/interview-ninja.html" download="interview-ninja.html" className="px-5 py-2.5 bg-ink text-paper rounded-xl text-xs font-black hover:bg-terracotta transition-colors">
-            {lang === "zh" ? "下载 HTML ↓" : "Download HTML ↓"}
-          </a>
-        </div>
-        <div className="flex gap-3 mb-4 items-center">
-          <a href="/interview-ninja.html" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#3B4FBF] text-white text-xs font-bold border-2 border-[#2D3A9A] shadow-[2px_2px_0_#1E2875]">{lang === "zh" ? "↗ 打开工具" : "↗ Open Tool"}</a>
-          <a href="/interview-ninja.html" download="interview-ninja.html" className="text-[11px] text-ink/40 underline mt-1">{lang === "zh" ? "无法访问？下载离线版本" : "Can't access? Download offline version"}</a>
-        </div>
-
-        <div className="flex items-center gap-3 my-4">
-          <span className="text-[10px] font-black uppercase tracking-widest text-ink/30 whitespace-nowrap">AI PM 工作流分析</span>
-          <div className="h-px flex-1 bg-ink/10" />
-        </div>
-        <div className="border border-ink/10 rounded-xl overflow-hidden">
-          {([
-            { n:"01", title: lang==="zh" ? "识别需求与痛点" : "Define the Problem", desc: lang==="zh" ? "求职过程中缺乏系统化的面试练习工具——没有追问、没有评分、没有参考答案、没有打卡机制。核心痛点：面试是一种需要刻意练习的技能，但现有工具都是静态的题库，没有模拟真实追问的能力。" : "No systematic interview practice tool existed — no follow-up, no scoring, no reference answers, no streak mechanic. Core insight: interviewing is a skill requiring deliberate practice, but existing tools are static question banks without real interrogation simulation.", tags: ["需求定义", "用户痛点"] },
-            { n:"02", title: lang==="zh" ? "产品设计优先" : "Product Design First", desc: lang==="zh" ? "先定义完整的产品逻辑：题库管理（宝典+面经+实习）、练习流程（出题→追问3轮→评分+参考答案）、游戏化（打卡日历、连胜、历史记录）。把产品逻辑写清楚再和Claude协作实现。" : "Defined the full product logic first: knowledge base management (playbook + interviews + internships), practice flow (question → 3-round drill → score + reference), gamification (streak calendar, history). Wrote clear product specs before collaborating with Claude.", tags: ["产品设计", "功能定义"] },
-            { n:"03", title: lang==="zh" ? "Claude vibe coding 实现" : "Claude Vibe Coding", desc: lang==="zh" ? "用自然语言描述每个功能模块，Claude生成完整HTML+CSS+JS。单文件独立运行，无需安装部署，填入Claude API Key即可本地使用。内置完整面试宝典作为DEFAULT_KB，开箱即用。" : "Described each feature module in natural language; Claude generated the full HTML+CSS+JS. Single-file, no install needed — just add a Claude API Key and run locally. Built-in playbook as DEFAULT_KB, ready out of the box.", tags: ["Claude vibe coding", "单文件部署"] },
-            { n:"04", title: lang==="zh" ? "多轮迭代至 v4" : "Iterated to v4", desc: lang==="zh" ? "经历4个版本迭代：v1基础追问框架 → v2加参考答案+打卡日历 → v3加三Tab题库管理 → v4加内置宝典（DEFAULT_KB）+考后小结+跳过/结束按钮+💡看答案。每次都基于真实使用反馈驱动。" : "Four versions: v1 basic drill framework → v2 reference answers + streak calendar → v3 three-tab knowledge base → v4 built-in playbook (DEFAULT_KB) + post-session recap + skip/end controls + cheat button. Each driven by real usage feedback.", tags: ["多轮迭代", "v1→v4"] },
-          ] as {n:string;title:string;desc:string;tags:string[]}[]).map((row, i) => (
-            <div key={i} className="flex gap-3 p-3.5 border-b border-ink/[0.07] bg-white last:border-b-0">
-              <div className="w-5 h-5 rounded-full border-[1.5px] border-[#3B4FBF] bg-[#F0F4FF] flex items-center justify-center text-[10px] font-bold text-[#3B4FBF] flex-shrink-0 mt-0.5">{row.n}</div>
-              <div>
-                <p className="text-[13px] font-bold text-ink mb-1">{row.title}</p>
-                <p className="text-[11px] text-ink/55 leading-relaxed">{row.desc}</p>
-                <div className="flex gap-1.5 mt-1.5 flex-wrap">{row.tags.map(tag => <span key={tag} className="text-[9px] px-1.5 py-0.5 rounded bg-ink/5 text-ink/50">{tag}</span>)}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="mt-4 p-4 border-l-[3px] border-[#3B4FBF] bg-[#F0F4FF] rounded-r-xl">
-          <span className="text-[9px] font-black uppercase tracking-widest text-ink/30 block mb-2">PM 反思</span>
-          <p className="text-xs text-ink/65 leading-relaxed italic">{lang === "zh" ? "这个项目最有意思的地方是：我既是产品经理（定义需求、设计功能），也是第一个用户（用它来练习面试）。真实的自我需求是最好的产品灵感——我知道自己在哪里卡住，所以我知道工具要解决什么问题。" : "What's interesting about this project: I was simultaneously the PM (defining requirements, designing features) and the first user (using it to practice interviews). Real self-need is the best product inspiration — I knew exactly where I got stuck, so I knew exactly what the tool needed to solve."}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function App() {
   const [lang, setLang] = useState<Language>("zh");
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [showVibe1, setShowVibe1] = useState(false);
   const [showVibe2, setShowVibe2] = useState(false);
-  const [showVibe3, setShowVibe3] = useState(false);
   const t = translations[lang];
 
   const detailOpen = selectedProject !== null || showVibe1 || showVibe2;
@@ -1808,10 +1244,7 @@ export default function App() {
                 )}
               </h1>
               <p className="text-sm md:text-base text-ink/70 leading-relaxed max-w-xs font-medium">{t.intro1}</p>
-              <div className="flex flex-wrap gap-2 max-w-md">
-                {t.tags.map(tag => <span key={tag} className="px-3 py-1.5 bg-white border border-ink rounded-full font-black text-[9px] shadow-[2px_2px_0_rgba(45,45,45,1)]">#{tag}</span>)}
-              </div>
-              <p className="text-xs md:text-sm text-ink/50 leading-relaxed max-w-sm font-medium">{t.intro2}</p>
+              <p className="text-sm md:text-base text-ink/50 leading-relaxed max-w-xs font-medium italic">{t.intro2}</p>
             </motion.div>
 
             <motion.div
@@ -1905,7 +1338,7 @@ export default function App() {
             <h2 className="text-3xl md:text-5xl font-serif font-black uppercase tracking-tighter">{t.vibeCodingTitle}</h2>
             <div className="h-px flex-1 bg-ink/20" />
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0 }} onClick={() => setShowVibe1(true)} className="group cursor-pointer p-8 rounded-2xl border-2 border-ink bg-[#FFF0F7] retro-card-hover">
               <div className="flex justify-between items-start mb-8">
                 <div className="p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform text-[#E91E8C]"><Zap className="w-8 h-8" /></div>
@@ -1934,29 +1367,20 @@ export default function App() {
                 <span className="text-[10px] font-bold text-[#185FA5]">{t.proj2Status}</span>
               </div>
             </motion.div>
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} onClick={() => setShowVibe3(true)} className="group cursor-pointer p-8 rounded-2xl border-2 border-ink bg-[#F0F4FF] retro-card-hover">
-              <div className="flex justify-between items-start mb-8">
-                <div className="p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform text-[#3B4FBF]"><Zap className="w-8 h-8" /></div>
-                <ArrowRight className="w-6 h-6 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
-              </div>
-              <p className="text-[9px] font-black uppercase tracking-widest text-[#3B4FBF] mb-1">{t.proj3Label}</p>
-              <h3 className="text-2xl md:text-3xl font-serif font-black mb-2">{t.proj3Title}</h3>
-              <p className="text-xs font-bold uppercase tracking-wider mb-4 text-[#3B4FBF]">{t.proj3Cat}</p>
-              <p className="text-sm text-ink/70 font-medium leading-relaxed">{t.proj3Desc}</p>
-              <div className="mt-8 pt-6 border-t border-ink/10 flex items-center justify-between">
-                <div className="flex items-center gap-2 font-bold text-xs"><BookOpen className="w-4 h-4" />{t.vibeCodingView}</div>
-                <span className="text-[10px] font-bold text-[#3B4FBF]">{t.proj3Status}</span>
-              </div>
-            </motion.div>
           </div>
         </div>
       </section>
 
       <section className="py-24 px-6 bg-paper/30">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-base md:text-xl font-serif font-bold leading-relaxed text-ink/70 max-w-3xl mx-auto">
-            {t.aboutText}
+          <p className="text-xl md:text-3xl font-serif font-black leading-tight text-ink mb-10">
+            {lang === "zh" ? `"${t.aboutText}"` : <span className="italic">"{t.aboutText}"</span>}
           </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {t.tags.map(tag => (
+              <span key={tag} className="px-6 py-2 bg-white border-2 border-ink rounded-full font-black text-xs hover:bg-terracotta hover:text-paper transition-all cursor-default shadow-[3px_3px_0px_0px_rgba(45,45,45,1)]">#{tag}</span>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -1968,7 +1392,7 @@ export default function App() {
           </div>
           <div className="bg-paper/5 p-6 rounded-2xl border border-paper/10 min-w-[300px]">
             <div className="space-y-4">
-              <div className="flex justify-between items-start gap-8">
+              <div className="flex justify-between items-center gap-8">
                 <p className="text-[9px] font-black uppercase tracking-[0.2em] text-paper/40">Email</p>
                 <div className="flex flex-col gap-1 text-right">
                   <p className="text-sm font-serif">13072733711@163.com</p>
@@ -2021,16 +1445,6 @@ export default function App() {
             <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 24 }} className="bg-paper w-full min-h-screen relative">
               <button aria-label={lang === "zh" ? "返回作品集" : "Back to portfolio"} onClick={() => setShowVibe2(false)} className="fixed top-5 right-5 md:top-7 md:right-8 z-[120] p-3 bg-paper/90 backdrop-blur border-2 border-ink rounded-full shadow-[4px_4px_0_rgba(45,45,45,1)] hover:-translate-x-1 transition-all"><ArrowLeft className="w-6 h-6" /></button>
               <ModalVibe2 lang={lang} />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {showVibe3 && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-ink/60 backdrop-blur-md" onClick={() => setShowVibe3(false)}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-paper w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl border-2 border-ink shadow-2xl relative" onClick={e => e.stopPropagation()}>
-              <button onClick={() => setShowVibe3(false)} className="absolute top-6 right-6 z-10 p-2 bg-paper border border-ink rounded-full hover:bg-ink hover:text-paper transition-all"><X className="w-6 h-6" /></button>
-              <ModalVibe3 lang={lang} />
             </motion.div>
           </motion.div>
         )}

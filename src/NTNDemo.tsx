@@ -59,7 +59,3 @@ export default function NTNDemo({ lang, activeStep, onStepChange, showSelector =
     </div>
   );
 }
-
-export function NTNArchitectureDemo({ lang }: { lang: Lang }) {
-  return <NTNDemo lang={lang} />;
-}
