@@ -1,4 +1,6 @@
 import NTNDemo from "./NTNDemo";
+import Roadmap from "./Roadmap";
+import { IterationCard, NinjaCard, ModalWeekend, ModalNinja, ShotStrip, Verdict, vibeText } from "./VibeExtra";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -22,12 +24,12 @@ const translations = {
     contactText: "欢迎一起交流学习！",
     vibeCodingTitle: "Vibe Coding",
     vibeCodingView: "查看详情",
-    proj1Label: "项目一",
+    proj1Label: "项目一 · V1",
     proj1Title: "私人导游行程规划小工具",
     proj1Status: "❆ 已上线",
     proj1Cat: "行程规划 · 交互工具",
     proj1Desc: "用选择题代替填空题，解决双向信息不对称，为朋友定制伦敦5日行程。",
-    proj2Label: "项目二",
+    proj2Label: "项目三",
     proj2Title: "大富翁桌游投资决策小工具",
     proj2Status: "❆ 已上线",
     proj2Cat: "数据建模 · 决策工具",
@@ -52,12 +54,12 @@ const translations = {
     contactText: "Always happy to connect and exchange ideas!",
     vibeCodingTitle: "Vibe Coding",
     vibeCodingView: "View Details",
-    proj1Label: "Project 1",
+    proj1Label: "Project 1 · V1",
     proj1Title: "Personal Tour Itinerary Planner",
     proj1Status: "Live",
     proj1Cat: "Trip Planner · Interactive Tool",
     proj1Desc: "Replacing open questions with structured choices to solve two-way information asymmetry.",
-    proj2Label: "Project 2",
+    proj2Label: "Project 3",
     proj2Title: "Monopoly Investment Decision Tool",
     proj2Status: "Live",
     proj2Cat: "Data Modelling · Decision Tool",
@@ -79,7 +81,7 @@ const projects = [
 ];
 
 const schools = [
-  { id: "icl", name: { zh: "伦敦帝国理工学院", en: "Imperial College London" }, degree: { zh: "设计与行为科学 理学硕士 (在读)", en: "MSc Design with Behavioural Science (Ongoing)" }, period: "2025.09 - 2026.09", image: "IC.jpg", rotation: "-2deg", zIndex: 10 },
+  { id: "icl", name: { zh: "伦敦帝国理工学院", en: "Imperial College London" }, degree: { zh: "设计与行为科学 理学硕士 (在读)", en: "MSc Design with Behavioural Science (Ongoing)" }, period: "2025.09 - 2026.12", image: "IC.jpg", rotation: "-2deg", zIndex: 10 },
   { id: "nju", name: { zh: "南京大学", en: "Nanjing University" }, degree: { zh: "建筑学硕士 | 一等奖学金(x1)、二等奖学金(x2)", en: "Master of Architecture | 1st Class Scholarship (x1), 2nd Class (x2)" }, period: "2022.09 - 2025.06", image: "NJU.jpeg", rotation: "0deg", zIndex: 11 },
   { id: "wit", name: { zh: "武汉理工大学", en: "Wuhan University of Technology" }, degree: { zh: "建筑学学士 | GPA: 3.91/4.00; 优秀毕业生", en: "Bachelor of Architecture | GPA: 3.91/4.00; Outstanding Graduate" }, period: "2017.09 - 2022.06", image: "WHUT.jpg", rotation: "2deg", zIndex: 12 }
 ];
@@ -517,8 +519,20 @@ function Modal1({ lang }: { lang: Language }) {
         </p>
         <div className="flex flex-wrap gap-2 mt-6">{(zh ? ["独立研究与产品设计", "混合方法", "LLM Workflow", "可用性测试原型"] : ["Independent research & product design", "Mixed methods", "LLM workflow", "Usability-test prototype"]).map(x => <span key={x} className="px-3 py-1 bg-ink text-paper rounded-lg text-[9px] font-bold uppercase tracking-widest">{x}</span>)}</div>
       </header>
+      <Verdict lang={lang} color="#B45309"
+        text={zh ? "模型能识别，不等于产品就该展示：触发资格、退出机制和用户控制权，与模型能力同样重要。" : "A model being able to detect something doesn't mean the product should show it: eligibility, exits and user control matter as much as model capability."}
+        facts={zh ? [["V1 → V5", "五轮迭代"], ["13 + 3", "参与者 + 专家形成性评估"], ["双层架构", "自然对话层 + 反思决策层"]] : [["V1 → V5", "five iterations"], ["13 + 3", "participants + experts"], ["Two layers", "conversation + reflection"]]}
+        role={zh ? "独立完成研究、交互设计、Prompt 策略、GPT 接入与 Web Demo" : "Independent research, interaction design, prompt strategy, GPT integration and web demo"} />
 
-      <section className="mb-20 -mt-10">
+
+      <section className="mb-16">
+        <div className="grid md:grid-cols-[1fr_1.35fr] gap-5">
+          <figure><div className="rounded-[1.5rem] overflow-hidden border-2 border-ink bg-white shadow-[4px_4px_0_rgba(45,45,45,1)]"><img src="ntn-v3.webp" alt={zh ? "对话中出现 Mirror 与支持方向" : "A Mirror and support directions inside the chat"} className="w-full h-auto" /></div><figcaption className="text-xs text-ink/55 mt-2">{zh ? "① 对话中：证据充分时出现可跳过的 Mirror，并给出几种支持方向" : "① In chat: a skippable Mirror appears only with enough evidence, followed by support directions"}</figcaption></figure>
+          <figure><div className="rounded-[1.5rem] overflow-hidden border-2 border-ink bg-white shadow-[4px_4px_0_rgba(45,45,45,1)]"><img src="ntn-weekly-reflection.webp" alt={zh ? "Weekly Reflection 报告" : "Weekly Reflection report"} className="w-full h-auto" /></div><figcaption className="text-xs text-ink/55 mt-2">{zh ? "② 一周之后：Weekly Reflection 用用户自己的话汇总反复出现的担忧" : "② After a week: the Weekly Reflection summarises recurring worries in the user's own words"}</figcaption></figure>
+        </div>
+      </section>
+
+      <section className="mb-20">
         <div className="rounded-[2rem] border-2 border-ink bg-ink overflow-hidden shadow-[8px_8px_0px_0px_rgba(194,65,12,.35)]">
           <div className="p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-5 text-paper">
             <div className="flex items-start gap-4">
@@ -526,11 +540,11 @@ function Modal1({ lang }: { lang: Language }) {
               <div><p className="text-[9px] font-black uppercase tracking-[.2em] text-amber-300 mb-1">V5 · FINAL PARTICIPANT EXPERIENCE</p><h5 className="text-xl md:text-2xl font-serif font-black">{zh ? "先体验，再看设计如何形成" : "Experience it before reading the process"}</h5><p className="text-xs text-paper/60 mt-1">{zh ? "三日压缩流程 · 两类 Mirror · 四种支持方向 · Weekly Reflection" : "Three-day flow · two Mirrors · four directions · weekly reflection"}</p></div>
             </div>
             <div className="flex flex-wrap gap-2 shrink-0">
-              <a href={`/ntn-v5-participant-final.html?lang=${zh ? "zh" : "en"}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-300 text-ink text-xs font-black hover:bg-amber-200 transition-colors"><ExternalLink className="w-4 h-4" />{zh ? "新窗口体验" : "Open full experience"}</a>
-              <a href="/ntn-v5-participant-final.html" download="NTN-V5-Participant-Final.html" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-paper/30 text-paper text-xs font-black hover:bg-paper/10 transition-colors"><Download className="w-4 h-4" />{zh ? "下载 HTML" : "Download HTML"}</a>
+              <a href={`ntn-v5-participant-final.html?lang=${zh ? "zh" : "en"}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-300 text-ink text-xs font-black hover:bg-amber-200 transition-colors"><ExternalLink className="w-4 h-4" />{zh ? "新窗口体验" : "Open full experience"}</a>
+              <a href="ntn-v5-participant-final.html" download="NTN-V5-Participant-Final.html" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-paper/30 text-paper text-xs font-black hover:bg-paper/10 transition-colors"><Download className="w-4 h-4" />{zh ? "下载 HTML" : "Download HTML"}</a>
             </div>
           </div>
-          <div className="bg-paper border-t-2 border-ink p-2 md:p-3"><iframe key={lang} src={`/ntn-v5-participant-final.html?lang=${zh ? "zh" : "en"}`} title={zh ? "NTN V5 最终参与者体验" : "NTN V5 final participant experience"} className="w-full h-[520px] md:h-[650px] rounded-[1.35rem] border border-ink/20 bg-white" loading="lazy" /></div>
+          <div className="bg-paper border-t-2 border-ink p-2 md:p-3"><iframe key={lang} src={`ntn-v5-participant-final.html?lang=${zh ? "zh" : "en"}`} title={zh ? "NTN V5 最终参与者体验" : "NTN V5 final participant experience"} className="w-full h-[520px] md:h-[650px] rounded-[1.35rem] border border-ink/20 bg-white" loading="lazy" /></div>
         </div>
       </section>
 
@@ -547,7 +561,7 @@ function Modal1({ lang }: { lang: Language }) {
         <SH i={2} label={zh ? "最终系统与机制" : "FINAL SYSTEM & MECHANISM"} />
         <p className="w-full text-base md:text-lg font-semibold text-ink/75 leading-relaxed mb-6">{zh ? "最终系统以自然对话为主层，并在证据充分时加入可纠正、可跳过的条件式反思；它把即时回应、模式判断、用户选择与长期回顾组织成一套连续但彼此受限的交互架构。" : "The final system keeps natural conversation as the primary layer and adds correctable, skippable reflection only when evidence qualifies, linking immediate response, pattern judgement, user choice, and longitudinal review within one bounded architecture."}</p>
         <div className="grid lg:grid-cols-[1.7fr_.75fr] gap-5 items-stretch">
-          <figure className="overflow-hidden rounded-[2rem] border-2 border-ink bg-white flex items-center"><img src={zh ? "/ntn-v5-interaction-architecture-zh.webp" : "/ntn-v5-interaction-architecture.webp"} alt={zh ? "NTN 理想状态交互架构" : "NTN final interaction architecture"} className="w-full h-auto" /></figure>
+          <figure className="overflow-hidden rounded-[2rem] border-2 border-ink bg-white flex items-center"><img src={zh ? "ntn-v5-interaction-architecture-zh.webp" : "ntn-v5-interaction-architecture.webp"} alt={zh ? "NTN 理想状态交互架构" : "NTN final interaction architecture"} className="w-full h-auto" /></figure>
           <div className="grid grid-cols-1 gap-3">{(zh ? [["自然对话", "先回应具体任务、情绪表达或用户已有觉察。"], ["条件判断", "综合证据，并区分同次停留与跨时间重复。"], ["反思与选择", "Mirror 保持暂定且可纠正，由用户决定下一步。"], ["长期回顾", "只汇总可追溯的担忧线索与选择，并允许删除。"]] : [["Natural conversation", "Respond first to tasks, emotion, or existing awareness."], ["Conditional judgement", "Combine evidence and separate dwelling from recurrence."], ["Reflection and choice", "Keep Mirrors tentative and let the user decide."], ["Longitudinal review", "Summarise only traceable strands and choices, with deletion."]]).map(([title,text],i)=><div key={title} className="p-5 rounded-2xl border border-ink/15 bg-white flex flex-col justify-center"><span className="text-[9px] font-black text-terracotta">0{i+1}</span><h6 className="text-base font-black mt-1">{title}</h6><p className="text-xs text-ink/55 mt-2 leading-relaxed">{text}</p></div>)}</div>
         </div>
       </section>
@@ -555,7 +569,7 @@ function Modal1({ lang }: { lang: Language }) {
       <section className="mb-20">
         <SH i={3} label={zh ? "核心交互链路" : "CORE INTERACTION PATHWAY"} />
         <p className="w-full text-base md:text-lg font-semibold text-ink/75 leading-relaxed mb-6">{zh ? "架构定义系统包含什么，链路则说明系统在何时做出何种判断：当前需要决定普通回应，同次与跨时间证据决定 Mirror 是否出现，Mirror 后的用户回应再决定支持方向与退出方式。" : "The architecture defines what the system contains; the pathway explains when each judgement occurs: present need shapes the ordinary reply, same-session and across-time evidence govern Mirror eligibility, and the user's post-Mirror response determines support and exit."}</p>
-        <figure className="relative overflow-hidden rounded-[2rem] border-2 border-ink bg-white shadow-[5px_5px_0px_0px_rgba(45,45,45,1)]"><img src={zh ? "/ntn-v5-response-pathway-zh.webp" : "/ntn-v5-response-pathway.webp"} alt={zh ? "NTN V5 对话回应链路" : "NTN V5 conversational response pathway"} className="w-full h-auto" /><div className="absolute inset-x-0 top-0 bottom-[3.2rem]" aria-label={zh ? "选择链路阶段" : "Select pathway stage"}>{["top-[13%] h-[25%]","top-[38%] h-[19%]","top-[57%] h-[22%]","top-[79%] h-[21%]"].map((position,step)=><button key={step} type="button" aria-label={zh ? `查看链路阶段 ${step+1}` : `View pathway stage ${step+1}`} aria-pressed={pathwayStep===step} onClick={()=>setPathwayStep(step)} className={`absolute inset-x-0 w-full border-0 transition-colors ${position} ${pathwayStep===step ? "bg-amber-300/10 ring-2 ring-inset ring-amber-500/45" : "bg-transparent hover:bg-white/10"}`} />)}</div><figcaption className="relative px-5 py-4 border-t border-ink/10 text-xs text-ink/55 bg-white">{zh ? "点击图中的任一阶段，下方将显示对应的设计判断。" : "Click any stage in the pathway to show its design rationale below."}</figcaption></figure>
+        <figure className="relative overflow-hidden rounded-[2rem] border-2 border-ink bg-white shadow-[5px_5px_0px_0px_rgba(45,45,45,1)]"><img src={zh ? "ntn-v5-response-pathway-zh.webp" : "ntn-v5-response-pathway.webp"} alt={zh ? "NTN V5 对话回应链路" : "NTN V5 conversational response pathway"} className="w-full h-auto" /><div className="absolute inset-x-0 top-0 bottom-[3.2rem]" aria-label={zh ? "选择链路阶段" : "Select pathway stage"}>{["top-[13%] h-[25%]","top-[38%] h-[19%]","top-[57%] h-[22%]","top-[79%] h-[21%]"].map((position,step)=><button key={step} type="button" aria-label={zh ? `查看链路阶段 ${step+1}` : `View pathway stage ${step+1}`} aria-pressed={pathwayStep===step} onClick={()=>setPathwayStep(step)} className={`absolute inset-x-0 w-full border-0 transition-colors ${position} ${pathwayStep===step ? "bg-amber-300/10 ring-2 ring-inset ring-amber-500/45" : "bg-transparent hover:bg-white/10"}`} />)}</div><figcaption className="relative px-5 py-4 border-t border-ink/10 text-xs text-ink/55 bg-white">{zh ? "点击图中的任一阶段，下方将显示对应的设计判断。" : "Click any stage in the pathway to show its design rationale below."}</figcaption></figure>
         <p className="w-full mt-6 mb-6 text-base md:text-lg font-semibold text-ink/75 leading-relaxed">{zh ? "这条链路把“识别模式”转化为一组可检查的产品规则：每一步都有明确证据来源、回应方式和返回自然对话的出口，因此 Mirror 是对话中的条件式反思节点，而不是持续接管对话的模式。" : "The pathway turns pattern recognition into inspectable product rules: every stage has an evidence source, a response, and an exit to ordinary conversation, making the Mirror a conditional reflection point rather than a mode that takes over the exchange."}</p>
         <NTNDemo lang={lang} activeStep={pathwayStep} onStepChange={setPathwayStep} showSelector={false} />
         <div className="grid md:grid-cols-3 gap-3 mt-5">{(zh ? [
@@ -572,15 +586,15 @@ function Modal1({ lang }: { lang: Language }) {
       <section className="mb-20">
         <SH i={4} label={zh ? "三阶段迭代" : "THREE-STAGE ITERATION"} />
         <p className="w-full text-base md:text-lg font-semibold text-ink/75 leading-relaxed mb-6">{zh ? "链路确定了最终规则，而三阶段迭代解释这些规则如何形成：项目先验证反思机制是否有价值，再把抽象机制转化为可体验流程，最后依据正式评估收紧触发、控制与退出条件。" : "The pathway states the final rules; the three-stage iteration shows how they formed—first testing the value of reflection, then making the mechanism experiential, and finally tightening triggers, controls, and exits through formal evaluation."}</p>
-        <div className="grid md:grid-cols-3 gap-5">{iteration.map((item) => <article key={item.version} className="overflow-hidden bg-white border-2 border-ink rounded-2xl"><div className="p-5"><div className="flex items-center gap-2 mb-2"><GitBranch className="w-4 h-4 text-terracotta" /><span className="text-xs font-black text-terracotta">{item.version}</span></div><h6 className="text-lg font-black mb-3">{item.title}</h6><p className="text-[9px] font-black uppercase tracking-widest text-ink/40 mb-1">{item.goal}</p><p className="text-xs leading-relaxed text-ink/65">{item.text}</p></div><img src={`/${item.image}`} alt={`${item.version} ${item.title}`} className="w-full aspect-[16/10] object-cover object-top border-y border-ink/10" /><p className="p-4 text-xs font-medium leading-relaxed bg-amber-50"><span className="font-black text-terracotta">→ </span>{item.result}</p></article>)}</div>
+        <div className="grid md:grid-cols-3 gap-5">{iteration.map((item) => <article key={item.version} className="overflow-hidden bg-white border-2 border-ink rounded-2xl"><div className="p-5"><div className="flex items-center gap-2 mb-2"><GitBranch className="w-4 h-4 text-terracotta" /><span className="text-xs font-black text-terracotta">{item.version}</span></div><h6 className="text-lg font-black mb-3">{item.title}</h6><p className="text-[9px] font-black uppercase tracking-widest text-ink/40 mb-1">{item.goal}</p><p className="text-xs leading-relaxed text-ink/65">{item.text}</p></div><img src={item.image} alt={`${item.version} ${item.title}`} className="w-full aspect-[16/10] object-cover object-top border-y border-ink/10" /><p className="p-4 text-xs font-medium leading-relaxed bg-amber-50"><span className="font-black text-terracotta">→ </span>{item.result}</p></article>)}</div>
       </section>
 
       <section className="mb-20">
         <SH i={5} label={zh ? "评估如何推动 V5" : "HOW EVALUATION SHAPED V5"} />
         <p className="w-full text-base md:text-lg font-semibold text-ink/75 leading-relaxed mb-6">{zh ? "正式评估把“能够运行”的原型推进为“规则能够被解释”的 V5：参与者证据揭示体验中的清晰度、时机与压力，专家证据检查安全、可实施性与边界，两者共同决定哪些机制保留、收紧或关闭。" : "Formal evaluation moved the prototype from functioning to explainable: participant evidence revealed clarity, timing, and pressure in use, while expert evidence tested safety, feasibility, and boundaries; together they determined what V5 retained, tightened, or closed."}</p>
         <div className="grid lg:grid-cols-2 gap-5 mb-6">
-          <figure className="overflow-hidden rounded-2xl border-2 border-ink bg-white"><img src={zh ? "/ntn-participant-evaluation-zh.webp" : "/ntn-participant-evaluation.webp"} alt={zh ? "参与者评估分析" : "Participant evaluation analysis"} className="w-full h-auto" /><figcaption className="p-4 border-t border-ink/10"><strong className="block text-xs mb-1">{zh ? "参与者体验证据" : "Participant experience evidence"}</strong><span className="block text-[10px] text-ink/50">{zh ? "比较 Mirror、四个支持方向与 Weekly Reflection 的清晰度、时机、语气和感知价值。" : "Comparing clarity, timing, tone, and perceived value across Mirrors, support directions, and weekly reflection."}</span></figcaption></figure>
-          <figure className="overflow-hidden rounded-2xl border-2 border-ink bg-white"><img src={zh ? "/ntn-expert-evaluation-zh.webp" : "/ntn-expert-evaluation.webp"} alt={zh ? "专家评估分析" : "Expert evaluation analysis"} className="w-full h-auto" /><figcaption className="p-4 border-t border-ink/10"><strong className="block text-xs mb-1">{zh ? "专家审查证据" : "Expert review evidence"}</strong><span className="block text-[10px] text-ink/50">{zh ? "汇总 AI 安全、产品和心理学视角对机制价值、风险和可实施性的判断。" : "Synthesising AI safety, product, and psychology perspectives on value, risk, and feasibility."}</span></figcaption></figure>
+          <figure className="overflow-hidden rounded-2xl border-2 border-ink bg-white"><img src={zh ? "ntn-participant-evaluation-zh.webp" : "ntn-participant-evaluation.webp"} alt={zh ? "参与者评估分析" : "Participant evaluation analysis"} className="w-full h-auto" /><figcaption className="p-4 border-t border-ink/10"><strong className="block text-xs mb-1">{zh ? "参与者体验证据" : "Participant experience evidence"}</strong><span className="block text-[10px] text-ink/50">{zh ? "比较 Mirror、四个支持方向与 Weekly Reflection 的清晰度、时机、语气和感知价值。" : "Comparing clarity, timing, tone, and perceived value across Mirrors, support directions, and weekly reflection."}</span></figcaption></figure>
+          <figure className="overflow-hidden rounded-2xl border-2 border-ink bg-white"><img src={zh ? "ntn-expert-evaluation-zh.webp" : "ntn-expert-evaluation.webp"} alt={zh ? "专家评估分析" : "Expert evaluation analysis"} className="w-full h-auto" /><figcaption className="p-4 border-t border-ink/10"><strong className="block text-xs mb-1">{zh ? "专家审查证据" : "Expert review evidence"}</strong><span className="block text-[10px] text-ink/50">{zh ? "汇总 AI 安全、产品和心理学视角对机制价值、风险和可实施性的判断。" : "Synthesising AI safety, product, and psychology perspectives on value, risk, and feasibility."}</span></figcaption></figure>
         </div>
         <div className="grid md:grid-cols-[.62fr_1.38fr] gap-5">
           <div className="p-7 rounded-[2rem] bg-ink text-paper"><p className="text-[9px] uppercase tracking-[.2em] text-paper/50 font-black mb-4">FORMAL EVALUATION</p><div className="flex gap-8"><div><strong className="text-5xl font-serif text-amber-300">13</strong><p className="text-xs mt-1">{zh ? "参与者" : "participants"}</p></div><div><strong className="text-5xl font-serif text-amber-300">3</strong><p className="text-xs mt-1">{zh ? "专家" : "experts"}</p></div></div><p className="text-xs text-paper/55 leading-relaxed mt-6">{zh ? "作品集只呈现改变设计的证据，不展开数据表。" : "Only evidence that changed the design is shown here."}</p></div>
@@ -647,6 +661,10 @@ function Modal2({ lang }: { lang: Language }) {
           </div>
         </div>
       </header>
+      <Verdict lang={lang} color="#2563EB"
+        text={lang === "zh" ? "从通勤场景而不是车辆参数切入，让用车成本和碳排放变得可比较；复盘发现两者高度相关，差异化还不够。" : "Anchoring on the commute rather than vehicle specs made cost and CO₂ comparable; the two turned out highly correlated, so differentiation was limited."}
+        facts={lang === "zh" ? [["3 类", "公开数据源整合"], ["WS-ARIMA", "预测能源价格"], ["3,425 辆", "车辆数据预计算"]] : [["3", "public data sources"], ["WS-ARIMA", "energy price forecast"], ["3,425", "cars pre-computed"]]} />
+
 
       <section className="mb-24">
         <SH i={1} label="Why this product exists" />
@@ -784,6 +802,11 @@ function Modal3({ lang }: { lang: Language }) {
           <div className="absolute inset-0 bg-ink/5 pointer-events-none" />
         </div>
       </header>
+      <Verdict lang={lang} color="#7C3AED"
+        text={lang === "zh" ? "模型准确率高不等于产品好用；数据质量和边界场景，决定了练习体验。" : "High model accuracy doesn't make a good product; data quality and edge cases decide the practice experience."}
+        facts={lang === "zh" ? [["4 类", "脑肿瘤类型判断"], ["2 步", "先判断类型，再点击定位"], ["94.31%", "ResNet-18 分类测试集准确率"]] : [["4", "tumour types"], ["2 steps", "classify, then locate"], ["94.31%", "ResNet-18 test accuracy"]]}
+        role={lang === "zh" ? "两人项目：我负责产品定义、研究策略、交互流程和轴状面定位；分类模型由同学完成" : "Two-person project: I led product definition, research strategy, interaction flow and axial-plane localisation; a teammate built the classifier"} />
+
 
       <section className="mb-24">
         <SH i={1} label="Why this matters" />
@@ -1020,7 +1043,7 @@ function Modal4({ lang }: { lang: Language }) {
 function ModalVibe1({ lang }: { lang: Language }) {
   const t = translations[lang];
   return (
-    <div className="font-sans">
+    <div className="font-sans max-w-5xl mx-auto">
       <div className="p-6 md:p-10 pb-4 border-b border-ink/10">
         <div className="flex flex-wrap gap-2 mb-4">
           <span className="px-3 py-1 bg-ink text-paper rounded-full text-[9px] font-bold uppercase tracking-widest">Vibe Coding</span>
@@ -1031,27 +1054,18 @@ function ModalVibe1({ lang }: { lang: Language }) {
         <p className="text-sm text-[#E91E8C] italic">{lang === "zh" ? "用自然语言指令驱动 AI，把想法变成可交互的产品" : "Turning ideas into interactive products with natural language"}</p>
       </div>
       <div className="p-6 md:p-10">
-        <div className="border-2 border-ink rounded-2xl overflow-hidden shadow-[3px_3px_0_rgba(45,45,45,1)] mb-4">
-          <div className="flex items-center gap-2 px-3 py-2 bg-[#FCE4EC]">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" /><span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" /><span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
-            <span className="flex-1 text-center text-[10px] text-ink/40 font-mono">yangyang-london.vercel.app</span>
-            <a href="https://yangyang-london.vercel.app" target="_blank" rel="noreferrer" className="text-[11px] font-bold text-[#C2185B]">{lang === "zh" ? "↗ 打开" : "↗ Open"}</a>
-          </div>
-          <svg viewBox="0 0 640 130" xmlns="http://www.w3.org/2000/svg" className="w-full block" style={{background:"#EEF6FB"}}>
-            <path d="M0,80 Q160,70 320,77 Q480,84 640,74" stroke="#93C5FD" strokeWidth="9" fill="none" strokeLinecap="round" opacity="0.7"/>
-            <circle cx="218" cy="65" r="7.5" fill="#F9A8D4" stroke="#C2185B" strokeWidth="1.8"/>
-            <text x="218" y="56" textAnchor="middle" fontSize="8" fill="#C2185B" fontFamily="sans-serif">Big Ben</text>
-            <circle cx="320" cy="35" r="7.5" fill="#F9A8D4" stroke="#C2185B" strokeWidth="1.8"/>
-            <text x="320" y="26" textAnchor="middle" fontSize="8" fill="#C2185B" fontFamily="sans-serif">大英博物馆</text>
-            <circle cx="446" cy="70" r="7.5" fill="#F9A8D4" stroke="#C2185B" strokeWidth="1.8"/>
-            <text x="446" y="61" textAnchor="middle" fontSize="8" fill="#C2185B" fontFamily="sans-serif">Tower Bridge</text>
-            <text x="12" y="15" fontSize="9" fill="#9CA3AF" fontFamily="sans-serif">London Tour Planner</text>
-          </svg>
-        </div>
+        <Verdict lang={lang} color="#E91E8C"
+          text={lang === "zh" ? "用户说不清需求时，把开放问题改成选择题，就能降低表达成本、让推荐可执行。" : "When users can't articulate needs, turning open questions into choices lowers the cost of expressing them."}
+          facts={lang === "zh" ? [["2 小时", "从想法到上线"], ["4 道题", "风格、节奏、美食、预算"], ["5 日", "行程 + 每日餐厅"]] : [["2 hours", "idea to launch"], ["4 questions", "style, pace, food, budget"], ["5 days", "plan + restaurants"]]}
+          role={lang === "zh" ? "需求定义与产品测试，AI 负责写代码" : "Problem definition and testing; AI wrote the code"} />
+        <ShotStrip url="yangyang-london.vercel.app" href="https://yangyang-london.vercel.app" openLabel={lang === "zh" ? "↗ 打开" : "↗ Open"} bar="#FCE4EC" link="#C2185B" bg="linear-gradient(135deg,#FFF0F5,#FFF8F3)"
+          shots={[{ src: "london-1.jpg", cap: lang === "zh" ? "① 选日期查天气，4 道选择题代替填空题" : "① Pick dates, then 4 multiple-choice questions instead of blanks" },
+                  { src: "london-2.jpg", cap: lang === "zh" ? "② 生成专属 5 日行程与偏好标签" : "② A personal 5-day plan with preference tags" },
+                  { src: "london-3.jpg", cap: lang === "zh" ? "③ 每天的时间线；帝国理工那天固定不动" : "③ Daily timeline; the Imperial day stays fixed" }]} />
         <div className="flex gap-3 mb-4">
           <a href="https://yangyang-london.vercel.app" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#E91E8C] text-white text-xs font-bold border-2 border-[#C2185B]">{lang === "zh" ? "↗ 打开工具" : "↗ Open Tool"}</a>
           
-          <a href="/london-tour.html" download="london-tour.html" className="text-[11px] text-ink/40 underline mt-1 block">{lang === "zh" ? "无法访问？下载离线版本" : "Can't access? Download offline version"}</a>
+          <a href="london-tour.html" download="london-tour.html" className="text-[11px] text-ink/40 underline mt-1 block">{lang === "zh" ? "无法访问？下载离线版本" : "Can't access? Download offline version"}</a>
         </div>
         <div className="flex items-center gap-3 my-4">
           <span className="text-[10px] font-black uppercase tracking-widest text-ink/30 whitespace-nowrap">AI PM 工作流分析</span>
@@ -1086,7 +1100,7 @@ function ModalVibe1({ lang }: { lang: Language }) {
 function ModalVibe2({ lang }: { lang: Language }) {
   const t = translations[lang];
   return (
-    <div className="font-sans">
+    <div className="font-sans max-w-5xl mx-auto">
       <div className="p-6 md:p-10 pb-4 border-b border-ink/10">
         <div className="flex flex-wrap gap-2 mb-4">
           <span className="px-3 py-1 bg-ink text-paper rounded-full text-[9px] font-bold uppercase tracking-widest">Vibe Coding</span>
@@ -1097,66 +1111,17 @@ function ModalVibe2({ lang }: { lang: Language }) {
         <p className="text-sm text-[#CA8A04] italic">{lang === "zh" ? "将棋盘规则数字化，构建地产投资决策系统" : "Digitising board game rules into a property investment decision system"}</p>
       </div>
       <div className="p-6 md:p-10">
-        <div className="border-2 border-ink rounded-2xl overflow-hidden shadow-[3px_3px_0_rgba(45,45,45,1)] mb-4">
-          <div className="flex items-center gap-2 px-3 py-2 bg-[#FEF3C7]">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" /><span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" /><span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
-            <span className="flex-1 text-center text-[10px] text-ink/40 font-mono">{lang === "zh" ? "大富翁投资决策工具" : "Monopoly Investment Tool"}</span>
-            <span className="text-[11px] font-bold text-[#B45309]">❆ Live</span>
-          </div>
-          <svg viewBox="0 0 640 130" xmlns="http://www.w3.org/2000/svg" className="w-full block" style={{background:"#FFFBEB"}}>
-            <rect x="8" y="8" width="624" height="114" rx="6" fill="none" stroke="#D97706" strokeWidth="1" strokeDasharray="4,3" opacity="0.4"/>
-            <rect x="8" y="8" width="52" height="52" rx="5" fill="#FEF9C3" stroke="#CA8A04" strokeWidth="1.5"/>
-            <text x="34" y="32" textAnchor="middle" fontSize="11" fill="#92400E" fontFamily="sans-serif" fontWeight="700">GO</text>
-            <text x="34" y="48" textAnchor="middle" fontSize="9" fill="#B45309" fontFamily="sans-serif">出发</text>
-            <rect x="68" y="8" width="46" height="52" rx="4" fill="#FFF7ED" stroke="#EA580C" strokeWidth="1"/>
-            <rect x="68" y="8" width="46" height="11" rx="3" fill="#EA580C"/>
-            <text x="91" y="19" textAnchor="middle" fontSize="8" fill="white" fontFamily="sans-serif" fontWeight="600">重庆</text>
-            <text x="91" y="38" textAnchor="middle" fontSize="9" fill="#7C2D12" fontFamily="sans-serif">M220</text>
-            <rect x="122" y="8" width="46" height="52" rx="4" fill="#FFF7ED" stroke="#EA580C" strokeWidth="1"/>
-            <rect x="122" y="8" width="46" height="11" rx="3" fill="#EA580C"/>
-            <text x="145" y="19" textAnchor="middle" fontSize="8" fill="white" fontFamily="sans-serif" fontWeight="600">宁波</text>
-            <text x="145" y="38" textAnchor="middle" fontSize="9" fill="#7C2D12" fontFamily="sans-serif">M220</text>
-            <rect x="176" y="8" width="46" height="52" rx="4" fill="#EFF6FF" stroke="#2563EB" strokeWidth="1"/>
-            <rect x="176" y="8" width="46" height="11" rx="3" fill="#2563EB"/>
-            <text x="199" y="19" textAnchor="middle" fontSize="8" fill="white" fontFamily="sans-serif" fontWeight="600">杭州</text>
-            <text x="199" y="38" textAnchor="middle" fontSize="9" fill="#1E3A8A" fontFamily="sans-serif">M240</text>
-            <rect x="230" y="8" width="46" height="52" rx="4" fill="#EFF6FF" stroke="#2563EB" strokeWidth="1"/>
-            <rect x="230" y="8" width="46" height="11" rx="3" fill="#2563EB"/>
-            <text x="253" y="19" textAnchor="middle" fontSize="8" fill="white" fontFamily="sans-serif" fontWeight="600">苏州</text>
-            <text x="253" y="38" textAnchor="middle" fontSize="9" fill="#1E3A8A" fontFamily="sans-serif">M260</text>
-            <rect x="284" y="8" width="46" height="52" rx="4" fill="#F5F3FF" stroke="#7C3AED" strokeWidth="1"/>
-            <rect x="284" y="8" width="46" height="11" rx="3" fill="#7C3AED"/>
-            <text x="307" y="19" textAnchor="middle" fontSize="8" fill="white" fontFamily="sans-serif" fontWeight="600">南京</text>
-            <text x="307" y="38" textAnchor="middle" fontSize="9" fill="#4C1D95" fontFamily="sans-serif">M300</text>
-            <rect x="338" y="8" width="52" height="52" rx="5" fill="#FFFBEB" stroke="#CA8A04" strokeWidth="2"/>
-            <rect x="338" y="8" width="52" height="13" rx="4" fill="#CA8A04"/>
-            <rect x="346" y="10" width="28" height="9" rx="3" fill="#DC2626"/>
-            <text x="360" y="18" textAnchor="middle" fontSize="7" fill="white" fontFamily="sans-serif" fontWeight="700">酒店</text>
-            <text x="364" y="34" textAnchor="middle" fontSize="9" fill="#78350F" fontFamily="sans-serif" fontWeight="700">上海</text>
-            <text x="364" y="48" textAnchor="middle" fontSize="9" fill="#92400E" fontFamily="sans-serif">M400</text>
-            <circle cx="430" cy="65" r="16" fill="#FCD34D" stroke="#D97706" strokeWidth="2.5"/>
-            <circle cx="430" cy="65" r="11" fill="#FBBF24" stroke="#B45309" strokeWidth="1.5"/>
-            <text x="430" y="69" textAnchor="middle" fontSize="10" fill="#78350F" fontFamily="sans-serif" fontWeight="700">你</text>
-            <rect x="490" y="20" width="110" height="68" rx="7" fill="#FFFEF0" stroke="#CA8A04" strokeWidth="1.5"/>
-            <rect x="490" y="20" width="110" height="18" rx="7" fill="#FEF3C7"/>
-            <rect x="490" y="30" width="110" height="8" fill="#FEF3C7"/>
-            <text x="545" y="33" textAnchor="middle" fontSize="8.5" fill="#92400E" fontFamily="sans-serif" fontWeight="700">投资建议</text>
-            <text x="502" y="50" fontSize="7.5" fill="#4B5563" fontFamily="sans-serif">上海中心 M400</text>
-            <text x="502" y="62" fontSize="7" fill="#16A34A" fontFamily="sans-serif" fontWeight="600">酒店收益 M2000/次</text>
-            <text x="502" y="74" fontSize="7" fill="#D97706" fontFamily="sans-serif" fontWeight="700">ROI 175% ★ 推荐</text>
-            <rect x="580" y="8" width="52" height="52" rx="5" fill="#FEE2E2" stroke="#DC2626" strokeWidth="1.5"/>
-            <text x="606" y="32" textAnchor="middle" fontSize="10" fill="#991B1B" fontFamily="sans-serif" fontWeight="700">监狱</text>
-            <text x="606" y="48" textAnchor="middle" fontSize="8" fill="#B91C1C" fontFamily="sans-serif">探视</text>
-            <rect x="8" y="70" width="52" height="52" rx="5" fill="#DCFCE7" stroke="#16A34A" strokeWidth="1.5"/>
-            <text x="34" y="96" textAnchor="middle" fontSize="8" fill="#15803D" fontFamily="sans-serif" fontWeight="600">免费停车</text>
-            <rect x="580" y="70" width="52" height="52" rx="5" fill="#EDE9FE" stroke="#7C3AED" strokeWidth="1.5"/>
-            <text x="606" y="96" textAnchor="middle" fontSize="8" fill="#5B21B6" fontFamily="sans-serif" fontWeight="600">去监狱</text>
-            <text x="20" y="125" fontSize="8.5" fill="#9CA3AF" fontFamily="sans-serif">Monopoly · Investment Decision System</text>
-          </svg>
-        </div>
+        <Verdict lang={lang} color="#CA8A04"
+          text={lang === "zh" ? "把棋盘规则数字化之后，建议必须说得清为什么：每条都附地价、租金、ROI 与现金占比。" : "Once the board is digitised, advice has to explain itself: every suggestion shows price, rent, ROI and cash share."}
+          facts={lang === "zh" ? [["22 块", "地产数据化"], ["6 档", "购地决策规则"], ["逐条核验", "AI 生成的数据表"]] : [["22", "properties"], ["6 tiers", "of buy rules"], ["Line by line", "data verification"]]}
+          role={lang === "zh" ? "数据架构定义者与逻辑把关者" : "Data architect and logic gatekeeper"} />
+        <ShotStrip url="monopoly-tool.vercel.app" href="https://monopoly-tool.vercel.app" openLabel={lang === "zh" ? "↗ 打开" : "↗ Open"} bar="#FEF3C7" link="#B45309" bg="linear-gradient(135deg,#FFFBEB,#FFF4E0)"
+          shots={[{ src: "monopoly-1.jpg", cap: lang === "zh" ? "① 开局设置：玩家数、你是第几位、初始现金" : "① Setup: players, your seat, starting cash" },
+                  { src: "monopoly-2.jpg", cap: lang === "zh" ? "② 落地一块地，按 6 档规则给出可解释的买入建议" : "② Land on a property and get an explainable buy recommendation" },
+                  { src: "monopoly-3.jpg", cap: lang === "zh" ? "③ 记录其他玩家的操作，追踪现金与地产" : "③ Log other players' moves and track cash and properties" }]} />
         <div className="flex gap-3 mb-4">
           <a href="https://monopoly-tool.vercel.app" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#CA8A04] text-white text-xs font-bold border-2 border-[#B45309] shadow-[2px_2px_0_#92400E]">{lang === "zh" ? "↗ 打开工具" : "↗ Open Tool"}</a>
-          <a href="/monopoly-tool.html" download="monopoly-tool.html" className="text-[11px] text-ink/40 underline mt-1 block">{lang === "zh" ? "无法访问？下载离线版本" : "Can't access? Download offline version"}</a>
+          <a href="monopoly-tool.html" download="monopoly-tool.html" className="text-[11px] text-ink/40 underline mt-1 block">{lang === "zh" ? "无法访问？下载离线版本" : "Can't access? Download offline version"}</a>
         </div>
         <div className="flex items-center gap-3 my-4">
           <span className="text-[10px] font-black uppercase tracking-widest text-ink/30 whitespace-nowrap">AI PM 工作流分析</span>
@@ -1193,6 +1158,8 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [showVibe1, setShowVibe1] = useState(false);
   const [showVibe2, setShowVibe2] = useState(false);
+  const [showWeekend, setShowWeekend] = useState(false);
+  const [showNinja, setShowNinja] = useState(false);
   const t = translations[lang];
 
   const detailOpen = selectedProject !== null || showVibe1 || showVibe2;
@@ -1294,6 +1261,13 @@ export default function App() {
                 ))}
               </div>
             </div>
+            <Roadmap lang={lang} onJump={(j) => {
+              if (j === "london") setShowVibe1(true);
+              else if (j === "weekend") setShowWeekend(true);
+              else if (j === "monopoly") setShowVibe2(true);
+              else if (j === "ninja") setShowNinja(true);
+              else if (j === "ntn") setSelectedProject(1);
+            }} />
           </div>
         </div>
       </section>
@@ -1304,8 +1278,66 @@ export default function App() {
             <h2 className="text-3xl md:text-5xl font-serif font-black uppercase tracking-tighter font-elegant">{t.projectsTitle}</h2>
             <div className="h-px flex-1 bg-ink/20" />
           </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            onClick={() => setSelectedProject(1)}
+            className={`group cursor-pointer rounded-2xl border-2 border-ink ${projects[0].color} retro-card-hover relative overflow-hidden grid md:grid-cols-[.9fr_1.1fr]`}
+          >
+            <div className="p-6 md:p-8 flex flex-col">
+              <div className="flex justify-between items-start mb-5">
+                <div className={`p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0px_0px_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform ${projects[0].accent}`}>{projects[0].icon}</div>
+                <ArrowRight className="w-6 h-6 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
+              </div>
+              <h3 className="text-2xl md:text-3xl font-serif font-black mb-2">{projects[0].title[lang]}</h3>
+              <p className={`text-xs font-bold uppercase tracking-wider mb-4 ${projects[0].accent}`}>{projects[0].category[lang]}</p>
+              <p className="text-sm md:text-base text-ink/70 font-medium leading-relaxed">{projects[0].description[lang]}</p>
+              <div className="mt-auto pt-6 text-base md:text-lg font-semibold leading-relaxed text-[#806F58]">{(lang === "zh" ? ["帝国理工硕士毕业设计", "独立研究与开发", "研究型设计"] : ["Imperial College MSc Thesis", "Independent Research & Development", "Research-led Design"]).map(item => <p key={item}>{item}</p>)}</div>
+              <div className="mt-4 pt-4 border-t border-ink/10 flex items-center gap-2 font-bold text-xs"><BookOpen className="w-4 h-4" />{t.viewMore}</div>
+            </div>
+            <div className="p-4 md:p-6 md:pl-0 flex items-center">
+              <div className="w-full rounded-xl overflow-hidden border-2 border-ink bg-white shadow-[3px_3px_0_rgba(45,45,45,1)]"><img src="ntn-v3.webp" alt={lang === "zh" ? "回声之外：对话中的 Mirror" : "Navigating the Noise: a Mirror in chat"} className="w-full h-auto" loading="lazy" /></div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* VIBE CODING */}
+      <section className="py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center gap-4 mb-12">
+            <h2 className="text-3xl md:text-5xl font-serif font-black uppercase tracking-tighter">{t.vibeCodingTitle}</h2>
+            <div className="h-px flex-1 bg-ink/20" />
+          </div>
+          <p className="-mt-6 mb-10 max-w-3xl text-sm md:text-base text-ink/60 font-medium leading-relaxed">{vibeText[lang].intro}</p>
+          <div className="grid md:grid-cols-2 gap-8">
+            <IterationCard lang={lang} t={t} onLondon={() => setShowVibe1(true)} onWeekend={() => setShowWeekend(true)} />
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} onClick={() => setShowVibe2(true)} className="group cursor-pointer p-8 rounded-2xl border-2 border-ink bg-[#FFFBEB] retro-card-hover">
+              <div className="flex justify-between items-start mb-8">
+                <div className="p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform text-[#CA8A04]"><Zap className="w-8 h-8" /></div>
+                <ArrowRight className="w-6 h-6 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
+              </div>
+              <p className="text-[9px] font-black uppercase tracking-widest text-[#CA8A04] mb-1">{t.proj2Label}</p>
+              <h3 className="text-2xl md:text-3xl font-serif font-black mb-2">{t.proj2Title}</h3>
+              <p className="text-xs font-bold uppercase tracking-wider mb-4 text-[#CA8A04]">{t.proj2Cat}</p>
+              <p className="text-sm text-ink/70 font-medium leading-relaxed">{t.proj2Desc}</p>
+              <div className="mt-8 pt-6 border-t border-ink/10 flex items-center justify-between">
+                <div className="flex items-center gap-2 font-bold text-xs"><BookOpen className="w-4 h-4" />{t.vibeCodingView}</div>
+                <span className="text-[10px] font-bold text-[#185FA5]">{t.proj2Status}</span>
+              </div>
+            </motion.div>
+            <NinjaCard lang={lang} onClick={() => setShowNinja(true)} />
+          </div>
+        </div>
+      </section>
+
+      <section id="other-projects" className="py-20 px-6 bg-ink/5">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center gap-4 mb-12">
+            <h2 className="text-3xl md:text-5xl font-serif font-black uppercase tracking-tighter font-elegant">{lang === "zh" ? "其他项目" : "Other Projects"}</h2>
+            <div className="h-px flex-1 bg-ink/20" />
+          </div>
           <div className="grid md:grid-cols-2 gap-5 md:auto-rows-[250px]">
-            {projects.map((project, i) => (
+            {projects.filter(p => p.id !== 1).map((project, i) => (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
@@ -1327,46 +1359,6 @@ export default function App() {
                 </div>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* VIBE CODING */}
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-4 mb-12">
-            <h2 className="text-3xl md:text-5xl font-serif font-black uppercase tracking-tighter">{t.vibeCodingTitle}</h2>
-            <div className="h-px flex-1 bg-ink/20" />
-          </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0 }} onClick={() => setShowVibe1(true)} className="group cursor-pointer p-8 rounded-2xl border-2 border-ink bg-[#FFF0F7] retro-card-hover">
-              <div className="flex justify-between items-start mb-8">
-                <div className="p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform text-[#E91E8C]"><Zap className="w-8 h-8" /></div>
-                <ArrowRight className="w-6 h-6 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
-              </div>
-              <p className="text-[9px] font-black uppercase tracking-widest text-[#E91E8C] mb-1">{t.proj1Label}</p>
-              <h3 className="text-2xl md:text-3xl font-serif font-black mb-2">{t.proj1Title}</h3>
-              <p className="text-xs font-bold uppercase tracking-wider mb-4 text-[#E91E8C]">{t.proj1Cat}</p>
-              <p className="text-sm text-ink/70 font-medium leading-relaxed">{t.proj1Desc}</p>
-              <div className="mt-8 pt-6 border-t border-ink/10 flex items-center justify-between">
-                <div className="flex items-center gap-2 font-bold text-xs"><BookOpen className="w-4 h-4" />{t.vibeCodingView}</div>
-                <span className="text-[10px] font-bold text-[#E91E8C]">{t.proj1Status}</span>
-              </div>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} onClick={() => setShowVibe2(true)} className="group cursor-pointer p-8 rounded-2xl border-2 border-ink bg-[#FFFBEB] retro-card-hover">
-              <div className="flex justify-between items-start mb-8">
-                <div className="p-4 bg-paper border border-ink rounded-xl shadow-[3px_3px_0_rgba(45,45,45,1)] group-hover:rotate-6 transition-transform text-[#CA8A04]"><Zap className="w-8 h-8" /></div>
-                <ArrowRight className="w-6 h-6 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
-              </div>
-              <p className="text-[9px] font-black uppercase tracking-widest text-[#CA8A04] mb-1">{t.proj2Label}</p>
-              <h3 className="text-2xl md:text-3xl font-serif font-black mb-2">{t.proj2Title}</h3>
-              <p className="text-xs font-bold uppercase tracking-wider mb-4 text-[#CA8A04]">{t.proj2Cat}</p>
-              <p className="text-sm text-ink/70 font-medium leading-relaxed">{t.proj2Desc}</p>
-              <div className="mt-8 pt-6 border-t border-ink/10 flex items-center justify-between">
-                <div className="flex items-center gap-2 font-bold text-xs"><BookOpen className="w-4 h-4" />{t.vibeCodingView}</div>
-                <span className="text-[10px] font-bold text-[#185FA5]">{t.proj2Status}</span>
-              </div>
-            </motion.div>
           </div>
         </div>
       </section>
@@ -1445,6 +1437,26 @@ export default function App() {
             <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 24 }} className="bg-paper w-full min-h-screen relative">
               <button aria-label={lang === "zh" ? "返回作品集" : "Back to portfolio"} onClick={() => setShowVibe2(false)} className="fixed top-5 right-5 md:top-7 md:right-8 z-[120] p-3 bg-paper/90 backdrop-blur border-2 border-ink rounded-full shadow-[4px_4px_0_rgba(45,45,45,1)] hover:-translate-x-1 transition-all"><ArrowLeft className="w-6 h-6" /></button>
               <ModalVibe2 lang={lang} />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {showWeekend && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] bg-paper overflow-y-auto">
+            <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 24 }} className="bg-paper w-full min-h-screen relative">
+              <button aria-label={lang === "zh" ? "返回作品集" : "Back to portfolio"} onClick={() => setShowWeekend(false)} className="fixed top-5 right-5 md:top-7 md:right-8 z-[120] p-3 bg-paper/90 backdrop-blur border-2 border-ink rounded-full shadow-[4px_4px_0_rgba(45,45,45,1)] hover:-translate-x-1 transition-all"><ArrowLeft className="w-6 h-6" /></button>
+              <ModalWeekend lang={lang} />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {showNinja && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] bg-paper overflow-y-auto">
+            <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 24 }} className="bg-paper w-full min-h-screen relative">
+              <button aria-label={lang === "zh" ? "返回作品集" : "Back to portfolio"} onClick={() => setShowNinja(false)} className="fixed top-5 right-5 md:top-7 md:right-8 z-[120] p-3 bg-paper/90 backdrop-blur border-2 border-ink rounded-full shadow-[4px_4px_0_rgba(45,45,45,1)] hover:-translate-x-1 transition-all"><ArrowLeft className="w-6 h-6" /></button>
+              <ModalNinja lang={lang} />
             </motion.div>
           </motion.div>
         )}
