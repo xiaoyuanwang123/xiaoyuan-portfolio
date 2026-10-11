@@ -35,7 +35,7 @@ const ITEMS: Item[] = [
   { track: 0, start: ym(2017, 9), end: ym(2022, 6), title: { zh: "武汉理工 · 建筑学学士", en: "WHUT · B.Arch" }, sub: "2017.09 – 2022.06" },
   { track: 0, start: ym(2022, 9), end: ym(2025, 6), title: { zh: "南京大学 · 建筑学硕士", en: "NJU · M.Arch" }, sub: "2022.09 – 2025.06" },
   { track: 0, start: ym(2025, 9), end: ym(2026, 12), title: { zh: "帝国理工 · 行为科学设计硕士", en: "Imperial · MSc Design with Behavioural Science" }, sub: "2025.09 – 2026.12", ongoing: true },
-  { track: 1, start: ym(2025, 5), end: ym(2025, 9), title: { zh: "腾讯 · 视频号 AI 直播助手", en: "Tencent · Channels AI Live Assistant" }, sub: "2025.05 – 09", minW: 170 },
+  { track: 1, start: ym(2025, 5), end: ym(2025, 9), title: { zh: "腾讯 · 视频号 AI 直播助手", en: "Tencent · Channels AI Live Assistant" }, sub: "2025.05 – 09" },
   { track: 1, start: ym(2026, 6), end: NOW, title: { zh: "百度 · 实时交互数字人", en: "Baidu · Real-time Digital Human" }, sub: "2026.06 –", ongoing: true },
   { track: 2, start: ym(2026, 1), end: ym(2026, 9), title: { zh: "回声之外 · 毕设", en: "Navigating the Noise · Thesis" }, sub: "2026.01 – 09", jump: "ntn" },
   { track: 3, start: ym(2026, 5), lane: 0, title: { zh: "伦敦行程 V1", en: "London V1" }, sub: "2026.05", jump: "london" },
@@ -119,8 +119,8 @@ export default function Roadmap({ lang, onJump }: { lang: Language; onJump: (j: 
                         <span className={`absolute left-[3px] right-0 ${it.ongoing ? "border-t border-dashed border-ink/35" : "h-px bg-ink/35"}`} />
                         {!it.ongoing && <span className="absolute right-0 w-px h-[7px] bg-ink/35" />}
                       </div>
-                      <span className={`block mt-2 text-[11px] font-semibold text-ink/75 leading-tight truncate ${clickable ? "group-hover:text-ink group-hover:underline underline-offset-2" : ""}`}>{it.title[lang]}</span>
-                      <span className="block text-[9px] font-mono text-ink/35 mt-0.5 truncate">{it.sub}</span>
+                      <span className={`block mt-2 text-[11px] font-semibold text-ink/75 leading-tight whitespace-nowrap ${clickable ? "group-hover:text-ink group-hover:underline underline-offset-2" : ""}`}>{it.title[lang]}</span>
+                      <span className="block text-[9px] font-mono text-ink/35 mt-0.5 whitespace-nowrap">{it.sub}</span>
                     </>
                   );
                   const style = { left: `${left}%`, width: `${width}%`, minWidth: it.minW };

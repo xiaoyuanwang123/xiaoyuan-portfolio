@@ -527,7 +527,7 @@ function Modal1({ lang }: { lang: Language }) {
 
       <section className="mb-16">
         <div className="grid md:grid-cols-[1fr_1.35fr] gap-5">
-          <figure><div className="rounded-[1.5rem] overflow-hidden border-2 border-ink bg-white shadow-[4px_4px_0_rgba(45,45,45,1)]"><img src="ntn-v3.webp" alt={zh ? "对话中出现 Mirror 与支持方向" : "A Mirror and support directions inside the chat"} className="w-full h-auto" /></div><figcaption className="text-xs text-ink/55 mt-2">{zh ? "① 对话中：证据充分时出现可跳过的 Mirror，并给出几种支持方向" : "① In chat: a skippable Mirror appears only with enough evidence, followed by support directions"}</figcaption></figure>
+          <figure><div className="rounded-[1.5rem] overflow-hidden border-2 border-ink bg-white shadow-[4px_4px_0_rgba(45,45,45,1)]"><img src={zh ? "ntn-v5-mirror-zh.webp" : "ntn-v5-mirror.webp"} alt={zh ? "V5：对话中出现 Mirror 与支持方向" : "A Mirror and support directions inside the chat"} className="w-full h-auto" /></div><figcaption className="text-xs text-ink/55 mt-2">{zh ? "① V5 对话中：证据充分时出现可跳过的 Mirror，并给出几种支持方向" : "① V5 in chat: a skippable Mirror appears only with enough evidence, followed by support directions"}</figcaption></figure>
           <figure><div className="rounded-[1.5rem] overflow-hidden border-2 border-ink bg-white shadow-[4px_4px_0_rgba(45,45,45,1)]"><img src="ntn-weekly-reflection.webp" alt={zh ? "Weekly Reflection 报告" : "Weekly Reflection report"} className="w-full h-auto" /></div><figcaption className="text-xs text-ink/55 mt-2">{zh ? "② 一周之后：Weekly Reflection 用用户自己的话汇总反复出现的担忧" : "② After a week: the Weekly Reflection summarises recurring worries in the user's own words"}</figcaption></figure>
         </div>
       </section>
@@ -1295,7 +1295,7 @@ export default function App() {
               <div className="mt-4 pt-4 border-t border-ink/10 flex items-center gap-2 font-bold text-xs"><BookOpen className="w-4 h-4" />{t.viewMore}</div>
             </div>
             <div className="p-4 md:p-6 md:pl-0 flex items-center">
-              <div className="w-full rounded-xl overflow-hidden border-2 border-ink bg-white shadow-[3px_3px_0_rgba(45,45,45,1)]"><img src="ntn-v3.webp" alt={lang === "zh" ? "回声之外：对话中的 Mirror" : "Navigating the Noise: a Mirror in chat"} className="w-full h-auto" loading="lazy" /></div>
+              <div className="w-full rounded-xl overflow-hidden border-2 border-ink bg-white shadow-[3px_3px_0_rgba(45,45,45,1)]"><img src={lang === "zh" ? "ntn-v5-mirror-zh.webp" : "ntn-v5-mirror.webp"} alt={lang === "zh" ? "回声之外 V5：对话中的 Mirror" : "Navigating the Noise: a Mirror in chat"} className="w-full h-auto" loading="lazy" /></div>
             </div>
           </motion.div>
         </div>
