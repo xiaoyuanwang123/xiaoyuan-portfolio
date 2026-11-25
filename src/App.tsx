@@ -1,5 +1,6 @@
 import NTNDemo from "./NTNDemo";
 import Roadmap from "./Roadmap";
+import MakerProjects, { MakerProjectDetail, type MakerProjectId } from "./MakerProjects";
 import { IterationCard, NinjaCard, ModalWeekend, ModalNinja, ShotStrip, Verdict, vibeText } from "./VibeExtra";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
@@ -1155,13 +1156,15 @@ function ModalVibe2({ lang }: { lang: Language }) {
 
 export default function App() {
   const [lang, setLang] = useState<Language>("zh");
-  const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const [selectedProject, setSelectedProject] = useState<number | MakerProjectId | null>(null);
   const [showVibe1, setShowVibe1] = useState(false);
   const [showVibe2, setShowVibe2] = useState(false);
   const [showWeekend, setShowWeekend] = useState(false);
   const [showNinja, setShowNinja] = useState(false);
   const t = translations[lang];
 
+  const makerProjectId = typeof selectedProject === "number" ? null : selectedProject;
+  const makerDetailOpen = makerProjectId !== null;
   const detailOpen = selectedProject !== null || showVibe1 || showVibe2;
   useEffect(() => {
     if (!detailOpen) return;
@@ -1169,6 +1172,33 @@ export default function App() {
     document.body.style.overflow = "hidden";
     return () => { document.body.style.overflow = previousOverflow; };
   }, [detailOpen]);
+
+  useEffect(() => {
+    if (!makerDetailOpen) return;
+    const trigger = document.activeElement;
+    const dialog = document.getElementById("maker-project-dialog");
+    dialog?.querySelector("button")?.focus({ preventScroll: true });
+
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedProject(null);
+      if (event.key !== "Tab" || !dialog) return;
+      const controls = dialog.querySelectorAll<HTMLElement>("button, a[href]");
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      if (trigger instanceof HTMLElement) trigger.focus({ preventScroll: true });
+    };
+  }, [makerDetailOpen]);
 
   return (
     <div className={`min-h-screen relative selection:bg-terracotta/20 ${lang === "zh" ? "lang-zh" : ""}`}>
@@ -1180,10 +1210,15 @@ export default function App() {
             <div className="w-10 h-10 bg-ink text-paper flex items-center justify-center font-serif font-bold text-xl rotate-3">W</div>
             <span className="font-serif font-bold text-xl md:text-2xl tracking-tight font-zh-display">{t.name}</span>
           </div>
-          <button onClick={() => setLang(l => l === "zh" ? "en" : "zh")} className="flex items-center gap-2 px-4 py-2 rounded-full border border-ink hover:bg-ink hover:text-paper transition-all font-medium text-xs md:text-sm">
-            <Languages className="w-4 h-4" />
-            {lang === "zh" ? "English" : "中文"}
-          </button>
+          <div className="flex items-center gap-3 md:gap-5">
+            <a href="#maker" className="rounded text-sm font-bold text-terracotta hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-terracotta">
+              {lang === "zh" ? "创客作品" : "Maker Works"}
+            </a>
+            <button onClick={() => setLang(l => l === "zh" ? "en" : "zh")} className="flex items-center gap-2 px-4 py-2 rounded-full border border-ink hover:bg-ink hover:text-paper transition-all font-medium text-xs md:text-sm">
+              <Languages className="w-4 h-4" />
+              {lang === "zh" ? "English" : "中文"}
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -1210,7 +1245,7 @@ export default function App() {
                   </>
                 )}
               </h1>
-              <p className="text-sm md:text-base text-ink/70 leading-relaxed max-w-xs font-medium">{t.intro1}</p>
+              <p className={`text-sm md:text-base text-ink/70 leading-relaxed font-medium ${lang === "zh" ? "max-w-sm text-pretty" : "max-w-xs"}`}>{t.intro1}</p>
               <p className="text-sm md:text-base text-ink/50 leading-relaxed max-w-xs font-medium italic">{t.intro2}</p>
             </motion.div>
 
@@ -1267,6 +1302,10 @@ export default function App() {
               else if (j === "monopoly") setShowVibe2(true);
               else if (j === "ninja") setShowNinja(true);
               else if (j === "ntn") setSelectedProject(1);
+              else if (j === "maker") {
+                document.getElementById("maker-title")?.focus({ preventScroll: true });
+                document.getElementById("maker")?.scrollIntoView();
+              }
             }} />
           </div>
         </div>
@@ -1329,6 +1368,8 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      <MakerProjects lang={lang} onSelect={setSelectedProject} />
 
       <section id="other-projects" className="py-20 px-6 bg-ink/5">
         <div className="max-w-6xl mx-auto">
@@ -1409,7 +1450,7 @@ export default function App() {
 
       <AnimatePresence>
         {selectedProject && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] bg-paper overflow-y-auto">
+          <motion.div id={makerDetailOpen ? "maker-project-dialog" : undefined} role={makerDetailOpen ? "dialog" : undefined} aria-modal={makerDetailOpen || undefined} aria-labelledby={makerDetailOpen ? "maker-detail-title" : undefined} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] bg-paper overflow-y-auto">
             <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 24 }} className="bg-paper w-full min-h-screen relative">
               <button aria-label={lang === "zh" ? "返回项目列表" : "Back to projects"} onClick={() => setSelectedProject(null)} className="fixed top-5 right-5 md:top-7 md:right-8 z-[120] p-3 bg-paper/90 backdrop-blur border-2 border-ink rounded-full shadow-[4px_4px_0_rgba(45,45,45,1)] hover:-translate-x-1 transition-all">
                 <ArrowLeft className="w-6 h-6" />
@@ -1417,6 +1458,7 @@ export default function App() {
               {selectedProject === 1 && <Modal1 lang={lang} />}
               {selectedProject === 2 && <Modal2 lang={lang} />}
               {selectedProject === 3 && <Modal3 lang={lang} />}
+              {makerProjectId && <MakerProjectDetail id={makerProjectId} lang={lang} />}
             </motion.div>
           </motion.div>
         )}

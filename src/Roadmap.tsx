@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
 
 type Language = "zh" | "en";
-type Jump = "london" | "weekend" | "monopoly" | "ninja" | "ntn";
+type Jump = "london" | "weekend" | "monopoly" | "ninja" | "ntn" | "maker";
 
 // 非线性时间刻度：早年压缩，2025 年以后展开
 const ANCHORS: [number, number][] = [
@@ -38,6 +38,7 @@ const ITEMS: Item[] = [
   { track: 1, start: ym(2025, 5), end: ym(2025, 9), title: { zh: "腾讯 · 视频号 AI 直播助手", en: "Tencent · Channels AI Live Assistant" }, sub: "2025.05 – 09" },
   { track: 1, start: ym(2026, 6), end: NOW, title: { zh: "百度 · 实时交互数字人", en: "Baidu · Real-time Digital Human" }, sub: "2026.06 –", ongoing: true },
   { track: 2, start: ym(2026, 1), end: ym(2026, 9), title: { zh: "回声之外 · 毕设", en: "Navigating the Noise · Thesis" }, sub: "2026.01 – 09", jump: "ntn" },
+  { track: 3, start: ym(2025, 3), end: ym(2025, 8), title: { zh: "创客与交互设计", en: "Maker & Interaction Works" }, sub: "2025.03 – 08", jump: "maker" },
   { track: 3, start: ym(2026, 5), lane: 0, title: { zh: "伦敦行程 V1", en: "London V1" }, sub: "2026.05", jump: "london" },
   { track: 3, start: ym(2026, 5.3), lane: 1, title: { zh: "大富翁", en: "Monopoly" }, sub: "2026.05", jump: "monopoly" },
   { track: 3, start: ym(2026, 5.6), lane: 2, title: { zh: "面试忍者", en: "Interview Ninja" }, sub: "2026.05", jump: "ninja" },
